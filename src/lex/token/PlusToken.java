@@ -7,9 +7,7 @@ import lex.protocol.UnaryOperatorTokenType;
 
 import java.util.Objects;
 
-public class PlusToken implements TokenType, AdditiveTokenType, UnaryOperatorTokenType {
-    private final Position position;
-
+public record PlusToken(Position position) implements TokenType, AdditiveTokenType, UnaryOperatorTokenType {
     public PlusToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -20,16 +18,6 @@ public class PlusToken implements TokenType, AdditiveTokenType, UnaryOperatorTok
         if (o == null || getClass() != o.getClass()) return false;
         PlusToken plusToken = (PlusToken) o;
         return Objects.equals(position, plusToken.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

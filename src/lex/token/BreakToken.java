@@ -5,16 +5,9 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class BreakToken implements TokenType {
-    private final Position position;
-
+public record BreakToken(Position position) implements TokenType {
     public BreakToken(Position position) {
         this.position = Objects.requireNonNull(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

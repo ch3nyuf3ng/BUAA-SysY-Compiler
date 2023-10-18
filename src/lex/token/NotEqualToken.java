@@ -5,9 +5,7 @@ import lex.protocol.EqualityTokenType;
 
 import java.util.Objects;
 
-public class NotEqualToken implements EqualityTokenType {
-    private final Position position;
-
+public record NotEqualToken(Position position) implements EqualityTokenType {
     public NotEqualToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class NotEqualToken implements EqualityTokenType {
         if (o == null || getClass() != o.getClass()) return false;
         NotEqualToken that = (NotEqualToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

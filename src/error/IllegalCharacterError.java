@@ -5,12 +5,7 @@ import foundation.Position;
 
 import java.util.Objects;
 
-public class IllegalCharacterError implements SimpleErrorType {
-    private final Position position;
-
-    public IllegalCharacterError(Position position) {
-        this.position = position;
-    }
+public record IllegalCharacterError(Position position) implements SimpleErrorType {
 
     @Override
     public boolean equals(Object o) {
@@ -18,16 +13,6 @@ public class IllegalCharacterError implements SimpleErrorType {
         if (o == null || getClass() != o.getClass()) return false;
         IllegalCharacterError that = (IllegalCharacterError) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

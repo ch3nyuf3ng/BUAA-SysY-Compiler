@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class RightBraceToken implements TokenType {
-    private final Position position;
-
+public record RightBraceToken(Position position) implements TokenType {
     public RightBraceToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class RightBraceToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         RightBraceToken that = (RightBraceToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

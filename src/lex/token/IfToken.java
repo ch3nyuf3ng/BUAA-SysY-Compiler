@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class IfToken implements TokenType {
-    private final Position position;
-
+public record IfToken(Position position) implements TokenType {
     public IfToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class IfToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         IfToken ifToken = (IfToken) o;
         return Objects.equals(position, ifToken.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

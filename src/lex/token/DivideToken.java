@@ -6,9 +6,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class DivideToken implements TokenType, MultiplicativeTokenType {
-    private final Position position;
-
+public record DivideToken(Position position) implements TokenType, MultiplicativeTokenType {
     public DivideToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -19,16 +17,6 @@ public class DivideToken implements TokenType, MultiplicativeTokenType {
         if (o == null || getClass() != o.getClass()) return false;
         DivideToken that = (DivideToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

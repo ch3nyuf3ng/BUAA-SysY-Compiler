@@ -62,11 +62,9 @@ public class MultiplicativeExpression implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstExpression.detailedRepresentation()).append(categoryCode()).append('\n');
-        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.first().detailedRepresentation()).append(i.second()
-                .detailedRepresentation()).append(categoryCode()).append('\n'));
-        return stringBuilder.toString();
+        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                firstExpression, operatorWithExpressionList, categoryCode()
+        );
     }
 
     @Override

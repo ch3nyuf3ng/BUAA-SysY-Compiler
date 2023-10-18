@@ -6,9 +6,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class GreaterToken implements TokenType, RelaitionalOperatorTokenType {
-    private final Position position;
-
+public record GreaterToken(Position position) implements TokenType, RelaitionalOperatorTokenType {
     public GreaterToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -19,16 +17,6 @@ public class GreaterToken implements TokenType, RelaitionalOperatorTokenType {
         if (o == null || getClass() != o.getClass()) return false;
         GreaterToken that = (GreaterToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

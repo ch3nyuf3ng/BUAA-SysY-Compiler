@@ -5,16 +5,9 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class CommaToken implements TokenType {
-    private final Position position;
-
+public record CommaToken(Position position) implements TokenType {
     public CommaToken(Position position) {
         this.position = Objects.requireNonNull(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

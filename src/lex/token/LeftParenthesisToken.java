@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class LeftParenthesisToken implements TokenType {
-    private final Position position;
-
+public record LeftParenthesisToken(Position position) implements TokenType {
     public LeftParenthesisToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class LeftParenthesisToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         LeftParenthesisToken that = (LeftParenthesisToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

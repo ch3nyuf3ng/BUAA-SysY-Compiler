@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class ForToken implements TokenType {
-    private final Position position;
-
+public record ForToken(Position position) implements TokenType {
     public ForToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class ForToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         ForToken forToken = (ForToken) o;
         return Objects.equals(position, forToken.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

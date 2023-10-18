@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class MainToken implements TokenType {
-    private final Position position;
-
+public record MainToken(Position position) implements TokenType {
     public MainToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class MainToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         MainToken mainToken = (MainToken) o;
         return Objects.equals(position, mainToken.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

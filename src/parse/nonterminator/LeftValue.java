@@ -1,5 +1,6 @@
 package parse.nonterminator;
 
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.IdentifierToken;
@@ -67,26 +68,15 @@ public class LeftValue implements NonTerminatorType, SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(identifierToken.detailedRepresentation());
-        for (final var i : bracketWithExpressionList) {
-            stringBuilder.append(i.leftBracketToken().detailedRepresentation()).append(i.entity()
-                    .detailedRepresentation());
-            i.rightBracketToken().ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
-        }
-        stringBuilder.append(categoryCode()).append('\n');
-        return stringBuilder.toString();
+        return identifierToken.detailedRepresentation()
+                + RepresentationBuilder.bracketWithTDetailedRepresentation(bracketWithExpressionList)
+                + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(identifierToken.representation());
-        for (final var i : bracketWithExpressionList) {
-            stringBuilder.append(i.leftBracketToken().representation()).append(i.entity().representation());
-            i.rightBracketToken().ifPresent(e -> stringBuilder.append(e.representation()));
-        }
-        return stringBuilder.toString();
+        return identifierToken.representation()
+                + RepresentationBuilder.bracketWithTRepresentation(bracketWithExpressionList);
     }
 
     @Override

@@ -6,9 +6,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class LessOrEqualToken implements TokenType, RelaitionalOperatorTokenType {
-    private final Position position;
-
+public record LessOrEqualToken(Position position) implements TokenType, RelaitionalOperatorTokenType {
     public LessOrEqualToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -19,16 +17,6 @@ public class LessOrEqualToken implements TokenType, RelaitionalOperatorTokenType
         if (o == null || getClass() != o.getClass()) return false;
         LessOrEqualToken that = (LessOrEqualToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

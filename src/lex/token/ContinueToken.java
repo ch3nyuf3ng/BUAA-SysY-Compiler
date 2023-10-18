@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class ContinueToken implements TokenType {
-    private final Position position;
-
+public record ContinueToken(Position position) implements TokenType {
     public ContinueToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class ContinueToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         ContinueToken that = (ContinueToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

@@ -7,13 +7,9 @@ import java.util.Optional;
 public interface LexerType {
     Optional<TokenType> currentToken();
 
-    void consumeToken();
-
-    void resetPosition(Position position);
-
     Position beginningPosition();
 
-    Position currentPosition();
+    void resetPosition(Position position);
 
     <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetClass);
 

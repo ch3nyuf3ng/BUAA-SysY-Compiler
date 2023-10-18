@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class ReturnToken implements TokenType {
-    private final Position position;
-
+public record ReturnToken(Position position) implements TokenType {
     public ReturnToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -18,16 +16,6 @@ public class ReturnToken implements TokenType {
         if (o == null || getClass() != o.getClass()) return false;
         ReturnToken that = (ReturnToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

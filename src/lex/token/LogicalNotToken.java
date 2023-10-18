@@ -6,9 +6,7 @@ import lex.protocol.UnaryOperatorTokenType;
 
 import java.util.Objects;
 
-public class LogicalNotToken implements TokenType, UnaryOperatorTokenType {
-    private final Position position;
-
+public record LogicalNotToken(Position position) implements TokenType, UnaryOperatorTokenType {
     public LogicalNotToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -19,16 +17,6 @@ public class LogicalNotToken implements TokenType, UnaryOperatorTokenType {
         if (o == null || getClass() != o.getClass()) return false;
         LogicalNotToken that = (LogicalNotToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

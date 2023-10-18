@@ -6,9 +6,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class VoidToken implements TokenType, FuncTypeTokenType {
-    private final Position position;
-
+public record VoidToken(Position position) implements TokenType, FuncTypeTokenType {
     public VoidToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -19,16 +17,6 @@ public class VoidToken implements TokenType, FuncTypeTokenType {
         if (o == null || getClass() != o.getClass()) return false;
         VoidToken voidToken = (VoidToken) o;
         return Objects.equals(position, voidToken.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

@@ -6,9 +6,7 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public class MultiplyToken implements TokenType, MultiplicativeTokenType {
-    private final Position position;
-
+public record MultiplyToken(Position position) implements TokenType, MultiplicativeTokenType {
     public MultiplyToken(Position position) {
         this.position = Objects.requireNonNull(position);
     }
@@ -19,16 +17,6 @@ public class MultiplyToken implements TokenType, MultiplicativeTokenType {
         if (o == null || getClass() != o.getClass()) return false;
         MultiplyToken that = (MultiplyToken) o;
         return Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position);
-    }
-
-    @Override
-    public Position position() {
-        return position;
     }
 
     @Override

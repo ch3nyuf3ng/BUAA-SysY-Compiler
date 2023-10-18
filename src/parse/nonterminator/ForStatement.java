@@ -20,6 +20,7 @@ public class ForStatement implements SelectionType {
         this.expression = Objects.requireNonNull(expression);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     public static Optional<ForStatement> parse(LexerType lexer) {
         Logger.info("Matching <ForStatement>.");
         final var beginningPosition = lexer.beginningPosition();

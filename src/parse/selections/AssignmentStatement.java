@@ -30,6 +30,7 @@ public class AssignmentStatement implements SelectionType {
         this.optionalSemicolonToken = Objects.requireNonNull(optionalSemicolonToken);
     }
 
+    @SuppressWarnings("DuplicatedCode")
     public static Optional<AssignmentStatement> parse(LexerType lexer) {
         Logger.info("Matching <AssignmentStatement>.");
         final var beginningPosition = lexer.beginningPosition();
