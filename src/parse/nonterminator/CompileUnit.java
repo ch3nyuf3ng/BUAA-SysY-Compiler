@@ -61,7 +61,7 @@ public class CompileUnit implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         declarationList.forEach(e -> stringBuilder.append(e.detailedRepresentation()));
         funcDefinitionList.forEach(e -> stringBuilder.append(e.detailedRepresentation()));
-        stringBuilder.append(mainFuncDefinition.detailedRepresentation()).append(categoryCode());
+        stringBuilder.append(mainFuncDefinition.detailedRepresentation()).append(categoryCode()).append('\n');
         return stringBuilder.toString();
     }
 
