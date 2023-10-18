@@ -13,10 +13,7 @@ import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class VarDeclaration implements NonTerminatorType, SelectionType {
     private final BasicType basicType;
@@ -24,16 +21,16 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
     private final List<Pair<CommaToken, VarDefinition>> additionalVariableDefinitionList;
     private final Optional<SemicolonToken> semicolonToken;
 
-    private VarDeclaration(
+    public VarDeclaration(
             BasicType basicType,
             VarDefinition firstVarDefinition,
             List<Pair<CommaToken, VarDefinition>> additionalVariableDefinitionList,
             Optional<SemicolonToken> semicolonToken
     ) {
-        this.basicType = basicType;
-        this.firstVarDefinition = firstVarDefinition;
+        this.basicType = Objects.requireNonNull(basicType);
+        this.firstVarDefinition = Objects.requireNonNull(firstVarDefinition);
         this.additionalVariableDefinitionList = Collections.unmodifiableList(additionalVariableDefinitionList);
-        this.semicolonToken = semicolonToken;
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean isMatchedBeginTokens(LexerType lexer) {

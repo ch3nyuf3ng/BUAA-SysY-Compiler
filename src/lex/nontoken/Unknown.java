@@ -10,8 +10,8 @@ public class Unknown implements NonTokenType {
     private final Position position;
 
     public Unknown(String rawRepresentation, Position position) {
-        this.rawRepresentation = rawRepresentation;
-        this.position = position;
+        this.rawRepresentation = Objects.requireNonNull(rawRepresentation);
+        this.position = Objects.requireNonNull(position);
     }
 
     @Override

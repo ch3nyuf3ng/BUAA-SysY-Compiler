@@ -6,13 +6,14 @@ import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Declaration implements NonTerminatorType, SelectionType {
     private final SelectionType declaration;
 
-    private Declaration(SelectionType declaration) {
-        this.declaration = declaration;
+    public Declaration(SelectionType declaration) {
+        this.declaration = Objects.requireNonNull(declaration);
     }
 
     public static boolean matchBeginTokens(LexerType lexer) {

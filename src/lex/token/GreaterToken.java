@@ -10,7 +10,7 @@ public class GreaterToken implements TokenType, RelaitionalOperatorTokenType {
     private final Position position;
 
     public GreaterToken(Position position) {
-        this.position = position;
+        this.position = Objects.requireNonNull(position);
     }
 
     @Override

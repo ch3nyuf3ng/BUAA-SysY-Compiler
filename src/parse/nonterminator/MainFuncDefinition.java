@@ -6,6 +6,7 @@ import lex.token.*;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class MainFuncDefinition implements NonTerminatorType {
@@ -15,18 +16,18 @@ public class MainFuncDefinition implements NonTerminatorType {
     private final RightParenthesisToken rightParenthesisToken;
     private final Block block;
 
-    private MainFuncDefinition(
+    public MainFuncDefinition(
             IntToken intToken,
             MainToken mainToken,
             LeftParenthesisToken leftParenthesisToken,
             RightParenthesisToken rightParenthesisToken,
             Block block
     ) {
-        this.intToken = intToken;
-        this.mainToken = mainToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.rightParenthesisToken = rightParenthesisToken;
-        this.block = block;
+        this.intToken = Objects.requireNonNull(intToken);
+        this.mainToken = Objects.requireNonNull(mainToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
+        this.block = Objects.requireNonNull(block);
     }
 
     public static Optional<MainFuncDefinition> parse(LexerType lexer) {

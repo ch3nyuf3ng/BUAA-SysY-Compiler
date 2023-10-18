@@ -9,9 +9,7 @@ import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class PrintfStatement implements SelectionType {
     private final PrintfToken printfToken;
@@ -21,7 +19,7 @@ public class PrintfStatement implements SelectionType {
     private final RightParenthesisToken rightParenthesisToken;
     private final Optional<SemicolonToken> semicolonToken;
 
-    private PrintfStatement(
+    public PrintfStatement(
             PrintfToken printfToken,
             LeftParenthesisToken leftParenthesisToken,
             LiteralFormatStringToken literalFormatStringToken,
@@ -29,12 +27,12 @@ public class PrintfStatement implements SelectionType {
             RightParenthesisToken rightParenthesisToken,
             Optional<SemicolonToken> semicolonToken
     ) {
-        this.printfToken = printfToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.literalFormatStringToken = literalFormatStringToken;
-        this.commaWithExpressionList = commaWithExpressionList;
-        this.rightParenthesisToken = rightParenthesisToken;
-        this.semicolonToken = semicolonToken;
+        this.printfToken = Objects.requireNonNull(printfToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.literalFormatStringToken = Objects.requireNonNull(literalFormatStringToken);
+        this.commaWithExpressionList = Collections.unmodifiableList(commaWithExpressionList);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {

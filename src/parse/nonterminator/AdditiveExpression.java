@@ -8,21 +8,18 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class AdditiveExpression implements NonTerminatorType {
     private final MultiplicativeExpression firstExpression;
     private final List<Pair<AdditiveTokenType, MultiplicativeExpression>> operatorWithExpressionList;
 
-    private AdditiveExpression(
+    public AdditiveExpression(
             MultiplicativeExpression firstExpression,
             List<Pair<AdditiveTokenType, MultiplicativeExpression>> operatorWithExpressionList
     ) {
         this.firstExpression = Objects.requireNonNull(firstExpression);
-        this.operatorWithExpressionList = Objects.requireNonNull(operatorWithExpressionList);
+        this.operatorWithExpressionList = Collections.unmodifiableList(operatorWithExpressionList);
     }
 
     public static Optional<AdditiveExpression> parse(LexerType lexer) {

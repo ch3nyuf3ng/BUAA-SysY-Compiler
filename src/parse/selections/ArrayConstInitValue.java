@@ -11,9 +11,7 @@ import parse.nonterminator.ConstInitValue;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ArrayConstInitValue implements SelectionType {
     private final LeftBraceToken leftBraceToken;
@@ -27,10 +25,10 @@ public class ArrayConstInitValue implements SelectionType {
             List<Pair<CommaToken, ConstInitValue>> otherInitValueList,
             RightBraceToken rightBraceToken
     ) {
-        this.leftBraceToken = leftBraceToken;
-        this.firstInitValue = firstInitValue;
-        this.otherInitValueList = otherInitValueList;
-        this.rightBraceToken = rightBraceToken;
+        this.leftBraceToken = Objects.requireNonNull(leftBraceToken);
+        this.firstInitValue = Objects.requireNonNull(firstInitValue);
+        this.otherInitValueList = Collections.unmodifiableList(otherInitValueList);
+        this.rightBraceToken = Objects.requireNonNull(rightBraceToken);
     }
 
     public static Optional<ArrayConstInitValue> parse(LexerType lexer) {

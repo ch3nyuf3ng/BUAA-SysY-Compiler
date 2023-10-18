@@ -13,6 +13,7 @@ import tests.foundations.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ArrayVarInitValue implements SelectionType {
@@ -27,10 +28,10 @@ public class ArrayVarInitValue implements SelectionType {
             List<Pair<CommaToken, VarInitValue>> otherInitValueList,
             RightBraceToken rightBraceToken
     ) {
-        this.leftBraceToken = leftBraceToken;
-        this.optionalFirstInitValue = optionalFirstInitValue;
-        this.otherInitValueList = otherInitValueList;
-        this.rightBraceToken = rightBraceToken;
+        this.leftBraceToken = Objects.requireNonNull(leftBraceToken);
+        this.optionalFirstInitValue = Objects.requireNonNull(optionalFirstInitValue);
+        this.otherInitValueList = Objects.requireNonNull(otherInitValueList);
+        this.rightBraceToken = Objects.requireNonNull(rightBraceToken);
     }
 
     public static Optional<ArrayVarInitValue> parse(LexerType lexer) {

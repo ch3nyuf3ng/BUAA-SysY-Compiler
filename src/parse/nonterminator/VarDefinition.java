@@ -1,5 +1,6 @@
 package parse.nonterminator;
 
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.AssignToken;
@@ -10,10 +11,7 @@ import parse.protocol.NonTerminatorType;
 import parse.substructures.BracketWith;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class VarDefinition implements NonTerminatorType {
     private final IdentifierToken identifierToken;
@@ -21,14 +19,14 @@ public class VarDefinition implements NonTerminatorType {
     private final Optional<AssignToken> assignToken;
     private final Optional<VarInitValue> varInitValue;
 
-    private VarDefinition(
+    public VarDefinition(
             IdentifierToken identifierToken,
             List<BracketWith<ConstExpression>> bracketWithConstExpressionList,
             Optional<AssignToken> assignToken,
             Optional<VarInitValue> varInitValue
     ) {
         this.identifierToken = Objects.requireNonNull(identifierToken);
-        this.bracketWithConstExpressionList = Objects.requireNonNull(bracketWithConstExpressionList);
+        this.bracketWithConstExpressionList = Collections.unmodifiableList(bracketWithConstExpressionList);
         this.assignToken = Objects.requireNonNull(assignToken);
         this.varInitValue = Objects.requireNonNull(varInitValue);
     }
@@ -61,10 +59,8 @@ public class VarDefinition implements NonTerminatorType {
 
             final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
             if (assignToken.isEmpty()) {
-                final var result = new VarDefinition(identifierToken.get(),
-                        bracketWithConstExpressionList,
-                        Optional.empty(),
-                        Optional.empty()
+                final var result = new VarDefinition(
+                        identifierToken.get(), bracketWithConstExpressionList, Optional.empty(), Optional.empty()
                 );
                 Logger.info("Matched <VarDefinition>: " + result.representation());
                 return Optional.of(result);
@@ -73,10 +69,8 @@ public class VarDefinition implements NonTerminatorType {
             final var varInitValue = VarInitValue.parse(lexer);
             if (varInitValue.isEmpty()) break parse;
 
-            final var result = new VarDefinition(identifierToken.get(),
-                    bracketWithConstExpressionList,
-                    assignToken,
-                    varInitValue
+            final var result = new VarDefinition(
+                    identifierToken.get(), bracketWithConstExpressionList, assignToken, varInitValue
             );
             Logger.info("Matched <VarDefinition>: " + result.representation());
             return Optional.of(result);
@@ -89,17 +83,11 @@ public class VarDefinition implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(identifierToken.detailedRepresentation());
-        for (final var i : bracketWithConstExpressionList) {
-            stringBuilder.append(i.leftBracketToken().detailedRepresentation()).append(i.entity()
-                    .detailedRepresentation());
-            i.rightBracketToken().ifPresent(x -> stringBuilder.append(x.detailedRepresentation()));
-        }
-        assignToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
-        varInitValue.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
-        stringBuilder.append(categoryCode()).append('\n');
-        return stringBuilder.toString();
+        return identifierToken.detailedRepresentation()
+                + RepresentationBuilder.bracketWithTDetailedRepresentation(bracketWithConstExpressionList)
+                + assignToken.map(AssignToken::detailedRepresentation).orElse("")
+                + varInitValue.map(VarInitValue::detailedRepresentation).orElse("")
+                + categoryCode() + '\n';
     }
 
     @Override

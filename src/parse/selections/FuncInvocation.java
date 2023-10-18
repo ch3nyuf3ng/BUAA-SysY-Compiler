@@ -9,6 +9,7 @@ import parse.nonterminator.FuncArgList;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class FuncInvocation implements SelectionType {
@@ -17,16 +18,16 @@ public class FuncInvocation implements SelectionType {
     final private Optional<FuncArgList> optionalFuncArgList;
     final private RightParenthesisToken rightParenthesisToken;
 
-    private FuncInvocation(
+    public FuncInvocation(
             IdentifierToken identifierToken,
             LeftParenthesisToken leftParenthesisToken,
             Optional<FuncArgList> optionalFuncArgList,
             RightParenthesisToken rightParenthesisToken
     ) {
-        this.identifierToken = identifierToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.optionalFuncArgList = optionalFuncArgList;
-        this.rightParenthesisToken = rightParenthesisToken;
+        this.identifierToken = Objects.requireNonNull(identifierToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.optionalFuncArgList = Objects.requireNonNull(optionalFuncArgList);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
     }
 
     public static boolean isMatchedBeginningTokens(LexerType lexer) {

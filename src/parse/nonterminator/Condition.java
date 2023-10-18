@@ -5,13 +5,14 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Condition implements NonTerminatorType {
     private final LogicalOrExpression logicalOrExpression;
 
-    private Condition(LogicalOrExpression logicalOrExpression) {
-        this.logicalOrExpression = logicalOrExpression;
+    public Condition(LogicalOrExpression logicalOrExpression) {
+        this.logicalOrExpression = Objects.requireNonNull(logicalOrExpression);
     }
 
     public static Optional<Condition> parse(LexerType lexer) {

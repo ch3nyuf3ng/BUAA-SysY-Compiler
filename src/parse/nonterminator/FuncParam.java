@@ -30,7 +30,7 @@ public class FuncParam implements NonTerminatorType {
         this.identifierToken = Objects.requireNonNull(identifierToken);
         this.leftBracketToken = Objects.requireNonNull(leftBracketToken);
         this.rightBracketToken = Objects.requireNonNull(rightBracketToken);
-        this.bracketWithEntityList = Objects.requireNonNull(bracketWithEntityList);
+        this.bracketWithEntityList = Collections.unmodifiableList(bracketWithEntityList);
     }
 
     public static Optional<FuncParam> parse(LexerType lexer) {

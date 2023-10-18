@@ -11,7 +11,7 @@ import java.util.Optional;
 public class BlockItem implements NonTerminatorType {
     private final SelectionType blockItem;
 
-    private BlockItem(SelectionType blockItem) {
+    public BlockItem(SelectionType blockItem) {
         this.blockItem = blockItem;
     }
 

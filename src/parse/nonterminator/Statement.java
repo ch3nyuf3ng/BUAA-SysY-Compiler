@@ -14,7 +14,7 @@ import java.util.Optional;
 public class Statement implements NonTerminatorType, SelectionType {
     private final SelectionType statement;
 
-    private Statement(SelectionType statement) {
+    public Statement(SelectionType statement) {
         this.statement = Objects.requireNonNull(statement);
     }
 

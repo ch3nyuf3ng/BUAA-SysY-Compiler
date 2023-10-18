@@ -7,6 +7,7 @@ import parse.nonterminator.LeftValue;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class GetIntStatement implements SelectionType {
@@ -17,7 +18,7 @@ public class GetIntStatement implements SelectionType {
     private final RightParenthesisToken rightParenthesisToken;
     private final SemicolonToken semicolonToken;
 
-    private GetIntStatement(
+    public GetIntStatement(
             LeftValue leftValue,
             AssignToken assignToken,
             GetIntToken getIntToken,
@@ -25,12 +26,12 @@ public class GetIntStatement implements SelectionType {
             RightParenthesisToken rightParenthesisToken,
             SemicolonToken semicolonToken
     ) {
-        this.leftValue = leftValue;
-        this.assignToken = assignToken;
-        this.getIntToken = getIntToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.rightParenthesisToken = rightParenthesisToken;
-        this.semicolonToken = semicolonToken;
+        this.leftValue = Objects.requireNonNull(leftValue);
+        this.assignToken = Objects.requireNonNull(assignToken);
+        this.getIntToken = Objects.requireNonNull(getIntToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static Optional<GetIntStatement> parse(LexerType lexer) {

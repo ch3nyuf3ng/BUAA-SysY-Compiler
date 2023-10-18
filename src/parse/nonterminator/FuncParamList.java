@@ -8,17 +8,15 @@ import lex.token.CommaToken;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class FuncParamList implements NonTerminatorType {
     private final FuncParam firstFuncParam;
     private final List<Pair<CommaToken, FuncParam>> commaWithFuncParamList;
 
-    private FuncParamList(FuncParam firstFuncParam, List<Pair<CommaToken, FuncParam>> commaWithFuncParamList) {
-        this.firstFuncParam = firstFuncParam;
-        this.commaWithFuncParamList = commaWithFuncParamList;
+    public FuncParamList(FuncParam firstFuncParam, List<Pair<CommaToken, FuncParam>> commaWithFuncParamList) {
+        this.firstFuncParam = Objects.requireNonNull(firstFuncParam);
+        this.commaWithFuncParamList = Collections.unmodifiableList(commaWithFuncParamList);
     }
 
     public static Optional<FuncParamList> parse(LexerType lexer) {

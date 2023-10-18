@@ -6,13 +6,14 @@ import lex.token.IntToken;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class BasicType implements NonTerminatorType {
     private final IntToken intToken;
 
-    private BasicType(IntToken intToken) {
-        this.intToken = intToken;
+    public BasicType(IntToken intToken) {
+        this.intToken = Objects.requireNonNull(intToken);
     }
 
     public static Optional<BasicType> parse(LexerType lexer) {

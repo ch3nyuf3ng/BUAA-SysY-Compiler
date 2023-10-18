@@ -7,13 +7,14 @@ import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Number implements NonTerminatorType, SelectionType {
     private final LiteralIntegerToken literalIntegerToken;
 
-    private Number(LiteralIntegerToken literalIntegerToken) {
-        this.literalIntegerToken = literalIntegerToken;
+    public Number(LiteralIntegerToken literalIntegerToken) {
+        this.literalIntegerToken = Objects.requireNonNull(literalIntegerToken);
     }
 
     public static Optional<Number> parse(LexerType lexer) {

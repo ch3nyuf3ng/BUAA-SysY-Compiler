@@ -12,7 +12,7 @@ public class CompileUnit implements NonTerminatorType {
     private final List<FuncDefinition> funcDefinitionList;
     private final MainFuncDefinition mainFuncDefinition;
 
-    private CompileUnit(
+    public CompileUnit(
             List<Declaration> declarationList,
             List<FuncDefinition> funcDefinitionList,
             MainFuncDefinition mainFuncDefinition

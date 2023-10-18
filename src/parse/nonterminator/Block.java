@@ -7,9 +7,7 @@ import lex.token.RightBraceToken;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Block implements SelectionType {
     private final LeftBraceToken leftBraceToken;
@@ -17,9 +15,9 @@ public class Block implements SelectionType {
     private final RightBraceToken rightBraceToken;
 
     public Block(LeftBraceToken leftBraceToken, List<BlockItem> blockItemList, RightBraceToken rightBraceToken) {
-        this.leftBraceToken = leftBraceToken;
-        this.blockItemList = blockItemList;
-        this.rightBraceToken = rightBraceToken;
+        this.leftBraceToken = Objects.requireNonNull(leftBraceToken);
+        this.blockItemList = Collections.unmodifiableList(blockItemList);
+        this.rightBraceToken = Objects.requireNonNull(rightBraceToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {

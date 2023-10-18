@@ -11,9 +11,7 @@ import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ConstDeclaration implements NonTerminatorType, SelectionType {
     private final ConstToken constToken;
@@ -22,18 +20,18 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
     private final List<Pair<CommaToken, ConstDefinition>> additionalConstantDefinitionList;
     private final Optional<SemicolonToken> semicolonToken;
 
-    private ConstDeclaration(
+    public ConstDeclaration(
             ConstToken constToken,
             BasicType basicType,
             ConstDefinition firstConstDefinition,
             List<Pair<CommaToken, ConstDefinition>> additionalConstantDefinitionList,
             Optional<SemicolonToken> semicolonToken
     ) {
-        this.constToken = constToken;
-        this.basicType = basicType;
-        this.firstConstDefinition = firstConstDefinition;
-        this.additionalConstantDefinitionList = additionalConstantDefinitionList;
-        this.semicolonToken = semicolonToken;
+        this.constToken = Objects.requireNonNull(constToken);
+        this.basicType = Objects.requireNonNull(basicType);
+        this.firstConstDefinition = Objects.requireNonNull(firstConstDefinition);
+        this.additionalConstantDefinitionList = Collections.unmodifiableList(additionalConstantDefinitionList);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean matchBeginToken(LexerType lexer) {

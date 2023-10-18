@@ -11,6 +11,7 @@ import parse.nonterminator.Statement;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class IfStatement implements SelectionType {
@@ -22,7 +23,7 @@ public class IfStatement implements SelectionType {
     private final Optional<ElseToken> optionalElseToken;
     private final Optional<Statement> optionalElseStatement;
 
-    private IfStatement(
+    public IfStatement(
             IfToken ifToken,
             LeftParenthesisToken leftParenthesisToken,
             Condition condition,
@@ -31,13 +32,13 @@ public class IfStatement implements SelectionType {
             Optional<ElseToken> optionalElseToken,
             Optional<Statement> optionalElseStatement
     ) {
-        this.ifToken = ifToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.condition = condition;
-        this.rightParenthesisToken = rightParenthesisToken;
-        this.ifStatement = ifStatement;
-        this.optionalElseToken = optionalElseToken;
-        this.optionalElseStatement = optionalElseStatement;
+        this.ifToken = Objects.requireNonNull(ifToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.condition = Objects.requireNonNull(condition);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
+        this.ifStatement = Objects.requireNonNull(ifStatement);
+        this.optionalElseToken = Objects.requireNonNull(optionalElseToken);
+        this.optionalElseStatement = Objects.requireNonNull(optionalElseStatement);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {

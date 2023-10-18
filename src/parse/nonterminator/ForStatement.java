@@ -6,6 +6,7 @@ import lex.token.AssignToken;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ForStatement implements SelectionType {
@@ -13,10 +14,10 @@ public class ForStatement implements SelectionType {
     private final AssignToken assignToken;
     private final Expression expression;
 
-    private ForStatement(LeftValue leftValue, AssignToken assignToken, Expression expression) {
-        this.leftValue = leftValue;
-        this.assignToken = assignToken;
-        this.expression = expression;
+    public ForStatement(LeftValue leftValue, AssignToken assignToken, Expression expression) {
+        this.leftValue = Objects.requireNonNull(leftValue);
+        this.assignToken = Objects.requireNonNull(assignToken);
+        this.expression = Objects.requireNonNull(expression);
     }
 
     public static Optional<ForStatement> parse(LexerType lexer) {

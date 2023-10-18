@@ -8,20 +8,18 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class RelationalExpression implements NonTerminatorType {
     private final AdditiveExpression firstAdditiveExpression;
     private final List<Pair<RelaitionalOperatorTokenType, AdditiveExpression>> operatorWithExpressionList;
 
-    private RelationalExpression(
+    public RelationalExpression(
             AdditiveExpression firstAdditiveExpression,
             List<Pair<RelaitionalOperatorTokenType, AdditiveExpression>> operatorWithExpressionList
     ) {
-        this.firstAdditiveExpression = firstAdditiveExpression;
-        this.operatorWithExpressionList = operatorWithExpressionList;
+        this.firstAdditiveExpression = Objects.requireNonNull(firstAdditiveExpression);
+        this.operatorWithExpressionList = Collections.unmodifiableList(operatorWithExpressionList);
     }
 
     public static Optional<RelationalExpression> parse(LexerType lexer) {

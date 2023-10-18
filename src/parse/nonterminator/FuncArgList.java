@@ -14,7 +14,7 @@ public class FuncArgList implements NonTerminatorType {
     private final Expression firstExpression;
     private final List<Pair<CommaToken, Expression>> commaWithExpressionList;
 
-    private FuncArgList(Expression firstExpression, List<Pair<CommaToken, Expression>> commaWithExpressionList) {
+    public FuncArgList(Expression firstExpression, List<Pair<CommaToken, Expression>> commaWithExpressionList) {
         this.firstExpression = Objects.requireNonNull(firstExpression);
         this.commaWithExpressionList = Collections.unmodifiableList(commaWithExpressionList);
     }

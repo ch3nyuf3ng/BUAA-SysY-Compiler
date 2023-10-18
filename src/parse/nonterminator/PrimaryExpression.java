@@ -10,17 +10,19 @@ import parse.protocol.SelectionType;
 import parse.selections.ParenthesisedPrimeExpression;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class PrimaryExpression implements NonTerminatorType, SelectionType {
     private final SelectionType primaryExpression;
 
-    private PrimaryExpression(SelectionType primaryExpression) {
-        this.primaryExpression = primaryExpression;
+    public PrimaryExpression(SelectionType primaryExpression) {
+        this.primaryExpression = Objects.requireNonNull(primaryExpression);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
-        return lexer.isMatchedTokenOf(LeftParenthesisToken.class) || lexer.isMatchedTokenOf(IdentifierToken.class)
+        return lexer.isMatchedTokenOf(LeftParenthesisToken.class)
+                || lexer.isMatchedTokenOf(IdentifierToken.class)
                 || lexer.isMatchedTokenOf(LiteralIntegerToken.class);
     }
 

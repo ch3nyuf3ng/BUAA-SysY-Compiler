@@ -8,15 +8,16 @@ import parse.nonterminator.UnaryOperator;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class UnaryOperatedExpression implements SelectionType {
     private final UnaryOperator unaryOperator;
     private final UnaryExpression unaryExpression;
 
-    private UnaryOperatedExpression(UnaryOperator unaryOperator, UnaryExpression unaryExpression) {
-        this.unaryOperator = unaryOperator;
-        this.unaryExpression = unaryExpression;
+    public UnaryOperatedExpression(UnaryOperator unaryOperator, UnaryExpression unaryExpression) {
+        this.unaryOperator = Objects.requireNonNull(unaryOperator);
+        this.unaryExpression = Objects.requireNonNull(unaryExpression);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {

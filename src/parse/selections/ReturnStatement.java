@@ -8,6 +8,7 @@ import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ReturnStatement implements SelectionType {
@@ -15,12 +16,12 @@ public class ReturnStatement implements SelectionType {
     private final Optional<Expression> optionalExpression;
     private final SemicolonToken semicolonToken;
 
-    private ReturnStatement(
+    public ReturnStatement(
             ReturnToken returnToken, Optional<Expression> optionalExpression, SemicolonToken semicolonToken
     ) {
-        this.returnToken = returnToken;
-        this.optionalExpression = optionalExpression;
-        this.semicolonToken = semicolonToken;
+        this.returnToken = Objects.requireNonNull(returnToken);
+        this.optionalExpression = Objects.requireNonNull(optionalExpression);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
@@ -60,9 +61,10 @@ public class ReturnStatement implements SelectionType {
 
     @Override
     public String representation() {
-        return returnToken.representation() + " "
-                + optionalExpression.map(Expression::representation).orElse("")
-                + semicolonToken.representation();
+        return optionalExpression.map(expression -> returnToken.representation() + " "
+                + expression.representation()
+                + semicolonToken.representation()
+                ).orElse("return;");
     }
 
     @Override

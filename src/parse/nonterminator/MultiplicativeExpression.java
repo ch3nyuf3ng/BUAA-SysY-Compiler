@@ -8,20 +8,18 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class MultiplicativeExpression implements NonTerminatorType {
     private final UnaryExpression firstExpression;
     private final List<Pair<MultiplicativeTokenType, UnaryExpression>> operatorWithExpressionList;
 
-    private MultiplicativeExpression(
+    public MultiplicativeExpression(
             UnaryExpression firstExpression,
             List<Pair<MultiplicativeTokenType, UnaryExpression>> operatorWithExpressionList
     ) {
-        this.firstExpression = firstExpression;
-        this.operatorWithExpressionList = operatorWithExpressionList;
+        this.firstExpression = Objects.requireNonNull(firstExpression);
+        this.operatorWithExpressionList = Collections.unmodifiableList(operatorWithExpressionList);
     }
 
     public static Optional<MultiplicativeExpression> parse(LexerType lexer) {

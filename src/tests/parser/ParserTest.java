@@ -10,7 +10,6 @@ import java.io.File;
 public class ParserTest {
     private final static String InputFilePath = "testfile";
     private final static String MyOutputFolderPath = "myoutput";
-    private final static String StandardOutputFolderPath = "stdoutput";
 
     public static void main(String[] args) {
         for (int i = 1; i <= 15; i += 1) {

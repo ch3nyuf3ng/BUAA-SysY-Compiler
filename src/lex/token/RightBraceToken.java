@@ -9,7 +9,7 @@ public class RightBraceToken implements TokenType {
     private final Position position;
 
     public RightBraceToken(Position position) {
-        this.position = position;
+        this.position = Objects.requireNonNull(position);
     }
 
     @Override

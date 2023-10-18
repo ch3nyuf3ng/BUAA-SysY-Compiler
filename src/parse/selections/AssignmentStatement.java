@@ -9,6 +9,7 @@ import parse.nonterminator.LeftValue;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class AssignmentStatement implements SelectionType {
@@ -17,11 +18,16 @@ public class AssignmentStatement implements SelectionType {
     private final Expression expression;
     private final Optional<SemicolonToken> optionalSemicolonToken;
 
-    private AssignmentStatement(LeftValue leftValue, AssignToken assignToken, Expression expression, Optional<SemicolonToken> optionalSemicolonToken) {
-        this.leftValue = leftValue;
-        this.assignToken = assignToken;
-        this.expression = expression;
-        this.optionalSemicolonToken = optionalSemicolonToken;
+    private AssignmentStatement(
+            LeftValue leftValue,
+            AssignToken assignToken,
+            Expression expression,
+            Optional<SemicolonToken> optionalSemicolonToken
+    ) {
+        this.leftValue = Objects.requireNonNull(leftValue);
+        this.assignToken = Objects.requireNonNull(assignToken);
+        this.expression = Objects.requireNonNull(expression);
+        this.optionalSemicolonToken = Objects.requireNonNull(optionalSemicolonToken);
     }
 
     public static Optional<AssignmentStatement> parse(LexerType lexer) {
@@ -41,7 +47,9 @@ public class AssignmentStatement implements SelectionType {
 
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            final var result = new AssignmentStatement(leftValue.get(), assignToken.get(), expression.get(), semicolonToken);
+            final var result = new AssignmentStatement(
+                    leftValue.get(), assignToken.get(), expression.get(), semicolonToken
+            );
             Logger.info("Matched <AssignmentStatement>: " + result.representation());
             return Optional.of(result);
         }

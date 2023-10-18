@@ -6,13 +6,14 @@ import parse.nonterminator.ConstExpression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ScalarConstInitValue implements SelectionType {
     private final ConstExpression constExpression;
 
-    private ScalarConstInitValue(ConstExpression constExpression) {
-        this.constExpression = constExpression;
+    public ScalarConstInitValue(ConstExpression constExpression) {
+        this.constExpression = Objects.requireNonNull(constExpression);
     }
 
     public static Optional<ScalarConstInitValue> parse(LexerType lexer) {

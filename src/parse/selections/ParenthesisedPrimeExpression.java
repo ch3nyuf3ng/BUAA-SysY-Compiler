@@ -8,6 +8,7 @@ import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ParenthesisedPrimeExpression implements SelectionType {
@@ -20,9 +21,9 @@ public class ParenthesisedPrimeExpression implements SelectionType {
             Expression expression,
             RightParenthesisToken rightParenthesisToken
     ) {
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.expression = expression;
-        this.rightParenthesisToken = rightParenthesisToken;
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.expression = Objects.requireNonNull(expression);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
     }
 
     public static Optional<ParenthesisedPrimeExpression> parse(LexerType lexer) {

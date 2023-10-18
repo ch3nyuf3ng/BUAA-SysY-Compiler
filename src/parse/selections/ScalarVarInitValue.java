@@ -6,13 +6,14 @@ import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ScalarVarInitValue implements SelectionType {
     private final Expression expression;
 
     public ScalarVarInitValue(Expression expression) {
-        this.expression = expression;
+        this.expression = Objects.requireNonNull(expression);
     }
 
     public static Optional<ScalarVarInitValue> parse(LexerType lexer) {

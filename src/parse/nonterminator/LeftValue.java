@@ -10,17 +10,14 @@ import parse.protocol.SelectionType;
 import parse.substructures.BracketWith;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class LeftValue implements NonTerminatorType, SelectionType {
     private final IdentifierToken identifierToken;
     private final List<BracketWith<Expression>> bracketWithExpressionList;
 
-    private LeftValue(IdentifierToken identifierToken, List<BracketWith<Expression>> bracketWithExpressionList) {
-        this.identifierToken = identifierToken;
+    public LeftValue(IdentifierToken identifierToken, List<BracketWith<Expression>> bracketWithExpressionList) {
+        this.identifierToken = Objects.requireNonNull(identifierToken);
         this.bracketWithExpressionList = Collections.unmodifiableList(bracketWithExpressionList);
     }
 

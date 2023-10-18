@@ -7,15 +7,16 @@ import lex.token.SemicolonToken;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ContinueStatement implements SelectionType {
     private final ContinueToken continueToken;
     private final Optional<SemicolonToken> optionalSemicolonToken;
 
-    private ContinueStatement(ContinueToken continueToken, Optional<SemicolonToken> optionalSemicolonToken) {
-        this.continueToken = continueToken;
-        this.optionalSemicolonToken = optionalSemicolonToken;
+    public ContinueStatement(ContinueToken continueToken, Optional<SemicolonToken> optionalSemicolonToken) {
+        this.continueToken = Objects.requireNonNull(continueToken);
+        this.optionalSemicolonToken = Objects.requireNonNull(optionalSemicolonToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
@@ -56,7 +57,7 @@ public class ContinueStatement implements SelectionType {
 
     @Override
     public String representation() {
-        return continueToken.representation() + " "
+        return continueToken.representation()
                 + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
     }
 

@@ -6,13 +6,14 @@ import lex.protocol.UnaryOperatorTokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class UnaryOperator implements NonTerminatorType {
     private final UnaryOperatorTokenType operator;
 
-    private UnaryOperator(UnaryOperatorTokenType operator) {
-        this.operator = operator;
+    public UnaryOperator(UnaryOperatorTokenType operator) {
+        this.operator = Objects.requireNonNull(operator);
     }
 
     public static Optional<UnaryOperator> parse(LexerType lexer) {

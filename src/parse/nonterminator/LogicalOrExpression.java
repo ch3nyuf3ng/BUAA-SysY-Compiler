@@ -8,20 +8,18 @@ import lex.token.LogicalOrToken;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class LogicalOrExpression implements NonTerminatorType {
     private final LogicalAndExpression firstLogicalAndExpression;
     private final List<Pair<LogicalOrToken, LogicalAndExpression>> operatorWithExpressionList;
 
-    private LogicalOrExpression(
+    public LogicalOrExpression(
             LogicalAndExpression firstLogicalAndExpression,
             List<Pair<LogicalOrToken, LogicalAndExpression>> operatorWithExpressionList
     ) {
-        this.firstLogicalAndExpression = firstLogicalAndExpression;
-        this.operatorWithExpressionList = operatorWithExpressionList;
+        this.firstLogicalAndExpression = Objects.requireNonNull(firstLogicalAndExpression);
+        this.operatorWithExpressionList = Collections.unmodifiableList(operatorWithExpressionList);
     }
 
     public static Optional<LogicalOrExpression> parse(LexerType lexer) {

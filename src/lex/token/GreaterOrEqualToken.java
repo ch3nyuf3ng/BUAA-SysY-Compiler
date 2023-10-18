@@ -10,7 +10,7 @@ public class GreaterOrEqualToken implements TokenType, RelaitionalOperatorTokenT
     private final Position position;
 
     public GreaterOrEqualToken(Position position) {
-        this.position = position;
+        this.position = Objects.requireNonNull(position);
     }
 
     @Override

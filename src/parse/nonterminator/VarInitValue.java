@@ -9,13 +9,14 @@ import parse.selections.ArrayVarInitValue;
 import parse.selections.ScalarVarInitValue;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class VarInitValue implements NonTerminatorType {
     private final SelectionType varInitVal;
 
-    private VarInitValue(SelectionType varInitVal) {
-        this.varInitVal = varInitVal;
+    public VarInitValue(SelectionType varInitVal) {
+        this.varInitVal = Objects.requireNonNull(varInitVal);
     }
 
     public static Optional<VarInitValue> parse(LexerType lexer) {

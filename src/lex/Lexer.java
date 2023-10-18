@@ -12,6 +12,7 @@ import lex.protocol.TokenType;
 import lex.token.*;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static foundation.CharacterUtils.*;
@@ -27,7 +28,7 @@ public class Lexer implements LexerType {
     private TokenType cachedCurrentToken;
 
     public Lexer(String sourceCode) {
-        this.sourceCode = sourceCode;
+        this.sourceCode = Objects.requireNonNull(sourceCode);
         resetPosition(new Position(0, 1, 1));
     }
 

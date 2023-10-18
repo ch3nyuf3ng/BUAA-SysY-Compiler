@@ -11,9 +11,7 @@ import parse.protocol.NonTerminatorType;
 import parse.substructures.BracketWith;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ConstDefinition implements NonTerminatorType {
     private final IdentifierToken identifierToken;
@@ -21,16 +19,16 @@ public class ConstDefinition implements NonTerminatorType {
     private final AssignToken assignToken;
     private final ConstInitValue initValue;
 
-    private ConstDefinition(
+    public ConstDefinition(
             IdentifierToken identifierToken,
             List<BracketWith<ConstExpression>> bracketWithConstExpressionList,
             AssignToken assignToken,
             ConstInitValue initValue
     ) {
-        this.identifierToken = identifierToken;
-        this.bracketWithConstExpressionList = bracketWithConstExpressionList;
-        this.assignToken = assignToken;
-        this.initValue = initValue;
+        this.identifierToken = Objects.requireNonNull(identifierToken);
+        this.bracketWithConstExpressionList = Collections.unmodifiableList(bracketWithConstExpressionList);
+        this.assignToken = Objects.requireNonNull(assignToken);
+        this.initValue = Objects.requireNonNull(initValue);
     }
 
     public static Optional<ConstDefinition> parse(LexerType lexer) {

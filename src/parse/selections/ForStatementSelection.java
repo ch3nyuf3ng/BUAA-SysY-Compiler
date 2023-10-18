@@ -12,6 +12,7 @@ import parse.nonterminator.Statement;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ForStatementSelection implements SelectionType {
@@ -25,7 +26,7 @@ public class ForStatementSelection implements SelectionType {
     private final RightParenthesisToken rightParenthesisToken;
     private final Statement statement;
 
-    private ForStatementSelection(
+    public ForStatementSelection(
             ForToken forToken,
             LeftParenthesisToken leftParenthesisToken,
             Optional<ForStatement> optionalInitStatement,
@@ -36,15 +37,15 @@ public class ForStatementSelection implements SelectionType {
             RightParenthesisToken rightParenthesisToken,
             Statement statement
     ) {
-        this.forToken = forToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.optionalInitStatement = optionalInitStatement;
-        this.semicolonToken1 = semicolonToken1;
-        this.optionalCondition = optionalCondition;
-        this.semicolonToken2 = semicolonToken2;
-        this.optionalIterateStatement = optionalIterateStatement;
-        this.rightParenthesisToken = rightParenthesisToken;
-        this.statement = statement;
+        this.forToken = Objects.requireNonNull(forToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.optionalInitStatement = Objects.requireNonNull(optionalInitStatement);
+        this.semicolonToken1 = Objects.requireNonNull(semicolonToken1);
+        this.optionalCondition = Objects.requireNonNull(optionalCondition);
+        this.semicolonToken2 = Objects.requireNonNull(semicolonToken2);
+        this.optionalIterateStatement = Objects.requireNonNull(optionalIterateStatement);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
+        this.statement = Objects.requireNonNull(statement);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {

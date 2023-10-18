@@ -12,7 +12,7 @@ import java.util.Optional;
 public class FuncType implements NonTerminatorType {
     private final FuncTypeTokenType funcType;
 
-    private FuncType(FuncTypeTokenType funcType) {
+    public FuncType(FuncTypeTokenType funcType) {
         this.funcType = Objects.requireNonNull(funcType);
     }
 

@@ -9,13 +9,14 @@ import parse.selections.ArrayConstInitValue;
 import parse.selections.ScalarConstInitValue;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ConstInitValue implements NonTerminatorType {
     private final SelectionType constInitValue;
 
-    private ConstInitValue(SelectionType constInitValue) {
-        this.constInitValue = constInitValue;
+    public ConstInitValue(SelectionType constInitValue) {
+        this.constInitValue = Objects.requireNonNull(constInitValue);
     }
 
     public static Optional<ConstInitValue> parse(LexerType lexer) {

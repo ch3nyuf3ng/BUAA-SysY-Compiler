@@ -5,13 +5,14 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Expression implements NonTerminatorType {
     private final AdditiveExpression additiveExpression;
 
-    private Expression(AdditiveExpression additiveExpression) {
-        this.additiveExpression = additiveExpression;
+    public Expression(AdditiveExpression additiveExpression) {
+        this.additiveExpression = Objects.requireNonNull(additiveExpression);
     }
 
     public static Optional<Expression> parse(LexerType lexer) {

@@ -8,13 +8,14 @@ import parse.selections.FuncInvocation;
 import parse.selections.UnaryOperatedExpression;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class UnaryExpression implements NonTerminatorType {
     private final SelectionType unaryExpression;
 
-    private UnaryExpression(SelectionType unaryExpression) {
-        this.unaryExpression = unaryExpression;
+    public UnaryExpression(SelectionType unaryExpression) {
+        this.unaryExpression = Objects.requireNonNull(unaryExpression);
     }
 
     public static Optional<UnaryExpression> parse(LexerType lexer) {

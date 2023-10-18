@@ -7,6 +7,7 @@ import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class ExpressionStatement implements SelectionType {
@@ -14,8 +15,8 @@ public class ExpressionStatement implements SelectionType {
     private final SemicolonToken semicolonToken;
 
     public ExpressionStatement(Optional<Expression> expression, SemicolonToken semicolonToken) {
-        this.expression = expression;
-        this.semicolonToken = semicolonToken;
+        this.expression = Objects.requireNonNull(expression);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {

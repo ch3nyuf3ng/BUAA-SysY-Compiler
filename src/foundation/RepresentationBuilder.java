@@ -2,6 +2,7 @@ package foundation;
 
 import foundation.protocol.DetailedRepresentable;
 import foundation.protocol.Representable;
+import lex.token.CommaToken;
 import lex.token.RightBracketToken;
 import parse.substructures.BracketWith;
 
@@ -15,8 +16,9 @@ public class RepresentationBuilder {
     String binaryOperatedConcatenatedDetailedRepresentation(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList, String categoryCode
     ) {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstOperand1.detailedRepresentation()).append(categoryCode).append('\n');
+        final var stringBuilder = new StringBuilder()
+                .append(firstOperand1.detailedRepresentation())
+                .append(categoryCode).append('\n');
         operatorWithOperandList.forEach(item -> stringBuilder
                 .append(item.first().detailedRepresentation())
                 .append(item.second().detailedRepresentation())
@@ -48,10 +50,10 @@ public class RepresentationBuilder {
     String binaryOperatedConcatenatedRepresentation(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList
     ) {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstOperand1.representation());
+        final var stringBuilder = new StringBuilder().append(firstOperand1.representation());
         operatorWithOperandList.forEach(item -> stringBuilder
-                .append(' ').append(item.first().representation())
+                .append(item.first() instanceof CommaToken ? "" : ' ')
+                .append(item.first().representation())
                 .append(' ').append(item.second().representation())
         );
         return stringBuilder.toString();

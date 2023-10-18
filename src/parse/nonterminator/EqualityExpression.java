@@ -8,20 +8,18 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class EqualityExpression implements NonTerminatorType {
     private final RelationalExpression firstExpression;
     private final List<Pair<EqualityTokenType, RelationalExpression>> operatorWithExpressionList;
 
-    private EqualityExpression(
+    public EqualityExpression(
             RelationalExpression firstExpression,
             List<Pair<EqualityTokenType, RelationalExpression>> operatorWithExpressionList
     ) {
-        this.firstExpression = firstExpression;
-        this.operatorWithExpressionList = operatorWithExpressionList;
+        this.firstExpression = Objects.requireNonNull(firstExpression);
+        this.operatorWithExpressionList = Collections.unmodifiableList(operatorWithExpressionList);
     }
 
     public static Optional<EqualityExpression> parse(LexerType lexer) {
