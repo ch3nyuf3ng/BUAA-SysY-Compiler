@@ -3,9 +3,7 @@ package error;
 import error.protocol.SimpleErrorType;
 import foundation.Position;
 
-public record IllegalCharacterError(
-        Position position
-) implements SimpleErrorType {
+public record IllegalCharacterError(Position position) implements SimpleErrorType {
     @Override
     public String categoryCode() {
         return "a";

@@ -1,19 +1,19 @@
 package parse.nonterminator;
 
+import lex.protocol.FuncTypeTokenType;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
-import lex.token.IntToken;
-import lex.token.VoidToken;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class FuncType implements NonTerminatorType {
-    private final TokenType funcType;
+    private final FuncTypeTokenType funcType;
 
-    private FuncType(TokenType funcType) {
-        this.funcType = funcType;
+    private FuncType(FuncTypeTokenType funcType) {
+        this.funcType = Objects.requireNonNull(funcType);
     }
 
     public static Optional<FuncType> parse(LexerType lexer) {
@@ -22,16 +22,10 @@ public class FuncType implements NonTerminatorType {
 
         parse:
         {
-            final var optionalFuncType = lexer.currentToken()
-                    .filter(t -> t instanceof IntToken || t instanceof VoidToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return t;
-                    });
-            if (optionalFuncType.isEmpty()) break parse;
-            final var funcType = optionalFuncType.get();
+            final var funcType = lexer.tryMatchAndConsumeTokenOf(FuncTypeTokenType.class);
+            if (funcType.isEmpty()) break parse;
 
-            final var result = new FuncType(funcType);
+            final var result = new FuncType(funcType.get());
             Logger.info("Matched <FuncType>: " + result.representation());
             return Optional.of(result);
         }

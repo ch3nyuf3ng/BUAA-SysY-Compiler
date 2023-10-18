@@ -16,7 +16,7 @@ public class Declaration implements NonTerminatorType, SelectionType {
     }
 
     public static boolean matchBeginTokens(LexerType lexer) {
-        return VarDeclaration.matchBeginTokens(lexer) || ConstDeclaration.matchBeginToken(lexer);
+        return VarDeclaration.isMatchedBeginTokens(lexer) || ConstDeclaration.matchBeginToken(lexer);
     }
 
     public static Optional<Declaration> parse(LexerType lexer) {
@@ -24,20 +24,18 @@ public class Declaration implements NonTerminatorType, SelectionType {
         final var beginningPosition = lexer.beginningPosition();
 
         if (ConstDeclaration.matchBeginToken(lexer)) {
-            final var optionalConstDeclaration = ConstDeclaration.parse(lexer);
-            if (optionalConstDeclaration.isPresent()) {
-                final var constDeclaration = optionalConstDeclaration.get();
-                final var result = new Declaration(constDeclaration);
+            final var constDeclaration = ConstDeclaration.parse(lexer);
+            if (constDeclaration.isPresent()) {
+                final var result = new Declaration(constDeclaration.get());
                 Logger.info("Matched <Declaration>: " + result.representation());
                 return Optional.of(result);
             }
         }
 
-        if (VarDeclaration.matchBeginTokens(lexer)) {
-            final var optionalVarDeclaration = VarDeclaration.parse(lexer);
-            if (optionalVarDeclaration.isPresent()) {
-                final var varDeclaration = optionalVarDeclaration.get();
-                final var result = new Declaration(varDeclaration);
+        if (VarDeclaration.isMatchedBeginTokens(lexer)) {
+            final var varDeclaration = VarDeclaration.parse(lexer);
+            if (varDeclaration.isPresent()) {
+                final var result = new Declaration(varDeclaration.get());
                 Logger.info("Matched <Declaration>: " + result.representation());
                 return Optional.of(result);
             }

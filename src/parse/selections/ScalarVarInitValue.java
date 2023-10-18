@@ -19,16 +19,12 @@ public class ScalarVarInitValue implements SelectionType {
         Logger.info("Matching <ScalarVarInitValue>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final Expression expression;
-            final var optionalExpression = Expression.parse(lexer);
-            if (optionalExpression.isPresent()) {
-                expression = optionalExpression.get();
-            } else {
-                break parse;
-            }
+        parse:
+        {
+            final var expression = Expression.parse(lexer);
+            if (expression.isEmpty()) break parse;
 
-            final var result = new ScalarVarInitValue(expression);
+            final var result = new ScalarVarInitValue(expression.get());
             Logger.info("Matched <ScalarVarInitValue>: " + result.representation());
             return Optional.of(result);
         }

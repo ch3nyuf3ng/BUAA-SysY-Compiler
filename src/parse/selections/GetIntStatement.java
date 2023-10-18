@@ -37,72 +37,33 @@ public class GetIntStatement implements SelectionType {
         Logger.info("Matching <GetIntStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final LeftValue leftValue;
-            final var optionalLeftValue = LeftValue.parse(lexer);
-            if (optionalLeftValue.isPresent()) {
-                leftValue = optionalLeftValue.get();
-            } else {
-                break parse;
-            }
+        parse:
+        {
+            final var leftValue = LeftValue.parse(lexer);
+            if (leftValue.isEmpty()) break parse;
 
-            final AssignToken assignToken;
-            final var optionalAssignToken = lexer.currentToken()
-                    .filter(t -> t instanceof AssignToken);
-            if (optionalAssignToken.isPresent()) {
-                assignToken = (AssignToken) optionalAssignToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
+            if (assignToken.isEmpty()) break parse;
 
-            final GetIntToken getIntToken;
-            final var optionalGetIntToken = lexer.currentToken()
-                    .filter(t -> t instanceof GetIntToken);
-            if (optionalGetIntToken.isPresent()) {
-                getIntToken = (GetIntToken) optionalGetIntToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var getIntToken = lexer.tryMatchAndConsumeTokenOf(GetIntToken.class);
+            if (getIntToken.isEmpty()) break parse;
 
-            final LeftParenthesisToken leftParenthesisToken;
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken);
-            if (optionalLeftParenthesisToken.isPresent()) {
-                leftParenthesisToken = (LeftParenthesisToken) optionalLeftParenthesisToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final RightParenthesisToken rightParenthesisToken;
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken);
-            if (optionalRightParenthesisToken.isPresent()) {
-                rightParenthesisToken = (RightParenthesisToken) optionalRightParenthesisToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final SemicolonToken semicolonToken;
-            final var optionalSemicolonToken = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken);
-            if (optionalSemicolonToken.isPresent()) {
-                semicolonToken = (SemicolonToken) optionalSemicolonToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
+            if (semicolonToken.isEmpty()) break parse;
 
             final var result = new GetIntStatement(
-                    leftValue,
-                    assignToken,
-                    getIntToken,
-                    leftParenthesisToken,
-                    rightParenthesisToken,
-                    semicolonToken
+                    leftValue.get(),
+                    assignToken.get(),
+                    getIntToken.get(),
+                    leftParenthesisToken.get(),
+                    rightParenthesisToken.get(),
+                    semicolonToken.get()
             );
             Logger.info("Matched <GetIntStatement>: " + result.representation());
             return Optional.of(result);
@@ -115,21 +76,15 @@ public class GetIntStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return leftValue.detailedRepresentation()
-                + assignToken.detailedRepresentation()
-                + getIntToken.detailedRepresentation()
-                + leftParenthesisToken.detailedRepresentation()
-                + rightParenthesisToken.detailedRepresentation()
-                + semicolonToken.detailedRepresentation();
+        return leftValue.detailedRepresentation() + assignToken.detailedRepresentation()
+                + getIntToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
+                + rightParenthesisToken.detailedRepresentation() + semicolonToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return leftValue.representation() + " "
-                + assignToken.representation() + " "
-                + getIntToken.representation()
-                + leftParenthesisToken.representation()
-                + rightParenthesisToken.representation()
+        return leftValue.representation() + " " + assignToken.representation() + " " + getIntToken.representation()
+                + leftParenthesisToken.representation() + rightParenthesisToken.representation()
                 + semicolonToken.representation();
     }
 

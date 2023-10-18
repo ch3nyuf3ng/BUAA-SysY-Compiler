@@ -2,10 +2,7 @@ package parse.nonterminator;
 
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
-import lex.token.IntToken;
-import lex.token.LeftParenthesisToken;
-import lex.token.MainToken;
-import lex.token.RightParenthesisToken;
+import lex.token.*;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
@@ -36,53 +33,29 @@ public class MainFuncDefinition implements NonTerminatorType {
         Logger.info("Matching <MainFuncDefinition>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalIntToken = lexer.currentToken()
-                    .filter(t -> t instanceof IntToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IntToken) t;
-                    });
-            if (optionalIntToken.isEmpty()) break parse;
-            final var intToken = optionalIntToken.get();
+        parse:
+        {
+            final var intToken = lexer.tryMatchAndConsumeTokenOf(IntToken.class);
+            if (intToken.isEmpty()) break parse;
 
-            final var optionalMainToken = lexer.currentToken()
-                    .filter(t -> t instanceof MainToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (MainToken) t;
-                    });
-            if (optionalMainToken.isEmpty()) break parse;
-            final var mainToken = optionalMainToken.get();
+            final var mainToken = lexer.tryMatchAndConsumeTokenOf(MainToken.class);
+            if (mainToken.isEmpty()) break parse;
 
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftParenthesisToken) t;
-                    });
-            if (optionalLeftParenthesisToken.isEmpty()) break parse;
-            final var leftParenthesisToken = optionalLeftParenthesisToken.get();
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightParenthesisToken) t;
-                    });
-            if (optionalRightParenthesisToken.isEmpty()) break parse;
-            final var rightParenthesisToken = optionalRightParenthesisToken.get();
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var optionalBlock = Block.parse(lexer);
-            if (optionalBlock.isEmpty()) break parse;
-            final var block = optionalBlock.get();
+            final var block = Block.parse(lexer);
+            if (block.isEmpty()) break parse;
 
             final var result = new MainFuncDefinition(
-                    intToken,
-                    mainToken,
-                    leftParenthesisToken,
-                    rightParenthesisToken,
-                    block
+                    intToken.get(),
+                    mainToken.get(),
+                    leftParenthesisToken.get(),
+                    rightParenthesisToken.get(),
+                    block.get()
             );
             Logger.info("Matched <MainFuncDefinition>:\n" + result.representation());
             return Optional.of(result);
@@ -101,29 +74,15 @@ public class MainFuncDefinition implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        return intToken.detailedRepresentation()
-                + mainToken.detailedRepresentation()
-                + leftParenthesisToken.detailedRepresentation()
-                + rightParenthesisToken.detailedRepresentation()
-                + block.detailedRepresentation()
-                + categoryCode() + "\n";
+        return intToken.detailedRepresentation() + mainToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation() + rightParenthesisToken.detailedRepresentation()
+                + block.detailedRepresentation() + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(intToken.representation()).append(" ")
-                .append(mainToken.representation())
-                .append(leftParenthesisToken.representation())
-                .append(rightParenthesisToken.representation()).append(" ")
-                .append(block.representation());
-        final var lastCharIndex = stringBuilder.length() - 1;
-        final var lastChar = stringBuilder.charAt(lastCharIndex);
-        if (lastChar == '\n') {
-            stringBuilder.deleteCharAt(lastCharIndex);
-        }
-        return stringBuilder.toString();
+        return intToken.representation() + " " + mainToken.representation() + leftParenthesisToken.representation()
+                + rightParenthesisToken.representation() + " " + block.representation();
     }
 
     @Override

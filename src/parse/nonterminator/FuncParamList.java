@@ -26,29 +26,21 @@ public class FuncParamList implements NonTerminatorType {
 
         parse:
         {
-            final var optionalFirstFuncParam = FuncParam.parse(lexer);
-            if (optionalFirstFuncParam.isEmpty()) break parse;
-            final var firstFuncParam = optionalFirstFuncParam.get();
+            final var firstFuncParam = FuncParam.parse(lexer);
+            if (firstFuncParam.isEmpty()) break parse;
 
-            final List<CommaWith<FuncParam>> commaWithFuncParamList = new ArrayList<>();
+            final var commaWithFuncParamList = new ArrayList<CommaWith<FuncParam>>();
             while (true) {
-                final var optionalCommaToken = lexer.currentToken()
-                        .filter(t -> t instanceof CommaToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (CommaToken) t;
-                        });
-                if (optionalCommaToken.isEmpty()) break;
-                final var commaToken = optionalCommaToken.get();
+                final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
+                if (commaToken.isEmpty()) break;
 
-                final var optionalFuncParam = FuncParam.parse(lexer);
-                if (optionalFuncParam.isEmpty()) break parse;
-                final var funcParam = optionalFuncParam.get();
+                final var funcParam = FuncParam.parse(lexer);
+                if (funcParam.isEmpty()) break parse;
 
-                commaWithFuncParamList.add(new CommaWith<>(commaToken, funcParam));
+                commaWithFuncParamList.add(new CommaWith<>(commaToken.get(), funcParam.get()));
             }
 
-            final var result = new FuncParamList(firstFuncParam, commaWithFuncParamList);
+            final var result = new FuncParamList(firstFuncParam.get(), commaWithFuncParamList);
             Logger.info("Matched <FuncParamList>: " + result.representation());
             return Optional.of(result);
         }
@@ -73,9 +65,7 @@ public class FuncParamList implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(firstFuncParam.detailedRepresentation());
         for (final var i : commaWithFuncParamList) {
-            stringBuilder
-                    .append(i.commaToken().detailedRepresentation())
-                    .append(i.entity().detailedRepresentation());
+            stringBuilder.append(i.commaToken().detailedRepresentation()).append(i.entity().detailedRepresentation());
         }
         stringBuilder.append(categoryCode()).append('\n');
         return stringBuilder.toString();
@@ -86,9 +76,7 @@ public class FuncParamList implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(firstFuncParam.representation());
         for (final var i : commaWithFuncParamList) {
-            stringBuilder
-                    .append(i.commaToken().representation()).append(' ')
-                    .append(i.entity().representation());
+            stringBuilder.append(i.commaToken().representation()).append(' ').append(i.entity().representation());
         }
         return stringBuilder.toString();
     }

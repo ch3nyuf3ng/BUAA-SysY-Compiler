@@ -14,6 +14,7 @@ public class ParserTest {
 
     public static void main(String[] args) {
         for (int i = 1; i <= 15; i += 1) {
+            Logger.info("Test " + i);
             final var sourceCode = IO.readStringFrom(InputFilePath + File.separator + "testfile" + i + ".txt");
             final var lexer = new Lexer(sourceCode);
             final var parser = new Parser(lexer);

@@ -18,28 +18,22 @@ public class BreakStatement implements SelectionType {
         this.optionalSemicolonToken = optionalSemicolonToken;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(BreakToken.class);
+    }
+
     public static Optional<BreakStatement> parse(LexerType lexer) {
         Logger.info("Matching <BreakStatement>.");
         final var beginnningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalBreakToken = lexer.currentToken()
-                    .filter(t -> t instanceof BreakToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (BreakToken) t;
-                    });
-            if (optionalBreakToken.isEmpty()) break parse;
-            final var breakToken = optionalBreakToken.get();
+        parse:
+        {
+            final var breakToken = lexer.tryMatchAndConsumeTokenOf(BreakToken.class);
+            if (breakToken.isEmpty()) break parse;
 
-            final var optionalSemicolonToken = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            final var result = new BreakStatement(breakToken, optionalSemicolonToken);
+            final var result = new BreakStatement(breakToken.get(), semicolonToken);
             Logger.info("Matched <BreakStatement>: " + result.representation());
             return Optional.of(result);
         }
@@ -51,14 +45,14 @@ public class BreakStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return breakToken.detailedRepresentation()
-                + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
+        return breakToken.detailedRepresentation() + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation)
+                .orElse("");
     }
 
     @Override
     public String representation() {
-        return breakToken.representation() + " "
-                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
+        return breakToken.representation() + " " + optionalSemicolonToken.map(SemicolonToken::representation)
+                .orElse("");
     }
 
     @Override
@@ -68,9 +62,7 @@ public class BreakStatement implements SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) {
-            return optionalSemicolonToken.get();
-        }
+        if (optionalSemicolonToken.isPresent()) return optionalSemicolonToken.get();
         return breakToken;
     }
 }

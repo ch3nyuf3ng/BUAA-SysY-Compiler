@@ -5,9 +5,6 @@ import lex.token.RightBracketToken;
 
 import java.util.Optional;
 
-public record BracketWith<T>(
-        LeftBracketToken leftBracketToken,
-        T entity,
-        Optional<RightBracketToken> optionalRightBracketToken
-) {
+public record BracketWith<T>(LeftBracketToken leftBracketToken, T entity,
+                             Optional<RightBracketToken> optionalRightBracketToken) {
 }

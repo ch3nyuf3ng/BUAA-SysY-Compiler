@@ -32,7 +32,8 @@ public class LexerTester {
         try {
             final var outputFilename = "output" + i + ".txt";
             final var myOutput = Files.readString(Path.of(MyOutputFolderPath + File.separator + outputFilename));
-            final var standardOutput = Files.readString(Path.of(StandardOutputFolderPath + File.separator + outputFilename));
+            final var standardOutput = Files.readString(Path.of(
+                    StandardOutputFolderPath + File.separator + outputFilename));
             if (!myOutput.equals(standardOutput)) {
                 System.out.println("The " + i + "th file is not same as the standard output.");
             }

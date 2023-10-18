@@ -8,127 +8,97 @@ import parse.protocol.SelectionType;
 import parse.selections.*;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class Statement implements NonTerminatorType, SelectionType {
     private final SelectionType statement;
 
     private Statement(SelectionType statement) {
-        this.statement = statement;
+        this.statement = Objects.requireNonNull(statement);
+    }
+
+    public static boolean isMatchedBeginningTokens(LexerType lexer) {
+        return lexer.isMatchedTokenOf(IdentifierToken.class) || ExpressionStatement.isMatchedBeginningToken(lexer)
+                || Block.isMatchedBeginningToken(lexer) || IfStatement.isMatchedBeginningToken(lexer)
+                || ForStatementSelection.isMatchedBeginningToken(lexer) || BreakStatement.isMatchedBeginningToken(lexer)
+                || ContinueStatement.isMatchedBeginningToken(lexer) || ReturnStatement.isMatchedBeginningToken(lexer)
+                || PrintfStatement.isMatchedBeginningToken(lexer);
     }
 
     public static Optional<Statement> parse(LexerType lexer) {
         Logger.info("Matching <Statement>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        final var optionalIdentifierToken = lexer.currentToken()
-                .filter(t -> t instanceof IdentifierToken);
-        if (optionalIdentifierToken.isPresent()) {
-            final var optionalExpression = Expression.parse(lexer);
-            if (optionalExpression.isPresent()) {
-                Logger.info("Matching <ExpressionStatement>.");
-                final var optionalSemicolonToken = lexer.currentToken()
-                        .filter(t -> t instanceof SemicolonToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (SemicolonToken) t;
-                        });
-                if (optionalSemicolonToken.isPresent()) {
-                    final var result = new Statement(new ExpressionStatement(
-                                    optionalExpression, optionalSemicolonToken
-                    ));
-                    Logger.info("Matched <ExpressionStatement>: " + result.representation());
-                    Logger.info("Matched <Statement>: " + result.representation());
-                    return Optional.of(result);
-                } else {
-                    Logger.info("Failed to match <ExpressionStatement>.");
-                    lexer.resetPosition(beginningPosition);
-                }
-            }
-            final var optionalGetIntStatement = GetIntStatement.parse(lexer);
-            if (optionalGetIntStatement.isPresent()) {
-                final var getIntStatement = optionalGetIntStatement.get();
-                final var result = new Statement(getIntStatement);
+        if (lexer.isMatchedTokenOf(IdentifierToken.class)) {
+            final var expressionStatement = ExpressionStatement.parse(lexer);
+            if (expressionStatement.isPresent()) {
+                final var result = new Statement(expressionStatement.get());
                 Logger.info("Matched <Statement>: " + result.representation());
                 return Optional.of(result);
             }
-            final var optionalAssignmentStatement = AssignmentStatement.parse(lexer);
-            if (optionalAssignmentStatement.isPresent()) {
-                final var assignmentStatement = optionalAssignmentStatement.get();
-                final var result = new Statement(assignmentStatement);
+
+            final var getIntStatement = GetIntStatement.parse(lexer);
+            if (getIntStatement.isPresent()) {
+                final var result = new Statement(getIntStatement.get());
+                Logger.info("Matched <Statement>: " + result.representation());
+                return Optional.of(result);
+            }
+
+            final var assignmentStatement = AssignmentStatement.parse(lexer);
+            if (assignmentStatement.isPresent()) {
+                final var result = new Statement(assignmentStatement.get());
                 Logger.info("Matched <Statement>: " + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalNonSingleLvalExpBeginningToken = lexer.currentToken()
-                .filter(t -> t instanceof LeftParenthesisToken
-                        || t instanceof LiteralIntegerToken
-                        || t instanceof PlusToken
-                        || t instanceof MinusToken
-                        || t instanceof LogicalNotToken
-                        || t instanceof SemicolonToken);
-        if (optionalNonSingleLvalExpBeginningToken.isPresent()) {
-            final var optionalExpressionStatement = ExpressionStatement.parse(lexer);
-            if (optionalExpressionStatement.isPresent()) {
-                final var expressionStatement = optionalExpressionStatement.get();
-                final var result = new Statement(expressionStatement);
+        if (ExpressionStatement.isMatchedBeginningToken(lexer)) {
+            final var expressionStatement = ExpressionStatement.parse(lexer);
+            if (expressionStatement.isPresent()) {
+                final var result = new Statement(expressionStatement.get());
                 Logger.info("Matched <Statement>: " + result.representation());
                 return Optional.of(result);
             }
         }
-
-        final var optionalBlockBeginningToken = lexer.currentToken()
-                .filter(t -> t instanceof LeftBraceToken);
-        if (optionalBlockBeginningToken.isPresent()) {
-            final var optionalBlock = Block.parse(lexer);
-            if (optionalBlock.isPresent()) {
-                final var block = optionalBlock.get();
-                final var result = new Statement(block);
+        /**/
+        if (Block.isMatchedBeginningToken(lexer)) {
+            final var block = Block.parse(lexer);
+            if (block.isPresent()) {
+                final var result = new Statement(block.get());
                 Logger.info("Matched <Statement>:\n" + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalIfToken = lexer.currentToken()
-                .filter(t -> t instanceof IfToken);
-        if (optionalIfToken.isPresent()) {
-            final var optionalIfStatement = IfStatement.parse(lexer);
-            if (optionalIfStatement.isPresent()) {
-                final var ifStatement = optionalIfStatement.get();
-                final var result = new Statement(ifStatement);
+        if (IfStatement.isMatchedBeginningToken(lexer)) {
+            final var ifStatement = IfStatement.parse(lexer);
+            if (ifStatement.isPresent()) {
+                final var result = new Statement(ifStatement.get());
                 Logger.info("Matched <Statement>:\n" + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalForToken = lexer.currentToken()
-                .filter(t -> t instanceof ForToken);
-        if (optionalForToken.isPresent()) {
-            final var optionalForStatementSelection = ForStatementSelection.parse(lexer);
-            if (optionalForStatementSelection.isPresent()) {
-                final var forStatementSelection = optionalForStatementSelection.get();
-                final var result = new Statement(forStatementSelection);
+        if (ForStatementSelection.isMatchedBeginningToken(lexer)) {
+            final var forStatementSelection = ForStatementSelection.parse(lexer);
+            if (forStatementSelection.isPresent()) {
+                final var result = new Statement(forStatementSelection.get());
                 Logger.info("Matched <Statement>:\n" + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalBreakToken = lexer.currentToken()
-                .filter(t -> t instanceof BreakToken);
-        if (optionalBreakToken.isPresent()) {
-            final var optionalBreakStatement = BreakStatement.parse(lexer);
-            if (optionalBreakStatement.isPresent()) {
-                final var breakStatement = optionalBreakStatement.get();
-                final var result = new Statement(breakStatement);
+        if (BreakStatement.isMatchedBeginningToken(lexer)) {
+            final var breakStatement = BreakStatement.parse(lexer);
+            if (breakStatement.isPresent()) {
+                final var result = new Statement(breakStatement.get());
                 Logger.info("Matched <Statement>: " + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalContinueToken = lexer.currentToken()
-                .filter(t -> t instanceof ContinueToken);
-        if (optionalContinueToken.isPresent()) {
+        if (ContinueStatement.isMatchedBeginningToken(lexer)) {
             final var optionalContinueStatement = ContinueStatement.parse(lexer);
             if (optionalContinueStatement.isPresent()) {
                 final var continueStatement = optionalContinueStatement.get();
@@ -138,25 +108,19 @@ public class Statement implements NonTerminatorType, SelectionType {
             }
         }
 
-        final var optionalReturnToken = lexer.currentToken()
-                .filter(t -> t instanceof ReturnToken);
-        if (optionalReturnToken.isPresent()) {
-            final var optionalReturnStatement = ReturnStatement.parse(lexer);
-            if (optionalReturnStatement.isPresent()) {
-                final var returnStatement = optionalReturnStatement.get();
-                final var result = new Statement(returnStatement);
+        if (ReturnStatement.isMatchedBeginningToken(lexer)) {
+            final var returnStatement = ReturnStatement.parse(lexer);
+            if (returnStatement.isPresent()) {
+                final var result = new Statement(returnStatement.get());
                 Logger.info("Matched <Statement>: " + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalPrintfToken = lexer.currentToken()
-                .filter(t -> t instanceof PrintfToken);
-        if (optionalPrintfToken.isPresent()) {
-            final var optionalPrintfStatement = PrintfStatement.parse(lexer);
-            if (optionalPrintfStatement.isPresent()) {
-                final var printfStatement = optionalPrintfStatement.get();
-                final var result = new Statement(printfStatement);
+        if (PrintfStatement.isMatchedBeginningToken(lexer)) {
+            final var printfStatement = PrintfStatement.parse(lexer);
+            if (printfStatement.isPresent()) {
+                final var result = new Statement(printfStatement.get());
                 Logger.info("Matched <Statement>: " + result.representation());
                 return Optional.of(result);
             }
@@ -184,6 +148,6 @@ public class Statement implements NonTerminatorType, SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        return null;
+        return statement.lastTerminator();
     }
 }

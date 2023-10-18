@@ -3,10 +3,7 @@ package lex.token;
 import foundation.Position;
 import lex.protocol.TokenType;
 
-public record IdentifierToken(
-        String name,
-        Position position
-) implements TokenType {
+public record IdentifierToken(String name, Position position) implements TokenType {
     @Override
     public String detailedRepresentation() {
         return categoryCode() + " " + representation() + "\n";

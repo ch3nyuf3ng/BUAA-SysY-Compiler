@@ -23,25 +23,18 @@ public class ForStatement implements SelectionType {
         Logger.info("Matching <ForStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalLeftValue = LeftValue.parse(lexer);
-            if (optionalLeftValue.isEmpty()) break parse;
-            final var leftValue = optionalLeftValue.get();
+        parse:
+        {
+            final var leftValue = LeftValue.parse(lexer);
+            if (leftValue.isEmpty()) break parse;
 
-            final var optionalAssignToken = lexer.currentToken()
-                    .filter(t -> t instanceof AssignToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (AssignToken) t;
-                    });
-            if (optionalAssignToken.isEmpty()) break parse;
-            final var assignToken = optionalAssignToken.get();
+            final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
+            if (assignToken.isEmpty()) break parse;
 
-            final var optionalExpression = Expression.parse(lexer);
-            if (optionalExpression.isEmpty()) break parse;
-            final var expression = optionalExpression.get();
+            final var expression = Expression.parse(lexer);
+            if (expression.isEmpty()) break parse;
 
-            final var result = new ForStatement(leftValue, assignToken, expression);
+            final var result = new ForStatement(leftValue.get(), assignToken.get(), expression.get());
             Logger.info("Matched <ForStatement>: " + result.representation());
             return Optional.of(result);
         }
@@ -58,17 +51,13 @@ public class ForStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return leftValue.detailedRepresentation() +
-                assignToken.detailedRepresentation() +
-                expression.detailedRepresentation() +
-                categoryCode() + '\n';
+        return leftValue.detailedRepresentation() + assignToken.detailedRepresentation()
+                + expression.detailedRepresentation() + categoryCode() + '\n';
     }
 
     @Override
     public String representation() {
-        return leftValue.representation() + ' '
-                + assignToken.representation() + ' '
-                + expression.representation();
+        return leftValue.representation() + ' ' + assignToken.representation() + ' ' + expression.representation();
     }
 
     @Override

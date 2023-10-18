@@ -29,46 +29,35 @@ public class FuncInvocation implements SelectionType {
         this.rightParenthesisToken = rightParenthesisToken;
     }
 
+    public static boolean isMatchedBeginningTokens(LexerType lexer) {
+        final var beginningPosition = lexer.beginningPosition();
+        final var result = lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class)
+                .flatMap(t -> lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class)).isPresent();
+        lexer.resetPosition(beginningPosition);
+        return result;
+    }
+
     public static Optional<FuncInvocation> parse(LexerType lexer) {
         Logger.info("Matching <FuncInvocation>.");
         final var beginningPosition = lexer.beginningPosition();
 
         parse:
         {
-            final var optionalIdentifierToken = lexer.currentToken()
-                    .filter(t -> t instanceof IdentifierToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IdentifierToken) t;
-                    });
-            if (optionalIdentifierToken.isEmpty()) break parse;
-            final var identifierToken = optionalIdentifierToken.get();
+            final var identifierToken = lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class);
+            if (identifierToken.isEmpty()) break parse;
 
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftParenthesisToken) t;
-                    });
-            if (optionalLeftParenthesisToken.isEmpty()) break parse;
-            final var leftParenthesisToken = optionalLeftParenthesisToken.get();
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final Optional<FuncArgList> optionalFuncArgList = FuncArgList.parse(lexer);
+            final var funcArgList = FuncArgList.parse(lexer);
 
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightParenthesisToken) t;
-                    });
-            if (optionalRightParenthesisToken.isEmpty()) break parse;
-            final var rightParenthesisToken = optionalRightParenthesisToken.get();
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var result = new FuncInvocation(
-                    identifierToken,
-                    leftParenthesisToken,
-                    optionalFuncArgList,
-                    rightParenthesisToken
+            final var result = new FuncInvocation(identifierToken.get(),
+                    leftParenthesisToken.get(),
+                    funcArgList,
+                    rightParenthesisToken.get()
             );
             Logger.info("Matched <FuncInvocation>: " + result.representation());
             return Optional.of(result);
@@ -81,18 +70,15 @@ public class FuncInvocation implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return identifierToken.detailedRepresentation()
-                + leftParenthesisToken.detailedRepresentation()
+        return identifierToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
                 + optionalFuncArgList.map(FuncArgList::detailedRepresentation).orElse("")
                 + rightParenthesisToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return identifierToken.representation()
-                + leftParenthesisToken.representation()
-                + optionalFuncArgList.map(FuncArgList::representation).orElse("")
-                + rightParenthesisToken.representation();
+        return identifierToken.representation() + leftParenthesisToken.representation() + optionalFuncArgList.map(
+                FuncArgList::representation).orElse("") + rightParenthesisToken.representation();
     }
 
     @Override

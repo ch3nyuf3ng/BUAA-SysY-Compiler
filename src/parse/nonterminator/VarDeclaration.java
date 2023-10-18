@@ -1,5 +1,6 @@
 package parse.nonterminator;
 
+import lex.protocol.BasicTypeTokenType;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.*;
@@ -17,85 +18,62 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
     private final BasicType basicType;
     private final VarDefinition firstVarDefinition;
     private final List<CommaWith<VarDefinition>> additionalVariableDefinitionList;
-    private final Optional<SemicolonToken> optionalSemicolonToken;
+    private final Optional<SemicolonToken> semicolonToken;
 
     private VarDeclaration(
             BasicType basicType,
             VarDefinition firstVarDefinition,
             List<CommaWith<VarDefinition>> additionalVariableDefinitionList,
-            Optional<SemicolonToken> optionalSemicolonToken
+            Optional<SemicolonToken> semicolonToken
     ) {
         this.basicType = basicType;
         this.firstVarDefinition = firstVarDefinition;
         this.additionalVariableDefinitionList = Collections.unmodifiableList(additionalVariableDefinitionList);
-        this.optionalSemicolonToken = optionalSemicolonToken;
+        this.semicolonToken = semicolonToken;
     }
 
-    public static boolean matchBeginTokens(LexerType lexer) {
+    public static boolean isMatchedBeginTokens(LexerType lexer) {
         final var beginningPosition = lexer.beginningPosition();
-        final var result = lexer.currentToken()
-                .filter(t -> t instanceof IntToken)
-                .flatMap(t -> {
-                    lexer.consumeToken();
-                    return lexer.currentToken();
-                })
-                .filter(t -> t instanceof IdentifierToken)
-                .flatMap(t -> {
-                    lexer.consumeToken();
-                    return lexer.currentToken();
-                })
-                .filter(t -> !(t instanceof LeftParenthesisToken)).isPresent();
+        final var intermediate = lexer.tryMatchAndConsumeTokenOf(BasicTypeTokenType.class)
+                .flatMap(t -> lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class));
         lexer.resetPosition(beginningPosition);
-        return result;
+        return intermediate.isPresent() && !lexer.isMatchedTokenOf(LeftParenthesisToken.class);
     }
 
     public static Optional<VarDeclaration> parse(LexerType lexer) {
         Logger.info("Matching <VarDeclaration>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalBasicType = BasicType.parse(lexer);
-            if (optionalBasicType.isEmpty()) break parse;
-            final var basicType = optionalBasicType.get();
+        parse:
+        {
+            final var basicType = BasicType.parse(lexer);
+            if (basicType.isEmpty()) break parse;
 
-            final var optionalFirstVarDefinition = VarDefinition.parse(lexer);
-            if (optionalFirstVarDefinition.isEmpty()) break parse;
-            final var firstVarDefinition = optionalFirstVarDefinition.get();
+            final var firstVarDefinition = VarDefinition.parse(lexer);
+            if (firstVarDefinition.isEmpty()) break parse;
 
             final var additionalVarDefinitionList = new ArrayList<CommaWith<VarDefinition>>();
-            while (true) {
-                final var optionalCommaToken = lexer.currentToken()
-                        .filter(t -> t instanceof CommaToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (CommaToken) t;
-                        });
-                if (optionalCommaToken.isEmpty()) break;
-                final var commaToken = optionalCommaToken.get();
+            while (lexer.isMatchedTokenOf(CommaToken.class)) {
+                final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
+                if (commaToken.isEmpty()) break;
 
-                final var optionalVarDefinition = VarDefinition.parse(lexer);
-                if (optionalVarDefinition.isEmpty()) break parse;
-                final var varDefinition = optionalVarDefinition.get();
+                final var varDefinition = VarDefinition.parse(lexer);
+                if (varDefinition.isEmpty()) break parse;
 
-                additionalVarDefinitionList.add(new CommaWith<>(commaToken, varDefinition));
+                additionalVarDefinitionList.add(new CommaWith<>(commaToken.get(), varDefinition.get()));
             }
 
-            final var optionalSemicolonToken = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            final var optionalLeftParenthesis = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken);
-            if (optionalSemicolonToken.isEmpty() && optionalLeftParenthesis.isPresent()) break parse;
+            if (semicolonToken.isEmpty()) {
+                if (lexer.isMatchedTokenOf(LeftParenthesisToken.class)) break parse;
+                Logger.warn("Tolerated a semicolon missing.");
+            } // Avoid Matching FuncDef.
 
-            final var result = new VarDeclaration(
-                    basicType,
-                    firstVarDefinition,
+            final var result = new VarDeclaration(basicType.get(),
+                    firstVarDefinition.get(),
                     additionalVarDefinitionList,
-                    optionalSemicolonToken
+                    semicolonToken
             );
             Logger.info("Matched <VarDeclaration>: " + result.representation());
             return Optional.of(result);
@@ -109,13 +87,10 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(basicType.detailedRepresentation())
-                .append(firstVarDefinition.detailedRepresentation());
-        for (final var i : additionalVariableDefinitionList) {
-            stringBuilder.append(i.commaToken().detailedRepresentation()).append(i.entity().detailedRepresentation());
-        }
-        optionalSemicolonToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
+        stringBuilder.append(basicType.detailedRepresentation()).append(firstVarDefinition.detailedRepresentation());
+        additionalVariableDefinitionList.forEach(i -> stringBuilder.append(i.commaToken().detailedRepresentation())
+                .append(i.entity().detailedRepresentation()));
+        semicolonToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
         stringBuilder.append(categoryCode()).append('\n');
         return stringBuilder.toString();
     }
@@ -123,17 +98,10 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
     @Override
     public String representation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(basicType.representation()).append(' ')
-                .append(firstVarDefinition.representation());
-        for (final var i : additionalVariableDefinitionList) {
-            stringBuilder
-                    .append(i.commaToken().representation()).append(' ')
-                    .append(i.entity().representation());
-        }
-        optionalSemicolonToken.ifPresent(t -> stringBuilder
-                .append(t.representation())
-        );
+        stringBuilder.append(basicType.representation()).append(' ').append(firstVarDefinition.representation());
+        additionalVariableDefinitionList.forEach(i -> stringBuilder.append(i.commaToken().representation()).append(' ')
+                .append(i.entity().representation()));
+        semicolonToken.ifPresent(t -> stringBuilder.append(t.representation()));
         return stringBuilder.toString();
     }
 
@@ -144,9 +112,7 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) {
-            return optionalSemicolonToken.get();
-        }
+        if (semicolonToken.isPresent()) return semicolonToken.get();
         if (!additionalVariableDefinitionList.isEmpty()) {
             final var lastIndex = additionalVariableDefinitionList.size() - 1;
             final var lastNonTerminator = additionalVariableDefinitionList.get(lastIndex).entity();

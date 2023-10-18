@@ -29,41 +29,20 @@ public class ParenthesisedPrimeExpression implements SelectionType {
         Logger.info("Matching <ParenthesisedPrimeExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final LeftParenthesisToken leftParenthesisToken;
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> (LeftParenthesisToken) t);
-            if (optionalLeftParenthesisToken.isPresent()) {
-                leftParenthesisToken = optionalLeftParenthesisToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+        parse:
+        {
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final Expression expression;
-            final var optionalExpression = Expression.parse(lexer);
-            if (optionalExpression.isPresent()) {
-                expression = optionalExpression.get();
-            } else {
-                break parse;
-            }
+            final var expression = Expression.parse(lexer);
+            if (expression.isEmpty()) break parse;
 
-            final RightParenthesisToken rightParenthesisToken;
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> (RightParenthesisToken) t);
-            if (optionalRightParenthesisToken.isPresent()) {
-                rightParenthesisToken = optionalRightParenthesisToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var result = new ParenthesisedPrimeExpression(
-                    leftParenthesisToken,
-                    expression,
-                    rightParenthesisToken
+            final var result = new ParenthesisedPrimeExpression(leftParenthesisToken.get(),
+                    expression.get(),
+                    rightParenthesisToken.get()
             );
             Logger.info("Matched <ParenthesisedPrimeExpression>: " + result.representation());
             return Optional.of(result);
@@ -76,15 +55,13 @@ public class ParenthesisedPrimeExpression implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return leftParenthesisToken.detailedRepresentation()
-                + expression.detailedRepresentation()
+        return leftParenthesisToken.detailedRepresentation() + expression.detailedRepresentation()
                 + rightParenthesisToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return leftParenthesisToken.representation()
-                + expression.representation()
+        return leftParenthesisToken.representation() + expression.representation()
                 + rightParenthesisToken.representation();
     }
 

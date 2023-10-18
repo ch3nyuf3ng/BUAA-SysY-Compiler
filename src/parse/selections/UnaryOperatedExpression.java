@@ -2,6 +2,7 @@ package parse.selections;
 
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
+import lex.protocol.UnaryOperatorTokenType;
 import parse.nonterminator.UnaryExpression;
 import parse.nonterminator.UnaryOperator;
 import parse.protocol.SelectionType;
@@ -18,20 +19,23 @@ public class UnaryOperatedExpression implements SelectionType {
         this.unaryExpression = unaryExpression;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(UnaryOperatorTokenType.class);
+    }
+
     public static Optional<UnaryOperatedExpression> parse(LexerType lexer) {
         Logger.info("Matching <UnaryOperatedExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalUnaryOperator = UnaryOperator.parse(lexer);
-            if (optionalUnaryOperator.isEmpty()) break parse;
-            final var unaryOperator = optionalUnaryOperator.get();
+        parse:
+        {
+            final var unaryOperator = UnaryOperator.parse(lexer);
+            if (unaryOperator.isEmpty()) break parse;
 
-            final var optionalUnaryExpression = UnaryExpression.parse(lexer);
-            if (optionalUnaryExpression.isEmpty()) break parse;
-            final var unaryExpression = optionalUnaryExpression.get();
+            final var unaryExpression = UnaryExpression.parse(lexer);
+            if (unaryExpression.isEmpty()) break parse;
 
-            final var result = new UnaryOperatedExpression(unaryOperator, unaryExpression);
+            final var result = new UnaryOperatedExpression(unaryOperator.get(), unaryExpression.get());
             Logger.info("Matched <UnaryOperatedExpression>: " + result.representation());
             return Optional.of(result);
         }

@@ -19,17 +19,12 @@ public class BasicType implements NonTerminatorType {
         Logger.info("Matching <BasicType>");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalIntToken = lexer.currentToken()
-                    .filter(t -> t instanceof IntToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IntToken) t;
-                    });
-            if (optionalIntToken.isEmpty()) break parse;
-            final var intToken = optionalIntToken.get();
+        parse:
+        {
+            final var intToken = lexer.tryMatchAndConsumeTokenOf(IntToken.class);
+            if (intToken.isEmpty()) break parse;
 
-            final var result = new BasicType(intToken);
+            final var result = new BasicType(intToken.get());
             Logger.info("Matched <BasicType>: " + result.representation());
             return Optional.of(result);
         }

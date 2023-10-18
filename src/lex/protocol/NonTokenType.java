@@ -1,3 +1,4 @@
 package lex.protocol;
 
-public interface NonTokenType extends TokenType {}
+public interface NonTokenType extends TokenType {
+}

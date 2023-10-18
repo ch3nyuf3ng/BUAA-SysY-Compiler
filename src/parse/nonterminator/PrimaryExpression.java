@@ -19,41 +19,37 @@ public class PrimaryExpression implements NonTerminatorType, SelectionType {
         this.primaryExpression = primaryExpression;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(LeftParenthesisToken.class) || lexer.isMatchedTokenOf(IdentifierToken.class)
+                || lexer.isMatchedTokenOf(LiteralIntegerToken.class);
+    }
+
     public static Optional<PrimaryExpression> parse(LexerType lexer) {
         Logger.info("Matching <PrimaryExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        final var optionalLeftParenthesisToken = lexer.currentToken()
-                .filter(t -> t instanceof LeftParenthesisToken);
-        if (optionalLeftParenthesisToken.isPresent()) {
-            final var optionalParenthesisedPrimeExpression = ParenthesisedPrimeExpression.parse(lexer);
-            if (optionalParenthesisedPrimeExpression.isPresent()) {
-                final var parenthesisedPrimeExpression = optionalParenthesisedPrimeExpression.get();
-                final var result = new PrimaryExpression(parenthesisedPrimeExpression);
+        if (lexer.isMatchedTokenOf(LeftParenthesisToken.class)) {
+            final var parenthesisedPrimeExpression = ParenthesisedPrimeExpression.parse(lexer);
+            if (parenthesisedPrimeExpression.isPresent()) {
+                final var result = new PrimaryExpression(parenthesisedPrimeExpression.get());
                 Logger.info("Matched <PrimaryExpression>: " + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalIdentifierToken = lexer.currentToken()
-                .filter(t -> t instanceof IdentifierToken);
-        if (optionalIdentifierToken.isPresent()) {
-            final var optionalLeftValue = LeftValue.parse(lexer);
-            if (optionalLeftValue.isPresent()) {
-                final var leftValue = optionalLeftValue.get();
-                final var result = new PrimaryExpression(leftValue);
+        if (lexer.isMatchedTokenOf(IdentifierToken.class)) {
+            final var leftValue = LeftValue.parse(lexer);
+            if (leftValue.isPresent()) {
+                final var result = new PrimaryExpression(leftValue.get());
                 Logger.info("Matched <PrimaryExpression>: " + result.representation());
                 return Optional.of(result);
             }
         }
 
-        final var optionalLiteralIntegerToken = lexer.currentToken()
-                .filter(t -> t instanceof LiteralIntegerToken);
-        if (optionalLiteralIntegerToken.isPresent()) {
-            final var optionalNumber = Number.parse(lexer);
-            if (optionalNumber.isPresent()) {
-                final var number = optionalNumber.get();
-                final var result = new PrimaryExpression(number);
+        if (lexer.isMatchedTokenOf(LiteralIntegerToken.class)) {
+            final var number = Number.parse(lexer);
+            if (number.isPresent()) {
+                final var result = new PrimaryExpression(number.get());
                 Logger.info("Matched <PrimaryExpression>: " + result.representation());
                 return Optional.of(result);
             }

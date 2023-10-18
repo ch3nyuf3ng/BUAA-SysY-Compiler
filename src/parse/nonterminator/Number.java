@@ -20,17 +20,12 @@ public class Number implements NonTerminatorType, SelectionType {
         Logger.info("Matching <Number>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalLiteralIntegerToken = lexer.currentToken()
-                    .filter(t -> t instanceof LiteralIntegerToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LiteralIntegerToken) t;
-                    });
-            if (optionalLiteralIntegerToken.isEmpty()) break parse;
-            final var literalIntegerToken = optionalLiteralIntegerToken.get();
+        parse:
+        {
+            final var literalIntegerToken = lexer.tryMatchAndConsumeTokenOf(LiteralIntegerToken.class);
+            if (literalIntegerToken.isEmpty()) break parse;
 
-            final var result = new Number(literalIntegerToken);
+            final var result = new Number(literalIntegerToken.get());
             Logger.info("Matched <Number>: " + result.representation());
             return Optional.of(result);
         }

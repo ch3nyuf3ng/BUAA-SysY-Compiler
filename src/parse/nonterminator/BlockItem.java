@@ -2,8 +2,6 @@ package parse.nonterminator;
 
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
-import lex.token.ConstToken;
-import lex.token.IntToken;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
@@ -21,20 +19,17 @@ public class BlockItem implements NonTerminatorType {
         Logger.info("Matching <BlockItem>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        final var optionalDeclarationBeginningToken = lexer.currentToken()
-                .filter(t -> t instanceof ConstToken || t instanceof IntToken );
-        if (optionalDeclarationBeginningToken.isPresent()) {
-            final var optionalDeclaration = Declaration.parse(lexer);
-            if (optionalDeclaration.isPresent()) {
-                final var declaration = optionalDeclaration.get();
-                Logger.info("Matched <BlockItem>.");
-                return Optional.of(new BlockItem(declaration));
+        if (Declaration.matchBeginTokens(lexer)) {
+            final var declaration = Declaration.parse(lexer);
+            if (declaration.isPresent()) {
+                final var result = new BlockItem(declaration.get());
+                Logger.info("Matched <BlockItem>:\n" + result.representation());
+                return Optional.of(result);
             }
         } else {
-            final var optionalStatement = Statement.parse(lexer);
-            if (optionalStatement.isPresent()) {
-                final var statement = optionalStatement.get();
-                final var result = new BlockItem(statement);
+            final var statement = Statement.parse(lexer);
+            if (statement.isPresent()) {
+                final var result = new BlockItem(statement.get());
                 Logger.info("Matched <BlockItem>:\n" + result.representation());
                 return Optional.of(result);
             }

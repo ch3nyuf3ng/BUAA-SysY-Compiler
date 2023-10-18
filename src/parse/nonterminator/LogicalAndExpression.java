@@ -27,30 +27,23 @@ public class LogicalAndExpression implements NonTerminatorType {
         Logger.info("Matching <LogicalAndExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalFirstEquality = EqualityExpression.parse(lexer);
-            if (optionalFirstEquality.isEmpty()) break parse;
-            final var firstEqualityExpression = optionalFirstEquality.get();
+        parse:
+        {
+            final var firstEqualityExpression = EqualityExpression.parse(lexer);
+            if (firstEqualityExpression.isEmpty()) break parse;
 
             final var operatorWithExpressionList = new ArrayList<Pair<LogicalAndToken, EqualityExpression>>();
-            while (lexer.currentToken().isPresent()) {
-                final var optionalOperator = lexer.currentToken()
-                        .filter(t -> t instanceof LogicalAndToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (LogicalAndToken) t;
-                        });
-                if (optionalOperator.isEmpty()) break;
-                final var operator = optionalOperator.get();
+            while (lexer.isMatchedTokenOf(LogicalAndToken.class)) {
+                final var operator = lexer.tryMatchAndConsumeTokenOf(LogicalAndToken.class);
+                if (operator.isEmpty()) break;
 
-                final var optionalAdditionalEqualityExpression = EqualityExpression.parse(lexer);
-                if (optionalAdditionalEqualityExpression.isEmpty()) break parse;
-                final var additionalEqualityExpression = optionalAdditionalEqualityExpression.get();
+                final var additionalEqualityExpression = EqualityExpression.parse(lexer);
+                if (additionalEqualityExpression.isEmpty()) break parse;
 
-                operatorWithExpressionList.add(new Pair<>(operator, additionalEqualityExpression));
+                operatorWithExpressionList.add(new Pair<>(operator.get(), additionalEqualityExpression.get()));
             }
 
-            final var result = new LogicalAndExpression(firstEqualityExpression, operatorWithExpressionList);
+            final var result = new LogicalAndExpression(firstEqualityExpression.get(), operatorWithExpressionList);
             Logger.info("Matched <LogicalAndExpression>: " + result.representation());
             return Optional.of(result);
         }
@@ -62,9 +55,7 @@ public class LogicalAndExpression implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (operatorWithExpressionList.isEmpty()) {
-            return firstEqualityExpression.lastTerminator();
-        }
+        if (operatorWithExpressionList.isEmpty()) return firstEqualityExpression.lastTerminator();
         final var lastIndex = operatorWithExpressionList.size() - 1;
         final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).e2();
         return lastNonTerminator.lastTerminator();
@@ -73,15 +64,9 @@ public class LogicalAndExpression implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstEqualityExpression.detailedRepresentation())
-                .append(categoryCode()).append('\n');
-        for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(i.e1().detailedRepresentation())
-                    .append(i.e2().detailedRepresentation())
-                    .append(categoryCode()).append('\n');
-        }
+        stringBuilder.append(firstEqualityExpression.detailedRepresentation()).append(categoryCode()).append('\n');
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.e1().detailedRepresentation()).append(i.e2()
+                .detailedRepresentation()).append(categoryCode()).append('\n'));
         return stringBuilder.toString();
     }
 
@@ -89,11 +74,8 @@ public class LogicalAndExpression implements NonTerminatorType {
     public String representation() {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(firstEqualityExpression.representation());
-        for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(' ').append(i.e1().representation())
-                    .append(' ').append(i.e2().representation());
-        }
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.e1().representation()).append(' ')
+                .append(i.e2().representation()));
         return stringBuilder.toString();
     }
 

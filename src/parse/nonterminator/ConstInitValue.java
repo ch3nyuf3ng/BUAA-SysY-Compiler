@@ -22,21 +22,17 @@ public class ConstInitValue implements NonTerminatorType {
         Logger.info("Matching <ConstInitValue>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        final var optionalLeftBraceToken = lexer.currentToken()
-                .filter(t -> t instanceof LeftBraceToken);
-        if (optionalLeftBraceToken.isPresent()) {
-            final var optionalArrayConstInitValue = ArrayConstInitValue.parse(lexer);
-            if (optionalArrayConstInitValue.isPresent()) {
-                final var arrayConstInitValue = optionalArrayConstInitValue.get();
-                final var result = new ConstInitValue(arrayConstInitValue);
+        if (lexer.isMatchedTokenOf(LeftBraceToken.class)) {
+            final var arrayConstInitValue = ArrayConstInitValue.parse(lexer);
+            if (arrayConstInitValue.isPresent()) {
+                final var result = new ConstInitValue(arrayConstInitValue.get());
                 Logger.info("Matched <ConstInitValue>: " + result.representation());
                 return Optional.of(result);
             }
         } else {
-            final var optionalScalarConstInitValue = ScalarConstInitValue.parse(lexer);
-            if (optionalScalarConstInitValue.isPresent()) {
-                final var scalarConstInitValue = optionalScalarConstInitValue.get();
-                final var result = new ConstInitValue(scalarConstInitValue);
+            final var scalarConstInitValue = ScalarConstInitValue.parse(lexer);
+            if (scalarConstInitValue.isPresent()) {
+                final var result = new ConstInitValue(scalarConstInitValue.get());
                 Logger.info("Matched <ConstInitValue>: " + result.representation());
                 return Optional.of(result);
             }

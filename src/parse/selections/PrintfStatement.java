@@ -26,7 +26,8 @@ public class PrintfStatement implements SelectionType {
             LiteralFormatStringToken literalFormatStringToken,
             List<CommaWith<Expression>> commaWithExpressionList,
             RightParenthesisToken rightParenthesisToken,
-            Optional<SemicolonToken> optionalSemicolonToken) {
+            Optional<SemicolonToken> optionalSemicolonToken
+    ) {
         this.printfToken = printfToken;
         this.leftParenthesisToken = leftParenthesisToken;
         this.literalFormatStringToken = literalFormatStringToken;
@@ -35,94 +36,48 @@ public class PrintfStatement implements SelectionType {
         this.optionalSemicolonToken = optionalSemicolonToken;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(PrintfToken.class);
+    }
+
     public static Optional<PrintfStatement> parse(LexerType lexer) {
         Logger.info("Matching <PrintfStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
         parse:
         {
-            final PrintfToken printfToken;
-            final var optionalPrintfToken = lexer.currentToken()
-                    .filter(t -> t instanceof PrintfToken)
-                    .map(t -> (PrintfToken) t);
-            if (optionalPrintfToken.isPresent()) {
-                printfToken = optionalPrintfToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
+            final var printfToken = lexer.tryMatchAndConsumeTokenOf(PrintfToken.class);
+            if (printfToken.isEmpty()) break parse;
+
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
+
+            final var literalFormatStringToken = lexer.tryMatchAndConsumeTokenOf(LiteralFormatStringToken.class);
+            if (literalFormatStringToken.isEmpty()) break parse;
+
+            final var commaWithExpressionList = new ArrayList<CommaWith<Expression>>();
+            while (lexer.isMatchedTokenOf(CommaToken.class)) {
+                final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
+                if (commaToken.isEmpty()) break;
+
+                final var expression = Expression.parse(lexer);
+                if (expression.isEmpty()) break;
+
+                commaWithExpressionList.add(new CommaWith<>(commaToken.get(), expression.get()));
             }
 
-            final LeftParenthesisToken leftParenthesisToken;
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> (LeftParenthesisToken) t);
-            if (optionalLeftParenthesisToken.isPresent()) {
-                leftParenthesisToken = optionalLeftParenthesisToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final LiteralFormatStringToken literalFormatStringToken;
-            final var optionalLiteralFormatStringToken = lexer.currentToken()
-                    .filter(t -> t instanceof LiteralFormatStringToken)
-                    .map(t -> (LiteralFormatStringToken) t);
-            if (optionalLiteralFormatStringToken.isPresent()) {
-                literalFormatStringToken = optionalLiteralFormatStringToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
-
-            final List<CommaWith<Expression>> commaWithExpressionList = new ArrayList<>();
-            while (lexer.currentToken().isPresent()) {
-                final CommaToken commaToken;
-                final var optionalCommaToken = lexer.currentToken()
-                        .filter(t -> t instanceof CommaToken)
-                        .map(t -> (CommaToken) t);
-                if (optionalCommaToken.isPresent()) {
-                    commaToken = optionalCommaToken.get();
-                    lexer.consumeToken();
-                } else {
-                    break;
-                }
-
-                final Expression expression;
-                final var optionalExpression = Expression.parse(lexer);
-                if (optionalExpression.isPresent()) {
-                    expression = optionalExpression.get();
-                } else {
-                    break parse;
-                }
-
-                commaWithExpressionList.add(new CommaWith<>(commaToken, expression));
-            }
-
-            final RightParenthesisToken rightParenthesisToken;
-            final var optionalRightParenthesis = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> (RightParenthesisToken) t);
-            if (optionalRightParenthesis.isPresent()) {
-                rightParenthesisToken = optionalRightParenthesis.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
-
-            final var optionalSemicolonToken = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
             final var result = new PrintfStatement(
-                    printfToken,
-                    leftParenthesisToken,
-                    literalFormatStringToken,
+                    printfToken.get(),
+                    leftParenthesisToken.get(),
+                    literalFormatStringToken.get(),
                     commaWithExpressionList,
-                    rightParenthesisToken,
-                    optionalSemicolonToken
+                    rightParenthesisToken.get(),
+                    semicolonToken
             );
             Logger.info("Matched <PrintfStatement>: " + result.representation());
             return Optional.of(result);
@@ -136,13 +91,10 @@ public class PrintfStatement implements SelectionType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder.append(printfToken.detailedRepresentation())
-                .append(leftParenthesisToken.detailedRepresentation())
+        stringBuilder.append(printfToken.detailedRepresentation()).append(leftParenthesisToken.detailedRepresentation())
                 .append(literalFormatStringToken.detailedRepresentation());
-        for (final var i : commaWithExpressionList) {
-            stringBuilder.append(i.commaToken().detailedRepresentation())
-                    .append(i.entity().detailedRepresentation());
-        }
+        commaWithExpressionList.forEach(i -> stringBuilder.append(i.commaToken().detailedRepresentation())
+                .append(i.entity().detailedRepresentation()));
         stringBuilder.append(rightParenthesisToken.detailedRepresentation());
         optionalSemicolonToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
         return stringBuilder.toString();
@@ -151,14 +103,10 @@ public class PrintfStatement implements SelectionType {
     @Override
     public String representation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder.append(printfToken.representation())
-                .append(leftParenthesisToken.representation())
-                .append(literalFormatStringToken.representation());
-        for (final var i : commaWithExpressionList) {
-            stringBuilder
-                    .append(i.commaToken().representation()).append(' ')
-                    .append(i.entity().representation());
-        }
+        stringBuilder.append(printfToken.representation()).append(leftParenthesisToken.representation()).append(
+                literalFormatStringToken.representation());
+        commaWithExpressionList.forEach(i -> stringBuilder.append(i.commaToken().representation()).append(' ')
+                .append(i.entity().representation()));
         stringBuilder.append(rightParenthesisToken.representation());
         optionalSemicolonToken.ifPresent(t -> stringBuilder.append(t.representation()));
         return stringBuilder.toString();

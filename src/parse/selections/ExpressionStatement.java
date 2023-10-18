@@ -2,7 +2,7 @@ package parse.selections;
 
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
-import lex.token.SemicolonToken;
+import lex.token.*;
 import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
 import tests.foundations.Logger;
@@ -10,34 +10,33 @@ import tests.foundations.Logger;
 import java.util.Optional;
 
 public class ExpressionStatement implements SelectionType {
-    private final Optional<Expression> optionalExpression;
-    private final Optional<SemicolonToken> optionalSemicolonToken;
+    private final Optional<Expression> expression;
+    private final SemicolonToken semicolonToken;
 
-    public ExpressionStatement(
-            Optional<Expression> optionalExpression,
-            Optional<SemicolonToken> optionalSemicolonToken
-    ) {
-        this.optionalExpression = optionalExpression;
-        this.optionalSemicolonToken = optionalSemicolonToken;
+    public ExpressionStatement(Optional<Expression> expression, SemicolonToken semicolonToken) {
+        this.expression = expression;
+        this.semicolonToken = semicolonToken;
+    }
+
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(LeftParenthesisToken.class) || lexer.isMatchedTokenOf(LiteralIntegerToken.class)
+                || lexer.isMatchedTokenOf(PlusToken.class) || lexer.isMatchedTokenOf(MinusToken.class)
+                || lexer.isMatchedTokenOf(LogicalNotToken.class) || lexer.isMatchedTokenOf(SemicolonToken.class)
+                || lexer.isMatchedTokenOf(IdentifierToken.class);
     }
 
     public static Optional<ExpressionStatement> parse(LexerType lexer) {
         Logger.info("Matching <ExpressionStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalExpression = Expression.parse(lexer);
+        parse:
+        {
+            final var expression = Expression.parse(lexer);
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            final var optionalSemicolonToken = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
+            if (semicolonToken.isEmpty()) break parse;
 
-            if (optionalExpression.isEmpty() && optionalSemicolonToken.isEmpty()) break parse;
-
-            final var result = new ExpressionStatement(optionalExpression, optionalSemicolonToken);
+            final var result = new ExpressionStatement(expression, semicolonToken.get());
             Logger.info("Matched <ExpressionStatement>: " + result.representation());
             return Optional.of(result);
         }
@@ -49,22 +48,14 @@ public class ExpressionStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        if (optionalExpression.isPresent()) {
-            return optionalExpression.get().detailedRepresentation()
-                    + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
-        }
-        assert optionalSemicolonToken.isPresent();
-        return optionalSemicolonToken.get().detailedRepresentation();
+        return expression.map(value -> value.detailedRepresentation() + semicolonToken.detailedRepresentation())
+                .orElseGet(semicolonToken::detailedRepresentation);
     }
 
     @Override
     public String representation() {
-        if (optionalExpression.isPresent()) {
-            return optionalExpression.get().representation()
-                    + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
-        }
-        assert optionalSemicolonToken.isPresent();
-        return optionalSemicolonToken.get().representation();
+        return expression.map(value -> value.representation() + semicolonToken.representation()).orElseGet(
+                semicolonToken::representation);
     }
 
     @Override
@@ -74,10 +65,6 @@ public class ExpressionStatement implements SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) {
-            return optionalSemicolonToken.get();
-        }
-        assert optionalExpression.isPresent();
-        return optionalExpression.get().lastTerminator();
+        return semicolonToken;
     }
 }

@@ -38,63 +38,35 @@ public class ConstDefinition implements NonTerminatorType {
 
         parse:
         {
-            final var optionalIdentifierToken = lexer.currentToken()
-                    .filter(t -> t instanceof IdentifierToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IdentifierToken) t;
-                    });
-            if (optionalIdentifierToken.isEmpty()) break parse;
-            final var identifierToken = optionalIdentifierToken.get();
-
+            final var identifierToken = lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class);
+            if (identifierToken.isEmpty()) break parse;
 
             final List<BracketWith<ConstExpression>> bracketWithConstExpressionList = new ArrayList<>();
             while (lexer.currentToken().isPresent()) {
-                final var optionalLeftBracketToken = lexer.currentToken()
-                        .filter(t -> t instanceof LeftBracketToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (LeftBracketToken) t;
-                        });
-                if (optionalLeftBracketToken.isEmpty()) break;
-                final var leftBracketToken = optionalLeftBracketToken.get();
+                final var leftBracketToken = lexer.tryMatchAndConsumeTokenOf(LeftBracketToken.class);
+                if (leftBracketToken.isEmpty()) break;
 
-                final var optionalConstExpression = ConstExpression.parse(lexer);
-                if (optionalConstExpression.isEmpty()) break parse;
-                final var constExpression = optionalConstExpression.get();
+                final var constExpression = ConstExpression.parse(lexer);
+                if (constExpression.isEmpty()) break parse;
 
-                final var optionalRightBracketToken = lexer.currentToken()
-                        .filter(t -> t instanceof RightBracketToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (RightBracketToken) t;
-                        });
+                final var rightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
 
-                bracketWithConstExpressionList.add(new BracketWith<>(
-                        leftBracketToken,
-                        constExpression,
-                        optionalRightBracketToken
+                bracketWithConstExpressionList.add(new BracketWith<>(leftBracketToken.get(),
+                        constExpression.get(),
+                        rightBracketToken
                 ));
             }
 
-            final var optionalAssignToken = lexer.currentToken()
-                    .filter(t -> t instanceof AssignToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (AssignToken) t;
-                    });
-            if (optionalAssignToken.isEmpty()) break parse;
-            final var assignToken = optionalAssignToken.get();
+            final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
+            if (assignToken.isEmpty()) break parse;
 
-            final var optionalConstInitValue = ConstInitValue.parse(lexer);
-            if (optionalConstInitValue.isEmpty()) break parse;
-            final var constInitValue = optionalConstInitValue.get();
+            final var constInitValue = ConstInitValue.parse(lexer);
+            if (constInitValue.isEmpty()) break parse;
 
-            final var result = new ConstDefinition(
-                    identifierToken,
+            final var result = new ConstDefinition(identifierToken.get(),
                     bracketWithConstExpressionList,
-                    assignToken,
-                    constInitValue
+                    assignToken.get(),
+                    constInitValue.get()
             );
             Logger.info("Matched <ConstDefinition>." + result.representation());
             return Optional.of(result);
@@ -110,15 +82,12 @@ public class ConstDefinition implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(identifierToken.detailedRepresentation());
         for (final var item : bracketWithConstExpressionList) {
-            stringBuilder
-                    .append(item.leftBracketToken().detailedRepresentation())
-                    .append(item.entity().detailedRepresentation());
+            stringBuilder.append(item.leftBracketToken().detailedRepresentation()).append(item.entity()
+                    .detailedRepresentation());
             item.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
         }
-        stringBuilder
-                .append(assignToken.detailedRepresentation())
-                .append(initValue.detailedRepresentation())
-                .append(categoryCode()).append('\n');
+        stringBuilder.append(assignToken.detailedRepresentation()).append(initValue.detailedRepresentation()).append(
+                categoryCode()).append('\n');
         return stringBuilder.toString();
     }
 
@@ -127,16 +96,10 @@ public class ConstDefinition implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(identifierToken.representation());
         for (final var item : bracketWithConstExpressionList) {
-            stringBuilder
-                    .append(item.leftBracketToken().representation())
-                    .append(item.entity().representation());
-            item.optionalRightBracketToken().ifPresent(e -> stringBuilder
-                    .append(e.representation())
-            );
+            stringBuilder.append(item.leftBracketToken().representation()).append(item.entity().representation());
+            item.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.representation()));
         }
-        stringBuilder
-                .append(' ').append(assignToken.representation())
-                .append(' ').append(initValue.representation());
+        stringBuilder.append(' ').append(assignToken.representation()).append(' ').append(initValue.representation());
         return stringBuilder.toString();
     }
 

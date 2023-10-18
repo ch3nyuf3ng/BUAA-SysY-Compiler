@@ -2,18 +2,16 @@ package parse.nonterminator;
 
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
-import lex.token.LogicalNotToken;
-import lex.token.MinusToken;
-import lex.token.PlusToken;
+import lex.protocol.UnaryOperatorTokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
 import java.util.Optional;
 
 public class UnaryOperator implements NonTerminatorType {
-    private final TokenType operator;
+    private final UnaryOperatorTokenType operator;
 
-    private UnaryOperator(TokenType operator) {
+    private UnaryOperator(UnaryOperatorTokenType operator) {
         this.operator = operator;
     }
 
@@ -23,18 +21,10 @@ public class UnaryOperator implements NonTerminatorType {
 
         parse:
         {
-            final var optionalOperator = lexer.currentToken()
-                    .filter(t -> t instanceof PlusToken
-                            || t instanceof MinusToken
-                            || t instanceof LogicalNotToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return t;
-                    });
-            if (optionalOperator.isEmpty()) break parse;
-            final var operator = optionalOperator.get();
+            final var operator = lexer.tryMatchAndConsumeTokenOf(UnaryOperatorTokenType.class);
+            if (operator.isEmpty()) break parse;
 
-            final var result = new UnaryOperator(operator);
+            final var result = new UnaryOperator(operator.get());
             Logger.info("Matched <UnaryOperator>: " + result.representation());
             return Optional.of(result);
         }

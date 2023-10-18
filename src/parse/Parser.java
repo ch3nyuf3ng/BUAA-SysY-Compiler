@@ -12,9 +12,7 @@ public class Parser {
     }
 
     public String customString() {
-        if (compileUnit != null) {
-            return compileUnit.detailedRepresentation();
-        }
+        if (compileUnit != null) return compileUnit.detailedRepresentation();
         return "Failed.";
     }
 }

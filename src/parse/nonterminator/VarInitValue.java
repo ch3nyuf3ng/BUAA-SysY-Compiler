@@ -22,21 +22,17 @@ public class VarInitValue implements NonTerminatorType {
         Logger.info("Matching <VarInitValue>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        final var optionalLeftBraceToken = lexer.currentToken()
-                .filter(t -> t instanceof LeftBraceToken);
-        if (optionalLeftBraceToken.isPresent()) {
-            final var optionalArrayVarInitValue = ArrayVarInitValue.parse(lexer);
-            if (optionalArrayVarInitValue.isPresent()) {
-                final var arrayVarInitValue = optionalArrayVarInitValue.get();
-                final var result = new VarInitValue(arrayVarInitValue);
+        if (lexer.isMatchedTokenOf(LeftBraceToken.class)) {
+            final var arrayVarInitValue = ArrayVarInitValue.parse(lexer);
+            if (arrayVarInitValue.isPresent()) {
+                final var result = new VarInitValue(arrayVarInitValue.get());
                 Logger.info("Matched <VarInitValue>: " + result.representation());
                 return Optional.of(result);
             }
         } else {
-            final var optionalScalarVarInitValue = ScalarVarInitValue.parse(lexer);
-            if (optionalScalarVarInitValue.isPresent()) {
-                final var scalarVarInitValue = optionalScalarVarInitValue.get();
-                final var result = new VarInitValue(scalarVarInitValue);
+            final var scalarVarInitValue = ScalarVarInitValue.parse(lexer);
+            if (scalarVarInitValue.isPresent()) {
+                final var result = new VarInitValue(scalarVarInitValue.get());
                 Logger.info("Matched <VarInitValue>: " + result.representation());
                 return Optional.of(result);
             }

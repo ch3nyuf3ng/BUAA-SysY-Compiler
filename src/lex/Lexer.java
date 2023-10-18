@@ -158,13 +158,18 @@ public class Lexer implements LexerType {
     }
 
     @Override
-    public <T> Optional<T> getAndConsumeTokenOf(Class<T> targetClass) {
-        if (targetClass.isInstance(currentToken())) {
-            final var result = Optional.of(targetClass.cast(currentToken()));
+    public <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetClass) {
+        if (currentToken().filter(targetClass::isInstance).isPresent()) {
+            final var result = currentToken().map(targetClass::cast);
             consumeToken();
             return result;
         }
         return Optional.empty();
+    }
+
+    @Override
+    public <T> boolean isMatchedTokenOf(Class<T> targetClass) {
+        return currentToken().filter(targetClass::isInstance).isPresent();
     }
 
     private boolean isAtEndOfSourceCode() {
@@ -269,10 +274,10 @@ public class Lexer implements LexerType {
         }
         if (isSlash(currentCharacter())) {
             consumeCurrentCharacterAndUpdateCurrentPosition();
-            while (!isLF(currentCharacter())
-                    && !isCR(currentCharacter(), followingCharacterOfCurrentOne())
-                    && !isCRLF(currentCharacter(), followingCharacterOfCurrentOne())
-            ) {
+            while (!isLF(currentCharacter()) && !isCR(currentCharacter(), followingCharacterOfCurrentOne()) && !isCRLF(
+                    currentCharacter(),
+                    followingCharacterOfCurrentOne()
+            )) {
                 commentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();
             }

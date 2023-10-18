@@ -18,28 +18,22 @@ public class ContinueStatement implements SelectionType {
         this.optionalSemicolonToken = optionalSemicolonToken;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(ContinueToken.class);
+    }
+
     public static Optional<ContinueStatement> parse(LexerType lexer) {
         Logger.info("Matching <ContinueStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalContinueToken = lexer.currentToken()
-                    .filter(t -> t instanceof ContinueToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (ContinueToken) t;
-                    });
-            if (optionalContinueToken.isEmpty()) break parse;
-            final var continueToken = optionalContinueToken.get();
+        parse:
+        {
+            final var continueToken = lexer.tryMatchAndConsumeTokenOf(ContinueToken.class);
+            if (continueToken.isEmpty()) break parse;
 
-            final var optionalSemicolonToken = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            final var result = new ContinueStatement(continueToken, optionalSemicolonToken);
+            final var result = new ContinueStatement(continueToken.get(), semicolonToken);
             Logger.info("Matched <ContinueStatement>: " + result.representation());
             return Optional.of(result);
         }
@@ -62,15 +56,13 @@ public class ContinueStatement implements SelectionType {
 
     @Override
     public String representation() {
-        return continueToken.representation() + " "
-                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
+        return continueToken.representation() + " " + optionalSemicolonToken.map(SemicolonToken::representation).orElse(
+                "");
     }
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) {
-            return optionalSemicolonToken.get();
-        }
+        if (optionalSemicolonToken.isPresent()) return optionalSemicolonToken.get();
         return continueToken;
     }
 }

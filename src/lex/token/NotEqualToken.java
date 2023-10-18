@@ -1,11 +1,9 @@
 package lex.token;
 
 import foundation.Position;
-import lex.protocol.TokenType;
+import lex.protocol.EqualityTokenType;
 
-public record NotEqualToken(
-        Position position
-) implements TokenType {
+public record NotEqualToken(Position position) implements EqualityTokenType {
     @Override
     public String detailedRepresentation() {
         return categoryCode() + " " + representation() + "\n";

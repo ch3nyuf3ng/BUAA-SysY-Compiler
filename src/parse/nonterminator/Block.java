@@ -13,47 +13,39 @@ import java.util.Optional;
 
 public class Block implements SelectionType {
     private final LeftBraceToken leftBraceToken;
-    private final List<BlockItem> blockItems;
+    private final List<BlockItem> blockItemList;
     private final RightBraceToken rightBraceToken;
 
-    public Block(LeftBraceToken leftBraceToken, List<BlockItem> blockItems, RightBraceToken rightBraceToken) {
+    public Block(LeftBraceToken leftBraceToken, List<BlockItem> blockItemList, RightBraceToken rightBraceToken) {
         this.leftBraceToken = leftBraceToken;
-        this.blockItems = blockItems;
+        this.blockItemList = blockItemList;
         this.rightBraceToken = rightBraceToken;
+    }
+
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(LeftBraceToken.class);
     }
 
     public static Optional<Block> parse(LexerType lexer) {
         Logger.info("Matching <Block>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalLeftBraceToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftBraceToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftBraceToken) t;
-                    });
-            if (optionalLeftBraceToken.isEmpty()) break parse;
-            final var leftBraceToken = optionalLeftBraceToken.get();
+        parse:
+        {
+            final var leftBraceToken = lexer.tryMatchAndConsumeTokenOf(LeftBraceToken.class);
+            if (leftBraceToken.isEmpty()) break parse;
 
-            final List<BlockItem> blockItems = new ArrayList<>();
+            final List<BlockItem> blockItemList = new ArrayList<>();
             while (true) {
-                final var optionalBlockItem = BlockItem.parse(lexer);
-                if (optionalBlockItem.isEmpty()) break;
-                final BlockItem blockItem = optionalBlockItem.get();
-                blockItems.add(blockItem);
+                final var blockItem = BlockItem.parse(lexer);
+                if (blockItem.isEmpty()) break;
+                blockItemList.add(blockItem.get());
             }
 
-            final var optionalRightBraceToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightBraceToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightBraceToken) t;
-                    });
-            if (optionalRightBraceToken.isEmpty()) break parse;
-            final var rightBraceToken = optionalRightBraceToken.get();
+            final var rightBraceToken = lexer.tryMatchAndConsumeTokenOf(RightBraceToken.class);
+            if (rightBraceToken.isEmpty()) break parse;
 
-            final var result = new Block(leftBraceToken, blockItems, rightBraceToken);
+            final var result = new Block(leftBraceToken.get(), blockItemList, rightBraceToken.get());
             Logger.info("Matched <Block>:\n" + result.representation());
             return Optional.of(result);
         }
@@ -67,21 +59,17 @@ public class Block implements SelectionType {
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(leftBraceToken.detailedRepresentation());
-        blockItems.forEach(i -> stringBuilder.append(i.detailedRepresentation()));
-        stringBuilder
-                .append(rightBraceToken.detailedRepresentation())
-                .append(categoryCode()).append('\n');
+        blockItemList.forEach(i -> stringBuilder.append(i.detailedRepresentation()));
+        stringBuilder.append(rightBraceToken.detailedRepresentation()).append(categoryCode()).append('\n');
         return stringBuilder.toString();
     }
 
     @Override
     public String representation() {
-        if (blockItems.isEmpty()) return "{}";
+        if (blockItemList.isEmpty()) return "{}";
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(leftBraceToken.representation()).append('\n');
-        blockItems.forEach(i -> stringBuilder
-                .append(i.representation().replaceAll("(?m)^", "    ")).append('\n')
-        );
+        blockItemList.forEach(i -> stringBuilder.append(i.representation().replaceAll("(?m)^", "    ")).append('\n'));
         stringBuilder.append(rightBraceToken.representation());
         return stringBuilder.toString();
     }

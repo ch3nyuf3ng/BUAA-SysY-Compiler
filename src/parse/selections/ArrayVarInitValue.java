@@ -38,49 +38,29 @@ public class ArrayVarInitValue implements SelectionType {
 
         parse:
         {
-            final var optionalLeftBraceToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftBraceToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftBraceToken) t;
-                    });
-            if (optionalLeftBraceToken.isEmpty()) break parse;
-            final var leftBraceToken = optionalLeftBraceToken.get();
+            final var leftBraceToken = lexer.tryMatchAndConsumeTokenOf(LeftBraceToken.class);
+            if (leftBraceToken.isEmpty()) break parse;
 
             final Optional<VarInitValue> optionalFirstInitValue = VarInitValue.parse(lexer);
 
             final var otherInitValueList = new ArrayList<CommaWith<VarInitValue>>();
             while (optionalFirstInitValue.isPresent()) {
-                final var optionalCommaToken = lexer.currentToken()
-                        .filter(t -> t instanceof CommaToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (CommaToken) t;
-                        });
-                if (optionalCommaToken.isEmpty()) break;
-                final var commaToken = optionalCommaToken.get();
+                final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
+                if (commaToken.isEmpty()) break;
 
-                final var optionalAnotherInitValue = VarInitValue.parse(lexer);
-                if (optionalAnotherInitValue.isEmpty()) break parse;
-                final var anotherInitValue = optionalAnotherInitValue.get();
+                final var anotherInitValue = VarInitValue.parse(lexer);
+                if (anotherInitValue.isEmpty()) break parse;
 
-                otherInitValueList.add(new CommaWith<>(commaToken, anotherInitValue));
+                otherInitValueList.add(new CommaWith<>(commaToken.get(), anotherInitValue.get()));
             }
 
-            final var optionalRightBraceToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightBraceToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightBraceToken) t;
-                    });
-            if (optionalRightBraceToken.isEmpty()) break parse;
-            final var rightBraceToken = optionalRightBraceToken.get();
+            final var rightBraceToken = lexer.tryMatchAndConsumeTokenOf(RightBraceToken.class);
+            if (rightBraceToken.isEmpty()) break parse;
 
-            final var result = new ArrayVarInitValue(
-                    leftBraceToken,
+            final var result = new ArrayVarInitValue(leftBraceToken.get(),
                     optionalFirstInitValue,
                     otherInitValueList,
-                    rightBraceToken
+                    rightBraceToken.get()
             );
             Logger.info("Matched <ArrayVarInitValue>: " + result.representation());
             return Optional.of(result);
@@ -97,9 +77,7 @@ public class ArrayVarInitValue implements SelectionType {
         stringBuilder.append(leftBraceToken.detailedRepresentation());
         optionalFirstInitValue.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
         for (final var i : otherInitValueList) {
-            stringBuilder
-                    .append(i.commaToken().detailedRepresentation())
-                    .append(i.entity().detailedRepresentation());
+            stringBuilder.append(i.commaToken().detailedRepresentation()).append(i.entity().detailedRepresentation());
         }
         stringBuilder.append(rightBraceToken.detailedRepresentation());
         return stringBuilder.toString();
@@ -111,9 +89,7 @@ public class ArrayVarInitValue implements SelectionType {
         stringBuilder.append(leftBraceToken.representation());
         optionalFirstInitValue.ifPresent(t -> stringBuilder.append(t.representation()));
         for (final var i : otherInitValueList) {
-            stringBuilder
-                    .append(i.commaToken().representation()).append(' ')
-                    .append(i.entity().representation());
+            stringBuilder.append(i.commaToken().representation()).append(' ').append(i.entity().representation());
         }
         stringBuilder.append(rightBraceToken.representation());
         return stringBuilder.toString();

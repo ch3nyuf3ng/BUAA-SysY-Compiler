@@ -28,32 +28,26 @@ public class CompileUnit implements NonTerminatorType {
         final var beginningPosition = lexer.beginningPosition();
         Logger.info("Matching <CompileUnit>");
 
-        parse: {
+        parse:
+        {
             final List<Declaration> declarationList = new ArrayList<>();
             while (Declaration.matchBeginTokens(lexer)) {
-                final var optDeclaration = Declaration.parse(lexer);
-                if (optDeclaration.isEmpty()) break;
-                final var declaration = optDeclaration.get();
-                declarationList.add(declaration);
+                final var declaration = Declaration.parse(lexer);
+                if (declaration.isEmpty()) break;
+                declarationList.add(declaration.get());
             }
 
             final List<FuncDefinition> funcDefinitionList = new ArrayList<>();
-            while (FuncDefinition.matchBeginTokens(lexer)) {
-                final var optionalFuncDefinition = FuncDefinition.parse(lexer);
-                if (optionalFuncDefinition.isEmpty()) break;
-                final var funcDefinition = optionalFuncDefinition.get();
-                funcDefinitionList.add(funcDefinition);
+            while (FuncDefinition.isMatchedBeginningTokens(lexer)) {
+                final var funcDefinition = FuncDefinition.parse(lexer);
+                if (funcDefinition.isEmpty()) break;
+                funcDefinitionList.add(funcDefinition.get());
             }
 
-            final var optionalMainFuncDefinition = MainFuncDefinition.parse(lexer);
-            if (optionalMainFuncDefinition.isEmpty()) break parse;
-            final var mainFuncDefinition = optionalMainFuncDefinition.get();
+            final var mainFuncDefinition = MainFuncDefinition.parse(lexer);
+            if (mainFuncDefinition.isEmpty()) break parse;
 
-            final var result = new CompileUnit(
-                    declarationList,
-                    funcDefinitionList,
-                    mainFuncDefinition
-            );
+            final var result = new CompileUnit(declarationList, funcDefinitionList, mainFuncDefinition.get());
             Logger.info("Matched <CompileUnit>:\n" + result.representation());
             return Optional.of(result);
         }
@@ -68,9 +62,7 @@ public class CompileUnit implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         declarationList.forEach(e -> stringBuilder.append(e.detailedRepresentation()));
         funcDefinitionList.forEach(e -> stringBuilder.append(e.detailedRepresentation()));
-        stringBuilder
-                .append(mainFuncDefinition.detailedRepresentation())
-                .append(categoryCode());
+        stringBuilder.append(mainFuncDefinition.detailedRepresentation()).append(categoryCode());
         return stringBuilder.toString();
     }
 
@@ -78,7 +70,8 @@ public class CompileUnit implements NonTerminatorType {
     public String representation() {
         final var stringBuilder = new StringBuilder();
         declarationList.forEach(e -> stringBuilder.append(e.representation()).append('\n'));
-        funcDefinitionList.forEach(e -> stringBuilder.append(e.representation()).append('\n'));
+        stringBuilder.append('\n');
+        funcDefinitionList.forEach(e -> stringBuilder.append(e.representation()).append("\n\n"));
         stringBuilder.append(mainFuncDefinition.representation());
         return stringBuilder.toString();
     }

@@ -20,15 +20,10 @@ public class ScalarConstInitValue implements SelectionType {
         final var beginningPosition = lexer.beginningPosition();
 
         parse: {
-            final ConstExpression constExpression;
-            final var optionalConstExpression = ConstExpression.parse(lexer);
-            if (optionalConstExpression.isPresent()) {
-                constExpression = optionalConstExpression.get();
-            } else {
-                break parse;
-            }
+            final var constExpression = ConstExpression.parse(lexer);
+            if (constExpression.isEmpty()) break parse;
 
-            final var result = new ScalarConstInitValue(constExpression);
+            final var result = new ScalarConstInitValue(constExpression.get());
             Logger.info("Matched <ScalarConstInitValue>: " + result.representation());
             return Optional.of(result);
         }

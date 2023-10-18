@@ -40,79 +40,57 @@ public class IfStatement implements SelectionType {
         this.optionalElseStatement = optionalElseStatement;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(IfToken.class);
+    }
+
     public static Optional<IfStatement> parse(LexerType lexer) {
         Logger.info("Matching <IfStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
         parse:
         {
-            final var optionalIfToken = lexer.currentToken()
-                    .filter(t -> t instanceof IfToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IfToken) t;
-                    });
-            if (optionalIfToken.isEmpty()) break parse;
-            final var ifToken = optionalIfToken.get();
+            final var ifToken = lexer.tryMatchAndConsumeTokenOf(IfToken.class);
+            if (ifToken.isEmpty()) break parse;
 
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftParenthesisToken) t;
-                    });
-            if (optionalLeftParenthesisToken.isEmpty()) break parse;
-            final var leftParenthesisToken = optionalLeftParenthesisToken.get();
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final var optionalCondition = Condition.parse(lexer);
-            if (optionalCondition.isEmpty()) break parse;
-            final var condition = optionalCondition.get();
+            final var condition = Condition.parse(lexer);
+            if (condition.isEmpty()) break parse;
 
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightParenthesisToken) t;
-                    });
-            if (optionalRightParenthesisToken.isEmpty()) break parse;
-            final var rightParenthesisToken = optionalRightParenthesisToken.get();
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var optionalIfStatement = Statement.parse(lexer);
-            if (optionalIfStatement.isEmpty()) break parse;
-            final var ifStatement = optionalIfStatement.get();
+            final var ifStatement = Statement.parse(lexer);
+            if (ifStatement.isEmpty()) break parse;
 
-            final Optional<ElseToken> optionalElseToken = lexer.currentToken()
-                    .filter(t -> t instanceof ElseToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (ElseToken) t;
-                    });
-
-            if (optionalElseToken.isEmpty()) {
-                final var result1 = new IfStatement(
-                        ifToken,
-                        leftParenthesisToken,
-                        condition,
-                        rightParenthesisToken,
-                        ifStatement,
+            final var elseToken = lexer.tryMatchAndConsumeTokenOf(ElseToken.class);
+            if (elseToken.isEmpty()) {
+                final var result = new IfStatement(
+                        ifToken.get(),
+                        leftParenthesisToken.get(),
+                        condition.get(),
+                        rightParenthesisToken.get(),
+                        ifStatement.get(),
                         Optional.empty(),
                         Optional.empty()
                 );
-                Logger.info("Matched <IfStatement>:\n" + result1.representation());
-                return Optional.of(result1);
+                Logger.info("Matched <IfStatement>:\n" + result.representation());
+                return Optional.of(result);
             }
 
-            final Optional<Statement> optionalElseStatement = Statement.parse(lexer);
-            if (optionalElseStatement.isEmpty()) break parse;
+            final var elseStatement = Statement.parse(lexer);
+            if (elseStatement.isEmpty()) break parse;
 
             final var result = new IfStatement(
-                    ifToken,
-                    leftParenthesisToken,
-                    condition,
-                    rightParenthesisToken,
-                    ifStatement,
-                    optionalElseToken,
-                    optionalElseStatement
+                    ifToken.get(),
+                    leftParenthesisToken.get(),
+                    condition.get(),
+                    rightParenthesisToken.get(),
+                    ifStatement.get(),
+                    elseToken,
+                    elseStatement
             );
             Logger.info("Matched <IfStatement>:\n" + result.representation());
             return Optional.of(result);
@@ -125,24 +103,18 @@ public class IfStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return ifToken.detailedRepresentation()
-                + leftParenthesisToken.detailedRepresentation()
-                + condition.detailedRepresentation()
-                + rightParenthesisToken.detailedRepresentation()
-                + ifStatement.detailedRepresentation()
-                + optionalElseToken.map(ElseToken::detailedRepresentation).orElse("")
-                + optionalElseStatement.map(Statement::detailedRepresentation).orElse("");
+        return ifToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
+                + condition.detailedRepresentation() + rightParenthesisToken.detailedRepresentation()
+                + ifStatement.detailedRepresentation() + optionalElseToken.map(ElseToken::detailedRepresentation)
+                .orElse("") + optionalElseStatement.map(Statement::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
-        return ifToken.representation() + " "
-                + leftParenthesisToken.representation()
-                + condition.representation()
-                + rightParenthesisToken.representation() + " "
-                + ifStatement.representation() + " "
-                + optionalElseToken.map(ElseToken::representation).orElse("") + " "
-                + optionalElseStatement.map(Statement::representation).orElse("");
+        return ifToken.representation() + " " + leftParenthesisToken.representation() + condition.representation()
+                + rightParenthesisToken.representation() + " " + ifStatement.representation() + " "
+                + optionalElseToken.map(ElseToken::representation).orElse("") + " " + optionalElseStatement.map(
+                Statement::representation).orElse("");
     }
 
     @Override

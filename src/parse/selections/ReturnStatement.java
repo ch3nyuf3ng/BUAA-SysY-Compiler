@@ -15,38 +15,33 @@ public class ReturnStatement implements SelectionType {
     private final Optional<Expression> optionalExpression;
     private final SemicolonToken semicolonToken;
 
-    private ReturnStatement(ReturnToken returnToken, Optional<Expression> optionalExpression, SemicolonToken semicolonToken) {
+    private ReturnStatement(
+            ReturnToken returnToken, Optional<Expression> optionalExpression, SemicolonToken semicolonToken
+    ) {
         this.returnToken = returnToken;
         this.optionalExpression = optionalExpression;
         this.semicolonToken = semicolonToken;
+    }
+
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(ReturnToken.class);
     }
 
     public static Optional<ReturnStatement> parse(LexerType lexer) {
         Logger.info("Matching <ReturnStatement>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final ReturnToken returnToken;
-            var optionalCurrentToken = lexer.currentToken();
-            if (optionalCurrentToken.isPresent() && optionalCurrentToken.get() instanceof ReturnToken) {
-                returnToken = (ReturnToken) optionalCurrentToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+        parse:
+        {
+            final var returnToken = lexer.tryMatchAndConsumeTokenOf(ReturnToken.class);
+            if (returnToken.isEmpty()) break parse;
 
-            final Optional<Expression> optionalExpression = Expression.parse(lexer);
+            final var expression = Expression.parse(lexer);
 
-            final SemicolonToken semicolonToken;
-            optionalCurrentToken = lexer.currentToken();
-            if (optionalCurrentToken.isPresent() && optionalCurrentToken.get() instanceof SemicolonToken) {
-                semicolonToken = (SemicolonToken) optionalCurrentToken.get();
-                lexer.consumeToken();
-            } else {
-                break parse;
-            }
+            final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
+            if (semicolonToken.isEmpty()) break parse;
 
-            final var result = new ReturnStatement(returnToken, optionalExpression, semicolonToken);
+            final var result = new ReturnStatement(returnToken.get(), expression, semicolonToken.get());
             Logger.info("Matched <ReturnStatement>: " + result.representation());
             return Optional.of(result);
         }
@@ -58,15 +53,13 @@ public class ReturnStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return returnToken.detailedRepresentation()
-                + optionalExpression.map(Expression::detailedRepresentation).orElse("")
-                + semicolonToken.detailedRepresentation();
+        return returnToken.detailedRepresentation() + optionalExpression.map(Expression::detailedRepresentation).orElse(
+                "") + semicolonToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return returnToken.representation() + " "
-                + optionalExpression.map(Expression::representation).orElse("")
+        return returnToken.representation() + " " + optionalExpression.map(Expression::representation).orElse("")
                 + semicolonToken.representation();
     }
 

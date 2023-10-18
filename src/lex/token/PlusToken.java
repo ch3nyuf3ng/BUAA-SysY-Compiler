@@ -1,12 +1,11 @@
 package lex.token;
 
 import foundation.Position;
-import lex.enums.AdditiveOperationEnum;
 import lex.protocol.AdditiveTokenType;
+import lex.protocol.TokenType;
+import lex.protocol.UnaryOperatorTokenType;
 
-public record PlusToken(
-        Position position
-) implements AdditiveTokenType {
+public record PlusToken(Position position) implements TokenType, AdditiveTokenType, UnaryOperatorTokenType {
     @Override
     public String detailedRepresentation() {
         return categoryCode() + " " + representation() + "\n";
@@ -20,10 +19,5 @@ public record PlusToken(
     @Override
     public String representation() {
         return "+";
-    }
-
-    @Override
-    public AdditiveOperationEnum operationType() {
-        return AdditiveOperationEnum.PLUS;
     }
 }

@@ -18,12 +18,12 @@ public class Condition implements NonTerminatorType {
         Logger.info("Matching <Condition>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalLogicOrExpression = LogicalOrExpression.parse(lexer);
-            if (optionalLogicOrExpression.isEmpty()) break parse;
-            final var logicalOrExpression = optionalLogicOrExpression.get();
+        parse:
+        {
+            final var logicalOrExpression = LogicalOrExpression.parse(lexer);
+            if (logicalOrExpression.isEmpty()) break parse;
 
-            final var result = new Condition(logicalOrExpression);
+            final var result = new Condition(logicalOrExpression.get());
             Logger.info("Matched <Condition>: " + result.representation());
             return Optional.of(result);
         }

@@ -1,54 +1,48 @@
 package parse.nonterminator;
 
 import foundation.Pair;
+import lex.protocol.AdditiveTokenType;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
-import lex.token.MinusToken;
-import lex.token.PlusToken;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AdditiveExpression implements NonTerminatorType {
     private final MultiplicativeExpression multiplicativeExpression;
-    private final List<Pair<TokenType, MultiplicativeExpression>> operatorWithExpressionList;
+    private final List<Pair<AdditiveTokenType, MultiplicativeExpression>> operatorWithExpressionList;
 
     private AdditiveExpression(
             MultiplicativeExpression multiplicativeExpression,
-            List<Pair<TokenType, MultiplicativeExpression>> operatorWithExpressionList
+            List<Pair<AdditiveTokenType, MultiplicativeExpression>> operatorWithExpressionList
     ) {
-        this.multiplicativeExpression = multiplicativeExpression;
-        this.operatorWithExpressionList = operatorWithExpressionList;
+        this.multiplicativeExpression = Objects.requireNonNull(multiplicativeExpression);
+        this.operatorWithExpressionList = Objects.requireNonNull(operatorWithExpressionList);
     }
 
     public static Optional<AdditiveExpression> parse(LexerType lexer) {
         Logger.info("Matching <AdditiveExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
+        parse:
+        {
             final var optionalMultiplicativeExpression = MultiplicativeExpression.parse(lexer);
             if (optionalMultiplicativeExpression.isEmpty()) break parse;
             final var multiplicativeExpression = optionalMultiplicativeExpression.get();
 
-            final List<Pair<TokenType, MultiplicativeExpression>> operatorWithExpressionList = new ArrayList<>();
+            final var operatorWithExpressionList = new ArrayList<Pair<AdditiveTokenType, MultiplicativeExpression>>();
             while (true) {
-                final var optionalOperator = lexer.currentToken()
-                        .filter(t -> t instanceof PlusToken || t instanceof MinusToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return t;
-                        });
-                if (optionalOperator.isEmpty()) break;
-                final var operator = optionalOperator.get();
+                final var operator = lexer.tryMatchAndConsumeTokenOf(AdditiveTokenType.class);
+                if (operator.isEmpty()) break;
 
-                final var optionalAdditionalMultiplicativeExpression = MultiplicativeExpression.parse(lexer);
-                if (optionalAdditionalMultiplicativeExpression.isEmpty()) break parse;
-                final var additionalMultiplicativeExpression = optionalAdditionalMultiplicativeExpression.get();
+                final var additionalMultiplicativeExpression = MultiplicativeExpression.parse(lexer);
+                if (additionalMultiplicativeExpression.isEmpty()) break parse;
 
-                operatorWithExpressionList.add(new Pair<>(operator, additionalMultiplicativeExpression));
+                operatorWithExpressionList.add(new Pair<>(operator.get(), additionalMultiplicativeExpression.get()));
             }
 
             final var result = new AdditiveExpression(multiplicativeExpression, operatorWithExpressionList);
@@ -64,15 +58,9 @@ public class AdditiveExpression implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(multiplicativeExpression.detailedRepresentation())
-                .append(categoryCode()).append('\n');
-        for (final var item : operatorWithExpressionList) {
-            stringBuilder
-                    .append(item.e1().detailedRepresentation())
-                    .append(item.e2().detailedRepresentation())
-                    .append(categoryCode()).append('\n');
-        }
+        stringBuilder.append(multiplicativeExpression.detailedRepresentation()).append(categoryCode()).append('\n');
+        operatorWithExpressionList.forEach(item -> stringBuilder.append(item.e1().detailedRepresentation())
+                .append(item.e2().detailedRepresentation()).append(categoryCode()).append('\n'));
         return stringBuilder.toString();
     }
 
@@ -80,11 +68,8 @@ public class AdditiveExpression implements NonTerminatorType {
     public String representation() {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(multiplicativeExpression.representation());
-        for (final var item : operatorWithExpressionList) {
-            stringBuilder
-                    .append(' ').append(item.e1().representation())
-                    .append(' ').append(item.e2().representation());
-        }
+        operatorWithExpressionList.forEach(item -> stringBuilder.append(' ').append(item.e1().representation())
+                .append(' ').append(item.e2().representation()));
         return stringBuilder.toString();
     }
 
@@ -95,9 +80,7 @@ public class AdditiveExpression implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (operatorWithExpressionList.isEmpty()) {
-            return multiplicativeExpression.lastTerminator();
-        }
+        if (operatorWithExpressionList.isEmpty()) return multiplicativeExpression.lastTerminator();
         final var lastIndex = operatorWithExpressionList.size() - 1;
         final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).e2();
         return lastNonTerminator.lastTerminator();

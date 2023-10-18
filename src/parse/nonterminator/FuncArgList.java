@@ -9,6 +9,7 @@ import tests.foundations.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class FuncArgList implements NonTerminatorType {
@@ -16,38 +17,31 @@ public class FuncArgList implements NonTerminatorType {
     private final List<CommaWith<Expression>> commaWithExpressionList;
 
     private FuncArgList(Expression firstExpression, List<CommaWith<Expression>> commaWithExpressionList) {
-        this.firstExpression = firstExpression;
-        this.commaWithExpressionList = commaWithExpressionList;
+        this.firstExpression = Objects.requireNonNull(firstExpression);
+        this.commaWithExpressionList = Objects.requireNonNull(commaWithExpressionList);
     }
 
     public static Optional<FuncArgList> parse(LexerType lexer) {
         Logger.info("Matching <FuncArgList>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalExpression = Expression.parse(lexer);
-            if (optionalExpression.isEmpty()) break parse;
-            final var expression = optionalExpression.get();
+        parse:
+        {
+            final var expression = Expression.parse(lexer);
+            if (expression.isEmpty()) break parse;
 
-            final List<CommaWith<Expression>> commaWithExpressionList = new ArrayList<>();
-            while (true) {
-                final var optionalCommaToken = lexer.currentToken()
-                        .filter(t -> t instanceof CommaToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (CommaToken) t;
-                        });
-                if (optionalCommaToken.isEmpty()) break;
-                final var commaToken = optionalCommaToken.get();
+            final var commaWithExpressionList = new ArrayList<CommaWith<Expression>>();
+            while (lexer.isMatchedTokenOf(CommaToken.class)) {
+                final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
+                if (commaToken.isEmpty()) break;
 
-                final var optionalAdditionalExpression = Expression.parse(lexer);
-                if (optionalAdditionalExpression.isEmpty()) break parse;
-                final var additionalExpression = optionalAdditionalExpression.get();
+                final var additionalExpression = Expression.parse(lexer);
+                if (additionalExpression.isEmpty()) break parse;
 
-                commaWithExpressionList.add(new CommaWith<>(commaToken, additionalExpression));
+                commaWithExpressionList.add(new CommaWith<>(commaToken.get(), additionalExpression.get()));
             }
 
-            final var result = new FuncArgList(expression, commaWithExpressionList);
+            final var result = new FuncArgList(expression.get(), commaWithExpressionList);
             Logger.info("Matched <FuncArgList>: " + result.representation());
             return Optional.of(result);
         }
@@ -59,9 +53,7 @@ public class FuncArgList implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (commaWithExpressionList.isEmpty()) {
-            return firstExpression.lastTerminator();
-        }
+        if (commaWithExpressionList.isEmpty()) return firstExpression.lastTerminator();
         final var lastIndex = commaWithExpressionList.size() - 1;
         final var lastNonTerminator = commaWithExpressionList.get(lastIndex).entity();
         return lastNonTerminator.lastTerminator();
@@ -71,11 +63,8 @@ public class FuncArgList implements NonTerminatorType {
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(firstExpression.detailedRepresentation());
-        for (final var i : commaWithExpressionList) {
-            stringBuilder
-                    .append(i.commaToken().detailedRepresentation())
-                    .append(i.entity().detailedRepresentation());
-        }
+        commaWithExpressionList.forEach(i -> stringBuilder.append(i.commaToken().detailedRepresentation())
+                .append(i.entity().detailedRepresentation()));
         stringBuilder.append(categoryCode()).append('\n');
         return stringBuilder.toString();
     }
@@ -84,11 +73,8 @@ public class FuncArgList implements NonTerminatorType {
     public String representation() {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(firstExpression.representation());
-        for (final var i : commaWithExpressionList) {
-            stringBuilder
-                    .append(' ').append(i.commaToken().representation())
-                    .append(' ').append(i.entity().representation());
-        }
+        commaWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.commaToken().representation())
+                .append(' ').append(i.entity().representation()));
         return stringBuilder.toString();
     }
 

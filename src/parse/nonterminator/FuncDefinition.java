@@ -1,11 +1,13 @@
 package parse.nonterminator;
 
+import lex.protocol.FuncTypeTokenType;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.*;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class FuncDefinition implements NonTerminatorType {
@@ -16,7 +18,7 @@ public class FuncDefinition implements NonTerminatorType {
     private final RightParenthesisToken rightParenthesisToken;
     private final Block block;
 
-    private FuncDefinition(
+    public FuncDefinition(
             FuncType funcType,
             IdentifierToken identifierToken,
             LeftParenthesisToken leftParenthesisToken,
@@ -24,28 +26,19 @@ public class FuncDefinition implements NonTerminatorType {
             RightParenthesisToken rightParenthesisToken,
             Block block
     ) {
-        this.funcType = funcType;
-        this.identifierToken = identifierToken;
-        this.leftParenthesisToken = leftParenthesisToken;
-        this.optionalFuncParaList = optionalFuncParaList;
-        this.rightParenthesisToken = rightParenthesisToken;
-        this.block = block;
+        this.funcType = Objects.requireNonNull(funcType);
+        this.identifierToken = Objects.requireNonNull(identifierToken);
+        this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
+        this.optionalFuncParaList = Objects.requireNonNull(optionalFuncParaList);
+        this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
+        this.block = Objects.requireNonNull(block);
     }
 
-    public static boolean matchBeginTokens(LexerType lexer) {
+    public static boolean isMatchedBeginningTokens(LexerType lexer) {
         final var beginningPosition = lexer.beginningPosition();
-        final var result = lexer.currentToken()
-                .filter(t -> t instanceof IntToken || t instanceof VoidToken)
-                .flatMap(t -> {
-                    lexer.consumeToken();
-                    return lexer.currentToken();
-                })
-                .filter(t ->  t instanceof IdentifierToken)
-                .flatMap(t -> {
-                    lexer.consumeToken();
-                    return lexer.currentToken();
-                })
-                .filter(t -> t instanceof LeftParenthesisToken).isPresent();
+        final var result = lexer.tryMatchAndConsumeTokenOf(FuncTypeTokenType.class)
+                .flatMap(t -> lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class))
+                .flatMap(t -> lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class)).isPresent();
         lexer.resetPosition(beginningPosition);
         return result;
     }
@@ -54,51 +47,32 @@ public class FuncDefinition implements NonTerminatorType {
         Logger.info("Matching <FuncDefinition>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalFuncType = FuncType.parse(lexer);
-            if (optionalFuncType.isEmpty()) break parse;
-            final var funcType = optionalFuncType.get();
+        parse:
+        {
+            final var funcType = FuncType.parse(lexer);
+            if (funcType.isEmpty()) break parse;
 
-            final var optionalIdentifierToken =  lexer.currentToken()
-                    .filter(t -> t instanceof IdentifierToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IdentifierToken) t;
-                    });
-            if (optionalIdentifierToken.isEmpty()) break parse;
-            final var identifierToken = optionalIdentifierToken.get();
+            final var identifierToken = lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class);
+            if (identifierToken.isEmpty()) break parse;
 
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftParenthesisToken) t;
-                    });
-            if (optionalLeftParenthesisToken.isEmpty()) break parse;
-            final var leftParenthesisToken = optionalLeftParenthesisToken.get();
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final var optionalFuncParaList = FuncParamList.parse(lexer);
+            final var funcParaList = FuncParamList.parse(lexer);
 
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightParenthesisToken) t;
-                    });
-            if (optionalRightParenthesisToken.isEmpty()) break parse;
-            final var rightParenthesisToken = optionalRightParenthesisToken.get();
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var optionalBlock = Block.parse(lexer);
-            if (optionalBlock.isEmpty()) break parse;
-            final var block = optionalBlock.get();
+            final var block = Block.parse(lexer);
+            if (block.isEmpty()) break parse;
 
             final var result = new FuncDefinition(
-                    funcType,
-                    identifierToken,
-                    leftParenthesisToken,
-                    optionalFuncParaList,
-                    rightParenthesisToken,
-                    block
+                    funcType.get(),
+                    identifierToken.get(),
+                    leftParenthesisToken.get(),
+                    funcParaList,
+                    rightParenthesisToken.get(),
+                    block.get()
             );
             Logger.info("Matched <FuncDefinition>:\n" + result.representation());
             return Optional.of(result);
@@ -117,14 +91,10 @@ public class FuncDefinition implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(funcType.detailedRepresentation())
-                .append(identifierToken.detailedRepresentation())
-                .append(leftParenthesisToken.detailedRepresentation());
+        stringBuilder.append(funcType.detailedRepresentation()).append(identifierToken.detailedRepresentation()).append(
+                leftParenthesisToken.detailedRepresentation());
         optionalFuncParaList.ifPresent(x -> stringBuilder.append(x.detailedRepresentation()));
-        stringBuilder
-                .append(rightParenthesisToken.detailedRepresentation())
-                .append(block.detailedRepresentation())
+        stringBuilder.append(rightParenthesisToken.detailedRepresentation()).append(block.detailedRepresentation())
                 .append(categoryCode()).append('\n');
         return stringBuilder.toString();
     }
@@ -132,16 +102,10 @@ public class FuncDefinition implements NonTerminatorType {
     @Override
     public String representation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(funcType.representation()).append(' ')
-                .append(identifierToken.representation())
-                .append(leftParenthesisToken.representation());
-        optionalFuncParaList.ifPresent(x -> stringBuilder
-                .append(x.representation())
-        );
-        stringBuilder
-                .append(rightParenthesisToken.representation()).append(' ')
-                .append(block.representation());
+        stringBuilder.append(funcType.representation()).append(' ').append(identifierToken.representation()).append(
+                leftParenthesisToken.representation());
+        optionalFuncParaList.ifPresent(x -> stringBuilder.append(x.representation()));
+        stringBuilder.append(rightParenthesisToken.representation()).append(' ').append(block.representation());
         return stringBuilder.toString();
     }
 

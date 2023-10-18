@@ -30,22 +30,20 @@ public class RelationalExpression implements NonTerminatorType {
         Logger.info("Matching <RelationalExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
+        parse:
+        {
             final var optionalFirstAdditiveExpression = AdditiveExpression.parse(lexer);
             if (optionalFirstAdditiveExpression.isEmpty()) break parse;
             final var firstAdditiveExpression = optionalFirstAdditiveExpression.get();
 
             final var operatorWithExpressionList = new ArrayList<Pair<TokenType, AdditiveExpression>>();
             while (lexer.currentToken().isPresent()) {
-                final var optionalOperator = lexer.currentToken()
-                        .filter(t -> t instanceof LessToken
-                                || t instanceof GreaterToken
-                                || t instanceof LessOrEqualToken
-                                || t instanceof GreaterOrEqualToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return t;
-                        });
+                final var optionalOperator = lexer.currentToken().filter(t -> t instanceof LessToken
+                        || t instanceof GreaterToken || t instanceof LessOrEqualToken
+                        || t instanceof GreaterOrEqualToken).map(t -> {
+                    lexer.consumeToken();
+                    return t;
+                });
                 if (optionalOperator.isEmpty()) break;
                 final var operator = optionalOperator.get();
 
@@ -79,14 +77,10 @@ public class RelationalExpression implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstAdditiveExpression.detailedRepresentation())
-                .append(categoryCode()).append('\n');;
+        stringBuilder.append(firstAdditiveExpression.detailedRepresentation()).append(categoryCode()).append('\n');
         for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(i.e1().detailedRepresentation())
-                    .append(i.e2().detailedRepresentation())
-                    .append(categoryCode()).append('\n');;
+            stringBuilder.append(i.e1().detailedRepresentation()).append(i.e2().detailedRepresentation()).append(
+                    categoryCode()).append('\n');
         }
         return stringBuilder.toString();
     }
@@ -94,12 +88,9 @@ public class RelationalExpression implements NonTerminatorType {
     @Override
     public String representation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstAdditiveExpression.representation());
+        stringBuilder.append(firstAdditiveExpression.representation());
         for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(' ').append(i.e1().representation())
-                    .append(' ').append(i.e2().representation());
+            stringBuilder.append(' ').append(i.e1().representation()).append(' ').append(i.e2().representation());
         }
         return stringBuilder.toString();
     }

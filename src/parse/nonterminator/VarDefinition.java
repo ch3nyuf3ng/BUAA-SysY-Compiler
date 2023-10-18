@@ -18,19 +18,19 @@ import java.util.Optional;
 public class VarDefinition implements NonTerminatorType {
     private final IdentifierToken identifierToken;
     private final List<BracketWith<ConstExpression>> bracketWithConstExpressionList;
-    private final Optional<AssignToken> optionalAssignToken;
-    private final Optional<VarInitValue> optionalVarInitValue;
+    private final Optional<AssignToken> assignToken;
+    private final Optional<VarInitValue> varInitValue;
 
     private VarDefinition(
             IdentifierToken identifierToken,
             List<BracketWith<ConstExpression>> bracketWithConstExpressionList,
-            Optional<AssignToken> optionalAssignToken,
-            Optional<VarInitValue> optionalVarInitValue
+            Optional<AssignToken> assignToken,
+            Optional<VarInitValue> varInitValue
     ) {
         this.identifierToken = Objects.requireNonNull(identifierToken);
         this.bracketWithConstExpressionList = Objects.requireNonNull(bracketWithConstExpressionList);
-        this.optionalAssignToken = Objects.requireNonNull(optionalAssignToken);
-        this.optionalVarInitValue = Objects.requireNonNull(optionalVarInitValue);
+        this.assignToken = Objects.requireNonNull(assignToken);
+        this.varInitValue = Objects.requireNonNull(varInitValue);
     }
 
     public static Optional<VarDefinition> parse(LexerType lexer) {
@@ -39,71 +39,47 @@ public class VarDefinition implements NonTerminatorType {
 
         parse:
         {
-            final var optionalIdentifierToken = lexer.currentToken()
-                    .filter(t -> t instanceof IdentifierToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IdentifierToken) t;
-                    });
-            if (optionalIdentifierToken.isEmpty()) break parse;
-            final var identifierToken = optionalIdentifierToken.get();
+            final var identifierToken = lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class);
+            if (identifierToken.isEmpty()) break parse;
 
             final var bracketWithConstExpressionList = new ArrayList<BracketWith<ConstExpression>>();
-            while (true) {
-                final var optionalLeftBracketToken = lexer.currentToken()
-                        .filter(t -> t instanceof LeftBracketToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (LeftBracketToken) t;
-                        });
-                if (optionalLeftBracketToken.isEmpty()) break;
-                final var leftBracketToken = optionalLeftBracketToken.get();
+            while (lexer.isMatchedTokenOf(LeftBracketToken.class)) {
+                final var leftBracketToken = lexer.tryMatchAndConsumeTokenOf(LeftBracketToken.class);
+                if (leftBracketToken.isEmpty()) break;
 
-                final var optionalConstExpression = ConstExpression.parse(lexer);
-                if (optionalConstExpression.isEmpty()) break parse;
-                final var constExpression = optionalConstExpression.get();
+                final var constExpression = ConstExpression.parse(lexer);
+                if (constExpression.isEmpty()) break parse;
 
-                final var optionalRightBracketToken = lexer.currentToken()
-                        .filter(t -> t instanceof RightBracketToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (RightBracketToken) t;
-                        });
+                final var optionalRightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
+                if (optionalRightBracketToken.isEmpty()) Logger.warn("Tolerated a right bracket missing.");
 
-                bracketWithConstExpressionList.add(new BracketWith<>(
-                        leftBracketToken,
-                        constExpression,
+                bracketWithConstExpressionList.add(new BracketWith<>(leftBracketToken.get(),
+                        constExpression.get(),
                         optionalRightBracketToken
                 ));
             }
 
-            final var optionalAssignToken = lexer.currentToken()
-                    .filter(t -> t instanceof AssignToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (AssignToken) t;
-                    });
-            final var result1 = new VarDefinition(
-                    identifierToken,
-                    bracketWithConstExpressionList,
-                    Optional.empty(),
-                    Optional.empty()
-            );
-            if (optionalAssignToken.isEmpty()) {
-                Logger.info("Matched <VarDefinition>: " + result1.representation());
-                return Optional.of(result1);
+            final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
+            if (assignToken.isEmpty()) {
+                final var result = new VarDefinition(identifierToken.get(),
+                        bracketWithConstExpressionList,
+                        Optional.empty(),
+                        Optional.empty()
+                );
+                Logger.info("Matched <VarDefinition>: " + result.representation());
+                return Optional.of(result);
             }
 
-            final var optionalVarInitValue = VarInitValue.parse(lexer);
+            final var varInitValue = VarInitValue.parse(lexer);
+            if (varInitValue.isEmpty()) break parse;
 
-            final var result2 = new VarDefinition(
-                    identifierToken,
+            final var result = new VarDefinition(identifierToken.get(),
                     bracketWithConstExpressionList,
-                    optionalAssignToken,
-                    optionalVarInitValue
+                    assignToken,
+                    varInitValue
             );
-            Logger.info("Matched <VarDefinition>: " + result2.representation());
-            return Optional.of(result2);
+            Logger.info("Matched <VarDefinition>: " + result.representation());
+            return Optional.of(result);
         }
 
         Logger.info("Failed to match <VarDefinition>.");
@@ -116,13 +92,12 @@ public class VarDefinition implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(identifierToken.detailedRepresentation());
         for (final var i : bracketWithConstExpressionList) {
-            stringBuilder
-                    .append(i.leftBracketToken().detailedRepresentation())
-                    .append(i.entity().detailedRepresentation());
+            stringBuilder.append(i.leftBracketToken().detailedRepresentation()).append(i.entity()
+                    .detailedRepresentation());
             i.optionalRightBracketToken().ifPresent(x -> stringBuilder.append(x.detailedRepresentation()));
         }
-        optionalAssignToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
-        optionalVarInitValue.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
+        assignToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
+        varInitValue.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
         stringBuilder.append(categoryCode()).append('\n');
         return stringBuilder.toString();
     }
@@ -132,16 +107,11 @@ public class VarDefinition implements NonTerminatorType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(identifierToken.representation());
         for (final var i : bracketWithConstExpressionList) {
-            stringBuilder
-                    .append(i.leftBracketToken().representation())
-                    .append(i.entity().representation());
-            i.optionalRightBracketToken().ifPresent(x -> stringBuilder
-                    .append(x.representation()));
+            stringBuilder.append(i.leftBracketToken().representation()).append(i.entity().representation());
+            i.optionalRightBracketToken().ifPresent(x -> stringBuilder.append(x.representation()));
         }
-        optionalAssignToken.ifPresent(t -> stringBuilder
-                .append(' ').append(t.representation()));
-        optionalVarInitValue.ifPresent(t -> stringBuilder
-                .append(' ').append(t.representation()));
+        assignToken.ifPresent(t -> stringBuilder.append(' ').append(t.representation()));
+        varInitValue.ifPresent(t -> stringBuilder.append(' ').append(t.representation()));
         return stringBuilder.toString();
     }
 
@@ -152,15 +122,13 @@ public class VarDefinition implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalVarInitValue.isPresent()) {
-            return optionalVarInitValue.get().lastTerminator();
+        if (varInitValue.isPresent()) {
+            return varInitValue.get().lastTerminator();
         }
         if (!bracketWithConstExpressionList.isEmpty()) {
             final var lastIndex = bracketWithConstExpressionList.size() - 1;
             final var lastItem = bracketWithConstExpressionList.get(lastIndex);
-            if (lastItem.optionalRightBracketToken().isPresent()) {
-                return lastItem.optionalRightBracketToken().get();
-            }
+            if (lastItem.optionalRightBracketToken().isPresent()) return lastItem.optionalRightBracketToken().get();
             return lastItem.entity().lastTerminator();
         }
         return identifierToken;

@@ -47,77 +47,50 @@ public class ForStatementSelection implements SelectionType {
         this.statement = statement;
     }
 
+    public static boolean isMatchedBeginningToken(LexerType lexer) {
+        return lexer.isMatchedTokenOf(ForToken.class);
+    }
+
     public static Optional<ForStatementSelection> parse(LexerType lexer) {
         Logger.info("Matching <ForStatementSelection>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalForToken = lexer.currentToken()
-                    .filter(t -> t instanceof ForToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (ForToken) t;
-                    });
-            if (optionalForToken.isEmpty()) break parse;
-            final var forToken = optionalForToken.get();
+        parse:
+        {
+            final var forToken = lexer.tryMatchAndConsumeTokenOf(ForToken.class);
+            if (forToken.isEmpty()) break parse;
 
-            final var optionalLeftParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof LeftParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (LeftParenthesisToken) t;
-                    });
-            if (optionalLeftParenthesisToken.isEmpty()) break parse;
-            final var leftParenthesisToken = optionalLeftParenthesisToken.get();
+            final var leftParenthesisToken = lexer.tryMatchAndConsumeTokenOf(LeftParenthesisToken.class);
+            if (leftParenthesisToken.isEmpty()) break parse;
 
-            final Optional<ForStatement> optionalInitStatement = ForStatement.parse(lexer);
+            final var initStatement = ForStatement.parse(lexer);
 
-            final var optionalSemicolonToken1 = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
-            if (optionalSemicolonToken1.isEmpty()) break parse;
-            final var semicolonToken1 = optionalSemicolonToken1.get();
+            final var semicolonToken1 = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
+            if (semicolonToken1.isEmpty()) break parse;
 
+            final var condition = Condition.parse(lexer);
 
-            final Optional<Condition> optionalCondition = Condition.parse(lexer);
+            final var semicolonToken2 = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
+            if (semicolonToken2.isEmpty()) break parse;
 
-            final var optionalSemicolonToken2 = lexer.currentToken()
-                    .filter(t -> t instanceof SemicolonToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (SemicolonToken) t;
-                    });
-            if (optionalSemicolonToken2.isEmpty()) break parse;
-            final var semicolonToken2 = optionalSemicolonToken2.get();
+            final var iterateStatement = ForStatement.parse(lexer);
 
-            final Optional<ForStatement> optionalIterateStatement = ForStatement.parse(lexer);
+            final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var optionalRightParenthesisToken = lexer.currentToken()
-                    .filter(t -> t instanceof RightParenthesisToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (RightParenthesisToken) t;
-                    });
-            if (optionalRightParenthesisToken.isEmpty()) break parse;
-            final var rightParenthesisToken = optionalRightParenthesisToken.get();
-
-            final var optionalStatement = Statement.parse(lexer);
-            if (optionalStatement.isEmpty()) break parse;
-            final var statement = optionalStatement.get();
+            final var statement = Statement.parse(lexer);
+            if (statement.isEmpty()) break parse;
 
             final var result = new ForStatementSelection(
-                    forToken,
-                    leftParenthesisToken,
-                    optionalInitStatement,
-                    semicolonToken1,
-                    optionalCondition,
-                    semicolonToken2,
-                    optionalIterateStatement,
-                    rightParenthesisToken,
-                    statement
+                    forToken.get(),
+                    leftParenthesisToken.get(),
+                    initStatement,
+                    semicolonToken1.get(),
+                    condition,
+                    semicolonToken2.get(),
+                    iterateStatement,
+                    rightParenthesisToken.get(),
+                    statement.get()
             );
             Logger.info("Matched <ForStatementSelection>:\n" + result.representation());
             return Optional.of(result);
@@ -130,28 +103,21 @@ public class ForStatementSelection implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return forToken.detailedRepresentation()
-                + leftParenthesisToken.detailedRepresentation()
+        return forToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
                 + optionalInitStatement.map(ForStatement::detailedRepresentation).orElse("")
-                + semicolonToken1.detailedRepresentation()
-                + optionalCondition.map(Condition::detailedRepresentation).orElse("")
-                + semicolonToken2.detailedRepresentation()
+                + semicolonToken1.detailedRepresentation() + optionalCondition.map(Condition::detailedRepresentation)
+                .orElse("") + semicolonToken2.detailedRepresentation()
                 + optionalIterateStatement.map(ForStatement::detailedRepresentation).orElse("")
-                + rightParenthesisToken.detailedRepresentation()
-                + statement.detailedRepresentation();
+                + rightParenthesisToken.detailedRepresentation() + statement.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return forToken.representation() + " "
-                + leftParenthesisToken.representation()
-                + optionalInitStatement.map(ForStatement::representation).orElse("")
-                + semicolonToken1.representation() + " "
-                + optionalCondition.map(Condition::representation).orElse("")
-                + semicolonToken2.representation() + " "
+        return forToken.representation() + " " + leftParenthesisToken.representation() + optionalInitStatement.map(
+                ForStatement::representation).orElse("") + semicolonToken1.representation() + " "
+                + optionalCondition.map(Condition::representation).orElse("") + semicolonToken2.representation() + " "
                 + optionalIterateStatement.map(ForStatement::representation).orElse("")
-                + rightParenthesisToken.representation() + " "
-                + statement.representation();
+                + rightParenthesisToken.representation() + " " + statement.representation();
     }
 
     @Override

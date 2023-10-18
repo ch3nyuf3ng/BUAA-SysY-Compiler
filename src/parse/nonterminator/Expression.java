@@ -20,11 +20,10 @@ public class Expression implements NonTerminatorType {
 
         parse:
         {
-            final var optionalAdditiveExpression = AdditiveExpression.parse(lexer);
-            if (optionalAdditiveExpression.isEmpty()) break parse;
-            final var additiveExpression = optionalAdditiveExpression.get();
+            final var additiveExpression = AdditiveExpression.parse(lexer);
+            if (additiveExpression.isEmpty()) break parse;
 
-            final var result = new Expression(additiveExpression);
+            final var result = new Expression(additiveExpression.get());
             Logger.info("Matched <Expression>: " + result.representation());
             return Optional.of(result);
         }

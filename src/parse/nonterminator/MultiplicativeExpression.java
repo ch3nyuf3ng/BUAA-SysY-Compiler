@@ -2,10 +2,8 @@ package parse.nonterminator;
 
 import foundation.Pair;
 import lex.protocol.LexerType;
+import lex.protocol.MultiplicativeTokenType;
 import lex.protocol.TokenType;
-import lex.token.DivideToken;
-import lex.token.ModulusToken;
-import lex.token.MultiplyToken;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
@@ -15,11 +13,11 @@ import java.util.Optional;
 
 public class MultiplicativeExpression implements NonTerminatorType {
     private final UnaryExpression firstExpression;
-    private final List<Pair<TokenType, UnaryExpression>> operatorWithExpressionList;
+    private final List<Pair<MultiplicativeTokenType, UnaryExpression>> operatorWithExpressionList;
 
     private MultiplicativeExpression(
             UnaryExpression firstExpression,
-            List<Pair<TokenType, UnaryExpression>> operatorWithExpressionList
+            List<Pair<MultiplicativeTokenType, UnaryExpression>> operatorWithExpressionList
     ) {
         this.firstExpression = firstExpression;
         this.operatorWithExpressionList = operatorWithExpressionList;
@@ -31,31 +29,21 @@ public class MultiplicativeExpression implements NonTerminatorType {
 
         parse:
         {
-            final var optionalUnaryExpression = UnaryExpression.parse(lexer);
-            if (optionalUnaryExpression.isEmpty()) break parse;
-            final var unaryExpression = optionalUnaryExpression.get();
+            final var unaryExpression = UnaryExpression.parse(lexer);
+            if (unaryExpression.isEmpty()) break parse;
 
-            final var operatorWithExpressionList = new ArrayList<Pair<TokenType, UnaryExpression>>();
+            final var operatorWithExpressionList = new ArrayList<Pair<MultiplicativeTokenType, UnaryExpression>>();
             while (true) {
-                final var optionalOperator = lexer.currentToken()
-                        .filter(t -> t instanceof MultiplyToken
-                                || t instanceof DivideToken
-                                || t instanceof ModulusToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return t;
-                        });
-                if (optionalOperator.isEmpty()) break;
-                final var operator = optionalOperator.get();
+                final var operator = lexer.tryMatchAndConsumeTokenOf(MultiplicativeTokenType.class);
+                if (operator.isEmpty()) break;
 
-                final var optionalAdditionalUnaryExpression = UnaryExpression.parse(lexer);
-                if (optionalAdditionalUnaryExpression.isEmpty()) break parse;
-                final var additionalUnaryExpression = optionalAdditionalUnaryExpression.get();
+                final var additionalUnaryExpression = UnaryExpression.parse(lexer);
+                if (additionalUnaryExpression.isEmpty()) break parse;
 
-                operatorWithExpressionList.add(new Pair<>(operator, additionalUnaryExpression));
+                operatorWithExpressionList.add(new Pair<>(operator.get(), additionalUnaryExpression.get()));
             }
 
-            final var result = new MultiplicativeExpression(unaryExpression, operatorWithExpressionList);
+            final var result = new MultiplicativeExpression(unaryExpression.get(), operatorWithExpressionList);
             Logger.info("Matched <MultiplicativeExpression>: " + result.representation());
             return Optional.of(result);
         }
@@ -67,9 +55,7 @@ public class MultiplicativeExpression implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (operatorWithExpressionList.isEmpty()) {
-            return firstExpression.lastTerminator();
-        }
+        if (operatorWithExpressionList.isEmpty()) return firstExpression.lastTerminator();
         final var lastIndex = operatorWithExpressionList.size() - 1;
         final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).e2();
         return lastNonTerminator.lastTerminator();
@@ -78,28 +64,18 @@ public class MultiplicativeExpression implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstExpression.detailedRepresentation())
-                .append(categoryCode()).append('\n');
-        for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(i.e1().detailedRepresentation())
-                    .append(i.e2().detailedRepresentation())
-                    .append(categoryCode()).append('\n');;
-        }
+        stringBuilder.append(firstExpression.detailedRepresentation()).append(categoryCode()).append('\n');
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.e1().detailedRepresentation()).append(i.e2()
+                .detailedRepresentation()).append(categoryCode()).append('\n'));
         return stringBuilder.toString();
     }
 
     @Override
     public String representation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstExpression.representation());
-        for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(' ').append(i.e1().representation())
-                    .append(' ').append(i.e2().representation());
-        }
+        stringBuilder.append(firstExpression.representation());
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.e1().representation()).append(' ')
+                .append(i.e2().representation()));
         return stringBuilder.toString();
     }
 

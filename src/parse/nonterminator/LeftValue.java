@@ -30,42 +30,26 @@ public class LeftValue implements NonTerminatorType, SelectionType {
 
         parse:
         {
-            final var optionalIdentifierToken = lexer.currentToken()
-                    .filter(t -> t instanceof IdentifierToken)
-                    .map(t -> {
-                        lexer.consumeToken();
-                        return (IdentifierToken) t;
-                    });
-            if (optionalIdentifierToken.isEmpty()) break parse;
-            final var identifierToken = optionalIdentifierToken.get();
+            final var identifierToken = lexer.tryMatchAndConsumeTokenOf(IdentifierToken.class);
+            if (identifierToken.isEmpty()) break parse;
 
-            final List<BracketWith<Expression>> bracketWithExpressionList = new ArrayList<>();
+            final var bracketWithExpressionList = new ArrayList<BracketWith<Expression>>();
             while (true) {
-                final var optionalLeftBracketToken = lexer.currentToken()
-                        .filter(t -> t instanceof LeftBracketToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (LeftBracketToken) t;
-                        });
-                if (optionalLeftBracketToken.isEmpty()) break;
-                final var leftBracketToken = optionalLeftBracketToken.get();
+                final var leftBracketToken = lexer.tryMatchAndConsumeTokenOf(LeftBracketToken.class);
+                if (leftBracketToken.isEmpty()) break;
 
-                final var optionalExpression = Expression.parse(lexer);
-                if (optionalExpression.isEmpty()) break parse;
-                final var expression = optionalExpression.get();
+                final var expression = Expression.parse(lexer);
+                if (expression.isEmpty()) break parse;
 
+                final var optionalRightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
 
-                final Optional<RightBracketToken> optionalRightBracketToken = lexer.currentToken()
-                        .filter(t -> t instanceof RightBracketToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (RightBracketToken) t;
-                        });
-
-                bracketWithExpressionList.add(new BracketWith<>(leftBracketToken, expression, optionalRightBracketToken));
+                bracketWithExpressionList.add(new BracketWith<>(leftBracketToken.get(),
+                        expression.get(),
+                        optionalRightBracketToken
+                ));
             }
 
-            final var result = new LeftValue(identifierToken, bracketWithExpressionList);
+            final var result = new LeftValue(identifierToken.get(), bracketWithExpressionList);
             Logger.info("Matched <LeftValue>: " + result.representation());
             return Optional.of(result);
         }
@@ -77,14 +61,10 @@ public class LeftValue implements NonTerminatorType, SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        if (bracketWithExpressionList.isEmpty()) {
-            return identifierToken;
-        }
+        if (bracketWithExpressionList.isEmpty()) return identifierToken;
         final var lastIndex = bracketWithExpressionList.size() - 1;
         final var lastItem = bracketWithExpressionList.get(lastIndex);
-        if (lastItem.optionalRightBracketToken().isPresent()) {
-            return lastItem.optionalRightBracketToken().get();
-        }
+        if (lastItem.optionalRightBracketToken().isPresent()) return lastItem.optionalRightBracketToken().get();
         return lastItem.entity().lastTerminator();
     }
 
@@ -93,9 +73,8 @@ public class LeftValue implements NonTerminatorType, SelectionType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(identifierToken.detailedRepresentation());
         for (final var i : bracketWithExpressionList) {
-            stringBuilder
-                    .append(i.leftBracketToken().detailedRepresentation())
-                    .append(i.entity().detailedRepresentation());
+            stringBuilder.append(i.leftBracketToken().detailedRepresentation()).append(i.entity()
+                    .detailedRepresentation());
             i.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
         }
         stringBuilder.append(categoryCode()).append('\n');
@@ -107,12 +86,8 @@ public class LeftValue implements NonTerminatorType, SelectionType {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(identifierToken.representation());
         for (final var i : bracketWithExpressionList) {
-            stringBuilder
-                    .append(i.leftBracketToken().representation())
-                    .append(i.entity().representation());
-            i.optionalRightBracketToken().ifPresent(e -> stringBuilder
-                    .append(e.representation())
-            );
+            stringBuilder.append(i.leftBracketToken().representation()).append(i.entity().representation());
+            i.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.representation()));
         }
         return stringBuilder.toString();
     }

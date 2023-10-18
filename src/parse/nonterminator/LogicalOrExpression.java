@@ -29,29 +29,21 @@ public class LogicalOrExpression implements NonTerminatorType {
 
         parse:
         {
-            final var optionalLogicalAndExpression = LogicalAndExpression.parse(lexer);
-            if (optionalLogicalAndExpression.isEmpty()) break parse;
-            final var firstLogicalAndExpression = optionalLogicalAndExpression.get();
+            final var firstLogicalAndExpression = LogicalAndExpression.parse(lexer);
+            if (firstLogicalAndExpression.isEmpty()) break parse;
 
             final var operatorWithExpressionList = new ArrayList<Pair<LogicalOrToken, LogicalAndExpression>>();
-            while (true) {
-                final var optionalOperator = lexer.currentToken()
-                        .filter(t -> t instanceof LogicalOrToken)
-                        .map(t -> {
-                            lexer.consumeToken();
-                            return (LogicalOrToken) t;
-                        });
-                if (optionalOperator.isEmpty()) break;
-                final var operator = optionalOperator.get();
+            while (lexer.isMatchedTokenOf(LogicalOrToken.class)) {
+                final var operator = lexer.tryMatchAndConsumeTokenOf(LogicalOrToken.class);
+                if (operator.isEmpty()) break;
 
-                final var optionalAdditionalLogicalAndExpression = LogicalAndExpression.parse(lexer);
-                if (optionalAdditionalLogicalAndExpression.isEmpty()) break parse;
-                final var additionalLogicalAndExpression = optionalAdditionalLogicalAndExpression.get();
+                final var additionalLogicalAndExpression = LogicalAndExpression.parse(lexer);
+                if (additionalLogicalAndExpression.isEmpty()) break parse;
 
-                operatorWithExpressionList.add(new Pair<>(operator, additionalLogicalAndExpression));
+                operatorWithExpressionList.add(new Pair<>(operator.get(), additionalLogicalAndExpression.get()));
             }
 
-            final var result = new LogicalOrExpression(firstLogicalAndExpression, operatorWithExpressionList);
+            final var result = new LogicalOrExpression(firstLogicalAndExpression.get(), operatorWithExpressionList);
             Logger.info("Matched <LogicalOrExpression>: " + result.representation());
             return Optional.of(result);
         }
@@ -63,9 +55,7 @@ public class LogicalOrExpression implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (operatorWithExpressionList.isEmpty()) {
-            return firstLogicalAndExpression.lastTerminator();
-        }
+        if (operatorWithExpressionList.isEmpty()) return firstLogicalAndExpression.lastTerminator();
         final var lastIndex = operatorWithExpressionList.size() - 1;
         final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).e2();
         return lastNonTerminator.lastTerminator();
@@ -74,28 +64,18 @@ public class LogicalOrExpression implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstLogicalAndExpression.detailedRepresentation())
-                .append(categoryCode()).append('\n');
-        for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(i.e1().detailedRepresentation())
-                    .append(i.e2().detailedRepresentation())
-                    .append(categoryCode()).append('\n');
-        }
+        stringBuilder.append(firstLogicalAndExpression.detailedRepresentation()).append(categoryCode()).append('\n');
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.e1().detailedRepresentation()).append(i.e2()
+                .detailedRepresentation()).append(categoryCode()).append('\n'));
         return stringBuilder.toString();
     }
 
     @Override
     public String representation() {
         final var stringBuilder = new StringBuilder();
-        stringBuilder
-                .append(firstLogicalAndExpression.representation());
-        for (final var i : operatorWithExpressionList) {
-            stringBuilder
-                    .append(' ').append(i.e1().representation())
-                    .append(' ').append(i.e2().representation());
-        }
+        stringBuilder.append(firstLogicalAndExpression.representation());
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.e1().representation()).append(' ')
+                .append(i.e2().representation()));
         return stringBuilder.toString();
     }
 

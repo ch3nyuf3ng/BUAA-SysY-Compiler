@@ -18,12 +18,12 @@ public class ConstExpression implements NonTerminatorType {
         Logger.info("Matching <ConstExpression>.");
         final var beginningPosition = lexer.beginningPosition();
 
-        parse: {
-            final var optionalAdditiveExpression = AdditiveExpression.parse(lexer);
-            if (optionalAdditiveExpression.isEmpty()) break parse;
-            final var additiveExpression = optionalAdditiveExpression.get();
+        parse:
+        {
+            final var additiveExpression = AdditiveExpression.parse(lexer);
+            if (additiveExpression.isEmpty()) break parse;
 
-            final var result = new ConstExpression(additiveExpression);
+            final var result = new ConstExpression(additiveExpression.get());
             Logger.info("Matched <ConstExpression>: " + result.representation());
             return Optional.of(result);
         }
