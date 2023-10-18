@@ -56,8 +56,8 @@ public class ContinueStatement implements SelectionType {
 
     @Override
     public String representation() {
-        return continueToken.representation() + " " + optionalSemicolonToken.map(SemicolonToken::representation).orElse(
-                "");
+        return continueToken.representation() + " "
+                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override

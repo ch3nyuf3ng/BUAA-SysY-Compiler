@@ -1,24 +1,22 @@
 package parse.nonterminator;
 
+import foundation.Pair;
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.CommaToken;
 import parse.protocol.NonTerminatorType;
-import parse.substructures.CommaWith;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class FuncArgList implements NonTerminatorType {
     private final Expression firstExpression;
-    private final List<CommaWith<Expression>> commaWithExpressionList;
+    private final List<Pair<CommaToken, Expression>> commaWithExpressionList;
 
-    private FuncArgList(Expression firstExpression, List<CommaWith<Expression>> commaWithExpressionList) {
+    private FuncArgList(Expression firstExpression, List<Pair<CommaToken, Expression>> commaWithExpressionList) {
         this.firstExpression = Objects.requireNonNull(firstExpression);
-        this.commaWithExpressionList = Objects.requireNonNull(commaWithExpressionList);
+        this.commaWithExpressionList = Collections.unmodifiableList(commaWithExpressionList);
     }
 
     public static Optional<FuncArgList> parse(LexerType lexer) {
@@ -30,7 +28,7 @@ public class FuncArgList implements NonTerminatorType {
             final var expression = Expression.parse(lexer);
             if (expression.isEmpty()) break parse;
 
-            final var commaWithExpressionList = new ArrayList<CommaWith<Expression>>();
+            final var commaWithExpressionList = new ArrayList<Pair<CommaToken, Expression>>();
             while (lexer.isMatchedTokenOf(CommaToken.class)) {
                 final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
                 if (commaToken.isEmpty()) break;
@@ -38,7 +36,7 @@ public class FuncArgList implements NonTerminatorType {
                 final var additionalExpression = Expression.parse(lexer);
                 if (additionalExpression.isEmpty()) break parse;
 
-                commaWithExpressionList.add(new CommaWith<>(commaToken.get(), additionalExpression.get()));
+                commaWithExpressionList.add(new Pair<>(commaToken.get(), additionalExpression.get()));
             }
 
             final var result = new FuncArgList(expression.get(), commaWithExpressionList);
@@ -55,27 +53,22 @@ public class FuncArgList implements NonTerminatorType {
     public TokenType lastTerminator() {
         if (commaWithExpressionList.isEmpty()) return firstExpression.lastTerminator();
         final var lastIndex = commaWithExpressionList.size() - 1;
-        final var lastNonTerminator = commaWithExpressionList.get(lastIndex).entity();
+        final var lastNonTerminator = commaWithExpressionList.get(lastIndex).second();
         return lastNonTerminator.lastTerminator();
     }
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstExpression.detailedRepresentation());
-        commaWithExpressionList.forEach(i -> stringBuilder.append(i.commaToken().detailedRepresentation())
-                .append(i.entity().detailedRepresentation()));
-        stringBuilder.append(categoryCode()).append('\n');
-        return stringBuilder.toString();
+        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                firstExpression, commaWithExpressionList
+        ) + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstExpression.representation());
-        commaWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.commaToken().representation())
-                .append(' ').append(i.entity().representation()));
-        return stringBuilder.toString();
+        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                firstExpression, commaWithExpressionList
+        );
     }
 
     @Override

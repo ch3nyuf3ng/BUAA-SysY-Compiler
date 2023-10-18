@@ -15,6 +15,10 @@ public class BlockItem implements NonTerminatorType {
         this.blockItem = blockItem;
     }
 
+    public static boolean isMatchedBeginningTokens(LexerType lexer) {
+        return Declaration.matchBeginTokens(lexer) || Statement.isMatchedBeginningTokens(lexer);
+    }
+
     public static Optional<BlockItem> parse(LexerType lexer) {
         Logger.info("Matching <BlockItem>.");
         final var beginningPosition = lexer.beginningPosition();
@@ -26,7 +30,9 @@ public class BlockItem implements NonTerminatorType {
                 Logger.info("Matched <BlockItem>:\n" + result.representation());
                 return Optional.of(result);
             }
-        } else {
+        }
+
+        if (Statement.isMatchedBeginningTokens(lexer)) {
             final var statement = Statement.parse(lexer);
             if (statement.isPresent()) {
                 final var result = new BlockItem(statement.get());

@@ -40,7 +40,8 @@ public class ParenthesisedPrimeExpression implements SelectionType {
             final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
             if (rightParenthesisToken.isEmpty()) break parse;
 
-            final var result = new ParenthesisedPrimeExpression(leftParenthesisToken.get(),
+            final var result = new ParenthesisedPrimeExpression(
+                    leftParenthesisToken.get(),
                     expression.get(),
                     rightParenthesisToken.get()
             );
@@ -55,13 +56,15 @@ public class ParenthesisedPrimeExpression implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return leftParenthesisToken.detailedRepresentation() + expression.detailedRepresentation()
+        return leftParenthesisToken.detailedRepresentation()
+                + expression.detailedRepresentation()
                 + rightParenthesisToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return leftParenthesisToken.representation() + expression.representation()
+        return leftParenthesisToken.representation()
+                + expression.representation()
                 + rightParenthesisToken.representation();
     }
 

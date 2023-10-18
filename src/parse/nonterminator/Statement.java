@@ -19,10 +19,14 @@ public class Statement implements NonTerminatorType, SelectionType {
     }
 
     public static boolean isMatchedBeginningTokens(LexerType lexer) {
-        return lexer.isMatchedTokenOf(IdentifierToken.class) || ExpressionStatement.isMatchedBeginningToken(lexer)
-                || Block.isMatchedBeginningToken(lexer) || IfStatement.isMatchedBeginningToken(lexer)
-                || ForStatementSelection.isMatchedBeginningToken(lexer) || BreakStatement.isMatchedBeginningToken(lexer)
-                || ContinueStatement.isMatchedBeginningToken(lexer) || ReturnStatement.isMatchedBeginningToken(lexer)
+        return lexer.isMatchedTokenOf(IdentifierToken.class)
+                || ExpressionStatement.isMatchedBeginningToken(lexer)
+                || Block.isMatchedBeginningToken(lexer)
+                || IfStatement.isMatchedBeginningToken(lexer)
+                || ForStatementSelection.isMatchedBeginningToken(lexer)
+                || BreakStatement.isMatchedBeginningToken(lexer)
+                || ContinueStatement.isMatchedBeginningToken(lexer)
+                || ReturnStatement.isMatchedBeginningToken(lexer)
                 || PrintfStatement.isMatchedBeginningToken(lexer);
     }
 

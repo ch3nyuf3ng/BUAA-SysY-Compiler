@@ -1,5 +1,7 @@
 package parse.selections;
 
+import foundation.Pair;
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.CommaToken;
@@ -7,7 +9,6 @@ import lex.token.LeftBraceToken;
 import lex.token.RightBraceToken;
 import parse.nonterminator.ConstInitValue;
 import parse.protocol.SelectionType;
-import parse.substructures.CommaWith;
 import tests.foundations.Logger;
 
 import java.util.ArrayList;
@@ -15,19 +16,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class ArrayConstInitValue implements SelectionType {
-    private final LeftBraceToken leftBracket;
-    private final Optional<ConstInitValue> optionalFirstInitValue;
-    private final List<CommaWith<ConstInitValue>> otherInitValueList;
+    private final LeftBraceToken leftBraceToken;
+    private final Optional<ConstInitValue> firstInitValue;
+    private final List<Pair<CommaToken, ConstInitValue>> otherInitValueList;
     private final RightBraceToken rightBraceToken;
 
     private ArrayConstInitValue(
-            LeftBraceToken leftBracket,
-            Optional<ConstInitValue> optionalFirstInitValue,
-            List<CommaWith<ConstInitValue>> otherInitValueList,
+            LeftBraceToken leftBraceToken,
+            Optional<ConstInitValue> firstInitValue,
+            List<Pair<CommaToken, ConstInitValue>> otherInitValueList,
             RightBraceToken rightBraceToken
     ) {
-        this.leftBracket = leftBracket;
-        this.optionalFirstInitValue = optionalFirstInitValue;
+        this.leftBraceToken = leftBraceToken;
+        this.firstInitValue = firstInitValue;
         this.otherInitValueList = otherInitValueList;
         this.rightBraceToken = rightBraceToken;
     }
@@ -43,7 +44,7 @@ public class ArrayConstInitValue implements SelectionType {
 
             final Optional<ConstInitValue> optionalFirstInitValue = ConstInitValue.parse(lexer);
 
-            final var otherInitValueList = new ArrayList<CommaWith<ConstInitValue>>();
+            final var otherInitValueList = new ArrayList<Pair<CommaToken, ConstInitValue>>();
             while (optionalFirstInitValue.isPresent()) {
                 final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
                 if (commaToken.isEmpty()) break;
@@ -51,16 +52,14 @@ public class ArrayConstInitValue implements SelectionType {
                 final var anotherInitValue = ConstInitValue.parse(lexer);
                 if (anotherInitValue.isEmpty()) break parse;
 
-                otherInitValueList.add(new CommaWith<>(commaToken.get(), anotherInitValue.get()));
+                otherInitValueList.add(new Pair<>(commaToken.get(), anotherInitValue.get()));
             }
 
             final var rightBraceToken = lexer.tryMatchAndConsumeTokenOf(RightBraceToken.class);
             if (rightBraceToken.isEmpty()) break parse;
 
-            final var result = new ArrayConstInitValue(leftBraceToken.get(),
-                    optionalFirstInitValue,
-                    otherInitValueList,
-                    rightBraceToken.get()
+            final var result = new ArrayConstInitValue(
+                    leftBraceToken.get(), optionalFirstInitValue, otherInitValueList, rightBraceToken.get()
             );
             Logger.info("Matched <ArrayConstInitValue>: " + result.representation());
             return Optional.of(result);
@@ -78,24 +77,26 @@ public class ArrayConstInitValue implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(leftBracket.detailedRepresentation());
-        optionalFirstInitValue.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
-        otherInitValueList.forEach(i -> stringBuilder.append(i.commaToken().detailedRepresentation())
-                .append(i.entity().detailedRepresentation()));
-        stringBuilder.append(rightBraceToken.detailedRepresentation());
-        return stringBuilder.toString();
+        return firstInitValue.map(initValue -> leftBraceToken.detailedRepresentation()
+                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                        initValue, otherInitValueList
+                  )
+                + rightBraceToken.detailedRepresentation()
+                ).orElseGet(() ->
+                leftBraceToken.detailedRepresentation()
+                + rightBraceToken.detailedRepresentation()
+        );
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(leftBracket.representation());
-        optionalFirstInitValue.ifPresent(t -> stringBuilder.append(t.representation()));
-        otherInitValueList.forEach(i -> stringBuilder.append(i.commaToken().representation()).append(' ')
-                .append(i.entity().representation()));
-        stringBuilder.append(rightBraceToken.representation());
-        return stringBuilder.toString();
+        return firstInitValue.map(initValue -> leftBraceToken.representation()
+                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation( initValue, otherInitValueList)
+                + rightBraceToken.representation()
+                ).orElseGet(() ->
+                leftBraceToken.representation()
+                + rightBraceToken.representation()
+        );
     }
 
     @Override

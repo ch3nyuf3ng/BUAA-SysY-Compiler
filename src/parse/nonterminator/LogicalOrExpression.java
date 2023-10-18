@@ -1,6 +1,7 @@
 package parse.nonterminator;
 
 import foundation.Pair;
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.LogicalOrToken;
@@ -57,7 +58,7 @@ public class LogicalOrExpression implements NonTerminatorType {
     public TokenType lastTerminator() {
         if (operatorWithExpressionList.isEmpty()) return firstLogicalAndExpression.lastTerminator();
         final var lastIndex = operatorWithExpressionList.size() - 1;
-        final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).e2();
+        final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).second();
         return lastNonTerminator.lastTerminator();
     }
 
@@ -65,18 +66,17 @@ public class LogicalOrExpression implements NonTerminatorType {
     public String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
         stringBuilder.append(firstLogicalAndExpression.detailedRepresentation()).append(categoryCode()).append('\n');
-        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.e1().detailedRepresentation()).append(i.e2()
+        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.first().detailedRepresentation()).append(i.second()
                 .detailedRepresentation()).append(categoryCode()).append('\n'));
         return stringBuilder.toString();
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstLogicalAndExpression.representation());
-        operatorWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.e1().representation()).append(' ')
-                .append(i.e2().representation()));
-        return stringBuilder.toString();
+        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                firstLogicalAndExpression,
+                operatorWithExpressionList
+        );
     }
 
     @Override

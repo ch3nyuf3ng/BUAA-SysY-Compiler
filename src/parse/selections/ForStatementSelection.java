@@ -82,14 +82,10 @@ public class ForStatementSelection implements SelectionType {
             if (statement.isEmpty()) break parse;
 
             final var result = new ForStatementSelection(
-                    forToken.get(),
-                    leftParenthesisToken.get(),
-                    initStatement,
-                    semicolonToken1.get(),
-                    condition,
-                    semicolonToken2.get(),
-                    iterateStatement,
-                    rightParenthesisToken.get(),
+                    forToken.get(), leftParenthesisToken.get(),
+                    initStatement, semicolonToken1.get(),
+                    condition, semicolonToken2.get(),
+                    iterateStatement, rightParenthesisToken.get(),
                     statement.get()
             );
             Logger.info("Matched <ForStatementSelection>:\n" + result.representation());
@@ -103,21 +99,28 @@ public class ForStatementSelection implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return forToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
+        return forToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
                 + optionalInitStatement.map(ForStatement::detailedRepresentation).orElse("")
-                + semicolonToken1.detailedRepresentation() + optionalCondition.map(Condition::detailedRepresentation)
-                .orElse("") + semicolonToken2.detailedRepresentation()
+                + semicolonToken1.detailedRepresentation()
+                + optionalCondition.map(Condition::detailedRepresentation).orElse("")
+                + semicolonToken2.detailedRepresentation()
                 + optionalIterateStatement.map(ForStatement::detailedRepresentation).orElse("")
-                + rightParenthesisToken.detailedRepresentation() + statement.detailedRepresentation();
+                + rightParenthesisToken.detailedRepresentation()
+                + statement.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return forToken.representation() + " " + leftParenthesisToken.representation() + optionalInitStatement.map(
-                ForStatement::representation).orElse("") + semicolonToken1.representation() + " "
-                + optionalCondition.map(Condition::representation).orElse("") + semicolonToken2.representation() + " "
+        return forToken.representation() + " "
+                + leftParenthesisToken.representation()
+                + optionalInitStatement.map(ForStatement::representation).orElse("")
+                + semicolonToken1.representation() + " "
+                + optionalCondition.map(Condition::representation).orElse("")
+                + semicolonToken2.representation() + " "
                 + optionalIterateStatement.map(ForStatement::representation).orElse("")
-                + rightParenthesisToken.representation() + " " + statement.representation();
+                + rightParenthesisToken.representation() + " "
+                + statement.representation();
     }
 
     @Override

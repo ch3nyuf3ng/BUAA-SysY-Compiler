@@ -68,13 +68,10 @@ public class IfStatement implements SelectionType {
             final var elseToken = lexer.tryMatchAndConsumeTokenOf(ElseToken.class);
             if (elseToken.isEmpty()) {
                 final var result = new IfStatement(
-                        ifToken.get(),
-                        leftParenthesisToken.get(),
-                        condition.get(),
-                        rightParenthesisToken.get(),
+                        ifToken.get(), leftParenthesisToken.get(),
+                        condition.get(), rightParenthesisToken.get(),
                         ifStatement.get(),
-                        Optional.empty(),
-                        Optional.empty()
+                        Optional.empty(), Optional.empty()
                 );
                 Logger.info("Matched <IfStatement>:\n" + result.representation());
                 return Optional.of(result);
@@ -84,13 +81,9 @@ public class IfStatement implements SelectionType {
             if (elseStatement.isEmpty()) break parse;
 
             final var result = new IfStatement(
-                    ifToken.get(),
-                    leftParenthesisToken.get(),
-                    condition.get(),
-                    rightParenthesisToken.get(),
-                    ifStatement.get(),
-                    elseToken,
-                    elseStatement
+                    ifToken.get(), leftParenthesisToken.get(),
+                    condition.get(), rightParenthesisToken.get(),
+                    ifStatement.get(), elseToken, elseStatement
             );
             Logger.info("Matched <IfStatement>:\n" + result.representation());
             return Optional.of(result);
@@ -103,18 +96,24 @@ public class IfStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return ifToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
-                + condition.detailedRepresentation() + rightParenthesisToken.detailedRepresentation()
-                + ifStatement.detailedRepresentation() + optionalElseToken.map(ElseToken::detailedRepresentation)
-                .orElse("") + optionalElseStatement.map(Statement::detailedRepresentation).orElse("");
+        return ifToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
+                + condition.detailedRepresentation()
+                + rightParenthesisToken.detailedRepresentation()
+                + ifStatement.detailedRepresentation()
+                + optionalElseToken.map(ElseToken::detailedRepresentation).orElse("")
+                + optionalElseStatement.map(Statement::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
-        return ifToken.representation() + " " + leftParenthesisToken.representation() + condition.representation()
-                + rightParenthesisToken.representation() + " " + ifStatement.representation() + " "
-                + optionalElseToken.map(ElseToken::representation).orElse("") + " " + optionalElseStatement.map(
-                Statement::representation).orElse("");
+        return ifToken.representation() + " "
+                + leftParenthesisToken.representation()
+                + condition.representation()
+                + rightParenthesisToken.representation() + " "
+                + ifStatement.representation() + " "
+                + optionalElseToken.map(ElseToken::representation).orElse("") + " "
+                + optionalElseStatement.map(Statement::representation).orElse("");
     }
 
     @Override

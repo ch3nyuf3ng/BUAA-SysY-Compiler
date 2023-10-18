@@ -36,7 +36,7 @@ public class Block implements SelectionType {
             if (leftBraceToken.isEmpty()) break parse;
 
             final List<BlockItem> blockItemList = new ArrayList<>();
-            while (true) {
+            while (BlockItem.isMatchedBeginningTokens(lexer)) {
                 final var blockItem = BlockItem.parse(lexer);
                 if (blockItem.isEmpty()) break;
                 blockItemList.add(blockItem.get());
@@ -57,8 +57,7 @@ public class Block implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(leftBraceToken.detailedRepresentation());
+        final var stringBuilder = new StringBuilder().append(leftBraceToken.detailedRepresentation());
         blockItemList.forEach(i -> stringBuilder.append(i.detailedRepresentation()));
         stringBuilder.append(rightBraceToken.detailedRepresentation()).append(categoryCode()).append('\n');
         return stringBuilder.toString();
@@ -67,8 +66,7 @@ public class Block implements SelectionType {
     @Override
     public String representation() {
         if (blockItemList.isEmpty()) return "{}";
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(leftBraceToken.representation()).append('\n');
+        final var stringBuilder = new StringBuilder().append(leftBraceToken.representation()).append('\n');
         blockItemList.forEach(i -> stringBuilder.append(i.representation().replaceAll("(?m)^", "    ")).append('\n'));
         stringBuilder.append(rightBraceToken.representation());
         return stringBuilder.toString();

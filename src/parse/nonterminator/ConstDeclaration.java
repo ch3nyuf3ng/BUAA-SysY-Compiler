@@ -1,5 +1,7 @@
 package parse.nonterminator;
 
+import foundation.Pair;
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.CommaToken;
@@ -7,7 +9,6 @@ import lex.token.ConstToken;
 import lex.token.SemicolonToken;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
-import parse.substructures.CommaWith;
 import tests.foundations.Logger;
 
 import java.util.ArrayList;
@@ -18,14 +19,14 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
     private final ConstToken constToken;
     private final BasicType basicType;
     private final ConstDefinition firstConstDefinition;
-    private final List<CommaWith<ConstDefinition>> additionalConstantDefinitionList;
+    private final List<Pair<CommaToken, ConstDefinition>> additionalConstantDefinitionList;
     private final Optional<SemicolonToken> semicolonToken;
 
     private ConstDeclaration(
             ConstToken constToken,
             BasicType basicType,
             ConstDefinition firstConstDefinition,
-            List<CommaWith<ConstDefinition>> additionalConstantDefinitionList,
+            List<Pair<CommaToken, ConstDefinition>> additionalConstantDefinitionList,
             Optional<SemicolonToken> semicolonToken
     ) {
         this.constToken = constToken;
@@ -54,7 +55,7 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
             final var firstConstDefinition = ConstDefinition.parse(lexer);
             if (firstConstDefinition.isEmpty()) break parse;
 
-            final var additionalConstDefinitionList = new ArrayList<CommaWith<ConstDefinition>>();
+            final var additionalConstDefinitionList = new ArrayList<Pair<CommaToken, ConstDefinition>>();
             while (lexer.isMatchedTokenOf(CommaToken.class)) {
                 final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
                 if (commaToken.isEmpty()) break;
@@ -62,7 +63,7 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
                 final var constDefinition = ConstDefinition.parse(lexer);
                 if (constDefinition.isEmpty()) break parse;
 
-                additionalConstDefinitionList.add(new CommaWith<>(commaToken.get(), constDefinition.get()));
+                additionalConstDefinitionList.add(new Pair<>(commaToken.get(), constDefinition.get()));
             }
 
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
@@ -85,25 +86,25 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(constToken.detailedRepresentation()).append(basicType.detailedRepresentation()).append(
-                firstConstDefinition.detailedRepresentation());
-        additionalConstantDefinitionList.forEach(e -> stringBuilder.append(e.commaToken().detailedRepresentation())
-                .append(e.entity().detailedRepresentation()));
-        semicolonToken.ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
-        stringBuilder.append(categoryCode()).append('\n');
-        return stringBuilder.toString();
+        return constToken.detailedRepresentation()
+                + basicType.detailedRepresentation()
+                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                        firstConstDefinition,
+                        additionalConstantDefinitionList
+                  )
+                + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("")
+                + categoryCode() + '\n';
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(constToken.representation()).append(' ').append(basicType.representation()).append(' ')
-                .append(firstConstDefinition.representation());
-        additionalConstantDefinitionList.forEach(e -> stringBuilder.append(e.commaToken().representation()).append(' ')
-                .append(e.entity().representation()));
-        semicolonToken.ifPresent(e -> stringBuilder.append(e.representation()));
-        return stringBuilder.toString();
+        return constToken.representation() + ' '
+                + basicType.representation() + ' '
+                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                        firstConstDefinition,
+                        additionalConstantDefinitionList
+                  )
+                + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override
@@ -114,11 +115,9 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
     @Override
     public TokenType lastTerminator() {
         if (semicolonToken.isPresent()) return semicolonToken.get();
-        if (!additionalConstantDefinitionList.isEmpty()) {
-            final var lastIndex = additionalConstantDefinitionList.size() - 1;
-            final var lastNonTerminator = additionalConstantDefinitionList.get(lastIndex).entity();
-            return lastNonTerminator.lastTerminator();
-        }
+        if (!additionalConstantDefinitionList.isEmpty())
+            return additionalConstantDefinitionList.get(additionalConstantDefinitionList.size() - 1).second()
+                    .lastTerminator();
         return firstConstDefinition.lastTerminator();
     }
 }

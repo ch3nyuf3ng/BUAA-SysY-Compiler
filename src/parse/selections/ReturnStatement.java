@@ -53,13 +53,15 @@ public class ReturnStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return returnToken.detailedRepresentation() + optionalExpression.map(Expression::detailedRepresentation).orElse(
-                "") + semicolonToken.detailedRepresentation();
+        return returnToken.detailedRepresentation()
+                + optionalExpression.map(Expression::detailedRepresentation).orElse("")
+                + semicolonToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return returnToken.representation() + " " + optionalExpression.map(Expression::representation).orElse("")
+        return returnToken.representation() + " "
+                + optionalExpression.map(Expression::representation).orElse("")
                 + semicolonToken.representation();
     }
 

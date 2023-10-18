@@ -19,9 +19,12 @@ public class ExpressionStatement implements SelectionType {
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
-        return lexer.isMatchedTokenOf(LeftParenthesisToken.class) || lexer.isMatchedTokenOf(LiteralIntegerToken.class)
-                || lexer.isMatchedTokenOf(PlusToken.class) || lexer.isMatchedTokenOf(MinusToken.class)
-                || lexer.isMatchedTokenOf(LogicalNotToken.class) || lexer.isMatchedTokenOf(SemicolonToken.class)
+        return lexer.isMatchedTokenOf(LeftParenthesisToken.class)
+                || lexer.isMatchedTokenOf(LiteralIntegerToken.class)
+                || lexer.isMatchedTokenOf(PlusToken.class)
+                || lexer.isMatchedTokenOf(MinusToken.class)
+                || lexer.isMatchedTokenOf(LogicalNotToken.class)
+                || lexer.isMatchedTokenOf(SemicolonToken.class)
                 || lexer.isMatchedTokenOf(IdentifierToken.class);
     }
 

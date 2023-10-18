@@ -5,9 +5,7 @@ import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
 import tests.foundations.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class CompileUnit implements NonTerminatorType {
     private final List<Declaration> declarationList;
@@ -19,9 +17,9 @@ public class CompileUnit implements NonTerminatorType {
             List<FuncDefinition> funcDefinitionList,
             MainFuncDefinition mainFuncDefinition
     ) {
-        this.declarationList = declarationList;
-        this.funcDefinitionList = funcDefinitionList;
-        this.mainFuncDefinition = mainFuncDefinition;
+        this.declarationList = Collections.unmodifiableList(declarationList);
+        this.funcDefinitionList = Collections.unmodifiableList(funcDefinitionList);
+        this.mainFuncDefinition = Objects.requireNonNull(mainFuncDefinition);
     }
 
     public static Optional<CompileUnit> parse(LexerType lexer) {
@@ -58,7 +56,8 @@ public class CompileUnit implements NonTerminatorType {
     }
 
     @Override
-    public String detailedRepresentation() {
+    public
+    String detailedRepresentation() {
         final var stringBuilder = new StringBuilder();
         declarationList.forEach(e -> stringBuilder.append(e.detailedRepresentation()));
         funcDefinitionList.forEach(e -> stringBuilder.append(e.detailedRepresentation()));

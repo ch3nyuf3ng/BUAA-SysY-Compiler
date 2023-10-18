@@ -14,7 +14,7 @@ public class FuncDefinition implements NonTerminatorType {
     private final FuncType funcType;
     private final IdentifierToken identifierToken;
     private final LeftParenthesisToken leftParenthesisToken;
-    private final Optional<FuncParamList> optionalFuncParaList;
+    private final Optional<FuncParamList> funcParaList;
     private final RightParenthesisToken rightParenthesisToken;
     private final Block block;
 
@@ -22,14 +22,14 @@ public class FuncDefinition implements NonTerminatorType {
             FuncType funcType,
             IdentifierToken identifierToken,
             LeftParenthesisToken leftParenthesisToken,
-            Optional<FuncParamList> optionalFuncParaList,
+            Optional<FuncParamList> funcParaList,
             RightParenthesisToken rightParenthesisToken,
             Block block
     ) {
         this.funcType = Objects.requireNonNull(funcType);
         this.identifierToken = Objects.requireNonNull(identifierToken);
         this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
-        this.optionalFuncParaList = Objects.requireNonNull(optionalFuncParaList);
+        this.funcParaList = Objects.requireNonNull(funcParaList);
         this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
         this.block = Objects.requireNonNull(block);
     }
@@ -67,12 +67,8 @@ public class FuncDefinition implements NonTerminatorType {
             if (block.isEmpty()) break parse;
 
             final var result = new FuncDefinition(
-                    funcType.get(),
-                    identifierToken.get(),
-                    leftParenthesisToken.get(),
-                    funcParaList,
-                    rightParenthesisToken.get(),
-                    block.get()
+                    funcType.get(), identifierToken.get(), leftParenthesisToken.get(),
+                    funcParaList, rightParenthesisToken.get(), block.get()
             );
             Logger.info("Matched <FuncDefinition>:\n" + result.representation());
             return Optional.of(result);
@@ -90,23 +86,21 @@ public class FuncDefinition implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(funcType.detailedRepresentation()).append(identifierToken.detailedRepresentation()).append(
-                leftParenthesisToken.detailedRepresentation());
-        optionalFuncParaList.ifPresent(x -> stringBuilder.append(x.detailedRepresentation()));
-        stringBuilder.append(rightParenthesisToken.detailedRepresentation()).append(block.detailedRepresentation())
-                .append(categoryCode()).append('\n');
-        return stringBuilder.toString();
+        return funcType.detailedRepresentation()
+                + identifierToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
+                + funcParaList.map(FuncParamList::detailedRepresentation).orElse("")
+                + rightParenthesisToken.detailedRepresentation() + block.detailedRepresentation()
+                + categoryCode() + '\n';
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(funcType.representation()).append(' ').append(identifierToken.representation()).append(
-                leftParenthesisToken.representation());
-        optionalFuncParaList.ifPresent(x -> stringBuilder.append(x.representation()));
-        stringBuilder.append(rightParenthesisToken.representation()).append(' ').append(block.representation());
-        return stringBuilder.toString();
+        return funcType.representation() + ' '
+                + identifierToken.representation()
+                + leftParenthesisToken.representation()
+                + funcParaList.map(FuncParamList::representation).orElse("")
+                + rightParenthesisToken.representation() + ' ' + block.representation();
     }
 
     @Override

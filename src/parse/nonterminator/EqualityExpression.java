@@ -1,6 +1,7 @@
 package parse.nonterminator;
 
 import foundation.Pair;
+import foundation.RepresentationBuilder;
 import lex.protocol.EqualityTokenType;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
@@ -12,14 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class EqualityExpression implements NonTerminatorType {
-    private final RelationalExpression firstRelationalExpression;
+    private final RelationalExpression firstExpression;
     private final List<Pair<EqualityTokenType, RelationalExpression>> operatorWithExpressionList;
 
     private EqualityExpression(
-            RelationalExpression firstRelationalExpression,
+            RelationalExpression firstExpression,
             List<Pair<EqualityTokenType, RelationalExpression>> operatorWithExpressionList
     ) {
-        this.firstRelationalExpression = firstRelationalExpression;
+        this.firstExpression = firstExpression;
         this.operatorWithExpressionList = operatorWithExpressionList;
     }
 
@@ -29,8 +30,8 @@ public class EqualityExpression implements NonTerminatorType {
 
         parse:
         {
-            final var firstRelationalExpression = RelationalExpression.parse(lexer);
-            if (firstRelationalExpression.isEmpty()) break parse;
+            final var firstExpression = RelationalExpression.parse(lexer);
+            if (firstExpression.isEmpty()) break parse;
 
             final var operatorWithExpressionList = new ArrayList<Pair<EqualityTokenType, RelationalExpression>>();
             while (lexer.isMatchedTokenOf(EqualityTokenType.class)) {
@@ -43,7 +44,7 @@ public class EqualityExpression implements NonTerminatorType {
                 operatorWithExpressionList.add(new Pair<>(operator.get(), additionalRelationalExpression.get()));
             }
 
-            final var result = new EqualityExpression(firstRelationalExpression.get(), operatorWithExpressionList);
+            final var result = new EqualityExpression(firstExpression.get(), operatorWithExpressionList);
             Logger.info("Matched <EqualityExpression>: " + result.representation());
             return Optional.of(result);
         }
@@ -55,28 +56,24 @@ public class EqualityExpression implements NonTerminatorType {
 
     @Override
     public TokenType lastTerminator() {
-        if (operatorWithExpressionList.isEmpty()) return firstRelationalExpression.lastTerminator();
+        if (operatorWithExpressionList.isEmpty()) return firstExpression.lastTerminator();
         final var lastIndex = operatorWithExpressionList.size() - 1;
-        final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).e2();
+        final var lastNonTerminator = operatorWithExpressionList.get(lastIndex).second();
         return lastNonTerminator.lastTerminator();
     }
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstRelationalExpression.detailedRepresentation()).append(categoryCode()).append('\n');
-        operatorWithExpressionList.forEach(i -> stringBuilder.append(i.e1().detailedRepresentation()).append(i.e2()
-                .detailedRepresentation()).append(categoryCode()).append('\n'));
-        return stringBuilder.toString();
+        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                firstExpression, operatorWithExpressionList, categoryCode()
+        );
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(firstRelationalExpression.representation());
-        operatorWithExpressionList.forEach(i -> stringBuilder.append(' ').append(i.e1().representation()).append(' ')
-                .append(i.e2().representation()));
-        return stringBuilder.toString();
+        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                firstExpression, operatorWithExpressionList
+        );
     }
 
     @Override

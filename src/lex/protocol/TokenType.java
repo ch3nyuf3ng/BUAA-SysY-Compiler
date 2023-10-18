@@ -1,7 +1,7 @@
 package lex.protocol;
 
 import foundation.Position;
-import foundation.TreeNodeType;
+import foundation.protocol.TreeNodeType;
 
 public interface TokenType extends TreeNodeType {
     String categoryCode();

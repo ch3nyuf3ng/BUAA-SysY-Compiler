@@ -53,12 +53,18 @@ public class AssignmentStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return leftValue.detailedRepresentation() + assignToken.detailedRepresentation() + expression.detailedRepresentation() + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
+        return leftValue.detailedRepresentation()
+                + assignToken.detailedRepresentation()
+                + expression.detailedRepresentation()
+                + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
-        return leftValue.representation() + " " + assignToken.representation() + " " + expression.representation() + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
+        return leftValue.representation()
+                + " " + assignToken.representation()
+                + " " + expression.representation()
+                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override

@@ -241,21 +241,34 @@ public class Lexer implements LexerType {
             consumeCurrentCharacterAndUpdateCurrentPosition();
         }
         final var identifierName = identifierNameBuilder.toString();
-        return switch (identifierName) {
-            case "getint" -> new GetIntToken(beginningPosition());
-            case "main" -> new MainToken(beginningPosition());
-            case "printf" -> new PrintfToken(beginningPosition());
-            case "break" -> new BreakToken(beginningPosition());
-            case "continue" -> new ContinueToken(beginningPosition());
-            case "else" -> new ElseToken(beginningPosition());
-            case "for" -> new ForToken(beginningPosition());
-            case "if" -> new IfToken(beginningPosition());
-            case "return" -> new ReturnToken(beginningPosition());
-            case "const" -> new ConstToken(beginningPosition());
-            case "int" -> new IntToken(beginningPosition());
-            case "void" -> new VoidToken(beginningPosition());
-            default -> new IdentifierToken(identifierName, beginningPosition());
-        };
+        switch (identifierName) {
+            case "getint":
+                return new GetIntToken(beginningPosition());
+            case "main":
+                return new MainToken(beginningPosition());
+            case "printf":
+                return new PrintfToken(beginningPosition());
+            case "break":
+                return new BreakToken(beginningPosition());
+            case "continue":
+                return new ContinueToken(beginningPosition());
+            case "else":
+                return new ElseToken(beginningPosition());
+            case "for":
+                return new ForToken(beginningPosition());
+            case "if":
+                return new IfToken(beginningPosition());
+            case "return":
+                return new ReturnToken(beginningPosition());
+            case "const":
+                return new ConstToken(beginningPosition());
+            case "int":
+                return new IntToken(beginningPosition());
+            case "void":
+                return new VoidToken(beginningPosition());
+            default:
+                return new IdentifierToken(identifierName, beginningPosition());
+        }
     }
 
     private LiteralIntegerToken matchLiteralIntegerAndUpdateCurrentPosition() {
@@ -274,8 +287,7 @@ public class Lexer implements LexerType {
         }
         if (isSlash(currentCharacter())) {
             consumeCurrentCharacterAndUpdateCurrentPosition();
-            while (!isLF(currentCharacter()) && !isCR(currentCharacter(), followingCharacterOfCurrentOne()) && !isCRLF(
-                    currentCharacter(),
+            while (!isLF(currentCharacter()) && !isCR(currentCharacter(), followingCharacterOfCurrentOne()) && !isCRLF(currentCharacter(),
                     followingCharacterOfCurrentOne()
             )) {
                 commentBuilder.append(currentCharacter());

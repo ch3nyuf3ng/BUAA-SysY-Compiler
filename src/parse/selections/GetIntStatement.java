@@ -76,15 +76,21 @@ public class GetIntStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return leftValue.detailedRepresentation() + assignToken.detailedRepresentation()
-                + getIntToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
-                + rightParenthesisToken.detailedRepresentation() + semicolonToken.detailedRepresentation();
+        return leftValue.detailedRepresentation()
+                + assignToken.detailedRepresentation()
+                + getIntToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
+                + rightParenthesisToken.detailedRepresentation()
+                + semicolonToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return leftValue.representation() + " " + assignToken.representation() + " " + getIntToken.representation()
-                + leftParenthesisToken.representation() + rightParenthesisToken.representation()
+        return leftValue.representation() + " "
+                + assignToken.representation() + " "
+                + getIntToken.representation()
+                + leftParenthesisToken.representation()
+                + rightParenthesisToken.representation()
                 + semicolonToken.representation();
     }
 

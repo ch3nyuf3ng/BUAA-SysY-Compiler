@@ -94,7 +94,7 @@ public class VarDefinition implements NonTerminatorType {
         for (final var i : bracketWithConstExpressionList) {
             stringBuilder.append(i.leftBracketToken().detailedRepresentation()).append(i.entity()
                     .detailedRepresentation());
-            i.optionalRightBracketToken().ifPresent(x -> stringBuilder.append(x.detailedRepresentation()));
+            i.rightBracketToken().ifPresent(x -> stringBuilder.append(x.detailedRepresentation()));
         }
         assignToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
         varInitValue.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
@@ -108,7 +108,7 @@ public class VarDefinition implements NonTerminatorType {
         stringBuilder.append(identifierToken.representation());
         for (final var i : bracketWithConstExpressionList) {
             stringBuilder.append(i.leftBracketToken().representation()).append(i.entity().representation());
-            i.optionalRightBracketToken().ifPresent(x -> stringBuilder.append(x.representation()));
+            i.rightBracketToken().ifPresent(x -> stringBuilder.append(x.representation()));
         }
         assignToken.ifPresent(t -> stringBuilder.append(' ').append(t.representation()));
         varInitValue.ifPresent(t -> stringBuilder.append(' ').append(t.representation()));
@@ -128,7 +128,7 @@ public class VarDefinition implements NonTerminatorType {
         if (!bracketWithConstExpressionList.isEmpty()) {
             final var lastIndex = bracketWithConstExpressionList.size() - 1;
             final var lastItem = bracketWithConstExpressionList.get(lastIndex);
-            if (lastItem.optionalRightBracketToken().isPresent()) return lastItem.optionalRightBracketToken().get();
+            if (lastItem.rightBracketToken().isPresent()) return lastItem.rightBracketToken().get();
             return lastItem.entity().lastTerminator();
         }
         return identifierToken;

@@ -1,5 +1,6 @@
 package parse.nonterminator;
 
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.AssignToken;
@@ -51,7 +52,8 @@ public class ConstDefinition implements NonTerminatorType {
 
                 final var rightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
 
-                bracketWithConstExpressionList.add(new BracketWith<>(leftBracketToken.get(),
+                bracketWithConstExpressionList.add(new BracketWith<>(
+                        leftBracketToken.get(),
                         constExpression.get(),
                         rightBracketToken
                 ));
@@ -63,7 +65,8 @@ public class ConstDefinition implements NonTerminatorType {
             final var constInitValue = ConstInitValue.parse(lexer);
             if (constInitValue.isEmpty()) break parse;
 
-            final var result = new ConstDefinition(identifierToken.get(),
+            final var result = new ConstDefinition(
+                    identifierToken.get(),
                     bracketWithConstExpressionList,
                     assignToken.get(),
                     constInitValue.get()
@@ -79,28 +82,19 @@ public class ConstDefinition implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(identifierToken.detailedRepresentation());
-        for (final var item : bracketWithConstExpressionList) {
-            stringBuilder.append(item.leftBracketToken().detailedRepresentation()).append(item.entity()
-                    .detailedRepresentation());
-            item.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
-        }
-        stringBuilder.append(assignToken.detailedRepresentation()).append(initValue.detailedRepresentation()).append(
-                categoryCode()).append('\n');
-        return stringBuilder.toString();
+        return identifierToken.detailedRepresentation()
+                + RepresentationBuilder.bracketWithTDetailedRepresentation(bracketWithConstExpressionList)
+                + assignToken.detailedRepresentation()
+                + initValue.detailedRepresentation()
+                + categoryCode() + '\n';
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(identifierToken.representation());
-        for (final var item : bracketWithConstExpressionList) {
-            stringBuilder.append(item.leftBracketToken().representation()).append(item.entity().representation());
-            item.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.representation()));
-        }
-        stringBuilder.append(' ').append(assignToken.representation()).append(' ').append(initValue.representation());
-        return stringBuilder.toString();
+        return identifierToken.representation()
+                + RepresentationBuilder.bracketWithTRepresentation(bracketWithConstExpressionList) + ' '
+                + assignToken.representation() + ' '
+                + initValue.representation();
     }
 
     @Override

@@ -70,15 +70,18 @@ public class FuncInvocation implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return identifierToken.detailedRepresentation() + leftParenthesisToken.detailedRepresentation()
+        return identifierToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
                 + optionalFuncArgList.map(FuncArgList::detailedRepresentation).orElse("")
                 + rightParenthesisToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return identifierToken.representation() + leftParenthesisToken.representation() + optionalFuncArgList.map(
-                FuncArgList::representation).orElse("") + rightParenthesisToken.representation();
+        return identifierToken.representation()
+                + leftParenthesisToken.representation()
+                + optionalFuncArgList.map(FuncArgList::representation).orElse("")
+                + rightParenthesisToken.representation();
     }
 
     @Override

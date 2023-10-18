@@ -45,14 +45,14 @@ public class BreakStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return breakToken.detailedRepresentation() + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation)
-                .orElse("");
+        return breakToken.detailedRepresentation()
+                + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
-        return breakToken.representation() + " " + optionalSemicolonToken.map(SemicolonToken::representation)
-                .orElse("");
+        return breakToken.representation() + " "
+                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override

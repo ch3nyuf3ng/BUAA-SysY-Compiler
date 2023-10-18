@@ -64,7 +64,7 @@ public class LeftValue implements NonTerminatorType, SelectionType {
         if (bracketWithExpressionList.isEmpty()) return identifierToken;
         final var lastIndex = bracketWithExpressionList.size() - 1;
         final var lastItem = bracketWithExpressionList.get(lastIndex);
-        if (lastItem.optionalRightBracketToken().isPresent()) return lastItem.optionalRightBracketToken().get();
+        if (lastItem.rightBracketToken().isPresent()) return lastItem.rightBracketToken().get();
         return lastItem.entity().lastTerminator();
     }
 
@@ -75,7 +75,7 @@ public class LeftValue implements NonTerminatorType, SelectionType {
         for (final var i : bracketWithExpressionList) {
             stringBuilder.append(i.leftBracketToken().detailedRepresentation()).append(i.entity()
                     .detailedRepresentation());
-            i.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
+            i.rightBracketToken().ifPresent(e -> stringBuilder.append(e.detailedRepresentation()));
         }
         stringBuilder.append(categoryCode()).append('\n');
         return stringBuilder.toString();
@@ -87,7 +87,7 @@ public class LeftValue implements NonTerminatorType, SelectionType {
         stringBuilder.append(identifierToken.representation());
         for (final var i : bracketWithExpressionList) {
             stringBuilder.append(i.leftBracketToken().representation()).append(i.entity().representation());
-            i.optionalRightBracketToken().ifPresent(e -> stringBuilder.append(e.representation()));
+            i.rightBracketToken().ifPresent(e -> stringBuilder.append(e.representation()));
         }
         return stringBuilder.toString();
     }

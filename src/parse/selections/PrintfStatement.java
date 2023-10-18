@@ -1,11 +1,12 @@
 package parse.selections;
 
+import foundation.Pair;
+import foundation.RepresentationBuilder;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.*;
 import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
-import parse.substructures.CommaWith;
 import tests.foundations.Logger;
 
 import java.util.ArrayList;
@@ -16,24 +17,24 @@ public class PrintfStatement implements SelectionType {
     private final PrintfToken printfToken;
     private final LeftParenthesisToken leftParenthesisToken;
     private final LiteralFormatStringToken literalFormatStringToken;
-    private final List<CommaWith<Expression>> commaWithExpressionList;
+    private final List<Pair<CommaToken, Expression>> commaWithExpressionList;
     private final RightParenthesisToken rightParenthesisToken;
-    private final Optional<SemicolonToken> optionalSemicolonToken;
+    private final Optional<SemicolonToken> semicolonToken;
 
     private PrintfStatement(
             PrintfToken printfToken,
             LeftParenthesisToken leftParenthesisToken,
             LiteralFormatStringToken literalFormatStringToken,
-            List<CommaWith<Expression>> commaWithExpressionList,
+            List<Pair<CommaToken, Expression>> commaWithExpressionList,
             RightParenthesisToken rightParenthesisToken,
-            Optional<SemicolonToken> optionalSemicolonToken
+            Optional<SemicolonToken> semicolonToken
     ) {
         this.printfToken = printfToken;
         this.leftParenthesisToken = leftParenthesisToken;
         this.literalFormatStringToken = literalFormatStringToken;
         this.commaWithExpressionList = commaWithExpressionList;
         this.rightParenthesisToken = rightParenthesisToken;
-        this.optionalSemicolonToken = optionalSemicolonToken;
+        this.semicolonToken = semicolonToken;
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
@@ -55,7 +56,7 @@ public class PrintfStatement implements SelectionType {
             final var literalFormatStringToken = lexer.tryMatchAndConsumeTokenOf(LiteralFormatStringToken.class);
             if (literalFormatStringToken.isEmpty()) break parse;
 
-            final var commaWithExpressionList = new ArrayList<CommaWith<Expression>>();
+            final var commaWithExpressionList = new ArrayList<Pair<CommaToken, Expression>>();
             while (lexer.isMatchedTokenOf(CommaToken.class)) {
                 final var commaToken = lexer.tryMatchAndConsumeTokenOf(CommaToken.class);
                 if (commaToken.isEmpty()) break;
@@ -63,7 +64,7 @@ public class PrintfStatement implements SelectionType {
                 final var expression = Expression.parse(lexer);
                 if (expression.isEmpty()) break;
 
-                commaWithExpressionList.add(new CommaWith<>(commaToken.get(), expression.get()));
+                commaWithExpressionList.add(new Pair<>(commaToken.get(), expression.get()));
             }
 
             final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
@@ -72,12 +73,9 @@ public class PrintfStatement implements SelectionType {
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
             final var result = new PrintfStatement(
-                    printfToken.get(),
-                    leftParenthesisToken.get(),
-                    literalFormatStringToken.get(),
-                    commaWithExpressionList,
-                    rightParenthesisToken.get(),
-                    semicolonToken
+                    printfToken.get(), leftParenthesisToken.get(),
+                    literalFormatStringToken.get(), commaWithExpressionList,
+                    rightParenthesisToken.get(), semicolonToken
             );
             Logger.info("Matched <PrintfStatement>: " + result.representation());
             return Optional.of(result);
@@ -90,26 +88,24 @@ public class PrintfStatement implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(printfToken.detailedRepresentation()).append(leftParenthesisToken.detailedRepresentation())
-                .append(literalFormatStringToken.detailedRepresentation());
-        commaWithExpressionList.forEach(i -> stringBuilder.append(i.commaToken().detailedRepresentation())
-                .append(i.entity().detailedRepresentation()));
-        stringBuilder.append(rightParenthesisToken.detailedRepresentation());
-        optionalSemicolonToken.ifPresent(t -> stringBuilder.append(t.detailedRepresentation()));
-        return stringBuilder.toString();
+        return printfToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
+                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                        literalFormatStringToken, commaWithExpressionList
+                  )
+                + rightParenthesisToken.detailedRepresentation()
+                + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
-        final var stringBuilder = new StringBuilder();
-        stringBuilder.append(printfToken.representation()).append(leftParenthesisToken.representation()).append(
-                literalFormatStringToken.representation());
-        commaWithExpressionList.forEach(i -> stringBuilder.append(i.commaToken().representation()).append(' ')
-                .append(i.entity().representation()));
-        stringBuilder.append(rightParenthesisToken.representation());
-        optionalSemicolonToken.ifPresent(t -> stringBuilder.append(t.representation()));
-        return stringBuilder.toString();
+        return printfToken.representation()
+                + leftParenthesisToken.representation()
+                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                        literalFormatStringToken, commaWithExpressionList
+                  )
+                + rightParenthesisToken.representation()
+                + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override
