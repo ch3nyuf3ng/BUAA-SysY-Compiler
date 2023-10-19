@@ -7,7 +7,7 @@ import lex.token.LeftParenthesisToken;
 import lex.token.RightParenthesisToken;
 import parse.nonterminator.FuncArgList;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -15,18 +15,18 @@ import java.util.Optional;
 public class FuncInvocation implements SelectionType {
     final private IdentifierToken identifierToken;
     final private LeftParenthesisToken leftParenthesisToken;
-    final private Optional<FuncArgList> optionalFuncArgList;
+    final private Optional<FuncArgList> funcArgList;
     final private RightParenthesisToken rightParenthesisToken;
 
     public FuncInvocation(
             IdentifierToken identifierToken,
             LeftParenthesisToken leftParenthesisToken,
-            Optional<FuncArgList> optionalFuncArgList,
+            Optional<FuncArgList> funcArgList,
             RightParenthesisToken rightParenthesisToken
     ) {
         this.identifierToken = Objects.requireNonNull(identifierToken);
         this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
-        this.optionalFuncArgList = Objects.requireNonNull(optionalFuncArgList);
+        this.funcArgList = Objects.requireNonNull(funcArgList);
         this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
     }
 
@@ -73,7 +73,7 @@ public class FuncInvocation implements SelectionType {
     public String detailedRepresentation() {
         return identifierToken.detailedRepresentation()
                 + leftParenthesisToken.detailedRepresentation()
-                + optionalFuncArgList.map(FuncArgList::detailedRepresentation).orElse("")
+                + funcArgList.map(FuncArgList::detailedRepresentation).orElse("")
                 + rightParenthesisToken.detailedRepresentation();
     }
 
@@ -81,7 +81,7 @@ public class FuncInvocation implements SelectionType {
     public String representation() {
         return identifierToken.representation()
                 + leftParenthesisToken.representation()
-                + optionalFuncArgList.map(FuncArgList::representation).orElse("")
+                + funcArgList.map(FuncArgList::representation).orElse("")
                 + rightParenthesisToken.representation();
     }
 

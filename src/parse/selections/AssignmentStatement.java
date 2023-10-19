@@ -7,7 +7,7 @@ import lex.token.SemicolonToken;
 import parse.nonterminator.Expression;
 import parse.nonterminator.LeftValue;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -16,18 +16,18 @@ public class AssignmentStatement implements SelectionType {
     private final LeftValue leftValue;
     private final AssignToken assignToken;
     private final Expression expression;
-    private final Optional<SemicolonToken> optionalSemicolonToken;
+    private final Optional<SemicolonToken> semicolonToken;
 
     private AssignmentStatement(
             LeftValue leftValue,
             AssignToken assignToken,
             Expression expression,
-            Optional<SemicolonToken> optionalSemicolonToken
+            Optional<SemicolonToken> semicolonToken
     ) {
         this.leftValue = Objects.requireNonNull(leftValue);
         this.assignToken = Objects.requireNonNull(assignToken);
         this.expression = Objects.requireNonNull(expression);
-        this.optionalSemicolonToken = Objects.requireNonNull(optionalSemicolonToken);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     @SuppressWarnings("DuplicatedCode")
@@ -65,7 +65,7 @@ public class AssignmentStatement implements SelectionType {
         return leftValue.detailedRepresentation()
                 + assignToken.detailedRepresentation()
                 + expression.detailedRepresentation()
-                + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
+                + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
@@ -73,7 +73,7 @@ public class AssignmentStatement implements SelectionType {
         return leftValue.representation()
                 + " " + assignToken.representation()
                 + " " + expression.representation()
-                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
+                + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AssignmentStatement implements SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) return optionalSemicolonToken.get();
+        if (semicolonToken.isPresent()) return semicolonToken.get();
         return expression.lastTerminator();
     }
 }

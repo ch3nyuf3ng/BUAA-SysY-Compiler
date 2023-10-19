@@ -6,7 +6,7 @@ import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.LogicalOrToken;
 import parse.protocol.NonTerminatorType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -62,14 +62,14 @@ public class LogicalOrExpression implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
                 firstLogicalAndExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
                 firstLogicalAndExpression,
                 operatorWithExpressionList
         );

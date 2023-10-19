@@ -6,7 +6,7 @@ import lex.token.*;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import parse.selections.*;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;

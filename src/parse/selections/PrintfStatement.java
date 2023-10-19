@@ -7,7 +7,7 @@ import lex.protocol.TokenType;
 import lex.token.*;
 import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -88,7 +88,7 @@ public class PrintfStatement implements SelectionType {
     public String detailedRepresentation() {
         return printfToken.detailedRepresentation()
                 + leftParenthesisToken.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
                         literalFormatStringToken, commaWithExpressionList
                   )
                 + rightParenthesisToken.detailedRepresentation()
@@ -99,7 +99,7 @@ public class PrintfStatement implements SelectionType {
     public String representation() {
         return printfToken.representation()
                 + leftParenthesisToken.representation()
-                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
                         literalFormatStringToken, commaWithExpressionList
                   )
                 + rightParenthesisToken.representation()

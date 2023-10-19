@@ -11,7 +11,7 @@ import lex.token.LeftParenthesisToken;
 import lex.token.SemicolonToken;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -88,7 +88,7 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
     @Override
     public String detailedRepresentation() {
         return basicType.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
                         firstVarDefinition, additionalVariableDefinitionList
                   )
                 + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("")
@@ -98,7 +98,7 @@ public class VarDeclaration implements NonTerminatorType, SelectionType {
     @Override
     public String representation() {
         return basicType.representation() + ' '
-                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
                         firstVarDefinition, additionalVariableDefinitionList
                   )
                 + semicolonToken.map(SemicolonToken::representation).orElse("");

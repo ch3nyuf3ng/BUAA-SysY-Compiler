@@ -5,12 +5,12 @@ import foundation.ErrorHandler;
 import foundation.Position;
 import lex.nontoken.CommentMultiLine;
 import lex.nontoken.CommentSingleLine;
-import lex.nontoken.Unknown;
+import lex.nontoken.UnknownToken;
 import lex.protocol.LexerType;
 import lex.protocol.NonTokenType;
 import lex.protocol.TokenType;
 import lex.token.*;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -34,11 +34,9 @@ public class Lexer implements LexerType {
 
     @Override
     public Optional<TokenType> currentToken() {
-        if (cachedCurrentToken != null) {
-            return Optional.of(cachedCurrentToken); // The content in the cache is preferred.
-        } else if (isAtEndOfSourceCode()) {
-            cachedCurrentToken = null;
-        } else if (isLetter(currentCharacter()) || isUnderline(currentCharacter())) {
+        if (cachedCurrentToken != null) return Optional.of(cachedCurrentToken);
+        if (isAtEndOfSourceCode()) cachedCurrentToken = null;
+        else if (isLetter(currentCharacter()) || isUnderline(currentCharacter())) {
             cachedCurrentToken = matchNormalAndReservedIdentifierAndUpdateCurrentPosition();
         } else if (isDigit(currentCharacter())) {
             cachedCurrentToken = matchLiteralIntegerAndUpdateCurrentPosition();
@@ -119,7 +117,7 @@ public class Lexer implements LexerType {
             cachedCurrentToken = new RightBraceToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
         } else {
-            cachedCurrentToken = new Unknown(String.valueOf(currentCharacter()), beginningPosition());
+            cachedCurrentToken = new UnknownToken(String.valueOf(currentCharacter()), beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
         }
         return Optional.ofNullable(cachedCurrentToken);
@@ -157,9 +155,9 @@ public class Lexer implements LexerType {
     }
 
     @Override
-    public <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetClass) {
-        if (currentToken().filter(targetClass::isInstance).isPresent()) {
-            final var result = currentToken().map(targetClass::cast);
+    public <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetTokenClass) {
+        if (currentToken().filter(targetTokenClass::isInstance).isPresent()) {
+            final var result = currentToken().map(targetTokenClass::cast);
             consumeToken();
             return result;
         }
@@ -167,8 +165,8 @@ public class Lexer implements LexerType {
     }
 
     @Override
-    public <T> boolean isMatchedTokenOf(Class<T> targetClass) {
-        return currentToken().filter(targetClass::isInstance).isPresent();
+    public <T> boolean isMatchedTokenOf(Class<T> targetTokenClass) {
+        return currentToken().filter(targetTokenClass::isInstance).isPresent();
     }
 
     private boolean isAtEndOfSourceCode() {
@@ -268,14 +266,13 @@ public class Lexer implements LexerType {
 
     private TokenType matchCommentAndDivideOperatorAndUpdateCurrentPosition() {
         final var commentBuilder = new StringBuilder();
+        if (isSlash(currentCharacter())) consumeCurrentCharacterAndUpdateCurrentPosition();
         if (isSlash(currentCharacter())) {
             consumeCurrentCharacterAndUpdateCurrentPosition();
-        }
-        if (isSlash(currentCharacter())) {
-            consumeCurrentCharacterAndUpdateCurrentPosition();
-            while (!isLF(currentCharacter()) && !isCR(currentCharacter(), followingCharacterOfCurrentOne()) && !isCRLF(currentCharacter(),
-                    followingCharacterOfCurrentOne()
-            )) {
+            while (!isLF(currentCharacter())
+                    && !isCR(currentCharacter(), followingCharacterOfCurrentOne())
+                    && !isCRLF(currentCharacter(), followingCharacterOfCurrentOne())
+            ) {
                 commentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();
             }

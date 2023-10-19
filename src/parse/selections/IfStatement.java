@@ -9,7 +9,7 @@ import lex.token.RightParenthesisToken;
 import parse.nonterminator.Condition;
 import parse.nonterminator.Statement;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -20,8 +20,8 @@ public class IfStatement implements SelectionType {
     private final Condition condition;
     private final RightParenthesisToken rightParenthesisToken;
     private final Statement ifStatement;
-    private final Optional<ElseToken> optionalElseToken;
-    private final Optional<Statement> optionalElseStatement;
+    private final Optional<ElseToken> elseToken;
+    private final Optional<Statement> elseStatement;
 
     public IfStatement(
             IfToken ifToken,
@@ -29,16 +29,16 @@ public class IfStatement implements SelectionType {
             Condition condition,
             RightParenthesisToken rightParenthesisToken,
             Statement ifStatement,
-            Optional<ElseToken> optionalElseToken,
-            Optional<Statement> optionalElseStatement
+            Optional<ElseToken> elseToken,
+            Optional<Statement> elseStatement
     ) {
         this.ifToken = Objects.requireNonNull(ifToken);
         this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
         this.condition = Objects.requireNonNull(condition);
         this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
         this.ifStatement = Objects.requireNonNull(ifStatement);
-        this.optionalElseToken = Objects.requireNonNull(optionalElseToken);
-        this.optionalElseStatement = Objects.requireNonNull(optionalElseStatement);
+        this.elseToken = Objects.requireNonNull(elseToken);
+        this.elseStatement = Objects.requireNonNull(elseStatement);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
@@ -102,8 +102,8 @@ public class IfStatement implements SelectionType {
                 + condition.detailedRepresentation()
                 + rightParenthesisToken.detailedRepresentation()
                 + ifStatement.detailedRepresentation()
-                + optionalElseToken.map(ElseToken::detailedRepresentation).orElse("")
-                + optionalElseStatement.map(Statement::detailedRepresentation).orElse("");
+                + elseToken.map(ElseToken::detailedRepresentation).orElse("")
+                + elseStatement.map(Statement::detailedRepresentation).orElse("");
     }
 
     @Override
@@ -113,8 +113,8 @@ public class IfStatement implements SelectionType {
                 + condition.representation()
                 + rightParenthesisToken.representation() + " "
                 + ifStatement.representation() + " "
-                + optionalElseToken.map(ElseToken::representation).orElse("") + " "
-                + optionalElseStatement.map(Statement::representation).orElse("");
+                + elseToken.map(ElseToken::representation).orElse("") + " "
+                + elseStatement.map(Statement::representation).orElse("");
     }
 
     @Override

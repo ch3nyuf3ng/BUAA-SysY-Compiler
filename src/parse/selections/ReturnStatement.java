@@ -6,21 +6,21 @@ import lex.token.ReturnToken;
 import lex.token.SemicolonToken;
 import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
 
 public class ReturnStatement implements SelectionType {
     private final ReturnToken returnToken;
-    private final Optional<Expression> optionalExpression;
+    private final Optional<Expression> expression;
     private final SemicolonToken semicolonToken;
 
     public ReturnStatement(
-            ReturnToken returnToken, Optional<Expression> optionalExpression, SemicolonToken semicolonToken
+            ReturnToken returnToken, Optional<Expression> expression, SemicolonToken semicolonToken
     ) {
         this.returnToken = Objects.requireNonNull(returnToken);
-        this.optionalExpression = Objects.requireNonNull(optionalExpression);
+        this.expression = Objects.requireNonNull(expression);
         this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
@@ -55,13 +55,13 @@ public class ReturnStatement implements SelectionType {
     @Override
     public String detailedRepresentation() {
         return returnToken.detailedRepresentation()
-                + optionalExpression.map(Expression::detailedRepresentation).orElse("")
+                + expression.map(Expression::detailedRepresentation).orElse("")
                 + semicolonToken.detailedRepresentation();
     }
 
     @Override
     public String representation() {
-        return optionalExpression.map(expression -> returnToken.representation() + " "
+        return expression.map(expression -> returnToken.representation() + " "
                 + expression.representation()
                 + semicolonToken.representation()
                 ).orElse("return;");

@@ -5,7 +5,7 @@ import lex.protocol.TokenType;
 import lex.token.LeftBraceToken;
 import lex.token.RightBraceToken;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 

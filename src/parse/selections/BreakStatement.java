@@ -5,18 +5,18 @@ import lex.protocol.TokenType;
 import lex.token.BreakToken;
 import lex.token.SemicolonToken;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
 
 public class BreakStatement implements SelectionType {
     private final BreakToken breakToken;
-    private final Optional<SemicolonToken> optionalSemicolonToken;
+    private final Optional<SemicolonToken> semicolonToken;
 
-    public BreakStatement(BreakToken breakToken, Optional<SemicolonToken> optionalSemicolonToken) {
+    public BreakStatement(BreakToken breakToken, Optional<SemicolonToken> semicolonToken) {
         this.breakToken = Objects.requireNonNull(breakToken);
-        this.optionalSemicolonToken = Objects.requireNonNull(optionalSemicolonToken);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
@@ -47,13 +47,13 @@ public class BreakStatement implements SelectionType {
     @Override
     public String detailedRepresentation() {
         return breakToken.detailedRepresentation()
-                + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
+                + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
         return breakToken.representation()
-                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
+                + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override
@@ -63,7 +63,7 @@ public class BreakStatement implements SelectionType {
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) return optionalSemicolonToken.get();
+        if (semicolonToken.isPresent()) return semicolonToken.get();
         return breakToken;
     }
 }

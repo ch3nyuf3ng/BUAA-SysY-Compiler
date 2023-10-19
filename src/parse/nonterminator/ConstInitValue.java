@@ -7,7 +7,7 @@ import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import parse.selections.ArrayConstInitValue;
 import parse.selections.ScalarConstInitValue;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;

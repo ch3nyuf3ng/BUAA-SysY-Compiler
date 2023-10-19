@@ -28,4 +28,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 /output.txt
-/lexer.zip
+/releases/lexer.zip

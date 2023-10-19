@@ -1,4 +1,3 @@
 package lex.protocol;
 
-public interface RelaitionalOperatorTokenType extends TokenType {
-}
+public interface RelaitionalOperatorTokenType extends TokenType {}

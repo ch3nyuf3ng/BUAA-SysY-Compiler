@@ -1,4 +1,3 @@
 package lex.protocol;
 
-public interface AdditiveTokenType extends TokenType {
-}
+public interface AdditiveTokenType extends TokenType {}

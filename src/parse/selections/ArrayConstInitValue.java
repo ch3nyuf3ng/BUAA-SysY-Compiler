@@ -9,7 +9,7 @@ import lex.token.LeftBraceToken;
 import lex.token.RightBraceToken;
 import parse.nonterminator.ConstInitValue;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -76,7 +76,7 @@ public class ArrayConstInitValue implements SelectionType {
     @Override
     public String detailedRepresentation() {
         return firstInitValue.map(initValue -> leftBraceToken.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
                         initValue, otherInitValueList
                   )
                 + rightBraceToken.detailedRepresentation()
@@ -89,7 +89,7 @@ public class ArrayConstInitValue implements SelectionType {
     @Override
     public String representation() {
         return firstInitValue.map(initValue -> leftBraceToken.representation()
-                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation( initValue, otherInitValueList)
+                + RepresentationBuilder.binaryOperatorExpressionRepresentation( initValue, otherInitValueList)
                 + rightBraceToken.representation()
                 ).orElseGet(() ->
                 leftBraceToken.representation()

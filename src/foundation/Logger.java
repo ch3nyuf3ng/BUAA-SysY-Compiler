@@ -1,4 +1,4 @@
-package tests.foundations;
+package foundation;
 
 import foundation.IO;
 

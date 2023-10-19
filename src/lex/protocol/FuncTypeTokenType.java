@@ -1,4 +1,3 @@
 package lex.protocol;
 
-public interface FuncTypeTokenType extends TokenType {
-}
+public interface FuncTypeTokenType extends TokenType {}

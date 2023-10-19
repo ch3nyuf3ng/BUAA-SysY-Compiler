@@ -9,7 +9,7 @@ import lex.token.LeftBracketToken;
 import lex.token.RightBracketToken;
 import parse.protocol.NonTerminatorType;
 import parse.substructures.BracketWith;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -81,7 +81,7 @@ public class ConstDefinition implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         return identifierToken.detailedRepresentation()
-                + RepresentationBuilder.bracketWithTDetailedRepresentation(bracketWithConstExpressionList)
+                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithConstExpressionList)
                 + assignToken.detailedRepresentation()
                 + initValue.detailedRepresentation()
                 + categoryCode() + '\n';
@@ -90,7 +90,7 @@ public class ConstDefinition implements NonTerminatorType {
     @Override
     public String representation() {
         return identifierToken.representation()
-                + RepresentationBuilder.bracketWithTRepresentation(bracketWithConstExpressionList) + ' '
+                + RepresentationBuilder.bracketWithNonTerminatorRepresentation(bracketWithConstExpressionList) + ' '
                 + assignToken.representation() + ' '
                 + initValue.representation();
     }

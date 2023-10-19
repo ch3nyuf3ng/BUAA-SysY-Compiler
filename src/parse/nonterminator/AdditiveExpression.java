@@ -6,7 +6,7 @@ import lex.protocol.AdditiveTokenType;
 import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -54,14 +54,14 @@ public class AdditiveExpression implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
                 firstExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
                 firstExpression, operatorWithExpressionList
         );
     }

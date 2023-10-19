@@ -3,7 +3,7 @@ package lex.nontoken;
 import foundation.Position;
 import lex.protocol.NonTokenType;
 
-public record CommentSingleLine(String content, Position position) implements NonTokenType {
+public record UnknownToken(String rawRepresentation, Position position) implements NonTokenType {
     @Override
     public String detailedRepresentation() {
         return categoryCode() + " " + representation() + "\n";
@@ -11,12 +11,11 @@ public record CommentSingleLine(String content, Position position) implements No
 
     @Override
     public String categoryCode() {
-        //noinspection SpellCheckingInspection
-        return "SCOMMENT";
+        return "UNKNOWN";
     }
 
     @Override
     public String representation() {
-        return content;
+        return rawRepresentation;
     }
 }

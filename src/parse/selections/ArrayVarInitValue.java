@@ -9,7 +9,7 @@ import lex.token.LeftBraceToken;
 import lex.token.RightBraceToken;
 import parse.nonterminator.VarInitValue;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,18 +18,18 @@ import java.util.Optional;
 
 public class ArrayVarInitValue implements SelectionType {
     private final LeftBraceToken leftBraceToken;
-    private final Optional<VarInitValue> optionalFirstInitValue;
+    private final Optional<VarInitValue> firstInitValue;
     private final List<Pair<CommaToken, VarInitValue>> otherInitValueList;
     private final RightBraceToken rightBraceToken;
 
     public ArrayVarInitValue(
             LeftBraceToken leftBraceToken,
-            Optional<VarInitValue> optionalFirstInitValue,
+            Optional<VarInitValue> firstInitValue,
             List<Pair<CommaToken, VarInitValue>> otherInitValueList,
             RightBraceToken rightBraceToken
     ) {
         this.leftBraceToken = Objects.requireNonNull(leftBraceToken);
-        this.optionalFirstInitValue = Objects.requireNonNull(optionalFirstInitValue);
+        this.firstInitValue = Objects.requireNonNull(firstInitValue);
         this.otherInitValueList = Objects.requireNonNull(otherInitValueList);
         this.rightBraceToken = Objects.requireNonNull(rightBraceToken);
     }
@@ -74,8 +74,8 @@ public class ArrayVarInitValue implements SelectionType {
 
     @Override
     public String detailedRepresentation() {
-        return optionalFirstInitValue.map(varInitValue -> leftBraceToken.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+        return firstInitValue.map(varInitValue -> leftBraceToken.detailedRepresentation()
+                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
                         varInitValue, otherInitValueList) + rightBraceToken.detailedRepresentation()
                 ).orElseGet(() ->
                 leftBraceToken.detailedRepresentation()
@@ -84,8 +84,8 @@ public class ArrayVarInitValue implements SelectionType {
 
     @Override
     public String representation() {
-        return optionalFirstInitValue.map(varInitValue -> leftBraceToken.representation()
-                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+        return firstInitValue.map(varInitValue -> leftBraceToken.representation()
+                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
                         varInitValue, otherInitValueList) + rightBraceToken.representation()
                 ).orElseGet(() ->
                 leftBraceToken.representation()

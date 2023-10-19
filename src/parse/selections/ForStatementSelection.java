@@ -10,7 +10,7 @@ import parse.nonterminator.Condition;
 import parse.nonterminator.ForStatement;
 import parse.nonterminator.Statement;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -18,32 +18,32 @@ import java.util.Optional;
 public class ForStatementSelection implements SelectionType {
     private final ForToken forToken;
     private final LeftParenthesisToken leftParenthesisToken;
-    private final Optional<ForStatement> optionalInitStatement;
+    private final Optional<ForStatement> initStatement;
     private final SemicolonToken semicolonToken1;
-    private final Optional<Condition> optionalCondition;
+    private final Optional<Condition> condition;
     private final SemicolonToken semicolonToken2;
-    private final Optional<ForStatement> optionalIterateStatement;
+    private final Optional<ForStatement> iterateStatement;
     private final RightParenthesisToken rightParenthesisToken;
     private final Statement statement;
 
     public ForStatementSelection(
             ForToken forToken,
             LeftParenthesisToken leftParenthesisToken,
-            Optional<ForStatement> optionalInitStatement,
+            Optional<ForStatement> initStatement,
             SemicolonToken semicolonToken1,
-            Optional<Condition> optionalCondition,
+            Optional<Condition> condition,
             SemicolonToken semicolonToken2,
-            Optional<ForStatement> optionalIterateStatement,
+            Optional<ForStatement> iterateStatement,
             RightParenthesisToken rightParenthesisToken,
             Statement statement
     ) {
         this.forToken = Objects.requireNonNull(forToken);
         this.leftParenthesisToken = Objects.requireNonNull(leftParenthesisToken);
-        this.optionalInitStatement = Objects.requireNonNull(optionalInitStatement);
+        this.initStatement = Objects.requireNonNull(initStatement);
         this.semicolonToken1 = Objects.requireNonNull(semicolonToken1);
-        this.optionalCondition = Objects.requireNonNull(optionalCondition);
+        this.condition = Objects.requireNonNull(condition);
         this.semicolonToken2 = Objects.requireNonNull(semicolonToken2);
-        this.optionalIterateStatement = Objects.requireNonNull(optionalIterateStatement);
+        this.iterateStatement = Objects.requireNonNull(iterateStatement);
         this.rightParenthesisToken = Objects.requireNonNull(rightParenthesisToken);
         this.statement = Objects.requireNonNull(statement);
     }
@@ -102,11 +102,11 @@ public class ForStatementSelection implements SelectionType {
     public String detailedRepresentation() {
         return forToken.detailedRepresentation()
                 + leftParenthesisToken.detailedRepresentation()
-                + optionalInitStatement.map(ForStatement::detailedRepresentation).orElse("")
+                + initStatement.map(ForStatement::detailedRepresentation).orElse("")
                 + semicolonToken1.detailedRepresentation()
-                + optionalCondition.map(Condition::detailedRepresentation).orElse("")
+                + condition.map(Condition::detailedRepresentation).orElse("")
                 + semicolonToken2.detailedRepresentation()
-                + optionalIterateStatement.map(ForStatement::detailedRepresentation).orElse("")
+                + iterateStatement.map(ForStatement::detailedRepresentation).orElse("")
                 + rightParenthesisToken.detailedRepresentation()
                 + statement.detailedRepresentation();
     }
@@ -115,11 +115,11 @@ public class ForStatementSelection implements SelectionType {
     public String representation() {
         return forToken.representation() + " "
                 + leftParenthesisToken.representation()
-                + optionalInitStatement.map(ForStatement::representation).orElse("")
+                + initStatement.map(ForStatement::representation).orElse("")
                 + semicolonToken1.representation() + " "
-                + optionalCondition.map(Condition::representation).orElse("")
+                + condition.map(Condition::representation).orElse("")
                 + semicolonToken2.representation() + " "
-                + optionalIterateStatement.map(ForStatement::representation).orElse("")
+                + iterateStatement.map(ForStatement::representation).orElse("")
                 + rightParenthesisToken.representation() + " "
                 + statement.representation();
     }

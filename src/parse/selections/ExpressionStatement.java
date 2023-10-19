@@ -5,7 +5,7 @@ import lex.protocol.TokenType;
 import lex.token.*;
 import parse.nonterminator.Expression;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;

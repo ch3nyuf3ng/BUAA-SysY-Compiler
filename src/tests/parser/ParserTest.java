@@ -3,7 +3,7 @@ package tests.parser;
 import foundation.IO;
 import lex.Lexer;
 import parse.Parser;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.io.File;
 

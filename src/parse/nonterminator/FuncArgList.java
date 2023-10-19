@@ -6,7 +6,7 @@ import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import lex.token.CommaToken;
 import parse.protocol.NonTerminatorType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -59,14 +59,14 @@ public class FuncArgList implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
                 firstExpression, commaWithExpressionList
         ) + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
                 firstExpression, commaWithExpressionList
         );
     }

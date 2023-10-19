@@ -6,7 +6,7 @@ import lex.protocol.LexerType;
 import lex.protocol.RelaitionalOperatorTokenType;
 import lex.protocol.TokenType;
 import parse.protocol.NonTerminatorType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -60,14 +60,14 @@ public class RelationalExpression implements NonTerminatorType {
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
                 firstAdditiveExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
                 firstAdditiveExpression, operatorWithExpressionList
         );
     }

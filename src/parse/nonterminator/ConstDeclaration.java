@@ -9,7 +9,7 @@ import lex.token.ConstToken;
 import lex.token.SemicolonToken;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -86,7 +86,7 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
     public String detailedRepresentation() {
         return constToken.detailedRepresentation()
                 + basicType.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatedConcatenatedDetailedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
                         firstConstDefinition,
                         additionalConstantDefinitionList
                   )
@@ -98,7 +98,7 @@ public class ConstDeclaration implements NonTerminatorType, SelectionType {
     public String representation() {
         return constToken.representation() + ' '
                 + basicType.representation() + ' '
-                + RepresentationBuilder.binaryOperatedConcatenatedRepresentation(
+                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
                         firstConstDefinition,
                         additionalConstantDefinitionList
                   )

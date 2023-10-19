@@ -9,11 +9,10 @@ import parse.substructures.BracketWith;
 import java.util.List;
 
 public class RepresentationBuilder {
-    public static <
-            Operand1 extends DetailedRepresentable,
+    public static <Operand1 extends DetailedRepresentable,
             Operand2 extends DetailedRepresentable,
             Operator extends DetailedRepresentable>
-    String binaryOperatedConcatenatedDetailedRepresentation(
+    String binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList, String categoryCode
     ) {
         final var stringBuilder = new StringBuilder()
@@ -27,11 +26,10 @@ public class RepresentationBuilder {
         return stringBuilder.toString();
     }
 
-    public static <
-            Operand1 extends DetailedRepresentable,
+    public static <Operand1 extends DetailedRepresentable,
             Operand2 extends DetailedRepresentable,
             Operator extends DetailedRepresentable>
-    String binaryOperatedConcatenatedDetailedRepresentation(
+    String binaryOperatorExpressionDetailedRepresentation(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList
     ) {
         final var stringBuilder = new StringBuilder();
@@ -43,11 +41,10 @@ public class RepresentationBuilder {
         return stringBuilder.toString();
     }
 
-    public static <
-            Operand1 extends Representable,
+    public static <Operand1 extends Representable,
             Operand2 extends Representable,
             Operator extends Representable>
-    String binaryOperatedConcatenatedRepresentation(
+    String binaryOperatorExpressionRepresentation(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList
     ) {
         final var stringBuilder = new StringBuilder().append(firstOperand1.representation());
@@ -59,9 +56,8 @@ public class RepresentationBuilder {
         return stringBuilder.toString();
     }
 
-    public static <T extends DetailedRepresentable> String bracketWithTDetailedRepresentation(
-            List<BracketWith<T>> bracketWithTList
-    ) {
+    public static <NonTerminator extends DetailedRepresentable>
+    String bracketWithNonTerminatorDetailedRepresentation(List<BracketWith<NonTerminator>> bracketWithTList) {
         final var stringBuilder = new StringBuilder();
         bracketWithTList.forEach(t -> stringBuilder
                 .append(t.leftBracketToken().detailedRepresentation())
@@ -71,9 +67,8 @@ public class RepresentationBuilder {
         return stringBuilder.toString();
     }
 
-    public static <T extends Representable> String bracketWithTRepresentation(
-            List<BracketWith<T>> bracketWithTList
-    ) {
+    public static <NonTerminator extends Representable>
+    String bracketWithNonTerminatorRepresentation(List<BracketWith<NonTerminator>> bracketWithTList) {
         final var stringBuilder = new StringBuilder();
         bracketWithTList.forEach(t -> stringBuilder
                 .append(t.leftBracketToken().representation())

@@ -3,16 +3,17 @@ package parse;
 import lex.protocol.LexerType;
 import parse.nonterminator.CompileUnit;
 
+import java.util.Optional;
+
 
 public class Parser {
-    private final CompileUnit compileUnit;
+    private final Optional<CompileUnit> compileUnit;
 
     public Parser(LexerType lexer) {
-        this.compileUnit = CompileUnit.parse(lexer).orElse(null);
+        this.compileUnit = CompileUnit.parse(lexer);
     }
 
     public String customString() {
-        if (compileUnit != null) return compileUnit.detailedRepresentation();
-        return "Failed.";
+        return compileUnit.map(CompileUnit::detailedRepresentation).orElse("Failed.");
     }
 }

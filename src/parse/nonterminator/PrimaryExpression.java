@@ -8,7 +8,7 @@ import lex.token.LiteralIntegerToken;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import parse.selections.ParenthesisedPrimeExpression;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;

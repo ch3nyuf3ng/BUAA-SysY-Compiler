@@ -9,7 +9,7 @@ import lex.token.RightBracketToken;
 import parse.protocol.NonTerminatorType;
 import parse.protocol.SelectionType;
 import parse.substructures.BracketWith;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -69,14 +69,14 @@ public class LeftValue implements NonTerminatorType, SelectionType {
     @Override
     public String detailedRepresentation() {
         return identifierToken.detailedRepresentation()
-                + RepresentationBuilder.bracketWithTDetailedRepresentation(bracketWithExpressionList)
+                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithExpressionList)
                 + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
         return identifierToken.representation()
-                + RepresentationBuilder.bracketWithTRepresentation(bracketWithExpressionList);
+                + RepresentationBuilder.bracketWithNonTerminatorRepresentation(bracketWithExpressionList);
     }
 
     @Override

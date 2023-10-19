@@ -6,7 +6,7 @@ import lex.protocol.UnaryOperatorTokenType;
 import parse.nonterminator.UnaryExpression;
 import parse.nonterminator.UnaryOperator;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;

@@ -4,7 +4,7 @@ import lex.protocol.LexerType;
 import lex.protocol.TokenType;
 import parse.nonterminator.ConstExpression;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;

@@ -8,7 +8,7 @@ import lex.token.LeftBracketToken;
 import lex.token.RightBracketToken;
 import parse.protocol.NonTerminatorType;
 import parse.substructures.BracketWith;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.*;
 
@@ -100,7 +100,7 @@ public class FuncParam implements NonTerminatorType {
                 + identifierToken.detailedRepresentation()
                 + leftBracketToken.map(LeftBracketToken::detailedRepresentation).orElse("")
                 + rightBracketToken.map(RightBracketToken::detailedRepresentation).orElse("")
-                + RepresentationBuilder.bracketWithTDetailedRepresentation(bracketWithEntityList)
+                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithEntityList)
                 + categoryCode() + '\n';
     }
 
@@ -110,7 +110,7 @@ public class FuncParam implements NonTerminatorType {
                 + identifierToken.representation()
                 + leftBracketToken.map(LeftBracketToken::representation).orElse("")
                 + rightBracketToken.map(RightBracketToken::representation).orElse("")
-                + RepresentationBuilder.bracketWithTRepresentation(bracketWithEntityList);
+                + RepresentationBuilder.bracketWithNonTerminatorRepresentation(bracketWithEntityList);
     }
 
     @Override

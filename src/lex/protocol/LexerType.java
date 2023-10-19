@@ -11,7 +11,7 @@ public interface LexerType {
 
     void resetPosition(Position position);
 
-    <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetClass);
+    <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetTokenClass);
 
-    <T> boolean isMatchedTokenOf(Class<T> targetClass);
+    <T> boolean isMatchedTokenOf(Class<T> targetTokenClass);
 }

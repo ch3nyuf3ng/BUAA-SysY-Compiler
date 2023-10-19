@@ -5,18 +5,18 @@ import lex.protocol.TokenType;
 import lex.token.ContinueToken;
 import lex.token.SemicolonToken;
 import parse.protocol.SelectionType;
-import tests.foundations.Logger;
+import foundation.Logger;
 
 import java.util.Objects;
 import java.util.Optional;
 
 public class ContinueStatement implements SelectionType {
     private final ContinueToken continueToken;
-    private final Optional<SemicolonToken> optionalSemicolonToken;
+    private final Optional<SemicolonToken> semicolonToken;
 
-    public ContinueStatement(ContinueToken continueToken, Optional<SemicolonToken> optionalSemicolonToken) {
+    public ContinueStatement(ContinueToken continueToken, Optional<SemicolonToken> semicolonToken) {
         this.continueToken = Objects.requireNonNull(continueToken);
-        this.optionalSemicolonToken = Objects.requireNonNull(optionalSemicolonToken);
+        this.semicolonToken = Objects.requireNonNull(semicolonToken);
     }
 
     public static boolean isMatchedBeginningToken(LexerType lexer) {
@@ -47,7 +47,7 @@ public class ContinueStatement implements SelectionType {
     @Override
     public String detailedRepresentation() {
         return continueToken.detailedRepresentation()
-                + optionalSemicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
+                + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
@@ -58,12 +58,12 @@ public class ContinueStatement implements SelectionType {
     @Override
     public String representation() {
         return continueToken.representation()
-                + optionalSemicolonToken.map(SemicolonToken::representation).orElse("");
+                + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override
     public TokenType lastTerminator() {
-        if (optionalSemicolonToken.isPresent()) return optionalSemicolonToken.get();
+        if (semicolonToken.isPresent()) return semicolonToken.get();
         return continueToken;
     }
 }
