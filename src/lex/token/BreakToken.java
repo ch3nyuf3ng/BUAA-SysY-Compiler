@@ -5,9 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record BreakToken(Position position) implements TokenType {
+public record BreakToken(String rawRepresentation, Position position) implements TokenType {
+    public BreakToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
+    }
+
     public BreakToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+        this("break", position);
     }
 
     @Override
@@ -23,6 +28,6 @@ public record BreakToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "break";
+        return rawRepresentation();
     }
 }

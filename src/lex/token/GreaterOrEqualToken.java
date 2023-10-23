@@ -6,17 +6,16 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record GreaterOrEqualToken(Position position) implements TokenType, RelaitionalOperatorTokenType {
-    public GreaterOrEqualToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record GreaterOrEqualToken(
+        String rawRepresentation, Position position
+) implements TokenType, RelaitionalOperatorTokenType {
+    public GreaterOrEqualToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GreaterOrEqualToken that = (GreaterOrEqualToken) o;
-        return Objects.equals(position, that.position);
+    public GreaterOrEqualToken(Position position) {
+        this(">=", position);
     }
 
     @Override
@@ -31,6 +30,6 @@ public record GreaterOrEqualToken(Position position) implements TokenType, Relai
 
     @Override
     public String representation() {
-        return ">=";
+        return rawRepresentation();
     }
 }

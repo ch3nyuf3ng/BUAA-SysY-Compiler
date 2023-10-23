@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record AssignToken(Position position) implements TokenType {
-    public AssignToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record AssignToken(String rawRepresentation, Position position) implements TokenType {
+    public AssignToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AssignToken that = (AssignToken) o;
-        return Objects.equals(position, that.position);
+    public AssignToken(Position position) {
+        this("=", position);
     }
 
     @Override
@@ -30,6 +27,6 @@ public record AssignToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "=";
+        return rawRepresentation();
     }
 }

@@ -198,7 +198,7 @@ public class Lexer implements LexerType {
             currentColumnNumber = 1;
             currentLineNumber += 1;
             currentCharacterIndex += 2;
-        } else if (isLF(currentCharacter()) || isCR(currentCharacter(), followingCharacterOfCurrentOne())) {
+        } else if (isLF(currentCharacter()) || isCR(currentCharacter())) {
             currentColumnNumber = 1;
             currentLineNumber += 1;
             currentCharacterIndex += 1;
@@ -269,9 +269,8 @@ public class Lexer implements LexerType {
         if (isSlash(currentCharacter())) consumeCurrentCharacterAndUpdateCurrentPosition();
         if (isSlash(currentCharacter())) {
             consumeCurrentCharacterAndUpdateCurrentPosition();
-            while (!isLF(currentCharacter())
-                    && !isCR(currentCharacter(), followingCharacterOfCurrentOne())
-                    && !isCRLF(currentCharacter(), followingCharacterOfCurrentOne())
+            while (!isCRLF(currentCharacter(), followingCharacterOfCurrentOne())
+                    && !isCR(currentCharacter()) && !isLF(currentCharacter())
             ) {
                 commentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();

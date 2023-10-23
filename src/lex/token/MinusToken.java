@@ -7,17 +7,16 @@ import lex.protocol.UnaryOperatorTokenType;
 
 import java.util.Objects;
 
-public record MinusToken(Position position) implements TokenType, AdditiveTokenType, UnaryOperatorTokenType {
-    public MinusToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record MinusToken(
+        String rawRepresentation, Position position
+) implements TokenType, AdditiveTokenType, UnaryOperatorTokenType {
+    public MinusToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MinusToken that = (MinusToken) o;
-        return Objects.equals(position, that.position);
+    public MinusToken(Position position) {
+        this("-", position);
     }
 
     @Override
@@ -33,6 +32,6 @@ public record MinusToken(Position position) implements TokenType, AdditiveTokenT
 
     @Override
     public String representation() {
-        return "-";
+        return rawRepresentation();
     }
 }

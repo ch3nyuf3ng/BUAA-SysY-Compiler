@@ -6,9 +6,14 @@ import lex.protocol.TokenType;
 import java.util.Objects;
 
 public record IdentifierToken(String name, Position position) implements TokenType {
-    public IdentifierToken(String name, Position position) {
-        this.name = Objects.requireNonNull(name);
-        this.position = Objects.requireNonNull(position);
+    public IdentifierToken {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(position);
+    }
+
+    @Override
+    public String rawRepresentation() {
+        return name();
     }
 
     @Override
@@ -24,6 +29,6 @@ public record IdentifierToken(String name, Position position) implements TokenTy
 
     @Override
     public String representation() {
-        return name;
+        return rawRepresentation();
     }
 }

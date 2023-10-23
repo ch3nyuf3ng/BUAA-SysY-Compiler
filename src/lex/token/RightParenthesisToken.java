@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record RightParenthesisToken(Position position) implements TokenType {
-    public RightParenthesisToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record RightParenthesisToken(String rawRepresentation, Position position) implements TokenType {
+    public RightParenthesisToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RightParenthesisToken that = (RightParenthesisToken) o;
-        return Objects.equals(position, that.position);
+    public RightParenthesisToken(Position position) {
+        this(")", position);
     }
 
     @Override
@@ -31,6 +28,6 @@ public record RightParenthesisToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return ")";
+        return rawRepresentation();
     }
 }

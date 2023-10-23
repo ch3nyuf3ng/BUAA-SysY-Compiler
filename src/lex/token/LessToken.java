@@ -6,9 +6,16 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record LessToken(Position position) implements TokenType, RelaitionalOperatorTokenType {
+public record LessToken(
+        String rawRepresentation, Position position
+) implements TokenType, RelaitionalOperatorTokenType {
+    public LessToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
+    }
+
     public LessToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+        this("<", position);
     }
 
     @Override
@@ -23,6 +30,6 @@ public record LessToken(Position position) implements TokenType, RelaitionalOper
 
     @Override
     public String representation() {
-        return "<";
+        return rawRepresentation();
     }
 }

@@ -7,14 +7,17 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record IntToken(Position position) implements TokenType, FuncTypeTokenType, BasicTypeTokenType {
+public record IntToken(
+        String rawRepresentation,
+        Position position
+) implements TokenType, FuncTypeTokenType, BasicTypeTokenType {
+    public IntToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
+    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IntToken intToken = (IntToken) o;
-        return Objects.equals(position, intToken.position);
+    public IntToken(Position position) {
+        this("int", position);
     }
 
     @Override
@@ -30,6 +33,6 @@ public record IntToken(Position position) implements TokenType, FuncTypeTokenTyp
 
     @Override
     public String representation() {
-        return "int";
+        return rawRepresentation();
     }
 }

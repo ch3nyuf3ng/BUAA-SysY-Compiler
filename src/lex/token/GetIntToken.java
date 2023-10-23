@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record GetIntToken(Position position) implements TokenType {
-    public GetIntToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record GetIntToken(String rawRepresentation, Position position) implements TokenType {
+    public GetIntToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GetIntToken that = (GetIntToken) o;
-        return Objects.equals(position, that.position);
+    public GetIntToken(Position position) {
+        this("getint", position);
     }
 
     @Override
@@ -31,6 +28,6 @@ public record GetIntToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "getint";
+        return rawRepresentation();
     }
 }

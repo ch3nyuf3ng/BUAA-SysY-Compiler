@@ -6,17 +6,16 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record MultiplyToken(Position position) implements TokenType, MultiplicativeTokenType {
-    public MultiplyToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record MultiplyToken(
+        String rawRepresentation, Position position
+) implements TokenType, MultiplicativeTokenType {
+    public MultiplyToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MultiplyToken that = (MultiplyToken) o;
-        return Objects.equals(position, that.position);
+    public MultiplyToken(Position position) {
+        this("*", position);
     }
 
     @Override
@@ -32,6 +31,6 @@ public record MultiplyToken(Position position) implements TokenType, Multiplicat
 
     @Override
     public String representation() {
-        return "*";
+        return rawRepresentation();
     }
 }

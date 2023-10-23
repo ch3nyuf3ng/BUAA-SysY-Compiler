@@ -6,17 +6,16 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record LessOrEqualToken(Position position) implements TokenType, RelaitionalOperatorTokenType {
-    public LessOrEqualToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record LessOrEqualToken(
+        String rawRepresentation, Position position
+) implements TokenType, RelaitionalOperatorTokenType {
+    public LessOrEqualToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LessOrEqualToken that = (LessOrEqualToken) o;
-        return Objects.equals(position, that.position);
+    public LessOrEqualToken(Position position) {
+        this("<=", position);
     }
 
     @Override
@@ -31,6 +30,6 @@ public record LessOrEqualToken(Position position) implements TokenType, Relaitio
 
     @Override
     public String representation() {
-        return "<=";
+        return rawRepresentation();
     }
 }

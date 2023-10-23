@@ -6,17 +6,16 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record DivideToken(Position position) implements TokenType, MultiplicativeTokenType {
-    public DivideToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record DivideToken(String rawRepresentation, Position position)
+        implements TokenType, MultiplicativeTokenType
+{
+    public DivideToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DivideToken that = (DivideToken) o;
-        return Objects.equals(position, that.position);
+    public DivideToken(Position position) {
+        this("/", position);
     }
 
     @Override
@@ -31,6 +30,6 @@ public record DivideToken(Position position) implements TokenType, Multiplicativ
 
     @Override
     public String representation() {
-        return "/";
+        return rawRepresentation();
     }
 }

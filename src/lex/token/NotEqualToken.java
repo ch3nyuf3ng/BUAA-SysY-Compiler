@@ -5,17 +5,16 @@ import lex.protocol.EqualityTokenType;
 
 import java.util.Objects;
 
-public record NotEqualToken(Position position) implements EqualityTokenType {
-    public NotEqualToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record NotEqualToken(
+        String rawRepresentation, Position position
+) implements EqualityTokenType {
+    public NotEqualToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        NotEqualToken that = (NotEqualToken) o;
-        return Objects.equals(position, that.position);
+    public NotEqualToken(Position position) {
+        this("!=", position);
     }
 
     @Override
@@ -30,6 +29,6 @@ public record NotEqualToken(Position position) implements EqualityTokenType {
 
     @Override
     public String representation() {
-        return "!=";
+        return rawRepresentation();
     }
 }

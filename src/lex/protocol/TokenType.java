@@ -5,6 +5,7 @@ import foundation.protocol.Representable;
 import foundation.protocol.TreeNodeType;
 
 public interface TokenType extends TreeNodeType, Representable {
+    String rawRepresentation();
     String categoryCode();
 
     Position position();

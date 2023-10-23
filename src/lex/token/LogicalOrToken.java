@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record LogicalOrToken(Position position) implements TokenType {
-    public LogicalOrToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record LogicalOrToken(String rawRepresentation, Position position) implements TokenType {
+    public LogicalOrToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LogicalOrToken that = (LogicalOrToken) o;
-        return Objects.equals(position, that.position);
+    public LogicalOrToken(Position position) {
+        this("||", position);
     }
 
     @Override
@@ -30,6 +27,6 @@ public record LogicalOrToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "||";
+        return rawRepresentation();
     }
 }

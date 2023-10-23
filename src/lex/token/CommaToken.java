@@ -5,9 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record CommaToken(Position position) implements TokenType {
+public record CommaToken(String rawRepresentation, Position position) implements TokenType {
+    public CommaToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
+    }
+
     public CommaToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+        this(",", position);
     }
 
     @Override
@@ -22,6 +27,6 @@ public record CommaToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return ",";
+        return rawRepresentation();
     }
 }

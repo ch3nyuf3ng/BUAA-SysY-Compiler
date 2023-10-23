@@ -5,17 +5,16 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record LeftBraceToken(Position position) implements TokenType {
-    public LeftBraceToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record LeftBraceToken(
+        String rawRepresentation, Position position
+) implements TokenType {
+    public LeftBraceToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LeftBraceToken that = (LeftBraceToken) o;
-        return Objects.equals(position, that.position);
+    public LeftBraceToken(Position position) {
+        this("{", position);
     }
 
     @Override
@@ -30,6 +29,6 @@ public record LeftBraceToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "{";
+        return rawRepresentation();
     }
 }

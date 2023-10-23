@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record RightBracketToken(Position position) implements TokenType {
-    public RightBracketToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record RightBracketToken(String rawRepresentation, Position position) implements TokenType {
+    public RightBracketToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RightBracketToken that = (RightBracketToken) o;
-        return Objects.equals(position, that.position);
+    public RightBracketToken(Position position) {
+        this("]", position);
     }
 
     @Override
@@ -31,6 +28,6 @@ public record RightBracketToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "]";
+        return rawRepresentation();
     }
 }

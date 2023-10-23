@@ -29,8 +29,8 @@ public class CharacterUtils {
         return first == '\n';
     }
 
-    public static boolean isCR(char first, char second) {
-        return first == '\r' && second != '\n';
+    public static boolean isCR(char first) {
+        return first == '\r';
     }
 
     public static boolean isCRLF(char first, char second) {

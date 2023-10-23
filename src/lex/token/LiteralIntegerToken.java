@@ -6,9 +6,9 @@ import lex.protocol.TokenType;
 import java.util.Objects;
 
 public record LiteralIntegerToken(String rawRepresentation, Position position) implements TokenType {
-    public LiteralIntegerToken(String rawRepresentation, Position position) {
-        this.rawRepresentation = Objects.requireNonNull(rawRepresentation);
-        this.position = Objects.requireNonNull(position);
+    public LiteralIntegerToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
     @Override
@@ -24,7 +24,7 @@ public record LiteralIntegerToken(String rawRepresentation, Position position) i
 
     @Override
     public String representation() {
-        return rawRepresentation;
+        return rawRepresentation();
     }
 
 }

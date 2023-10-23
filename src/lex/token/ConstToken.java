@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record ConstToken(Position position) implements TokenType {
-    public ConstToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record ConstToken(String rawRepresentation, Position position) implements TokenType {
+    public ConstToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ConstToken that = (ConstToken) o;
-        return Objects.equals(position, that.position);
+    public ConstToken(Position position) {
+        this("const", position);
     }
 
     @Override
@@ -31,6 +28,6 @@ public record ConstToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "const";
+        return rawRepresentation();
     }
 }

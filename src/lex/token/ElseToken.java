@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record ElseToken(Position position) implements TokenType {
-    public ElseToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record ElseToken(String rawRepresentation, Position position) implements TokenType {
+    public ElseToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ElseToken elseToken = (ElseToken) o;
-        return Objects.equals(position, elseToken.position);
+    public ElseToken(Position position) {
+        this("else", position);
     }
 
     @Override
@@ -31,6 +28,6 @@ public record ElseToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "else";
+        return rawRepresentation();
     }
 }

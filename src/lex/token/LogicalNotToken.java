@@ -6,17 +6,16 @@ import lex.protocol.UnaryOperatorTokenType;
 
 import java.util.Objects;
 
-public record LogicalNotToken(Position position) implements TokenType, UnaryOperatorTokenType {
-    public LogicalNotToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record LogicalNotToken(
+        String rawRepresentation, Position position
+) implements TokenType, UnaryOperatorTokenType {
+    public LogicalNotToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LogicalNotToken that = (LogicalNotToken) o;
-        return Objects.equals(position, that.position);
+    public LogicalNotToken(Position position) {
+        this("!", position);
     }
 
     @Override
@@ -31,6 +30,6 @@ public record LogicalNotToken(Position position) implements TokenType, UnaryOper
 
     @Override
     public String representation() {
-        return "!";
+        return rawRepresentation();
     }
 }

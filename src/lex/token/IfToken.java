@@ -5,17 +5,14 @@ import lex.protocol.TokenType;
 
 import java.util.Objects;
 
-public record IfToken(Position position) implements TokenType {
-    public IfToken(Position position) {
-        this.position = Objects.requireNonNull(position);
+public record IfToken(String rawRepresentation, Position position) implements TokenType {
+    public IfToken {
+        Objects.requireNonNull(rawRepresentation);
+        Objects.requireNonNull(position);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IfToken ifToken = (IfToken) o;
-        return Objects.equals(position, ifToken.position);
+    public IfToken(Position position) {
+        this("if", position);
     }
 
     @Override
@@ -31,6 +28,6 @@ public record IfToken(Position position) implements TokenType {
 
     @Override
     public String representation() {
-        return "if";
+        return rawRepresentation();
     }
 }
