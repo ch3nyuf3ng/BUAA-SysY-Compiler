@@ -1,10 +1,9 @@
 package foundation;
 
-import foundation.protocol.DetailedRepresentable;
-import foundation.protocol.Representable;
-import lex.token.CommaToken;
-import lex.token.RightBracketToken;
-import parse.substructures.BracketWith;
+import foundation.protocols.DetailedRepresentable;
+import foundation.protocols.Representable;
+import terminators.CommaToken;
+import terminators.RightBracketToken;
 
 import java.util.List;
 

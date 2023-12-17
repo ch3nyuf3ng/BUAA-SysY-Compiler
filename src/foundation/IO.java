@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class IO {
-    public static String readStringFrom(String filePath) {
+    public static String simpleInput(String filePath) {
         try {
             return Files.readString(Path.of(filePath));
         } catch (IOException e) {
@@ -16,7 +16,11 @@ public class IO {
         }
     }
 
-    public static void outputResult(String folderPath, String filename, String content) {
+    public static String simpleInputFromFolder(String folderPath, String filename) {
+        return simpleInput(folderPath + File.separator + filename);
+    }
+
+    public static void simpleOutputToFolder(String folderPath, String filename, String content) {
         try {
             final File folder = new File(folderPath);
             if (!folder.exists() && !folder.mkdirs()) {
@@ -30,6 +34,16 @@ public class IO {
             bufferedWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void simpleOutput(String filename, String content) {
+        try {
+            FileWriter writer = new FileWriter(filename);
+            writer.write(content);
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException();
         }
     }
 }

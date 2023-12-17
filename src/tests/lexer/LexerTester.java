@@ -1,5 +1,6 @@
 package tests.lexer;
 
+import error.ErrorHandler;
 import lex.Lexer;
 import foundation.IO;
 
@@ -15,15 +16,16 @@ public class LexerTester {
     private final static String StandardOutputFolderPath = "stdoutput";
 
     public static void main(String[] args) {
-        for (int i = 1; i <= 1; i += 1) {
-            final var sourceCode = IO.readStringFrom(InputFilePath + File.separator + "testfile" + i + ".txt");
-            final var lexer = new Lexer(sourceCode);
+        for (int i = 1; i <= 15; i += 1) {
+            final var sourceCode = IO.simpleInput(InputFilePath + File.separator + "testfile" + i + ".txt");
+            final var errorHandler = new ErrorHandler(false);
+            final var lexer = new Lexer(errorHandler, sourceCode);
             final var resultBuilder = new StringBuilder();
             while (lexer.currentToken().isPresent()) {
                 resultBuilder.append(lexer.currentToken().get().detailedRepresentation());
                 lexer.consumeToken();
             }
-            IO.outputResult(MyOutputFolderPath, "output" + i + ".txt", resultBuilder.toString());
+            IO.simpleOutputToFolder(MyOutputFolderPath, "output" + i + ".txt", resultBuilder.toString());
             compareResults(i);
         }
     }

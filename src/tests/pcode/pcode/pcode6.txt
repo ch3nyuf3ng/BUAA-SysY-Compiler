@@ -1,0 +1,298 @@
+BLKS
+CAL #main_start
+JMP #main_end
+#de_start:
+RET 0
+#de_end:
+#keke_start:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 0
+LEA 0,4
+STO -1,0
+LIT 0
+RET 1
+#keke_end:
+#jian_start:
+MAZ 1
+MAZ 1
+MAZ 1
+RED
+LIT 0
+LEA 0,4
+STO -1,0
+RED
+LIT 0
+LEA 0,5
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 2
+LIT 0
+LEA 0,6
+STO -1,0
+LIT 0
+LOD 0,6
+RET 1
+#jian_end:
+#main_start:
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+LIT 1
+OPR 6
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+LIT 1
+OPR 7
+LIT 2
+MAZ 1
+MAZ 1
+LIT 0
+RED
+LIT 0
+LEA 0,17
+STO -1,0
+#loop[0]_start:
+LIT 0
+LOD 0,16
+LIT 0
+LOD 0,17
+OPR 13
+JPC #loop[0]_end
+BLKS
+LIT 0
+LOD 1,17
+LIT 0
+LOD 1,16
+OPR 5
+LIT 0
+LEA 1,18
+STO -1,0
+LIT 0
+LOD 1,18
+LIT 0
+OPR 11
+JPC #if[0]_else
+#if[0]_start:
+BLKS
+LIT 1
+LIT 0
+LEA 2,19
+STO -1,0
+WRTS "0\n"
+BLKE 0
+JMP #if[0]_end
+#if[0]_else:
+#if[0]_end:
+LIT 0
+LOD 1,16
+LIT 1
+OPR 1
+LIT 0
+LEA 1,16
+STO -1,0
+BLKE 0
+#loop[0]_iter:
+JMP #loop[0]_start
+#loop[0]_end:
+CAL #jian_start
+LIT 0
+LEA 0,6
+STO -1,0
+WRTS ""
+LIT 0
+LOD 0,6
+WRT
+WRTS "\n"
+LIT 0
+LOD 0,6
+LIT 1
+OPR 1
+LIT 0
+LEA 0,7
+STO -1,0
+LIT 0
+LOD 0,6
+LIT 2
+OPR 3
+LIT 0
+LEA 0,8
+STO -1,0
+LIT 0
+LOD 0,8
+LIT 5
+OPR 13
+JPC #if[1]_else
+#if[1]_start:
+BLKS
+LIT 0
+LOD 1,6
+LIT 2
+OPR 5
+LIT 0
+LEA 1,9
+STO -1,0
+BLKE 0
+JMP #if[1]_end
+#if[1]_else:
+LIT 0
+LOD 0,6
+LIT 2
+OPR 4
+LIT 0
+LEA 0,9
+STO -1,0
+#if[1]_end:
+LIT 0
+LOD 0,9
+LIT 3
+OPR 8
+OPR 12
+JPC #if[2]_else
+#if[2]_start:
+LIT 0
+LOD 0,10
+LIT 1
+OPR 1
+LIT 0
+LEA 0,10
+STO -1,0
+JMP #if[2]_end
+#if[2]_else:
+#if[2]_end:
+LIT 0
+LOD 0,16
+LIT 0
+LOD 0,12
+LIT 1
+OPR 1
+OPR 1
+LIT 0
+LEA 0,15
+STO -1,0
+BLKS
+BLKE 0
+#loop[1]_start:
+LIT 0
+JPC #loop[1]_end
+BLKS
+BLKE 0
+JMP #loop[1]_iter
+BLKE 0
+#loop[1]_iter:
+JMP #loop[1]_start
+#loop[1]_end:
+#loop[2]_start:
+LIT 1
+JPC #loop[2]_end
+BLKS
+BLKE 0
+JMP #loop[2]_end
+BLKE 0
+#loop[2]_iter:
+JMP #loop[2]_start
+#loop[2]_end:
+LIT 0
+LOD 0,6
+LIT 0
+LOD 0,7
+OPR 11
+JPC #if[3]_else
+#if[3]_start:
+BLKS
+LIT 0
+LOD 1,7
+LIT 0
+LOD 1,8
+OPR 16
+JPC #if[4]_else
+#if[4]_start:
+BLKS
+LIT 0
+LOD 2,8
+LIT 0
+LOD 2,9
+OPR 14
+JPC #if[5]_else
+#if[5]_start:
+BLKS
+LIT 0
+LOD 3,9
+LIT 0
+LOD 3,10
+OPR 12
+JPC #if[6]_else
+#if[6]_start:
+BLKS
+LIT 0
+LOD 4,6
+LIT 1
+OPR 15
+JPC #if[7]_else
+#if[7]_start:
+BLKS
+LIT 1
+LIT 0
+LEA 5,4
+STO -1,0
+BLKE 0
+JMP #if[7]_end
+#if[7]_else:
+#if[7]_end:
+BLKE 0
+JMP #if[6]_end
+#if[6]_else:
+#if[6]_end:
+BLKE 0
+JMP #if[5]_end
+#if[5]_else:
+#if[5]_end:
+BLKE 0
+JMP #if[4]_end
+#if[4]_else:
+#if[4]_end:
+BLKE 0
+JMP #if[3]_end
+#if[3]_else:
+#if[3]_end:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+CAL #keke_start
+INT -1
+WRTS ""
+LIT 0
+LOD 0,7
+WRT
+WRTS "\n"
+LIT 0
+LOD 0,8
+WRT
+WRTS "\n"
+LIT 0
+LOD 0,9
+WRT
+WRTS "\n"
+LIT 0
+LOD 0,10
+WRT
+WRTS "\n"
+WRTS "19182620\n"
+WRTS "19182620\n"
+WRTS "19182620\n"
+LIT 0
+RET 1
+#main_end:
+BLKE 0

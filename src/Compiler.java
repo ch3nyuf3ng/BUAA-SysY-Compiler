@@ -1,27 +1,35 @@
+import error.ErrorHandler;
+import error.FatalErrorException;
 import foundation.IO;
 import lex.Lexer;
 import parse.Parser;
+import pcode.Interpreter;
+import pcode.protocols.PcodeType;
+import symbol.SymbolManager;
+
+import java.util.ArrayList;
 
 public class Compiler {
-    @SuppressWarnings("SpellCheckingInspection")
-    private final static String InputFilePath = "testfile.txt";
-    private final static String OutputFilePath = "output.txt";
-
-    @SuppressWarnings("CommentedOutCode")
     public static void main(String[] args) {
-        final var sourceCode = IO.readStringFrom(InputFilePath);
-        final var lexer = new Lexer(sourceCode);
-/*
-        // Lexer Results.
-        final var result = new StringBuilder();
-        while (lexer.currentToken().isPresent()) {
-            result.append(lexer.currentToken().get().detailedRepresentation());
-            lexer.consumeToken();
+        final var sourceCode = IO.simpleInput("testfile.txt");
+        final var errorHandler = new ErrorHandler(false);
+        final var lexer = new Lexer(errorHandler, sourceCode);
+        final var parser = new Parser(errorHandler, lexer);
+        final var possibleCompileUnit = parser.parse();
+        if (possibleCompileUnit.isEmpty()) {
+            throw new RuntimeException("Parse failed.");
         }
-        IO.outputResult(".", OutputFilePath, result.toString());
-*/
-        // Parser Results
-        final var parser = new Parser(lexer);
-        IO.outputResult(".", OutputFilePath, parser.customString());
+        final var compileUnit = possibleCompileUnit.get();
+        final var symbolManager = new SymbolManager();
+        final var pcodeList = new ArrayList<PcodeType>();
+        try {
+            compileUnit.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
+        } catch (FatalErrorException e) {
+            throw new RuntimeException(e);
+        }
+        final var interpreter = new Interpreter(pcodeList, null);
+        interpreter.run();
+        final var result = interpreter.output();
+        IO.simpleOutput("pcoderesult.txt", result);
     }
 }

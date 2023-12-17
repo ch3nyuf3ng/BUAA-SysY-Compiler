@@ -1,23 +1,24 @@
 package lex;
 
-import error.IllegalCharacterError;
-import foundation.ErrorHandler;
-import foundation.Position;
-import lex.nontoken.CommentMultiLine;
-import lex.nontoken.CommentSingleLine;
-import lex.nontoken.UnknownToken;
-import lex.protocol.LexerType;
-import lex.protocol.NonTokenType;
-import lex.protocol.TokenType;
-import lex.token.*;
+import error.ErrorHandler;
+import error.errors.IllegalCharacterError;
 import foundation.Logger;
+import foundation.Position;
+import foundation.StringUtils;
+import terminators.*;
+import terminators.nontokens.CommentMultiLine;
+import terminators.nontokens.CommentSingleLine;
+import terminators.nontokens.UnknownToken;
+import terminators.protocols.NonTokenType;
+import terminators.protocols.TokenType;
 
 import java.util.Objects;
 import java.util.Optional;
 
 import static foundation.CharacterUtils.*;
 
-public class Lexer implements LexerType {
+public class Lexer {
+    private final ErrorHandler errorHandler;
     private final String sourceCode;
     private int beginningLineNumber;
     private int currentLineNumber;
@@ -27,42 +28,46 @@ public class Lexer implements LexerType {
     private int currentCharacterIndex;
     private TokenType cachedCurrentToken;
 
-    public Lexer(String sourceCode) {
+    public Lexer(ErrorHandler errorHandler, String sourceCode) {
+        this.errorHandler = errorHandler;
         this.sourceCode = Objects.requireNonNull(sourceCode);
         resetPosition(new Position(0, 1, 1));
     }
 
-    @Override
     public Optional<TokenType> currentToken() {
-        if (cachedCurrentToken != null) return Optional.of(cachedCurrentToken);
-        if (isAtEndOfSourceCode()) cachedCurrentToken = null;
-        else if (isLetter(currentCharacter()) || isUnderline(currentCharacter())) {
+        if (cachedCurrentToken != null) {
+            return Optional.of(cachedCurrentToken);
+        }
+
+        if (isAtEndOfSourceCode()) {
+            cachedCurrentToken = null;
+        } else if (isLetter(currentCharacter()) || isUnderline(currentCharacter())) {
             cachedCurrentToken = matchNormalAndReservedIdentifierAndUpdateCurrentPosition();
         } else if (isDigit(currentCharacter())) {
             cachedCurrentToken = matchLiteralIntegerAndUpdateCurrentPosition();
         } else if (currentCharacter() == '"') {
             cachedCurrentToken = matchLiteralFormatStringAndUpdateCurrentPosition();
         } else if (currentCharacter() == '!' && followingCharacterOfCurrentOne() == '=') {
-            cachedCurrentToken = new NotEqualToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition(2);
+            cachedCurrentToken = new NotEqualToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '!') {
-            cachedCurrentToken = new LogicalNotToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new LogicalNotToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '&' && followingCharacterOfCurrentOne() == '&') {
-            cachedCurrentToken = new LogicalAndToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition(2);
+            cachedCurrentToken = new LogicalAndToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '|' && followingCharacterOfCurrentOne() == '|') {
-            cachedCurrentToken = new LogicalOrToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition(2);
+            cachedCurrentToken = new LogicalOrToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '+') {
-            cachedCurrentToken = new PlusToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new PlusToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '-') {
-            cachedCurrentToken = new MinusToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new MinusToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '*') {
-            cachedCurrentToken = new MultiplyToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new MultiplyToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '/') {
             final var token = matchCommentAndDivideOperatorAndUpdateCurrentPosition();
             if (token instanceof NonTokenType) {
@@ -72,70 +77,78 @@ public class Lexer implements LexerType {
                 cachedCurrentToken = token;
             }
         } else if (currentCharacter() == '%') {
-            cachedCurrentToken = new ModulusToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new ModulusToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '<' && followingCharacterOfCurrentOne() == '=') {
-            cachedCurrentToken = new LessOrEqualToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition(2);
+            cachedCurrentToken = new LessOrEqualToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '<') {
-            cachedCurrentToken = new LessToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new LessToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '>' && followingCharacterOfCurrentOne() == '=') {
-            cachedCurrentToken = new GreaterOrEqualToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition(2);
+            cachedCurrentToken = new GreaterOrEqualToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '>') {
-            cachedCurrentToken = new GreaterToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new GreaterToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '=' && followingCharacterOfCurrentOne() == '=') {
-            cachedCurrentToken = new EqualToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition(2);
+            cachedCurrentToken = new EqualToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '=') {
-            cachedCurrentToken = new AssignToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new AssignToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == ';') {
-            cachedCurrentToken = new SemicolonToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new SemicolonToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == ',') {
-            cachedCurrentToken = new CommaToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new CommaToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '(') {
-            cachedCurrentToken = new LeftParenthesisToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new LeftParenthesisToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == ')') {
-            cachedCurrentToken = new RightParenthesisToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new RightParenthesisToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '[') {
-            cachedCurrentToken = new LeftBracketToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new LeftBracketToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == ']') {
-            cachedCurrentToken = new RightBracketToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new RightBracketToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '{') {
-            cachedCurrentToken = new LeftBraceToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new LeftBraceToken(beginningPosition(), currentPosition());
         } else if (currentCharacter() == '}') {
-            cachedCurrentToken = new RightBraceToken(beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new RightBraceToken(beginningPosition(), currentPosition());
         } else {
-            cachedCurrentToken = new UnknownToken(String.valueOf(currentCharacter()), beginningPosition());
             consumeCurrentCharacterAndUpdateCurrentPosition();
+            cachedCurrentToken = new UnknownToken(
+                    String.valueOf(currentCharacter()),
+                    beginningPosition(),
+                    currentPosition()
+            );
         }
+
         return Optional.ofNullable(cachedCurrentToken);
     }
 
     public void consumeToken() {
         if (cachedCurrentToken != null) {
-            Logger.info("Consumed Token: " + cachedCurrentToken.representation());
+            if (Logger.LogEnabled) {
+                Logger.debug("Consumed Token: " + cachedCurrentToken.representation(), Logger.Category.LEXER);
+            }
             cachedCurrentToken = null;
         }
         skipWhitespaceAndUpdateCurrentPosition();
         syncBeginningPositionWithCurrentPosition();
     }
 
-    @Override
     public void resetPosition(Position position) {
         if (beginningCharacterIndex != position.characterIndex()) {
-            Logger.info("Lexer rolling back...");
+            if (Logger.LogEnabled) {
+                Logger.debug("Lexer rolling back...", Logger.Category.LEXER);
+            }
         }
         beginningLineNumber = currentLineNumber = position.lineNumber();
         beginningColumnNumber = currentColumnNumber = position.columnNumber();
@@ -149,12 +162,10 @@ public class Lexer implements LexerType {
         return new Position(currentCharacterIndex, currentLineNumber, currentColumnNumber);
     }
 
-    @Override
     public Position beginningPosition() {
         return new Position(beginningCharacterIndex, beginningLineNumber, beginningColumnNumber);
     }
 
-    @Override
     public <T> Optional<T> tryMatchAndConsumeTokenOf(Class<T> targetTokenClass) {
         if (currentToken().filter(targetTokenClass::isInstance).isPresent()) {
             final var result = currentToken().map(targetTokenClass::cast);
@@ -164,9 +175,12 @@ public class Lexer implements LexerType {
         return Optional.empty();
     }
 
-    @Override
     public <T> boolean isMatchedTokenOf(Class<T> targetTokenClass) {
         return currentToken().filter(targetTokenClass::isInstance).isPresent();
+    }
+
+    public String getLineAt(Position position) {
+        return StringUtils.readLine(sourceCode, position);
     }
 
     private boolean isAtEndOfSourceCode() {
@@ -239,19 +253,19 @@ public class Lexer implements LexerType {
         }
         final var identifierName = identifierNameBuilder.toString();
         return switch (identifierName) {
-            case "getint" -> new GetIntToken(beginningPosition());
-            case "main" -> new MainToken(beginningPosition());
-            case "printf" -> new PrintfToken(beginningPosition());
-            case "break" -> new BreakToken(beginningPosition());
-            case "continue" -> new ContinueToken(beginningPosition());
-            case "else" -> new ElseToken(beginningPosition());
-            case "for" -> new ForToken(beginningPosition());
-            case "if" -> new IfToken(beginningPosition());
-            case "return" -> new ReturnToken(beginningPosition());
-            case "const" -> new ConstToken(beginningPosition());
-            case "int" -> new IntToken(beginningPosition());
-            case "void" -> new VoidToken(beginningPosition());
-            default -> new IdentifierToken(identifierName, beginningPosition());
+            case "getint" -> new GetIntToken(beginningPosition(), currentPosition());
+            case "main" -> new MainToken(beginningPosition(), currentPosition());
+            case "printf" -> new PrintfToken(beginningPosition(), currentPosition());
+            case "break" -> new BreakToken(beginningPosition(), currentPosition());
+            case "continue" -> new ContinueToken(beginningPosition(), currentPosition());
+            case "else" -> new ElseToken(beginningPosition(), currentPosition());
+            case "for" -> new ForToken(beginningPosition(), currentPosition());
+            case "if" -> new IfToken(beginningPosition(), currentPosition());
+            case "return" -> new ReturnToken(beginningPosition(), currentPosition());
+            case "const" -> new ConstToken(beginningPosition(), currentPosition());
+            case "int" -> new IntToken(beginningPosition(), currentPosition());
+            case "void" -> new VoidToken(beginningPosition(), currentPosition());
+            default -> new IdentifierToken(identifierName, beginningPosition(), currentPosition());
         };
     }
 
@@ -261,7 +275,7 @@ public class Lexer implements LexerType {
             unsignedIntegerBuilder.append(currentCharacter());
             consumeCurrentCharacterAndUpdateCurrentPosition();
         }
-        return new LiteralIntegerToken(unsignedIntegerBuilder.toString(), beginningPosition());
+        return new LiteralIntegerToken(unsignedIntegerBuilder.toString(), beginningPosition(), currentPosition());
     }
 
     private TokenType matchCommentAndDivideOperatorAndUpdateCurrentPosition() {
@@ -275,20 +289,20 @@ public class Lexer implements LexerType {
                 commentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();
             }
-            return new CommentSingleLine(commentBuilder.toString(), beginningPosition());
+            return new CommentSingleLine(commentBuilder.toString(), beginningPosition(), currentPosition());
         } else if (isStar(currentCharacter())) {
             consumeCurrentCharacterAndUpdateCurrentPosition();
             while (true) {
                 if (isStar(currentCharacter()) && isSlash(followingCharacterOfCurrentOne())) {
                     consumeCurrentCharacterAndUpdateCurrentPosition(2);
-                    return new CommentMultiLine(commentBuilder.toString(), beginningPosition());
+                    return new CommentMultiLine(commentBuilder.toString(), beginningPosition(), currentPosition());
                 } else {
                     commentBuilder.append(currentCharacter());
                     consumeCurrentCharacterAndUpdateCurrentPosition();
                 }
             }
         } else {
-            return new DivideToken(beginningPosition());
+            return new DivideToken(beginningPosition(), currentPosition());
         }
     }
 
@@ -300,15 +314,27 @@ public class Lexer implements LexerType {
         }
         while (currentCharacter() != '"') {
             if (currentCharacter() == '\\' && followingCharacterOfCurrentOne() != 'n') {
-                for (var i = 0; i < 2; ++i) {
-                    literalFormatStringContentBuilder.append(currentCharacter());
-                    consumeCurrentCharacterAndUpdateCurrentPosition();
-                }
-                ErrorHandler.outputSimpleError(new IllegalCharacterError(currentPosition()));
+                final var illegalCharacterBeginningPosition = currentPosition();
+                literalFormatStringContentBuilder
+                        .append(currentCharacter())
+                        .append(followingCharacterOfCurrentOne());
+                consumeCurrentCharacterAndUpdateCurrentPosition(2);
+                final var illegalCharacterError = new IllegalCharacterError(
+                        getLineAt(beginningPosition()),
+                        illegalCharacterBeginningPosition,
+                        currentPosition()
+                );
+                errorHandler.reportError(illegalCharacterError);
             } else if (!LiteralFormatStringToken.isLegalCharacter(currentCharacter())) {
+                final var illegalCharacterBeginningPosition = currentPosition();
                 literalFormatStringContentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();
-                ErrorHandler.outputSimpleError(new IllegalCharacterError(currentPosition()));
+                final var illegalCharacterError = new IllegalCharacterError(
+                        getLineAt(beginningPosition()),
+                        illegalCharacterBeginningPosition,
+                        currentPosition()
+                );
+                errorHandler.reportError(illegalCharacterError);
             } else {
                 literalFormatStringContentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();
@@ -319,6 +345,21 @@ public class Lexer implements LexerType {
         }
 
         final var literalFormatStringContent = literalFormatStringContentBuilder.toString();
-        return new LiteralFormatStringToken(literalFormatStringContent, beginningPosition());
+        return new LiteralFormatStringToken(literalFormatStringContent, beginningPosition(), currentPosition());
+    }
+
+    @Override
+    public String toString() {
+        return "Lexer{" +
+                "errorHandler=" + errorHandler +
+                ", sourceCode='" + sourceCode + '\'' +
+                ", beginningLineNumber=" + beginningLineNumber +
+                ", currentLineNumber=" + currentLineNumber +
+                ", beginningColumnNumber=" + beginningColumnNumber +
+                ", currentColumnNumber=" + currentColumnNumber +
+                ", beginningCharacterIndex=" + beginningCharacterIndex +
+                ", currentCharacterIndex=" + currentCharacterIndex +
+                ", cachedCurrentToken=" + cachedCurrentToken +
+                '}';
     }
 }

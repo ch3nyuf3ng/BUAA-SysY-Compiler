@@ -1,7 +1,9 @@
 package tests.parser;
 
+import error.ErrorHandler;
 import foundation.IO;
 import lex.Lexer;
+import nonterminators.CompileUnit;
 import parse.Parser;
 import foundation.Logger;
 
@@ -13,12 +15,14 @@ public class ParserTest {
 
     public static void main(String[] args) {
         for (int i = 1; i <= 15; i += 1) {
-            Logger.info("Test " + i);
-            final var sourceCode = IO.readStringFrom(InputFilePath + File.separator + "testfile" + i + ".txt");
-            final var lexer = new Lexer(sourceCode);
-            final var parser = new Parser(lexer);
-            final var result = parser.customString();
-            IO.outputResult(MyOutputFolderPath, "output" + i + ".txt", result);
+            Logger.debug("Test " + i, Logger.Category.TEST);
+            final var sourceCode = IO.simpleInput(InputFilePath + File.separator + "testfile" + i + ".txt");
+            final var errorHandler = new ErrorHandler(false);
+            final var lexer = new Lexer(errorHandler, sourceCode);
+            final var parser = new Parser(errorHandler, lexer);
+            final var compileUnit = parser.parse();
+            final var result = compileUnit.map(CompileUnit::detailedRepresentation).orElse("Failed.");
+            IO.simpleOutputToFolder(MyOutputFolderPath, "output" + i + ".txt", result);
             Logger.writeLogFile();
         }
     }

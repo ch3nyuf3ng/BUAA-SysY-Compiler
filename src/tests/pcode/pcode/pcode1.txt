@@ -1,0 +1,188 @@
+BLKS
+LIT 0
+LIT 1
+LIT 2
+LIT 3
+CAL #main_start
+JMP #main_end
+#fun_start:
+LIT 1
+BLKS
+LIT 1
+#loop[0]_start:
+LIT 0
+LOD 0,4
+LIT 1000
+OPR 13
+JPC #loop[0]_end
+BLKS
+LIT 0
+LOD 1,4
+LIT 2
+OPR 3
+LIT 0
+LEA 1,4
+STO -1,0
+BLKE 0
+#loop[0]_iter:
+JMP #loop[0]_start
+#loop[0]_end:
+WRTS "\n"
+LIT 0
+LOD 0,4
+WRT
+BLKE 0
+RET 0
+#fun_end:
+#main_start:
+WRTS "21373457\n"
+#and[0]_start:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 1,6
+OPR 1
+LIT 0
+LOD 1,7
+LIT 0
+LOD 1,5
+OPR 2
+OPR 11
+JPC #and[0]_shortcut
+LIT 1
+LIT 0
+LOD 1,5
+OPR 9
+JMP #and[0]_end
+#and[0]_shortcut:
+LIT 0
+#and[0]_end:
+JPC #if[0]_else
+#if[0]_start:
+BLKS
+#or[0]_start:
+LIT 0
+LOD 2,4
+JPT #or[0]_true
+LIT 0
+#and[1]_start:
+LIT 0
+LOD 2,4
+OPR 8
+JPC #and[1]_shortcut
+LIT 1
+LIT 0
+LOD 2,5
+LIT 1
+OPR 1
+LIT 0
+LOD 2,6
+OPR 1
+LIT 0
+OPR 13
+OPR 9
+JMP #and[1]_end
+#and[1]_shortcut:
+LIT 0
+#and[1]_end:
+OPR 10
+JMP #or[0]_end
+#or[0]_true:
+LIT 1
+#or[0]_end:
+JPC #if[1]_else
+#if[1]_start:
+BLKS
+WRTS "ERROR!\n"
+BLKE 0
+JMP #if[1]_end
+#if[1]_else:
+BLKS
+WRTS "And success!\n"
+BLKE 0
+#if[1]_end:
+BLKE 0
+JMP #if[0]_end
+#if[0]_else:
+#if[0]_end:
+#or[1]_start:
+LIT 0
+LOD 1,7
+LIT 3
+OPR 12
+JPT #or[1]_true
+LIT 0
+LIT 0
+LOD 1,6
+LIT 22
+OPR 2
+LIT 20
+OPR 7
+OPR 11
+OPR 10
+JMP #or[1]_end
+#or[1]_true:
+LIT 1
+#or[1]_end:
+JPC #if[2]_else
+#if[2]_start:
+BLKS
+#or[2]_start:
+LIT 0
+LOD 2,5
+LIT 2
+OPR 5
+LIT 3
+OPR 1
+LIT 4
+LIT 2
+OPR 3
+OPR 2
+LIT 0
+LOD 2,7
+OPR 1
+LIT 0
+LOD 2,6
+OPR 1
+LIT 100
+OPR 14
+JPT #or[2]_true
+LIT 0
+LIT 0
+LOD 2,5
+OPR 10
+JMP #or[2]_end
+#or[2]_true:
+LIT 1
+#or[2]_end:
+JPC #if[3]_else
+#if[3]_start:
+BLKS
+WRTS "Or pass!\n"
+BLKE 0
+JMP #if[3]_end
+#if[3]_else:
+#if[3]_end:
+BLKE 0
+JMP #if[2]_end
+#if[2]_else:
+#if[2]_end:
+WRTS "Test1 Success!"
+BLKS
+BLKE 0
+CAL #fun_start
+INT -1
+CAL #fun_start
+INT -1
+CAL #fun_start
+INT -1
+CAL #fun_start
+INT -1
+CAL #fun_start
+INT -1
+CAL #fun_start
+INT -1
+LIT 0
+RET 1
+#main_end:
+BLKE 0

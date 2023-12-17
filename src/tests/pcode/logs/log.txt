@@ -1,0 +1,6330 @@
+[DEBUG] Test 100
+[DEBUG] Matching <CompileUnit>
+[DEBUG] Matching <Declaration>.
+[DEBUG] Matching <ConstDeclaration>.
+[DEBUG] Consumed Token: const
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <ConstDefinition>.
+[DEBUG] Consumed Token: a
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <ConstInitValue>.
+[DEBUG] Matching <ScalarConstInitValue>.
+[DEBUG] Matching <ConstExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 1
+[DEBUG] Matched <Number>: 1
+[DEBUG] Matched <PrimaryExpression>: 1
+[DEBUG] Matched <UnaryExpression>: 1
+[DEBUG] Matched <MultiplicativeExpression>: 1
+[DEBUG] Matched <AdditiveExpression>: 1
+[DEBUG] Matched <ConstExpression>: 1
+[DEBUG] Matched <ScalarConstInitValue>: 1
+[DEBUG] Matched <ConstInitValue>: 1
+[DEBUG] Matched <ConstDefinition>.a = 1
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <ConstDefinition>.
+[DEBUG] Consumed Token: b
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <ConstInitValue>.
+[DEBUG] Matching <ScalarConstInitValue>.
+[DEBUG] Matching <ConstExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 2
+[DEBUG] Matched <Number>: 2
+[DEBUG] Matched <PrimaryExpression>: 2
+[DEBUG] Matched <UnaryExpression>: 2
+[DEBUG] Matched <MultiplicativeExpression>: 2
+[DEBUG] Matched <AdditiveExpression>: 2
+[DEBUG] Matched <ConstExpression>: 2
+[DEBUG] Matched <ScalarConstInitValue>: 2
+[DEBUG] Matched <ConstInitValue>: 2
+[DEBUG] Matched <ConstDefinition>.b = 2
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ConstDeclaration>: const int a = 1, b = 2;
+[DEBUG] Matched <Declaration>: const int a = 1, b = 2;
+[DEBUG] Matching <Declaration>.
+[DEBUG] Matching <ConstDeclaration>.
+[DEBUG] Consumed Token: const
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <ConstDefinition>.
+[DEBUG] Consumed Token: c
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <ConstInitValue>.
+[DEBUG] Matching <ScalarConstInitValue>.
+[DEBUG] Matching <ConstExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 3
+[DEBUG] Matched <Number>: 3
+[DEBUG] Matched <PrimaryExpression>: 3
+[DEBUG] Matched <UnaryExpression>: 3
+[DEBUG] Matched <MultiplicativeExpression>: 3
+[DEBUG] Matched <AdditiveExpression>: 3
+[DEBUG] Matched <ConstExpression>: 3
+[DEBUG] Matched <ScalarConstInitValue>: 3
+[DEBUG] Matched <ConstInitValue>: 3
+[DEBUG] Matched <ConstDefinition>.c = 3
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ConstDeclaration>: const int c = 3;
+[DEBUG] Matched <Declaration>: const int c = 3;
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: d
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: d
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: d
+[DEBUG] Matched <VarDefinition>: d
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: e
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <VarInitValue>.
+[DEBUG] Matching <ScalarVarInitValue>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 1
+[DEBUG] Matched <Number>: 1
+[DEBUG] Matched <PrimaryExpression>: 1
+[DEBUG] Matched <UnaryExpression>: 1
+[DEBUG] Matched <MultiplicativeExpression>: 1
+[DEBUG] Consumed Token: +
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 2
+[DEBUG] Matched <Number>: 2
+[DEBUG] Matched <PrimaryExpression>: 2
+[DEBUG] Matched <UnaryExpression>: 2
+[DEBUG] Matched <MultiplicativeExpression>: 2
+[DEBUG] Matched <AdditiveExpression>: 1 + 2
+[DEBUG] Matched <Expression>: 1 + 2
+[DEBUG] Matched <ScalarVarInitValue>: 1 + 2
+[DEBUG] Matched <VarInitValue>: 1 + 2
+[DEBUG] Matched <VarDefinition>: e = 1 + 2
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int d, e = 1 + 2;
+[DEBUG] Matched <Declaration>: int d, e = 1 + 2;
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: f
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: f
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: f
+[DEBUG] Matched <VarDefinition>: f
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int f;
+[DEBUG] Matched <Declaration>: int f;
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: double2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: double2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: double2
+[DEBUG] Matched <VarDefinition>: double2
+[DEBUG] Failed to match <VarDeclaration>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Failed to match <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: double2
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncDefinition>.
+[DEBUG] Matching <FuncType>.
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <FuncType>: int
+[DEBUG] Consumed Token: double2
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncParamList>.
+[DEBUG] Matching <FuncParam>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <FuncParamList>: int x1
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <UnaryOperatedExpression>.
+[DEBUG] Matching <UnaryOperator>.
+[DEBUG] Consumed Token: !
+[DEBUG] Matched <UnaryOperator>: !
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <UnaryOperatedExpression>: !x1
+[DEBUG] Matched <UnaryExpression>: !x1
+[DEBUG] Matched <MultiplicativeExpression>: !x1
+[DEBUG] Matched <AdditiveExpression>: !x1
+[DEBUG] Matched <RelationalExpression>: !x1
+[DEBUG] Matched <EqualityExpression>: !x1
+[DEBUG] Matched <LogicalAndExpression>: !x1
+[DEBUG] Matched <LogicalOrExpression>: !x1
+[DEBUG] Matched <Condition>: !x1
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 2
+[DEBUG] Matched <Number>: 2
+[DEBUG] Matched <PrimaryExpression>: 2
+[DEBUG] Matched <UnaryExpression>: 2
+[DEBUG] Consumed Token: *
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: 2 * x1
+[DEBUG] Matched <AdditiveExpression>: 2 * x1
+[DEBUG] Matched <Expression>: 2 * x1
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return 2 * x1;
+[DEBUG] Matched <Statement>: return 2 * x1;
+[DEBUG] Matched <BlockItem>:
+return 2 * x1;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    return 2 * x1;
+}
+[DEBUG] Matched <Statement>:
+{
+    return 2 * x1;
+}
+[DEBUG] Consumed Token: else
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <ParenthesisedPrimeExpression>.
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 2
+[DEBUG] Matched <Number>: 2
+[DEBUG] Matched <PrimaryExpression>: 2
+[DEBUG] Matched <UnaryExpression>: 2
+[DEBUG] Consumed Token: *
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <UnaryOperatedExpression>.
+[DEBUG] Matching <UnaryOperator>.
+[DEBUG] Consumed Token: -
+[DEBUG] Matched <UnaryOperator>: -
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <UnaryOperatedExpression>: -x1
+[DEBUG] Matched <UnaryExpression>: -x1
+[DEBUG] Matched <MultiplicativeExpression>: 2 * -x1
+[DEBUG] Matched <AdditiveExpression>: 2 * -x1
+[DEBUG] Matched <Expression>: 2 * -x1
+[DEBUG] Consumed Token: )
+[DEBUG] Matched <ParenthesisedPrimeExpression>: (2 * -x1)
+[DEBUG] Matched <PrimaryExpression>: (2 * -x1)
+[DEBUG] Matched <UnaryExpression>: (2 * -x1)
+[DEBUG] Matched <MultiplicativeExpression>: (2 * -x1)
+[DEBUG] Matched <AdditiveExpression>: (2 * -x1)
+[DEBUG] Matched <Expression>: (2 * -x1)
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return (2 * -x1);
+[DEBUG] Matched <Statement>: return (2 * -x1);
+[DEBUG] Matched <BlockItem>:
+return (2 * -x1);
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    return (2 * -x1);
+}
+[DEBUG] Matched <Statement>:
+{
+    return (2 * -x1);
+}
+[DEBUG] Matched <IfStatement>:
+if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Matched <Statement>:
+if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Matched <BlockItem>:
+if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return 0;
+[DEBUG] Matched <Statement>: return 0;
+[DEBUG] Matched <BlockItem>:
+return 0;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    if (!x1) {
+        return 2 * x1;
+    } else {
+        return (2 * -x1);
+    }
+    return 0;
+}
+[DEBUG] Matched <FuncDefinition>:
+int double2(int x1) {
+    if (!x1) {
+        return 2 * x1;
+    } else {
+        return (2 * -x1);
+    }
+    return 0;
+}
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: add
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncDefinition>.
+[DEBUG] Matching <FuncType>.
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <FuncType>: int
+[DEBUG] Consumed Token: add
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncParamList>.
+[DEBUG] Matching <FuncParam>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Consumed Token: x1
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <FuncParam>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <FuncParamList>: int x1, int x2
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <VarInitValue>.
+[DEBUG] Matching <ScalarVarInitValue>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Matched <ScalarVarInitValue>: 0
+[DEBUG] Matched <VarInitValue>: 0
+[DEBUG] Matched <VarDefinition>: sum = 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int sum = 0;
+[DEBUG] Matched <Declaration>: int sum = 0;
+[DEBUG] Matched <BlockItem>:
+int sum = 0;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Matched <PrimaryExpression>: sum
+[DEBUG] Matched <UnaryExpression>: sum
+[DEBUG] Matched <MultiplicativeExpression>: sum
+[DEBUG] Matched <AdditiveExpression>: sum
+[DEBUG] Matched <Expression>: sum
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Consumed Token: =
+[DEBUG] Failed to match <GetIntStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <AssignmentStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Consumed Token: +
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Matched <PrimaryExpression>: x2
+[DEBUG] Matched <UnaryExpression>: x2
+[DEBUG] Matched <MultiplicativeExpression>: x2
+[DEBUG] Matched <AdditiveExpression>: x1 + x2
+[DEBUG] Matched <Expression>: x1 + x2
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <AssignmentStatement>: sum = x1 + x2;
+[DEBUG] Matched <Statement>: sum = x1 + x2;
+[DEBUG] Matched <BlockItem>:
+sum = x1 + x2;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Matched <PrimaryExpression>: sum
+[DEBUG] Matched <UnaryExpression>: sum
+[DEBUG] Matched <MultiplicativeExpression>: sum
+[DEBUG] Matched <AdditiveExpression>: sum
+[DEBUG] Matched <Expression>: sum
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return sum;
+[DEBUG] Matched <Statement>: return sum;
+[DEBUG] Matched <BlockItem>:
+return sum;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    int sum = 0;
+    sum = x1 + x2;
+    return sum;
+}
+[DEBUG] Matched <FuncDefinition>:
+int add(int x1, int x2) {
+    int sum = 0;
+    sum = x1 + x2;
+    return sum;
+}
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sub
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncDefinition>.
+[DEBUG] Matching <FuncType>.
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <FuncType>: int
+[DEBUG] Consumed Token: sub
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncParamList>.
+[DEBUG] Matching <FuncParam>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Consumed Token: x1
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <FuncParam>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <FuncParamList>: int x1, int x2
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <VarInitValue>.
+[DEBUG] Matching <ScalarVarInitValue>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Matched <ScalarVarInitValue>: 0
+[DEBUG] Matched <VarInitValue>: 0
+[DEBUG] Matched <VarDefinition>: sum = 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int sum = 0;
+[DEBUG] Matched <Declaration>: int sum = 0;
+[DEBUG] Matched <BlockItem>:
+int sum = 0;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Matched <PrimaryExpression>: sum
+[DEBUG] Matched <UnaryExpression>: sum
+[DEBUG] Matched <MultiplicativeExpression>: sum
+[DEBUG] Matched <AdditiveExpression>: sum
+[DEBUG] Matched <Expression>: sum
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Consumed Token: =
+[DEBUG] Failed to match <GetIntStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <AssignmentStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Consumed Token: -
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Matched <PrimaryExpression>: x2
+[DEBUG] Matched <UnaryExpression>: x2
+[DEBUG] Matched <MultiplicativeExpression>: x2
+[DEBUG] Matched <AdditiveExpression>: x1 - x2
+[DEBUG] Matched <Expression>: x1 - x2
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <AssignmentStatement>: sum = x1 - x2;
+[DEBUG] Matched <Statement>: sum = x1 - x2;
+[DEBUG] Matched <BlockItem>:
+sum = x1 - x2;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Matched <PrimaryExpression>: sum
+[DEBUG] Matched <UnaryExpression>: sum
+[DEBUG] Matched <MultiplicativeExpression>: sum
+[DEBUG] Matched <AdditiveExpression>: sum
+[DEBUG] Consumed Token: >=
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <RelationalExpression>: sum >= 0
+[DEBUG] Matched <EqualityExpression>: sum >= 0
+[DEBUG] Matched <LogicalAndExpression>: sum >= 0
+[DEBUG] Matched <LogicalOrExpression>: sum >= 0
+[DEBUG] Matched <Condition>: sum >= 0
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Matched <PrimaryExpression>: sum
+[DEBUG] Matched <UnaryExpression>: sum
+[DEBUG] Matched <MultiplicativeExpression>: sum
+[DEBUG] Matched <AdditiveExpression>: sum
+[DEBUG] Matched <Expression>: sum
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return sum;
+[DEBUG] Matched <Statement>: return sum;
+[DEBUG] Matched <BlockItem>:
+return sum;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    return sum;
+}
+[DEBUG] Matched <Statement>:
+{
+    return sum;
+}
+[DEBUG] Matched <IfStatement>:
+if (sum >= 0) {
+    return sum;
+}  
+[DEBUG] Matched <Statement>:
+if (sum >= 0) {
+    return sum;
+}  
+[DEBUG] Matched <BlockItem>:
+if (sum >= 0) {
+    return sum;
+}  
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: sum
+[DEBUG] Matched <LeftValue>: sum
+[DEBUG] Matched <PrimaryExpression>: sum
+[DEBUG] Matched <UnaryExpression>: sum
+[DEBUG] Matched <MultiplicativeExpression>: sum
+[DEBUG] Matched <AdditiveExpression>: sum
+[DEBUG] Consumed Token: <=
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <RelationalExpression>: sum <= 0
+[DEBUG] Matched <EqualityExpression>: sum <= 0
+[DEBUG] Matched <LogicalAndExpression>: sum <= 0
+[DEBUG] Matched <LogicalOrExpression>: sum <= 0
+[DEBUG] Matched <Condition>: sum <= 0
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return 0;
+[DEBUG] Matched <Statement>: return 0;
+[DEBUG] Matched <BlockItem>:
+return 0;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    return 0;
+}
+[DEBUG] Matched <Statement>:
+{
+    return 0;
+}
+[DEBUG] Matched <IfStatement>:
+if (sum <= 0) {
+    return 0;
+}  
+[DEBUG] Matched <Statement>:
+if (sum <= 0) {
+    return 0;
+}  
+[DEBUG] Matched <BlockItem>:
+if (sum <= 0) {
+    return 0;
+}  
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return 0;
+[DEBUG] Matched <Statement>: return 0;
+[DEBUG] Matched <BlockItem>:
+return 0;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    int sum = 0;
+    sum = x1 - x2;
+    if (sum >= 0) {
+        return sum;
+    }  
+    if (sum <= 0) {
+        return 0;
+    }  
+    return 0;
+}
+[DEBUG] Matched <FuncDefinition>:
+int sub(int x1, int x2) {
+    int sum = 0;
+    sum = x1 - x2;
+    if (sum >= 0) {
+        return sum;
+    }  
+    if (sum <= 0) {
+        return 0;
+    }  
+    return 0;
+}
+[DEBUG] Consumed Token: void
+[DEBUG] Consumed Token: print_none
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncDefinition>.
+[DEBUG] Matching <FuncType>.
+[DEBUG] Consumed Token: void
+[DEBUG] Matched <FuncType>: void
+[DEBUG] Consumed Token: print_none
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncParamList>.
+[DEBUG] Matching <FuncParam>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Failed to match <BasicType>.
+[DEBUG] Failed to match <FuncParam>.
+[DEBUG] Failed to match <FuncParamList>.
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Failed to match <UnaryExpression>.
+[DEBUG] Failed to match <MultiplicativeExpression>.
+[DEBUG] Failed to match <AdditiveExpression>.
+[DEBUG] Failed to match <Expression>.
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return;
+[DEBUG] Matched <Statement>: return;
+[DEBUG] Matched <BlockItem>:
+return;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    return;
+}
+[DEBUG] Matched <FuncDefinition>:
+void print_none() {
+    return;
+}
+[DEBUG] Consumed Token: int
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <MainFuncDefinition>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: main
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: x
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <VarInitValue>.
+[DEBUG] Matching <ScalarVarInitValue>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Matched <ScalarVarInitValue>: 0
+[DEBUG] Matched <VarInitValue>: 0
+[DEBUG] Matched <VarDefinition>: x = 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int x = 0;
+[DEBUG] Matched <Declaration>: int x = 0;
+[DEBUG] Matched <BlockItem>:
+int x = 0;
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Matched <VarDefinition>: flag
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int flag;
+[DEBUG] Matched <Declaration>: int flag;
+[DEBUG] Matched <BlockItem>:
+int flag;
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <VarDefinition>: temp
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int temp;
+[DEBUG] Matched <Declaration>: int temp;
+[DEBUG] Matched <BlockItem>:
+int temp;
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <Declaration>.
+[DEBUG] Consumed Token: int
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <VarDeclaration>.
+[DEBUG] Matching <BasicType>
+[DEBUG] Consumed Token: int
+[DEBUG] Matched <BasicType>: int
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <VarDefinition>: x1
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <VarDefinition>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <VarDefinition>: x2
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <VarDeclaration>: int x1, x2;
+[DEBUG] Matched <Declaration>: int x1, x2;
+[DEBUG] Matched <BlockItem>:
+int x1, x2;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ForStatementSelection>.
+[DEBUG] Consumed Token: for
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <ForStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Failed to match <LeftValue>.
+[DEBUG] Failed to match <ForStatement>.
+[DEBUG] Consumed Token: ;
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x
+[DEBUG] Matched <LeftValue>: x
+[DEBUG] Matched <PrimaryExpression>: x
+[DEBUG] Matched <UnaryExpression>: x
+[DEBUG] Matched <MultiplicativeExpression>: x
+[DEBUG] Matched <AdditiveExpression>: x
+[DEBUG] Consumed Token: <
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 4
+[DEBUG] Matched <Number>: 4
+[DEBUG] Matched <PrimaryExpression>: 4
+[DEBUG] Matched <UnaryExpression>: 4
+[DEBUG] Matched <MultiplicativeExpression>: 4
+[DEBUG] Matched <AdditiveExpression>: 4
+[DEBUG] Matched <RelationalExpression>: x < 4
+[DEBUG] Matched <EqualityExpression>: x < 4
+[DEBUG] Matched <LogicalAndExpression>: x < 4
+[DEBUG] Matched <LogicalOrExpression>: x < 4
+[DEBUG] Matched <Condition>: x < 4
+[DEBUG] Consumed Token: ;
+[DEBUG] Matching <ForStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Failed to match <LeftValue>.
+[DEBUG] Failed to match <ForStatement>.
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x
+[DEBUG] Matched <LeftValue>: x
+[DEBUG] Matched <PrimaryExpression>: x
+[DEBUG] Matched <UnaryExpression>: x
+[DEBUG] Matched <MultiplicativeExpression>: x
+[DEBUG] Matched <AdditiveExpression>: x
+[DEBUG] Matched <RelationalExpression>: x
+[DEBUG] Consumed Token: !=
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 4
+[DEBUG] Matched <Number>: 4
+[DEBUG] Matched <PrimaryExpression>: 4
+[DEBUG] Matched <UnaryExpression>: 4
+[DEBUG] Matched <MultiplicativeExpression>: 4
+[DEBUG] Matched <AdditiveExpression>: 4
+[DEBUG] Matched <RelationalExpression>: 4
+[DEBUG] Matched <EqualityExpression>: x != 4
+[DEBUG] Matched <LogicalAndExpression>: x != 4
+[DEBUG] Matched <LogicalOrExpression>: x != 4
+[DEBUG] Matched <Condition>: x != 4
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x
+[DEBUG] Matched <LeftValue>: x
+[DEBUG] Matched <PrimaryExpression>: x
+[DEBUG] Matched <UnaryExpression>: x
+[DEBUG] Matched <MultiplicativeExpression>: x
+[DEBUG] Matched <AdditiveExpression>: x
+[DEBUG] Matched <Expression>: x
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x
+[DEBUG] Matched <LeftValue>: x
+[DEBUG] Consumed Token: =
+[DEBUG] Failed to match <GetIntStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <AssignmentStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x
+[DEBUG] Matched <LeftValue>: x
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x
+[DEBUG] Matched <LeftValue>: x
+[DEBUG] Matched <PrimaryExpression>: x
+[DEBUG] Matched <UnaryExpression>: x
+[DEBUG] Matched <MultiplicativeExpression>: x
+[DEBUG] Consumed Token: +
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 1
+[DEBUG] Matched <Number>: 1
+[DEBUG] Matched <PrimaryExpression>: 1
+[DEBUG] Matched <UnaryExpression>: 1
+[DEBUG] Matched <MultiplicativeExpression>: 1
+[DEBUG] Matched <AdditiveExpression>: x + 1
+[DEBUG] Matched <Expression>: x + 1
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <AssignmentStatement>: x = x + 1;
+[DEBUG] Matched <Statement>: x = x + 1;
+[DEBUG] Matched <BlockItem>:
+x = x + 1;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    x = x + 1;
+}
+[DEBUG] Matched <Statement>:
+{
+    x = x + 1;
+}
+[DEBUG] Consumed Token: else
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <BreakStatement>.
+[DEBUG] Consumed Token: break
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <BreakStatement>: break;
+[DEBUG] Matched <Statement>: break;
+[DEBUG] Matched <BlockItem>:
+break;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    break;
+}
+[DEBUG] Matched <Statement>:
+{
+    break;
+}
+[DEBUG] Matched <IfStatement>:
+if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Matched <Statement>:
+if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Matched <BlockItem>:
+if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Matched <LeftValue>: flag
+[DEBUG] Matched <PrimaryExpression>: flag
+[DEBUG] Matched <UnaryExpression>: flag
+[DEBUG] Matched <MultiplicativeExpression>: flag
+[DEBUG] Matched <AdditiveExpression>: flag
+[DEBUG] Matched <Expression>: flag
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Matched <LeftValue>: flag
+[DEBUG] Consumed Token: =
+[DEBUG] Consumed Token: getint
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <GetIntStatement>: flag = getint();
+[DEBUG] Matched <Statement>: flag = getint();
+[DEBUG] Matched <BlockItem>:
+flag = getint();
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Matched <LeftValue>: flag
+[DEBUG] Matched <PrimaryExpression>: flag
+[DEBUG] Matched <UnaryExpression>: flag
+[DEBUG] Matched <MultiplicativeExpression>: flag
+[DEBUG] Matched <AdditiveExpression>: flag
+[DEBUG] Matched <RelationalExpression>: flag
+[DEBUG] Consumed Token: ==
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <RelationalExpression>: 0
+[DEBUG] Matched <EqualityExpression>: flag == 0
+[DEBUG] Matched <LogicalAndExpression>: flag == 0
+[DEBUG] Matched <LogicalOrExpression>: flag == 0
+[DEBUG] Matched <Condition>: flag == 0
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Consumed Token: =
+[DEBUG] Consumed Token: getint
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <GetIntStatement>: x1 = getint();
+[DEBUG] Matched <Statement>: x1 = getint();
+[DEBUG] Matched <BlockItem>:
+x1 = getint();
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Matched <PrimaryExpression>: temp
+[DEBUG] Matched <UnaryExpression>: temp
+[DEBUG] Matched <MultiplicativeExpression>: temp
+[DEBUG] Matched <AdditiveExpression>: temp
+[DEBUG] Matched <Expression>: temp
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Consumed Token: =
+[DEBUG] Failed to match <GetIntStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <AssignmentStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: double2
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncInvocation>.
+[DEBUG] Consumed Token: double2
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncArgList>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Matched <FuncArgList>: x1
+[DEBUG] Consumed Token: )
+[DEBUG] Matched <FuncInvocation>: double2(x1)
+[DEBUG] Matched <UnaryExpression>: double2(x1)
+[DEBUG] Consumed Token: %
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 1
+[DEBUG] Matched <Number>: 1
+[DEBUG] Matched <PrimaryExpression>: 1
+[DEBUG] Matched <UnaryExpression>: 1
+[DEBUG] Matched <MultiplicativeExpression>: double2(x1) % 1
+[DEBUG] Matched <AdditiveExpression>: double2(x1) % 1
+[DEBUG] Matched <Expression>: double2(x1) % 1
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <AssignmentStatement>: temp = double2(x1) % 1;
+[DEBUG] Matched <Statement>: temp = double2(x1) % 1;
+[DEBUG] Matched <BlockItem>:
+temp = double2(x1) % 1;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <PrintfStatement>.
+[DEBUG] Consumed Token: printf
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: "%d "
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Matched <PrimaryExpression>: temp
+[DEBUG] Matched <UnaryExpression>: temp
+[DEBUG] Matched <MultiplicativeExpression>: temp
+[DEBUG] Matched <AdditiveExpression>: temp
+[DEBUG] Matched <Expression>: temp
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <PrintfStatement>: printf("%d ", temp);
+[DEBUG] Matched <Statement>: printf("%d ", temp);
+[DEBUG] Matched <BlockItem>:
+printf("%d ", temp);
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Matched <PrimaryExpression>: temp
+[DEBUG] Matched <UnaryExpression>: temp
+[DEBUG] Matched <MultiplicativeExpression>: temp
+[DEBUG] Matched <AdditiveExpression>: temp
+[DEBUG] Matched <Expression>: temp
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Consumed Token: =
+[DEBUG] Failed to match <GetIntStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <AssignmentStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Consumed Token: =
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: double2
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncInvocation>.
+[DEBUG] Consumed Token: double2
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncArgList>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Matched <FuncArgList>: x1
+[DEBUG] Consumed Token: )
+[DEBUG] Matched <FuncInvocation>: double2(x1)
+[DEBUG] Matched <UnaryExpression>: double2(x1)
+[DEBUG] Consumed Token: /
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <UnaryOperatedExpression>.
+[DEBUG] Matching <UnaryOperator>.
+[DEBUG] Consumed Token: +
+[DEBUG] Matched <UnaryOperator>: +
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 1
+[DEBUG] Matched <Number>: 1
+[DEBUG] Matched <PrimaryExpression>: 1
+[DEBUG] Matched <UnaryExpression>: 1
+[DEBUG] Matched <UnaryOperatedExpression>: +1
+[DEBUG] Matched <UnaryExpression>: +1
+[DEBUG] Matched <MultiplicativeExpression>: double2(x1) / +1
+[DEBUG] Matched <AdditiveExpression>: double2(x1) / +1
+[DEBUG] Matched <Expression>: double2(x1) / +1
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <AssignmentStatement>: temp = double2(x1) / +1;
+[DEBUG] Matched <Statement>: temp = double2(x1) / +1;
+[DEBUG] Matched <BlockItem>:
+temp = double2(x1) / +1;
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <PrintfStatement>.
+[DEBUG] Consumed Token: printf
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: "%d\n"
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: temp
+[DEBUG] Matched <LeftValue>: temp
+[DEBUG] Matched <PrimaryExpression>: temp
+[DEBUG] Matched <UnaryExpression>: temp
+[DEBUG] Matched <MultiplicativeExpression>: temp
+[DEBUG] Matched <AdditiveExpression>: temp
+[DEBUG] Matched <Expression>: temp
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <PrintfStatement>: printf("%d\n", temp);
+[DEBUG] Matched <Statement>: printf("%d\n", temp);
+[DEBUG] Matched <BlockItem>:
+printf("%d\n", temp);
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ContinueStatement>.
+[DEBUG] Consumed Token: continue
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ContinueStatement>: continue;
+[DEBUG] Matched <Statement>: continue;
+[DEBUG] Matched <BlockItem>:
+continue;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}
+[DEBUG] Matched <Statement>:
+{
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}
+[DEBUG] Matched <IfStatement>:
+if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Matched <Statement>:
+if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Matched <BlockItem>:
+if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Matched <LeftValue>: flag
+[DEBUG] Matched <PrimaryExpression>: flag
+[DEBUG] Matched <UnaryExpression>: flag
+[DEBUG] Matched <MultiplicativeExpression>: flag
+[DEBUG] Matched <AdditiveExpression>: flag
+[DEBUG] Consumed Token: >
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <RelationalExpression>: flag > 0
+[DEBUG] Matched <EqualityExpression>: flag > 0
+[DEBUG] Matched <LogicalAndExpression>: flag > 0
+[DEBUG] Matched <LogicalOrExpression>: flag > 0
+[DEBUG] Matched <Condition>: flag > 0
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Consumed Token: =
+[DEBUG] Consumed Token: getint
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <GetIntStatement>: x1 = getint();
+[DEBUG] Matched <Statement>: x1 = getint();
+[DEBUG] Matched <BlockItem>:
+x1 = getint();
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Matched <PrimaryExpression>: x2
+[DEBUG] Matched <UnaryExpression>: x2
+[DEBUG] Matched <MultiplicativeExpression>: x2
+[DEBUG] Matched <AdditiveExpression>: x2
+[DEBUG] Matched <Expression>: x2
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Consumed Token: =
+[DEBUG] Consumed Token: getint
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <GetIntStatement>: x2 = getint();
+[DEBUG] Matched <Statement>: x2 = getint();
+[DEBUG] Matched <BlockItem>:
+x2 = getint();
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <PrintfStatement>.
+[DEBUG] Consumed Token: printf
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: "%d\n"
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: add
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncInvocation>.
+[DEBUG] Consumed Token: add
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncArgList>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Matched <PrimaryExpression>: x2
+[DEBUG] Matched <UnaryExpression>: x2
+[DEBUG] Matched <MultiplicativeExpression>: x2
+[DEBUG] Matched <AdditiveExpression>: x2
+[DEBUG] Matched <Expression>: x2
+[DEBUG] Matched <FuncArgList>: x1, x2
+[DEBUG] Consumed Token: )
+[DEBUG] Matched <FuncInvocation>: add(x1, x2)
+[DEBUG] Matched <UnaryExpression>: add(x1, x2)
+[DEBUG] Matched <MultiplicativeExpression>: add(x1, x2)
+[DEBUG] Matched <AdditiveExpression>: add(x1, x2)
+[DEBUG] Matched <Expression>: add(x1, x2)
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <PrintfStatement>: printf("%d\n", add(x1, x2));
+[DEBUG] Matched <Statement>: printf("%d\n", add(x1, x2));
+[DEBUG] Matched <BlockItem>:
+printf("%d\n", add(x1, x2));
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ContinueStatement>.
+[DEBUG] Consumed Token: continue
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ContinueStatement>: continue;
+[DEBUG] Matched <Statement>: continue;
+[DEBUG] Matched <BlockItem>:
+continue;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}
+[DEBUG] Matched <Statement>:
+{
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}
+[DEBUG] Matched <IfStatement>:
+if (flag > 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}  
+[DEBUG] Matched <Statement>:
+if (flag > 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}  
+[DEBUG] Matched <BlockItem>:
+if (flag > 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}  
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <IfStatement>.
+[DEBUG] Consumed Token: if
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <Condition>.
+[DEBUG] Matching <LogicalOrExpression>.
+[DEBUG] Matching <LogicalAndExpression>.
+[DEBUG] Matching <EqualityExpression>.
+[DEBUG] Matching <RelationalExpression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: flag
+[DEBUG] Matched <LeftValue>: flag
+[DEBUG] Matched <PrimaryExpression>: flag
+[DEBUG] Matched <UnaryExpression>: flag
+[DEBUG] Matched <MultiplicativeExpression>: flag
+[DEBUG] Matched <AdditiveExpression>: flag
+[DEBUG] Consumed Token: <
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <RelationalExpression>: flag < 0
+[DEBUG] Matched <EqualityExpression>: flag < 0
+[DEBUG] Matched <LogicalAndExpression>: flag < 0
+[DEBUG] Matched <LogicalOrExpression>: flag < 0
+[DEBUG] Matched <Condition>: flag < 0
+[DEBUG] Consumed Token: )
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <Block>.
+[DEBUG] Consumed Token: {
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Consumed Token: =
+[DEBUG] Consumed Token: getint
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <GetIntStatement>: x1 = getint();
+[DEBUG] Matched <Statement>: x1 = getint();
+[DEBUG] Matched <BlockItem>:
+x1 = getint();
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ExpressionStatement>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Matched <PrimaryExpression>: x2
+[DEBUG] Matched <UnaryExpression>: x2
+[DEBUG] Matched <MultiplicativeExpression>: x2
+[DEBUG] Matched <AdditiveExpression>: x2
+[DEBUG] Matched <Expression>: x2
+[DEBUG] Failed to match <ExpressionStatement>.
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <GetIntStatement>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Consumed Token: =
+[DEBUG] Consumed Token: getint
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <GetIntStatement>: x2 = getint();
+[DEBUG] Matched <Statement>: x2 = getint();
+[DEBUG] Matched <BlockItem>:
+x2 = getint();
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <PrintfStatement>.
+[DEBUG] Consumed Token: printf
+[DEBUG] Consumed Token: (
+[DEBUG] Consumed Token: "%d\n"
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: sub
+[DEBUG] Consumed Token: (
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <FuncInvocation>.
+[DEBUG] Consumed Token: sub
+[DEBUG] Consumed Token: (
+[DEBUG] Matching <FuncArgList>.
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x1
+[DEBUG] Matched <LeftValue>: x1
+[DEBUG] Matched <PrimaryExpression>: x1
+[DEBUG] Matched <UnaryExpression>: x1
+[DEBUG] Matched <MultiplicativeExpression>: x1
+[DEBUG] Matched <AdditiveExpression>: x1
+[DEBUG] Matched <Expression>: x1
+[DEBUG] Consumed Token: ,
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Lexer rolling back...
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <LeftValue>.
+[DEBUG] Consumed Token: x2
+[DEBUG] Matched <LeftValue>: x2
+[DEBUG] Matched <PrimaryExpression>: x2
+[DEBUG] Matched <UnaryExpression>: x2
+[DEBUG] Matched <MultiplicativeExpression>: x2
+[DEBUG] Matched <AdditiveExpression>: x2
+[DEBUG] Matched <Expression>: x2
+[DEBUG] Matched <FuncArgList>: x1, x2
+[DEBUG] Consumed Token: )
+[DEBUG] Matched <FuncInvocation>: sub(x1, x2)
+[DEBUG] Matched <UnaryExpression>: sub(x1, x2)
+[DEBUG] Matched <MultiplicativeExpression>: sub(x1, x2)
+[DEBUG] Matched <AdditiveExpression>: sub(x1, x2)
+[DEBUG] Matched <Expression>: sub(x1, x2)
+[DEBUG] Consumed Token: )
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <PrintfStatement>: printf("%d\n", sub(x1, x2));
+[DEBUG] Matched <Statement>: printf("%d\n", sub(x1, x2));
+[DEBUG] Matched <BlockItem>:
+printf("%d\n", sub(x1, x2));
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ContinueStatement>.
+[DEBUG] Consumed Token: continue
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ContinueStatement>: continue;
+[DEBUG] Matched <Statement>: continue;
+[DEBUG] Matched <BlockItem>:
+continue;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}
+[DEBUG] Matched <Statement>:
+{
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}
+[DEBUG] Matched <IfStatement>:
+if (flag < 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}  
+[DEBUG] Matched <Statement>:
+if (flag < 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}  
+[DEBUG] Matched <BlockItem>:
+if (flag < 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}  
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Matched <Statement>:
+{
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Matched <ForStatementSelection>:
+for (; x < 4; ) {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Matched <Statement>:
+for (; x < 4; ) {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Matched <BlockItem>:
+for (; x < 4; ) {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    int x = 0;
+    int flag;
+    int temp;
+    int x1, x2;
+    for (; x < 4; ) {
+        if (x != 4) {
+            x = x + 1;
+        } else {
+            break;
+        }
+        flag = getint();
+        if (flag == 0) {
+            x1 = getint();
+            temp = double2(x1) % 1;
+            printf("%d ", temp);
+            temp = double2(x1) / +1;
+            printf("%d\n", temp);
+            continue;
+        }  
+        if (flag > 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", add(x1, x2));
+            continue;
+        }  
+        if (flag < 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", sub(x1, x2));
+            continue;
+        }  
+    }
+}
+[DEBUG] Matched <Statement>:
+{
+    int x = 0;
+    int flag;
+    int temp;
+    int x1, x2;
+    for (; x < 4; ) {
+        if (x != 4) {
+            x = x + 1;
+        } else {
+            break;
+        }
+        flag = getint();
+        if (flag == 0) {
+            x1 = getint();
+            temp = double2(x1) % 1;
+            printf("%d ", temp);
+            temp = double2(x1) / +1;
+            printf("%d\n", temp);
+            continue;
+        }  
+        if (flag > 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", add(x1, x2));
+            continue;
+        }  
+        if (flag < 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", sub(x1, x2));
+            continue;
+        }  
+    }
+}
+[DEBUG] Matched <BlockItem>:
+{
+    int x = 0;
+    int flag;
+    int temp;
+    int x1, x2;
+    for (; x < 4; ) {
+        if (x != 4) {
+            x = x + 1;
+        } else {
+            break;
+        }
+        flag = getint();
+        if (flag == 0) {
+            x1 = getint();
+            temp = double2(x1) % 1;
+            printf("%d ", temp);
+            temp = double2(x1) / +1;
+            printf("%d\n", temp);
+            continue;
+        }  
+        if (flag > 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", add(x1, x2));
+            continue;
+        }  
+        if (flag < 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", sub(x1, x2));
+            continue;
+        }  
+    }
+}
+[DEBUG] Matching <BlockItem>.
+[DEBUG] Matching <Statement>.
+[DEBUG] Matching <ReturnStatement>.
+[DEBUG] Consumed Token: return
+[DEBUG] Matching <Expression>.
+[DEBUG] Matching <AdditiveExpression>.
+[DEBUG] Matching <MultiplicativeExpression>.
+[DEBUG] Matching <UnaryExpression>.
+[DEBUG] Matching <PrimaryExpression>.
+[DEBUG] Matching <Number>.
+[DEBUG] Consumed Token: 0
+[DEBUG] Matched <Number>: 0
+[DEBUG] Matched <PrimaryExpression>: 0
+[DEBUG] Matched <UnaryExpression>: 0
+[DEBUG] Matched <MultiplicativeExpression>: 0
+[DEBUG] Matched <AdditiveExpression>: 0
+[DEBUG] Matched <Expression>: 0
+[DEBUG] Consumed Token: ;
+[DEBUG] Matched <ReturnStatement>: return 0;
+[DEBUG] Matched <Statement>: return 0;
+[DEBUG] Matched <BlockItem>:
+return 0;
+[DEBUG] Consumed Token: }
+[DEBUG] Matched <Block>:
+{
+    {
+        int x = 0;
+        int flag;
+        int temp;
+        int x1, x2;
+        for (; x < 4; ) {
+            if (x != 4) {
+                x = x + 1;
+            } else {
+                break;
+            }
+            flag = getint();
+            if (flag == 0) {
+                x1 = getint();
+                temp = double2(x1) % 1;
+                printf("%d ", temp);
+                temp = double2(x1) / +1;
+                printf("%d\n", temp);
+                continue;
+            }  
+            if (flag > 0) {
+                x1 = getint();
+                x2 = getint();
+                printf("%d\n", add(x1, x2));
+                continue;
+            }  
+            if (flag < 0) {
+                x1 = getint();
+                x2 = getint();
+                printf("%d\n", sub(x1, x2));
+                continue;
+            }  
+        }
+    }
+    return 0;
+}
+[DEBUG] Matched <MainFuncDefinition>:
+int main() {
+    {
+        int x = 0;
+        int flag;
+        int temp;
+        int x1, x2;
+        for (; x < 4; ) {
+            if (x != 4) {
+                x = x + 1;
+            } else {
+                break;
+            }
+            flag = getint();
+            if (flag == 0) {
+                x1 = getint();
+                temp = double2(x1) % 1;
+                printf("%d ", temp);
+                temp = double2(x1) / +1;
+                printf("%d\n", temp);
+                continue;
+            }  
+            if (flag > 0) {
+                x1 = getint();
+                x2 = getint();
+                printf("%d\n", add(x1, x2));
+                continue;
+            }  
+            if (flag < 0) {
+                x1 = getint();
+                x2 = getint();
+                printf("%d\n", sub(x1, x2));
+                continue;
+            }  
+        }
+    }
+    return 0;
+}
+[DEBUG] Matched <CompileUnit>:
+const int a = 1, b = 2;
+const int c = 3;
+int d, e = 1 + 2;
+int f;
+
+int double2(int x1) {
+    if (!x1) {
+        return 2 * x1;
+    } else {
+        return (2 * -x1);
+    }
+    return 0;
+}
+
+int add(int x1, int x2) {
+    int sum = 0;
+    sum = x1 + x2;
+    return sum;
+}
+
+int sub(int x1, int x2) {
+    int sum = 0;
+    sum = x1 - x2;
+    if (sum >= 0) {
+        return sum;
+    }  
+    if (sum <= 0) {
+        return 0;
+    }  
+    return 0;
+}
+
+void print_none() {
+    return;
+}
+
+int main() {
+    {
+        int x = 0;
+        int flag;
+        int temp;
+        int x1, x2;
+        for (; x < 4; ) {
+            if (x != 4) {
+                x = x + 1;
+            } else {
+                break;
+            }
+            flag = getint();
+            if (flag == 0) {
+                x1 = getint();
+                temp = double2(x1) % 1;
+                printf("%d ", temp);
+                temp = double2(x1) / +1;
+                printf("%d\n", temp);
+                continue;
+            }  
+            if (flag > 0) {
+                x1 = getint();
+                x2 = getint();
+                printf("%d\n", add(x1, x2));
+                continue;
+            }  
+            if (flag < 0) {
+                x1 = getint();
+                x2 = getint();
+                printf("%d\n", sub(x1, x2));
+                continue;
+            }  
+        }
+    }
+    return 0;
+}
+[DEBUG] Added Constant Symbol into Table[0]: 
+  identifier: a
+  metadata: 
+    isConstant: true
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 4
+    depth: 0
+  precalculatedValue: Optional[[1]]
+[DEBUG] Added Constant Symbol into Table[0]: 
+  identifier: b
+  metadata: 
+    isConstant: true
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 5
+    depth: 0
+  precalculatedValue: Optional[[2]]
+[DEBUG] Added Constant Symbol into Table[0]: 
+  identifier: c
+  metadata: 
+    isConstant: true
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 6
+    depth: 0
+  precalculatedValue: Optional[[3]]
+[DEBUG] Added Variable Symbol into Table[0]: 
+  identifier: d
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 7
+    depth: 0
+  precalculatedValue: Optional.empty
+[DEBUG] Added Variable Symbol into Table[0]: 
+  identifier: e
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 8
+    depth: 0
+  precalculatedValue: Optional.empty
+[DEBUG] Added Variable Symbol into Table[0]: 
+  identifier: f
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 9
+    depth: 0
+  precalculatedValue: Optional.empty
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: double2
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 0]: 
+    - identifier: x1
+      metadata: 
+        isArrayPointer: false
+        basicType: int
+        dimensionSizes: []
+        activeRecordOffset: 4
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: add
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 1]: 
+    - identifier: x1
+      metadata: 
+        isArrayPointer: false
+        basicType: int
+        dimensionSizes: []
+        activeRecordOffset: 4
+[DEBUG] Added Function Parameter Symbol into Table[0, 1]: 
+    - identifier: x2
+      metadata: 
+        isArrayPointer: false
+        basicType: int
+        dimensionSizes: []
+        activeRecordOffset: 5
+[DEBUG] Added Variable Symbol into Table[0, 1]: 
+  identifier: sum
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 6
+    depth: 1
+  precalculatedValue: Optional.empty
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: sub
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 2]: 
+    - identifier: x1
+      metadata: 
+        isArrayPointer: false
+        basicType: int
+        dimensionSizes: []
+        activeRecordOffset: 4
+[DEBUG] Added Function Parameter Symbol into Table[0, 2]: 
+    - identifier: x2
+      metadata: 
+        isArrayPointer: false
+        basicType: int
+        dimensionSizes: []
+        activeRecordOffset: 5
+[DEBUG] Added Variable Symbol into Table[0, 2]: 
+  identifier: sum
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 6
+    depth: 1
+  precalculatedValue: Optional.empty
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: print_none
+  metadata: 
+    returnType: void
+    parameters: 
+[DEBUG] Added Main Func Symbol: 
+  identifier: main
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Variable Symbol into Table[0, 4, 0]: 
+  identifier: x
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 4
+    depth: 2
+  precalculatedValue: Optional.empty
+[DEBUG] Added Variable Symbol into Table[0, 4, 0]: 
+  identifier: flag
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 5
+    depth: 2
+  precalculatedValue: Optional.empty
+[DEBUG] Added Variable Symbol into Table[0, 4, 0]: 
+  identifier: temp
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 6
+    depth: 2
+  precalculatedValue: Optional.empty
+[DEBUG] Added Variable Symbol into Table[0, 4, 0]: 
+  identifier: x1
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 7
+    depth: 2
+  precalculatedValue: Optional.empty
+[DEBUG] Added Variable Symbol into Table[0, 4, 0]: 
+  identifier: x2
+  metadata: 
+    isConstant: false
+    isArray: false
+    basicType: int
+    dimensionSizes: []
+    activeRecordOffset: 8
+    depth: 2
+  precalculatedValue: Optional.empty
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0]
+  currentActiveRecord=[0, 0, -1, 0]
+  currentArguments=[]
+  programCounter=1
+  stackPointer=3
+  markPointer=0
+}
+[DEBUG] Debug hint: Declaration: const int a = 1, b = 2;
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1]
+  currentActiveRecord=[0, 0, -1, 0, 1]
+  currentArguments=[1]
+  programCounter=3
+  stackPointer=4
+  markPointer=0
+}
+[DEBUG] Load immediate: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2]
+  currentArguments=[1, 2]
+  programCounter=4
+  stackPointer=5
+  markPointer=0
+}
+[DEBUG] Debug hint: Declaration: const int c = 3;
+[DEBUG] Load immediate: 3
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3]
+  currentArguments=[1, 2, 3]
+  programCounter=6
+  stackPointer=6
+  markPointer=0
+}
+[DEBUG] Debug hint: Declaration: int d, e = 1 + 2;
+[DEBUG] Added 1 zero(s).
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0]
+  currentArguments=[1, 2, 3, 0]
+  programCounter=8
+  stackPointer=7
+  markPointer=0
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 1]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0, 1]
+  currentArguments=[1, 2, 3, 0, 1]
+  programCounter=9
+  stackPointer=8
+  markPointer=0
+}
+[DEBUG] Load immediate: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 1, 2]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0, 1, 2]
+  currentArguments=[1, 2, 3, 0, 1, 2]
+  programCounter=10
+  stackPointer=9
+  markPointer=0
+}
+[DEBUG] Operate: 1+2=3
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0, 3]
+  currentArguments=[1, 2, 3, 0, 3]
+  programCounter=11
+  stackPointer=8
+  markPointer=0
+}
+[DEBUG] Debug hint: Declaration: int f;
+[DEBUG] Added 1 zero(s).
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0]
+  currentArguments=[1, 2, 3, 0, 3, 0]
+  programCounter=13
+  stackPointer=9
+  markPointer=0
+}
+[DEBUG] Called a function: #main_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 14, 0, 0]
+  currentArguments=[]
+  programCounter=127
+  stackPointer=13
+  markPointer=10
+}
+[DEBUG] Skip label: #main_start
+[DEBUG] Debug hint: Statement: {
+    int x = 0;
+    int flag;
+    int temp;
+    int x1, x2;
+    for (; x < 4; ) {
+        if (x != 4) {
+            x = x + 1;
+        } else {
+            break;
+        }
+        flag = getint();
+        if (flag == 0) {
+            x1 = getint();
+            temp = double2(x1) % 1;
+            printf("%d ", temp);
+            temp = double2(x1) / +1;
+            printf("%d\n", temp);
+            continue;
+        }  
+        if (flag > 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", add(x1, x2));
+            continue;
+        }  
+        if (flag < 0) {
+            x1 = getint();
+            x2 = getint();
+            printf("%d\n", sub(x1, x2));
+            continue;
+        }  
+    }
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0]
+  currentActiveRecord=[0, 0, 10, 0]
+  currentArguments=[]
+  programCounter=130
+  stackPointer=17
+  markPointer=14
+}
+[DEBUG] Debug hint: Declaration: int x = 0;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0]
+  currentArguments=[0]
+  programCounter=132
+  stackPointer=18
+  markPointer=14
+}
+[DEBUG] Debug hint: Declaration: int flag;
+[DEBUG] Added 1 zero(s).
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=134
+  stackPointer=19
+  markPointer=14
+}
+[DEBUG] Debug hint: Declaration: int temp;
+[DEBUG] Added 1 zero(s).
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0]
+  currentArguments=[0, 0, 0]
+  programCounter=136
+  stackPointer=20
+  markPointer=14
+}
+[DEBUG] Debug hint: Declaration: int x1, x2;
+[DEBUG] Added 1 zero(s).
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0]
+  currentArguments=[0, 0, 0, 0]
+  programCounter=138
+  stackPointer=21
+  markPointer=14
+}
+[DEBUG] Added 1 zero(s).
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0, 0]
+  currentArguments=[0, 0, 0, 0, 0]
+  programCounter=139
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Debug hint: Statement: for (; x < 4; ) {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Skip label: #loop[0]_start
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0, 0, 0]
+  currentArguments=[0, 0, 0, 0, 0, 0]
+  programCounter=142
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0, 0, 0]
+  currentArguments=[0, 0, 0, 0, 0, 0]
+  programCounter=143
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 4]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 4]
+  currentArguments=[0, 0, 0, 0, 0, 0, 4]
+  programCounter=144
+  stackPointer=24
+  markPointer=14
+}
+[DEBUG] Operate: 0<4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 1]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0, 0, 1]
+  currentArguments=[0, 0, 0, 0, 0, 1]
+  programCounter=145
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Jump if zero to: #loop[0]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 0, 0, 0, 0, 0]
+  currentArguments=[0, 0, 0, 0, 0]
+  programCounter=146
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Debug hint: Statement: {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=148
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=150
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=151
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 4]
+  currentActiveRecord=[0, 0, 14, 0, 0, 4]
+  currentArguments=[0, 4]
+  programCounter=152
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 0!=4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=153
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[3]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=154
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_start
+[DEBUG] Debug hint: Statement: {
+    x = x + 1;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=157
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x = x + 1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=159
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=160
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 1]
+  currentActiveRecord=[0, 0, 23, 0, 0, 1]
+  currentArguments=[0, 1]
+  programCounter=161
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: 0+1=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1]
+  currentActiveRecord=[0, 0, 23, 0, 1]
+  currentArguments=[1]
+  programCounter=162
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1, 0]
+  currentActiveRecord=[0, 0, 23, 0, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=163
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 4]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1, 18]
+  currentActiveRecord=[0, 0, 23, 0, 1, 18]
+  currentArguments=[1, 18]
+  programCounter=164
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 1 to [-1, 0]with offset: 18.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=165
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=166
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Jump to: #if[3]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=175
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_end
+[DEBUG] Debug hint: Statement: flag = getint();
+[DEBUG] Read an input number: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=178
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=179
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Load address from [1, 5]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 19]
+  currentActiveRecord=[0, 0, 14, 0, 0, 19]
+  currentArguments=[0, 19]
+  programCounter=180
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Store value 0 to [-1, 0]with offset: 19.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=181
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=183
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=184
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=185
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 0==0=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=186
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[4]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=187
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[4]_start
+[DEBUG] Debug hint: Statement: {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=190
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x1 = getint();
+[DEBUG] Read an input number: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1]
+  currentActiveRecord=[0, 0, 23, 0, 1]
+  currentArguments=[1]
+  programCounter=192
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1, 0]
+  currentActiveRecord=[0, 0, 23, 0, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=193
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 7]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1, 21]
+  currentActiveRecord=[0, 0, 23, 0, 1, 21]
+  currentArguments=[1, 21]
+  programCounter=194
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 1 to [-1, 0]with offset: 21.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=195
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: temp = double2(x1) % 1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=197
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 7]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1]
+  currentActiveRecord=[0, 0, 23, 0, 1]
+  currentArguments=[1]
+  programCounter=198
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Called a function: #double2_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1]
+  currentActiveRecord=[0, 199, 0, 27, 1]
+  currentArguments=[1]
+  programCounter=16
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #double2_start
+[DEBUG] Debug hint: Statement: if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0]
+  currentActiveRecord=[0, 199, 0, 27, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=19
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 1]
+  currentActiveRecord=[0, 199, 0, 27, 1, 1]
+  currentArguments=[1, 1]
+  programCounter=20
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Operate: !1=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0]
+  currentActiveRecord=[0, 199, 0, 27, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=21
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Jump if zero to: #if[0]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1]
+  currentActiveRecord=[0, 199, 0, 27, 1]
+  currentArguments=[1]
+  programCounter=34
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #if[0]_else
+[DEBUG] Debug hint: Statement: {
+    return (2 * -x1);
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0, 0, 31, 0]
+  currentActiveRecord=[0, 0, 31, 0]
+  currentArguments=[]
+  programCounter=37
+  stackPointer=39
+  markPointer=36
+}
+[DEBUG] Debug hint: Statement: return (2 * -x1);
+[DEBUG] Load immediate: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0, 0, 31, 0, 2]
+  currentActiveRecord=[0, 0, 31, 0, 2]
+  currentArguments=[2]
+  programCounter=39
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0, 0, 31, 0, 2, 0]
+  currentActiveRecord=[0, 0, 31, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=40
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0, 0, 31, 0, 2, 1]
+  currentActiveRecord=[0, 0, 31, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=41
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: -1=-1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0, 0, 31, 0, 2, -1]
+  currentActiveRecord=[0, 0, 31, 0, 2, -1]
+  currentArguments=[2, -1]
+  programCounter=42
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: 2*-1=-2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, 0, 0, 31, 0, -2]
+  currentActiveRecord=[0, 0, 31, 0, -2]
+  currentArguments=[-2]
+  programCounter=43
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, 1, -2]
+  currentActiveRecord=[0, 199, 0, 27, 1, -2]
+  currentArguments=[1, -2]
+  programCounter=44
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2]
+  currentActiveRecord=[0, 0, 23, 0, -2]
+  currentArguments=[-2]
+  programCounter=199
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2, 1]
+  currentActiveRecord=[0, 0, 23, 0, -2, 1]
+  currentArguments=[-2, 1]
+  programCounter=200
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: -2%1=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=201
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=202
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 6]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 20]
+  currentActiveRecord=[0, 0, 23, 0, 0, 20]
+  currentArguments=[0, 20]
+  programCounter=203
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 0 to [-1, 0]with offset: 20.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=204
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: printf("%d ", temp);
+[DEBUG] Print String: 
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=206
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=207
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=208
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Print Number: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=209
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Print String:  
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=210
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: temp = double2(x1) / +1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=212
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 7]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1]
+  currentActiveRecord=[0, 0, 23, 0, 1]
+  currentArguments=[1]
+  programCounter=213
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Called a function: #double2_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1]
+  currentActiveRecord=[0, 214, 0, 27, 1]
+  currentArguments=[1]
+  programCounter=16
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #double2_start
+[DEBUG] Debug hint: Statement: if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0]
+  currentActiveRecord=[0, 214, 0, 27, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=19
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 1]
+  currentActiveRecord=[0, 214, 0, 27, 1, 1]
+  currentArguments=[1, 1]
+  programCounter=20
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Operate: !1=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0]
+  currentActiveRecord=[0, 214, 0, 27, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=21
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Jump if zero to: #if[0]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1]
+  currentActiveRecord=[0, 214, 0, 27, 1]
+  currentArguments=[1]
+  programCounter=34
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #if[0]_else
+[DEBUG] Debug hint: Statement: {
+    return (2 * -x1);
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0, 0, 31, 0]
+  currentActiveRecord=[0, 0, 31, 0]
+  currentArguments=[]
+  programCounter=37
+  stackPointer=39
+  markPointer=36
+}
+[DEBUG] Debug hint: Statement: return (2 * -x1);
+[DEBUG] Load immediate: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0, 0, 31, 0, 2]
+  currentActiveRecord=[0, 0, 31, 0, 2]
+  currentArguments=[2]
+  programCounter=39
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0, 0, 31, 0, 2, 0]
+  currentActiveRecord=[0, 0, 31, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=40
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0, 0, 31, 0, 2, 1]
+  currentActiveRecord=[0, 0, 31, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=41
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: -1=-1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0, 0, 31, 0, 2, -1]
+  currentActiveRecord=[0, 0, 31, 0, 2, -1]
+  currentArguments=[2, -1]
+  programCounter=42
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: 2*-1=-2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, 0, 0, 31, 0, -2]
+  currentActiveRecord=[0, 0, 31, 0, -2]
+  currentArguments=[-2]
+  programCounter=43
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, 1, -2]
+  currentActiveRecord=[0, 214, 0, 27, 1, -2]
+  currentArguments=[1, -2]
+  programCounter=44
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2]
+  currentActiveRecord=[0, 0, 23, 0, -2]
+  currentArguments=[-2]
+  programCounter=214
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2, 1]
+  currentActiveRecord=[0, 0, 23, 0, -2, 1]
+  currentArguments=[-2, 1]
+  programCounter=215
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2, 1]
+  currentActiveRecord=[0, 0, 23, 0, -2, 1]
+  currentArguments=[-2, 1]
+  programCounter=216
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: -2/1=-2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2]
+  currentActiveRecord=[0, 0, 23, 0, -2]
+  currentArguments=[-2]
+  programCounter=217
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2, 0]
+  currentActiveRecord=[0, 0, 23, 0, -2, 0]
+  currentArguments=[-2, 0]
+  programCounter=218
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 6]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, 0, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2, 20]
+  currentActiveRecord=[0, 0, 23, 0, -2, 20]
+  currentArguments=[-2, 20]
+  programCounter=219
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value -2 to [-1, 0]with offset: 20.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=220
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: printf("%d\n", temp);
+[DEBUG] Print String: 
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=222
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=223
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -2]
+  currentActiveRecord=[0, 0, 23, 0, -2]
+  currentArguments=[-2]
+  programCounter=224
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Print Number: -2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=225
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Print String: 
+
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=226
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: continue;
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=228
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentArguments=[1, 0, -2, 1, 0]
+  programCounter=229
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Jump to: #loop[0]_iter
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentArguments=[1, 0, -2, 1, 0]
+  programCounter=307
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_iter
+[DEBUG] Jump to: #loop[0]_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentArguments=[1, 0, -2, 1, 0]
+  programCounter=140
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_start
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0, 0]
+  currentArguments=[1, 0, -2, 1, 0, 0]
+  programCounter=142
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 1]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0, 1]
+  currentArguments=[1, 0, -2, 1, 0, 1]
+  programCounter=143
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 1, 4]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0, 1, 4]
+  currentArguments=[1, 0, -2, 1, 0, 1, 4]
+  programCounter=144
+  stackPointer=24
+  markPointer=14
+}
+[DEBUG] Operate: 1<4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 1]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0, 1]
+  currentArguments=[1, 0, -2, 1, 0, 1]
+  programCounter=145
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Jump if zero to: #loop[0]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 1, 0, -2, 1, 0]
+  currentArguments=[1, 0, -2, 1, 0]
+  programCounter=146
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Debug hint: Statement: {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=148
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=150
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=151
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 1, 4]
+  currentActiveRecord=[0, 0, 14, 0, 1, 4]
+  currentArguments=[1, 4]
+  programCounter=152
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 1!=4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=153
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[3]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=154
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_start
+[DEBUG] Debug hint: Statement: {
+    x = x + 1;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=157
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x = x + 1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=159
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1]
+  currentActiveRecord=[0, 0, 23, 0, 1]
+  currentArguments=[1]
+  programCounter=160
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 1, 1]
+  currentActiveRecord=[0, 0, 23, 0, 1, 1]
+  currentArguments=[1, 1]
+  programCounter=161
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: 1+1=2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=162
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=163
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 4]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 1, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 18]
+  currentActiveRecord=[0, 0, 23, 0, 2, 18]
+  currentArguments=[2, 18]
+  programCounter=164
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 2 to [-1, 0]with offset: 18.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=165
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=166
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Jump to: #if[3]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=175
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_end
+[DEBUG] Debug hint: Statement: flag = getint();
+[DEBUG] Read an input number: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=178
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=179
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Load address from [1, 5]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 19]
+  currentActiveRecord=[0, 0, 14, 0, 0, 19]
+  currentArguments=[0, 19]
+  programCounter=180
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Store value 0 to [-1, 0]with offset: 19.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=181
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=183
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=184
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=185
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 0==0=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=186
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[4]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=187
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[4]_start
+[DEBUG] Debug hint: Statement: {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=190
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x1 = getint();
+[DEBUG] Read an input number: -1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -1]
+  currentActiveRecord=[0, 0, 23, 0, -1]
+  currentArguments=[-1]
+  programCounter=192
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -1, 0]
+  currentActiveRecord=[0, 0, 23, 0, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=193
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 7]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, 1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -1, 21]
+  currentActiveRecord=[0, 0, 23, 0, -1, 21]
+  currentArguments=[-1, 21]
+  programCounter=194
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value -1 to [-1, 0]with offset: 21.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=195
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: temp = double2(x1) % 1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=197
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 7]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -1]
+  currentActiveRecord=[0, 0, 23, 0, -1]
+  currentArguments=[-1]
+  programCounter=198
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Called a function: #double2_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1]
+  currentActiveRecord=[0, 199, 0, 27, -1]
+  currentArguments=[-1]
+  programCounter=16
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #double2_start
+[DEBUG] Debug hint: Statement: if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0]
+  currentActiveRecord=[0, 199, 0, 27, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=19
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, -1]
+  currentActiveRecord=[0, 199, 0, 27, -1, -1]
+  currentArguments=[-1, -1]
+  programCounter=20
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Operate: !-1=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0]
+  currentActiveRecord=[0, 199, 0, 27, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=21
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Jump if zero to: #if[0]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1]
+  currentActiveRecord=[0, 199, 0, 27, -1]
+  currentArguments=[-1]
+  programCounter=34
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #if[0]_else
+[DEBUG] Debug hint: Statement: {
+    return (2 * -x1);
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0, 0, 31, 0]
+  currentActiveRecord=[0, 0, 31, 0]
+  currentArguments=[]
+  programCounter=37
+  stackPointer=39
+  markPointer=36
+}
+[DEBUG] Debug hint: Statement: return (2 * -x1);
+[DEBUG] Load immediate: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0, 0, 31, 0, 2]
+  currentActiveRecord=[0, 0, 31, 0, 2]
+  currentArguments=[2]
+  programCounter=39
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0, 0, 31, 0, 2, 0]
+  currentActiveRecord=[0, 0, 31, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=40
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0, 0, 31, 0, 2, -1]
+  currentActiveRecord=[0, 0, 31, 0, 2, -1]
+  currentArguments=[2, -1]
+  programCounter=41
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: --1=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0, 0, 31, 0, 2, 1]
+  currentActiveRecord=[0, 0, 31, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=42
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: 2*1=2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 0, 0, 31, 0, 2]
+  currentActiveRecord=[0, 0, 31, 0, 2]
+  currentArguments=[2]
+  programCounter=43
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 199, 0, 27, -1, 2]
+  currentActiveRecord=[0, 199, 0, 27, -1, 2]
+  currentArguments=[-1, 2]
+  programCounter=44
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=199
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 1]
+  currentActiveRecord=[0, 0, 23, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=200
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: 2%1=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=201
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0, 0]
+  currentArguments=[0, 0]
+  programCounter=202
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 6]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, -2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 20]
+  currentActiveRecord=[0, 0, 23, 0, 0, 20]
+  currentArguments=[0, 20]
+  programCounter=203
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 0 to [-1, 0]with offset: 20.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=204
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: printf("%d ", temp);
+[DEBUG] Print String: 
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=206
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=207
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=208
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Print Number: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=209
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Print String:  
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=210
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: temp = double2(x1) / +1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=212
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 7]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, -1]
+  currentActiveRecord=[0, 0, 23, 0, -1]
+  currentArguments=[-1]
+  programCounter=213
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Called a function: #double2_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1]
+  currentActiveRecord=[0, 214, 0, 27, -1]
+  currentArguments=[-1]
+  programCounter=16
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #double2_start
+[DEBUG] Debug hint: Statement: if (!x1) {
+    return 2 * x1;
+} else {
+    return (2 * -x1);
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0]
+  currentActiveRecord=[0, 214, 0, 27, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=19
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, -1]
+  currentActiveRecord=[0, 214, 0, 27, -1, -1]
+  currentArguments=[-1, -1]
+  programCounter=20
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Operate: !-1=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0]
+  currentActiveRecord=[0, 214, 0, 27, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=21
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Jump if zero to: #if[0]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1]
+  currentActiveRecord=[0, 214, 0, 27, -1]
+  currentArguments=[-1]
+  programCounter=34
+  stackPointer=35
+  markPointer=31
+}
+[DEBUG] Skip label: #if[0]_else
+[DEBUG] Debug hint: Statement: {
+    return (2 * -x1);
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0, 0, 31, 0]
+  currentActiveRecord=[0, 0, 31, 0]
+  currentArguments=[]
+  programCounter=37
+  stackPointer=39
+  markPointer=36
+}
+[DEBUG] Debug hint: Statement: return (2 * -x1);
+[DEBUG] Load immediate: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0, 0, 31, 0, 2]
+  currentActiveRecord=[0, 0, 31, 0, 2]
+  currentArguments=[2]
+  programCounter=39
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0, 0, 31, 0, 2, 0]
+  currentActiveRecord=[0, 0, 31, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=40
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0, 0, 31, 0, 2, -1]
+  currentActiveRecord=[0, 0, 31, 0, 2, -1]
+  currentArguments=[2, -1]
+  programCounter=41
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: --1=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0, 0, 31, 0, 2, 1]
+  currentActiveRecord=[0, 0, 31, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=42
+  stackPointer=41
+  markPointer=36
+}
+[DEBUG] Operate: 2*1=2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 0, 0, 31, 0, 2]
+  currentActiveRecord=[0, 0, 31, 0, 2]
+  currentArguments=[2]
+  programCounter=43
+  stackPointer=40
+  markPointer=36
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0, 214, 0, 27, -1, 2]
+  currentActiveRecord=[0, 214, 0, 27, -1, 2]
+  currentArguments=[-1, 2]
+  programCounter=44
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=214
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 1]
+  currentActiveRecord=[0, 0, 23, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=215
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 1]
+  currentActiveRecord=[0, 0, 23, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=216
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: 2/1=2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=217
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=218
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 6]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 0, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 20]
+  currentActiveRecord=[0, 0, 23, 0, 2, 20]
+  currentArguments=[2, 20]
+  programCounter=219
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 2 to [-1, 0]with offset: 20.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=220
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: printf("%d\n", temp);
+[DEBUG] Print String: 
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=222
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=223
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=224
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Print Number: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=225
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Print String: 
+
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=226
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: continue;
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=228
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentArguments=[2, 0, 2, -1, 0]
+  programCounter=229
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Jump to: #loop[0]_iter
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentArguments=[2, 0, 2, -1, 0]
+  programCounter=307
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_iter
+[DEBUG] Jump to: #loop[0]_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentArguments=[2, 0, 2, -1, 0]
+  programCounter=140
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_start
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0, 0]
+  currentArguments=[2, 0, 2, -1, 0, 0]
+  programCounter=142
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 2]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0, 2]
+  currentArguments=[2, 0, 2, -1, 0, 2]
+  programCounter=143
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 2, 4]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0, 2, 4]
+  currentArguments=[2, 0, 2, -1, 0, 2, 4]
+  programCounter=144
+  stackPointer=24
+  markPointer=14
+}
+[DEBUG] Operate: 2<4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 1]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0, 1]
+  currentArguments=[2, 0, 2, -1, 0, 1]
+  programCounter=145
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Jump if zero to: #loop[0]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentActiveRecord=[0, 0, 10, 0, 2, 0, 2, -1, 0]
+  currentArguments=[2, 0, 2, -1, 0]
+  programCounter=146
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Debug hint: Statement: {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=148
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=150
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 2]
+  currentActiveRecord=[0, 0, 14, 0, 2]
+  currentArguments=[2]
+  programCounter=151
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 2, 4]
+  currentActiveRecord=[0, 0, 14, 0, 2, 4]
+  currentArguments=[2, 4]
+  programCounter=152
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 2!=4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=153
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[3]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=154
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_start
+[DEBUG] Debug hint: Statement: {
+    x = x + 1;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=157
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x = x + 1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=159
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=160
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 1]
+  currentActiveRecord=[0, 0, 23, 0, 2, 1]
+  currentArguments=[2, 1]
+  programCounter=161
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: 2+1=3
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 3]
+  currentActiveRecord=[0, 0, 23, 0, 3]
+  currentArguments=[3]
+  programCounter=162
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 3, 0]
+  currentActiveRecord=[0, 0, 23, 0, 3, 0]
+  currentArguments=[3, 0]
+  programCounter=163
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 4]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 2, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 3, 18]
+  currentActiveRecord=[0, 0, 23, 0, 3, 18]
+  currentArguments=[3, 18]
+  programCounter=164
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 3 to [-1, 0]with offset: 18.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 0, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=165
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 0, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=166
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Jump to: #if[3]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 0, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=175
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_end
+[DEBUG] Debug hint: Statement: flag = getint();
+[DEBUG] Read an input number: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 0, 2, -1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=178
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 0, 2, -1, 0, 0, 0, 14, 0, 1, 0]
+  currentActiveRecord=[0, 0, 14, 0, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=179
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Load address from [1, 5]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 0, 2, -1, 0, 0, 0, 14, 0, 1, 19]
+  currentActiveRecord=[0, 0, 14, 0, 1, 19]
+  currentArguments=[1, 19]
+  programCounter=180
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Store value 1 to [-1, 0]with offset: 19.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=181
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=183
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=184
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 1, 0]
+  currentActiveRecord=[0, 0, 14, 0, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=185
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 1==0=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=186
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[4]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=232
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[4]_else
+[DEBUG] Skip label: #if[4]_end
+[DEBUG] Debug hint: Statement: if (flag > 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=236
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=237
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 1, 0]
+  currentActiveRecord=[0, 0, 14, 0, 1, 0]
+  currentArguments=[1, 0]
+  programCounter=238
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 1>0=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=239
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[5]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=240
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[5]_start
+[DEBUG] Debug hint: Statement: {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=243
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x1 = getint();
+[DEBUG] Read an input number: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=245
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=246
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 7]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, -1, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 21]
+  currentActiveRecord=[0, 0, 23, 0, 2, 21]
+  currentArguments=[2, 21]
+  programCounter=247
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 2 to [-1, 0]with offset: 21.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 0, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=248
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x2 = getint();
+[DEBUG] Read an input number: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=250
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=251
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 8]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 0, 0, 0, 14, 0, 0, 0, 23, 0, 2, 22]
+  currentActiveRecord=[0, 0, 23, 0, 2, 22]
+  currentArguments=[2, 22]
+  programCounter=252
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 2 to [-1, 0]with offset: 22.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=253
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: printf("%d\n", add(x1, x2));
+[DEBUG] Print String: 
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=255
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=256
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 7]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=257
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=258
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load value from [2, 8]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2, 2]
+  currentArguments=[2, 2]
+  programCounter=259
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Called a function: #add_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2]
+  currentArguments=[2, 2]
+  programCounter=52
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Skip label: #add_start
+[DEBUG] Debug hint: Declaration: int sum = 0;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0]
+  currentArguments=[2, 2, 0]
+  programCounter=55
+  stackPointer=37
+  markPointer=31
+}
+[DEBUG] Debug hint: Statement: sum = x1 + x2;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 0]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 0]
+  currentArguments=[2, 2, 0, 0]
+  programCounter=57
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 2]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 2]
+  currentArguments=[2, 2, 0, 2]
+  programCounter=58
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 2, 0]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 2, 0]
+  currentArguments=[2, 2, 0, 2, 0]
+  programCounter=59
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Load value from [0, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 2, 2]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 2, 2]
+  currentArguments=[2, 2, 0, 2, 2]
+  programCounter=60
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Operate: 2+2=4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 4]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 4]
+  currentArguments=[2, 2, 0, 4]
+  programCounter=61
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 4, 0]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 4, 0]
+  currentArguments=[2, 2, 0, 4, 0]
+  programCounter=62
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Load address from [0, 6]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 0, 4, 37]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 0, 4, 37]
+  currentArguments=[2, 2, 0, 4, 37]
+  programCounter=63
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Store value 4 to [-1, 0]with offset: 37.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 4]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 4]
+  currentArguments=[2, 2, 4]
+  programCounter=64
+  stackPointer=37
+  markPointer=31
+}
+[DEBUG] Debug hint: Statement: return sum;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 4, 0]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 4, 0]
+  currentArguments=[2, 2, 4, 0]
+  programCounter=66
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load value from [0, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 260, 0, 27, 2, 2, 4, 4]
+  currentActiveRecord=[0, 260, 0, 27, 2, 2, 4, 4]
+  currentArguments=[2, 2, 4, 4]
+  programCounter=67
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 4]
+  currentActiveRecord=[0, 0, 23, 0, 4]
+  currentArguments=[4]
+  programCounter=260
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Print Number: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=261
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Print String: 
+
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=262
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: continue;
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=264
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentArguments=[3, 1, 2, 2, 2]
+  programCounter=265
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Jump to: #loop[0]_iter
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentArguments=[3, 1, 2, 2, 2]
+  programCounter=307
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_iter
+[DEBUG] Jump to: #loop[0]_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentArguments=[3, 1, 2, 2, 2]
+  programCounter=140
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_start
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2, 0]
+  currentArguments=[3, 1, 2, 2, 2, 0]
+  programCounter=142
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 3]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2, 3]
+  currentArguments=[3, 1, 2, 2, 2, 3]
+  programCounter=143
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 3, 4]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2, 3, 4]
+  currentArguments=[3, 1, 2, 2, 2, 3, 4]
+  programCounter=144
+  stackPointer=24
+  markPointer=14
+}
+[DEBUG] Operate: 3<4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 1]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2, 1]
+  currentArguments=[3, 1, 2, 2, 2, 1]
+  programCounter=145
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Jump if zero to: #loop[0]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 3, 1, 2, 2, 2]
+  currentArguments=[3, 1, 2, 2, 2]
+  programCounter=146
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Debug hint: Statement: {
+    if (x != 4) {
+        x = x + 1;
+    } else {
+        break;
+    }
+    flag = getint();
+    if (flag == 0) {
+        x1 = getint();
+        temp = double2(x1) % 1;
+        printf("%d ", temp);
+        temp = double2(x1) / +1;
+        printf("%d\n", temp);
+        continue;
+    }  
+    if (flag > 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", add(x1, x2));
+        continue;
+    }  
+    if (flag < 0) {
+        x1 = getint();
+        x2 = getint();
+        printf("%d\n", sub(x1, x2));
+        continue;
+    }  
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=148
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (x != 4) {
+    x = x + 1;
+} else {
+    break;
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=150
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 3]
+  currentActiveRecord=[0, 0, 14, 0, 3]
+  currentArguments=[3]
+  programCounter=151
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 3, 4]
+  currentActiveRecord=[0, 0, 14, 0, 3, 4]
+  currentArguments=[3, 4]
+  programCounter=152
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: 3!=4=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=153
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[3]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=154
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_start
+[DEBUG] Debug hint: Statement: {
+    x = x + 1;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=157
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x = x + 1;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=159
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 3]
+  currentActiveRecord=[0, 0, 23, 0, 3]
+  currentArguments=[3]
+  programCounter=160
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 3, 1]
+  currentActiveRecord=[0, 0, 23, 0, 3, 1]
+  currentArguments=[3, 1]
+  programCounter=161
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Operate: 3+1=4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 4]
+  currentActiveRecord=[0, 0, 23, 0, 4]
+  currentArguments=[4]
+  programCounter=162
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 4, 0]
+  currentActiveRecord=[0, 0, 23, 0, 4, 0]
+  currentArguments=[4, 0]
+  programCounter=163
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 4]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 3, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 4, 18]
+  currentActiveRecord=[0, 0, 23, 0, 4, 18]
+  currentArguments=[4, 18]
+  programCounter=164
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 4 to [-1, 0]with offset: 18.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, 1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=165
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, 1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=166
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Jump to: #if[3]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, 1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=175
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[3]_end
+[DEBUG] Debug hint: Statement: flag = getint();
+[DEBUG] Read an input number: -1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, 1, 2, 2, 2, 0, 0, 14, 0, -1]
+  currentActiveRecord=[0, 0, 14, 0, -1]
+  currentArguments=[-1]
+  programCounter=178
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, 1, 2, 2, 2, 0, 0, 14, 0, -1, 0]
+  currentActiveRecord=[0, 0, 14, 0, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=179
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Load address from [1, 5]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, 1, 2, 2, 2, 0, 0, 14, 0, -1, 19]
+  currentActiveRecord=[0, 0, 14, 0, -1, 19]
+  currentArguments=[-1, 19]
+  programCounter=180
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Store value -1 to [-1, 0]with offset: 19.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=181
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Debug hint: Statement: if (flag == 0) {
+    x1 = getint();
+    temp = double2(x1) % 1;
+    printf("%d ", temp);
+    temp = double2(x1) / +1;
+    printf("%d\n", temp);
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=183
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, -1]
+  currentActiveRecord=[0, 0, 14, 0, -1]
+  currentArguments=[-1]
+  programCounter=184
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, -1, 0]
+  currentActiveRecord=[0, 0, 14, 0, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=185
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: -1==0=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=186
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[4]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=232
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[4]_else
+[DEBUG] Skip label: #if[4]_end
+[DEBUG] Debug hint: Statement: if (flag > 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", add(x1, x2));
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=236
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, -1]
+  currentActiveRecord=[0, 0, 14, 0, -1]
+  currentArguments=[-1]
+  programCounter=237
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, -1, 0]
+  currentActiveRecord=[0, 0, 14, 0, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=238
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: -1>0=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=239
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[5]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=268
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[5]_else
+[DEBUG] Skip label: #if[5]_end
+[DEBUG] Debug hint: Statement: if (flag < 0) {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 0, 14, 0, 0]
+  currentArguments=[0]
+  programCounter=272
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load value from [1, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, -1]
+  currentActiveRecord=[0, 0, 14, 0, -1]
+  currentArguments=[-1]
+  programCounter=273
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, -1, 0]
+  currentActiveRecord=[0, 0, 14, 0, -1, 0]
+  currentArguments=[-1, 0]
+  programCounter=274
+  stackPointer=28
+  markPointer=23
+}
+[DEBUG] Operate: -1<0=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 1]
+  currentActiveRecord=[0, 0, 14, 0, 1]
+  currentArguments=[1]
+  programCounter=275
+  stackPointer=27
+  markPointer=23
+}
+[DEBUG] Jump if zero to: #if[6]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=276
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Skip label: #if[6]_start
+[DEBUG] Debug hint: Statement: {
+    x1 = getint();
+    x2 = getint();
+    printf("%d\n", sub(x1, x2));
+    continue;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=279
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x1 = getint();
+[DEBUG] Read an input number: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=281
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=282
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 7]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 21]
+  currentActiveRecord=[0, 0, 23, 0, 2, 21]
+  currentArguments=[2, 21]
+  programCounter=283
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 2 to [-1, 0]with offset: 21.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=284
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: x2 = getint();
+[DEBUG] Read an input number: 2
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=286
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=287
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load address from [2, 8]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 22]
+  currentActiveRecord=[0, 0, 23, 0, 2, 22]
+  currentArguments=[2, 22]
+  programCounter=288
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Store value 2 to [-1, 0]with offset: 22.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=289
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: printf("%d\n", sub(x1, x2));
+[DEBUG] Print String: 
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=291
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=292
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load value from [2, 7]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2]
+  currentArguments=[2]
+  programCounter=293
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 0]
+  currentActiveRecord=[0, 0, 23, 0, 2, 0]
+  currentArguments=[2, 0]
+  programCounter=294
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Load value from [2, 8]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 2, 2]
+  currentActiveRecord=[0, 0, 23, 0, 2, 2]
+  currentArguments=[2, 2]
+  programCounter=295
+  stackPointer=32
+  markPointer=27
+}
+[DEBUG] Called a function: #sub_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2]
+  currentArguments=[2, 2]
+  programCounter=70
+  stackPointer=36
+  markPointer=31
+}
+[DEBUG] Skip label: #sub_start
+[DEBUG] Debug hint: Declaration: int sum = 0;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0]
+  currentArguments=[2, 2, 0]
+  programCounter=73
+  stackPointer=37
+  markPointer=31
+}
+[DEBUG] Debug hint: Statement: sum = x1 - x2;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0]
+  currentArguments=[2, 2, 0, 0]
+  programCounter=75
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 2]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 2]
+  currentArguments=[2, 2, 0, 2]
+  programCounter=76
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 2, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 2, 0]
+  currentArguments=[2, 2, 0, 2, 0]
+  programCounter=77
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Load value from [0, 5]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 2, 2]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 2, 2]
+  currentArguments=[2, 2, 0, 2, 2]
+  programCounter=78
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Operate: 2-2=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0]
+  currentArguments=[2, 2, 0, 0]
+  programCounter=79
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0, 0]
+  currentArguments=[2, 2, 0, 0, 0]
+  programCounter=80
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Load address from [0, 6]
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0, 37]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0, 37]
+  currentArguments=[2, 2, 0, 0, 37]
+  programCounter=81
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Store value 0 to [-1, 0]with offset: 37.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0]
+  currentArguments=[2, 2, 0]
+  programCounter=82
+  stackPointer=37
+  markPointer=31
+}
+[DEBUG] Debug hint: Statement: if (sum >= 0) {
+    return sum;
+}  
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0]
+  currentArguments=[2, 2, 0, 0]
+  programCounter=84
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load value from [0, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0]
+  currentArguments=[2, 2, 0, 0]
+  programCounter=85
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0, 0]
+  currentArguments=[2, 2, 0, 0, 0]
+  programCounter=86
+  stackPointer=39
+  markPointer=31
+}
+[DEBUG] Operate: 0>=0=1
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 1]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 1]
+  currentArguments=[2, 2, 0, 1]
+  programCounter=87
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Jump if zero to: #if[1]_else
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0]
+  currentArguments=[2, 2, 0]
+  programCounter=88
+  stackPointer=37
+  markPointer=31
+}
+[DEBUG] Skip label: #if[1]_start
+[DEBUG] Debug hint: Statement: {
+    return sum;
+}
+[DEBUG] Block Start.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0, 0, 31, 0]
+  currentActiveRecord=[0, 0, 31, 0]
+  currentArguments=[]
+  programCounter=91
+  stackPointer=41
+  markPointer=38
+}
+[DEBUG] Debug hint: Statement: return sum;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0, 0, 31, 0, 0]
+  currentActiveRecord=[0, 0, 31, 0, 0]
+  currentArguments=[0]
+  programCounter=93
+  stackPointer=42
+  markPointer=38
+}
+[DEBUG] Load value from [1, 6]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0, 0, 31, 0, 0]
+  currentActiveRecord=[0, 0, 31, 0, 0]
+  currentArguments=[0]
+  programCounter=94
+  stackPointer=42
+  markPointer=38
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0, 296, 0, 27, 2, 2, 0, 0]
+  currentActiveRecord=[0, 296, 0, 27, 2, 2, 0, 0]
+  currentArguments=[2, 2, 0, 0]
+  programCounter=95
+  stackPointer=38
+  markPointer=31
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0, 0]
+  currentActiveRecord=[0, 0, 23, 0, 0]
+  currentArguments=[0]
+  programCounter=296
+  stackPointer=31
+  markPointer=27
+}
+[DEBUG] Print Number: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=297
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Print String: 
+
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0, 0, 0, 23, 0]
+  currentActiveRecord=[0, 0, 23, 0]
+  currentArguments=[]
+  programCounter=298
+  stackPointer=30
+  markPointer=27
+}
+[DEBUG] Debug hint: Statement: continue;
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0, 0, 14, 0]
+  currentActiveRecord=[0, 0, 14, 0]
+  currentArguments=[]
+  programCounter=300
+  stackPointer=26
+  markPointer=23
+}
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentArguments=[4, -1, 2, 2, 2]
+  programCounter=301
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Jump to: #loop[0]_iter
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentArguments=[4, -1, 2, 2, 2]
+  programCounter=307
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_iter
+[DEBUG] Jump to: #loop[0]_start
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentArguments=[4, -1, 2, 2, 2]
+  programCounter=140
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_start
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2, 0]
+  currentArguments=[4, -1, 2, 2, 2, 0]
+  programCounter=142
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load value from [0, 4]with offset: 0.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 4]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2, 4]
+  currentArguments=[4, -1, 2, 2, 2, 4]
+  programCounter=143
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Load immediate: 4
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 4, 4]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2, 4, 4]
+  currentArguments=[4, -1, 2, 2, 2, 4, 4]
+  programCounter=144
+  stackPointer=24
+  markPointer=14
+}
+[DEBUG] Operate: 4<4=0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2, 0]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2, 0]
+  currentArguments=[4, -1, 2, 2, 2, 0]
+  programCounter=145
+  stackPointer=23
+  markPointer=14
+}
+[DEBUG] Jump if zero to: #loop[0]_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentActiveRecord=[0, 0, 10, 0, 4, -1, 2, 2, 2]
+  currentArguments=[4, -1, 2, 2, 2]
+  programCounter=309
+  stackPointer=22
+  markPointer=14
+}
+[DEBUG] Skip label: #loop[0]_end
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0]
+  currentActiveRecord=[0, 14, 0, 0]
+  currentArguments=[]
+  programCounter=311
+  stackPointer=13
+  markPointer=10
+}
+[DEBUG] Debug hint: Statement: return 0;
+[DEBUG] Load immediate: 0
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0, 14, 0, 0, 0]
+  currentActiveRecord=[0, 14, 0, 0, 0]
+  currentArguments=[0]
+  programCounter=313
+  stackPointer=14
+  markPointer=10
+}
+[DEBUG] Returned a function which has a return value.
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0]
+  currentArguments=[1, 2, 3, 0, 3, 0, 0]
+  programCounter=14
+  stackPointer=10
+  markPointer=0
+}
+[DEBUG] Jump to: #main_end
+[DEBUG] Interpreter{
+  stack=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0]
+  currentActiveRecord=[0, 0, -1, 0, 1, 2, 3, 0, 3, 0, 0]
+  currentArguments=[1, 2, 3, 0, 3, 0, 0]
+  programCounter=314
+  stackPointer=10
+  markPointer=0
+}
+[DEBUG] Skip label: #main_end
+[DEBUG] Block end.
+[DEBUG] Interpreter{
+  stack=[]
+  currentActiveRecord=[]
+  currentArguments=[]
+  programCounter=316
+  stackPointer=-1
+  markPointer=-1
+}
