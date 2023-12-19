@@ -1,9 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.code.Operate;
 import pcode.protocols.PcodeType;
@@ -29,14 +28,14 @@ public record RelationalExpression(
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
+        return ReprBuilder.binaryOpExpWithCatCodeForEachPairDetailedRepr(
                 firstAdditiveExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
+        return ReprBuilder.binaryOpExRepr(
                 firstAdditiveExpression, operatorWithExpressionList
         );
     }
@@ -48,13 +47,10 @@ public record RelationalExpression(
 
     @Override
     public String toString() {
-        return "RelationalExpression{" +
-                "firstAdditiveExpression=" + firstAdditiveExpression +
-                ", operatorWithExpressionList=" + operatorWithExpressionList +
-                '}';
+        return representation();
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         firstAdditiveExpression.generatePcode(symbolManager, pcodeList, errorHandler);
         for (final var operatorWithExpression : operatorWithExpressionList) {
             final var operator = operatorWithExpression.first();
@@ -69,7 +65,7 @@ public record RelationalExpression(
             } else if (operator instanceof GreaterOrEqualToken) {
                 pcodeList.add(new Operate(Operate.Opcode.GREATER_OR_EQUAL));
             } else {
-                throw new RuntimeException();
+                throw new UnsupportedOperationException();
             }
         }
     }

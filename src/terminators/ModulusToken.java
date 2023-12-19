@@ -38,10 +38,6 @@ public record ModulusToken(
 
     @Override
     public String toString() {
-        return "ModulusToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

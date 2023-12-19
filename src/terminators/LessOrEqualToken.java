@@ -38,10 +38,6 @@ public record LessOrEqualToken(
 
     @Override
     public String toString() {
-        return "LessOrEqualToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

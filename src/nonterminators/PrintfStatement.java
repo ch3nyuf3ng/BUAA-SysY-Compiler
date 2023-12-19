@@ -1,9 +1,10 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.FormatStringArgCountUnmatchException;
+import foundation.Helpers;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.StatementType;
 import pcode.code.WriteNumber;
 import pcode.code.WriteString;
@@ -21,7 +22,7 @@ public record PrintfStatement(
         LeftParenthesisToken leftParenthesisToken,
         LiteralFormatStringToken literalFormatStringToken,
         List<Pair<CommaToken, Expression>> commaWithExpressionList,
-        RightParenthesisToken rightParenthesisToken,
+        Optional<RightParenthesisToken> rightParenthesisToken,
         Optional<SemicolonToken> semicolonToken
 ) implements StatementType {
     private enum Specifier {
@@ -32,10 +33,10 @@ public record PrintfStatement(
     public String detailedRepresentation() {
         return printfToken.detailedRepresentation()
                 + leftParenthesisToken.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
+                + ReprBuilder.binaryOpExpDetailedRepr(
                         literalFormatStringToken, commaWithExpressionList
                   )
-                + rightParenthesisToken.detailedRepresentation()
+                + rightParenthesisToken.map(RightParenthesisToken::detailedRepresentation).orElse("")
                 + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
@@ -43,10 +44,10 @@ public record PrintfStatement(
     public String representation() {
         return printfToken.representation()
                 + leftParenthesisToken.representation()
-                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
+                + ReprBuilder.binaryOpExRepr(
                         literalFormatStringToken, commaWithExpressionList
                   )
-                + rightParenthesisToken.representation()
+                + rightParenthesisToken.map(RightParenthesisToken::detailedRepresentation).orElse("")
                 + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
@@ -57,25 +58,33 @@ public record PrintfStatement(
 
     @Override
     public TokenType lastTerminator() {
-        return semicolonToken.isPresent() ? semicolonToken.get() : rightParenthesisToken;
+        if (semicolonToken.isPresent()) {
+            return semicolonToken.get();
+        } else if (rightParenthesisToken.isPresent()) {
+            return rightParenthesisToken.get();
+        } else if (!commaWithExpressionList.isEmpty()) {
+            final var expression = commaWithExpressionList.get(commaWithExpressionList.size() - 1).second();
+            return expression.lastTerminator();
+        } else {
+            return literalFormatStringToken;
+        }
     }
 
     @Override
     public String toString() {
-        return "PrintfStatement{" +
-                "printfToken=" + printfToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", literalFormatStringToken=" + literalFormatStringToken +
-                ", commaWithExpressionList=" + commaWithExpressionList +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws FormatStringArgCountUnmatchException {
         final var parts = new ArrayList<Pair<Specifier, Object>>();
         final var originalString = literalFormatStringToken.rawRepresentation();
         final var stringBuilder = new StringBuilder();
+        final var descriptorCount = Helpers.formatDescriptorCount(literalFormatStringToken.content());
+        if (descriptorCount != commaWithExpressionList.size()) {
+            throw new FormatStringArgCountUnmatchException(Helpers.lineNumberOf(printfToken));
+        }
         var expressionCount = 0;
         for (var i = 0; i < originalString.length(); i += 1) {
             final var character = originalString.charAt(i);

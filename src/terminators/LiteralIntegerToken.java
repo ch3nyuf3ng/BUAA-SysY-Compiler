@@ -34,11 +34,7 @@ public record LiteralIntegerToken(
 
     @Override
     public String toString() {
-        return "LiteralIntegerToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 
     public int toInt() {

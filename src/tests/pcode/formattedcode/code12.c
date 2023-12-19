@@ -26,20 +26,24 @@ int __my_Ha_s__h(int _[], int len) {
 }
 
 void ___() {
-    printf("   !!! ()*+,-./:;<>=@?^_`{}|~[]  called func: ___\n");
+    printf("   !!! ()*+,-./:;<>=@?^_`{}|~[]  called func: ___\n"RPARENT )
+    ;
 }
 
 void ____(int _arg) {
-    printf("//called func: ____, _arg = %d\n", _arg * 2 * 3 / 6);
+    printf("//called func: ____, _arg = %d\n", _arg * 2 * 3 / 6RPARENT )
+    ;
 }
 
 void __(int _arr_Ay[], int useless) {
-    printf("called func: __, array[0] = %d\n\n\n", _arr_Ay[0]);
+    printf("called func: __, array[0] = %d\n\n\n", _arr_Ay[0]RPARENT )
+    ;
     return;
 }
 
 void _Main(int _arr_Ay[][2]) {
-    printf("called func: Main, array[0][0] = %d, array[0][1] = %d\n\n", _arr_Ay[0][0], _arr_Ay[0][1]);
+    printf("called func: Main, array[0][0] = %d, array[0][1] = %d\n\n", _arr_Ay[0][0], _arr_Ay[0][1]RPARENT )
+    ;
 }
 
 int _add_fake(int a, int b) {
@@ -63,11 +67,14 @@ int _get_id() {
     {
         ;
         123;
-        printf("%d\n", _2_wj5qhidw_);
+        printf("%d\n", _2_wj5qhidw_RPARENT )
+        ;
         _2_wj5qhidw_ = 10086;
-        printf("%d\n", _2_wj5qhidw_);
+        printf("%d\n", _2_wj5qhidw_RPARENT )
+        ;
         int _2_wj5qhidw_ = +-+10;
-        printf("%d\n", _2_wj5qhidw_);
+        printf("%d\n", _2_wj5qhidw_RPARENT )
+        ;
     }
     return20373381;
 }
@@ -146,8 +153,10 @@ int main() {
     ___();
     _Main(_3u22);
     __(_23879, 3432);
-    printf("temp: %d\n", temp);
-    printf("%d %d %d %d %d %d %d %d %d %d\n%d %d %d %d %d %d %d %d %d %d\n%d %d %d %d %d %d %d %d %d %d\n%d %d %d %d %d %d %d %d %d %d\n", __my_Ha_s__h(array, 12), sum, 1, _3, _2, _10, aaa[0], aaa[1], A[0][0], A[0][1], A[0][2], A[1][0], A[1][1], A[1][2], A[2][0], A[2][1], A[2][2], A[3][0], A[3][1], A[3][2], _3cg, hdc33ec_dyu, cdh3yi_23, duhih2_23c, dijhw[0][0], dijhw[0][1], dijhw[1][0], dijhw[1][1], dijhw[2][0], dijhw[2][1], cdwuh[0], cdwuh[1], wuei, jdfo_, _M__a_G_I___c(__my_Ha_s__h(cdwuh, 2)), __my_Ha_s__h(_3u22[0], 2), _main, _0, a10086__, __array[0][2]);
+    printf("temp: %d\n", tempRPARENT )
+    ;
+    printf("%d %d %d %d %d %d %d %d %d %d\n%d %d %d %d %d %d %d %d %d %d\n%d %d %d %d %d %d %d %d %d %d\n%d %d %d %d %d %d %d %d %d %d\n", __my_Ha_s__h(array, 12), sum, 1, _3, _2, _10, aaa[0], aaa[1], A[0][0], A[0][1], A[0][2], A[1][0], A[1][1], A[1][2], A[2][0], A[2][1], A[2][2], A[3][0], A[3][1], A[3][2], _3cg, hdc33ec_dyu, cdh3yi_23, duhih2_23c, dijhw[0][0], dijhw[0][1], dijhw[1][0], dijhw[1][1], dijhw[2][0], dijhw[2][1], cdwuh[0], cdwuh[1], wuei, jdfo_, _M__a_G_I___c(__my_Ha_s__h(cdwuh, 2)), __my_Ha_s__h(_3u22[0], 2), _main, _0, a10086__, __array[0][2]RPARENT )
+    ;
     ____(Main);
     return0;
 }

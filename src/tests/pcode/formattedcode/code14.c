@@ -39,19 +39,24 @@ void logic() {
     if (i < 100 && j > 100) {}  
     if (i == 0 && j != 0) {}  
     if (i == 0 && !j) {
-        printf("YeG1\n");
+        printf("YeG1\n"RPARENT )
+        ;
     }  
     if (!i || j) {
-        printf("YeG2\n");
+        printf("YeG2\n"RPARENT )
+        ;
     }  
     if (i || !j) {
-        printf("YeG3\n");
+        printf("YeG3\n"RPARENT )
+        ;
     }  
     if (!i || !j) {
-        printf("YeG4\n");
+        printf("YeG4\n"RPARENT )
+        ;
     }  
     if (!i && !j) {
-        printf("YeG5\n");
+        printf("YeG5\n"RPARENT )
+        ;
     }  
     if (!i != j) {
         i = j;
@@ -73,7 +78,8 @@ int getInt() {
 void prd(int d[][2], int x, int a[]) {
     int i = 0, j = 0;
     for (; i >= 0; ) {
-        printf("%d\n", d[i][j]);
+        printf("%d\n", d[i][j]RPARENT )
+        ;
         j = j + 1;
         if (j == 2) {
             j = 0;
@@ -89,7 +95,8 @@ void prd(int d[][2], int x, int a[]) {
 }
 
 void f1(int x) {
-    printf("%d", x);
+    printf("%d", xRPARENT )
+    ;
 }
 
 void f2(int d[][1 + 1]) {
@@ -140,11 +147,16 @@ int main() {
     if (!a) {
         a = 10000;
     } else {}
-    printf("%d -- %d\n", n, m);
+    printf("%d -- %d\n", n, mRPARENT )
+    ;
     prd(d, 100, tmp_0);
-    printf("%d\n", n + m);
-    printf("%d\n", n - m);
-    printf("%d\n", n * m);
-    printf("%d\n", n % m);
+    printf("%d\n", n + mRPARENT )
+    ;
+    printf("%d\n", n - mRPARENT )
+    ;
+    printf("%d\n", n * mRPARENT )
+    ;
+    printf("%d\n", n % mRPARENT )
+    ;
     return0;
 }

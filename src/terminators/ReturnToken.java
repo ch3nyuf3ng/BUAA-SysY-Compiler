@@ -38,10 +38,6 @@ public record ReturnToken(
 
     @Override
     public String toString() {
-        return "ReturnToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

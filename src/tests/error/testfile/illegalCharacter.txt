@@ -1,5 +1,0 @@
-int main() {
-    printf("Illegal format descriptor:\t\n");
-    printf("Illegal character:$\n");
-    return 0;
-}

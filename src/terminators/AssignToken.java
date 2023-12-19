@@ -37,11 +37,7 @@ public record AssignToken(
 
     @Override
     public String toString() {
-        return "AssignToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }
 

@@ -1,7 +1,6 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.StatementType;
 import pcode.code.Jump;
 import pcode.code.JumpIfZero;
@@ -60,22 +59,12 @@ public record IfStatement(
 
     @Override
     public String toString() {
-        return "IfStatement{" +
-                "ifToken=" + ifToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", condition=" + condition +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                ", ifStatement=" + ifStatement +
-                ", elseToken=" + elseToken +
-                ", elseStatement=" + elseStatement +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
         condition.generatePcode(symbolManager, pcodeList, errorHandler);
         final var ifLabel = "#if" + "[" + symbolManager.ifCount() + "]";
         symbolManager.increaseIfCount();
@@ -84,9 +73,9 @@ public record IfStatement(
         ifStatement.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         pcodeList.add(new Jump(ifLabel + "_end"));
         pcodeList.add(new Label(ifLabel + "_else"));
-        if (elseStatement.isPresent()) {
-            elseStatement.get().buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
-        }
+        elseStatement.ifPresent(statement ->
+                statement.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler)
+        );
         pcodeList.add(new Label(ifLabel + "_end"));
     }
 }

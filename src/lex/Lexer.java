@@ -4,7 +4,7 @@ import error.ErrorHandler;
 import error.errors.IllegalCharacterError;
 import foundation.Logger;
 import foundation.Position;
-import foundation.StringUtils;
+import foundation.Helpers;
 import terminators.*;
 import terminators.nontokens.CommentMultiLine;
 import terminators.nontokens.CommentSingleLine;
@@ -180,7 +180,7 @@ public class Lexer {
     }
 
     public String getLineAt(Position position) {
-        return StringUtils.readLine(sourceCode, position);
+        return Helpers.readLine(sourceCode, position);
     }
 
     private boolean isAtEndOfSourceCode() {
@@ -315,26 +315,23 @@ public class Lexer {
         while (currentCharacter() != '"') {
             if (currentCharacter() == '\\' && followingCharacterOfCurrentOne() != 'n') {
                 final var illegalCharacterBeginningPosition = currentPosition();
-                literalFormatStringContentBuilder
-                        .append(currentCharacter())
-                        .append(followingCharacterOfCurrentOne());
+                literalFormatStringContentBuilder.append(currentCharacter()).append(followingCharacterOfCurrentOne());
+                if (followingCharacterOfCurrentOne() != '"') {
+                    consumeCurrentCharacterAndUpdateCurrentPosition(2);
+                } else {
+                    consumeCurrentCharacterAndUpdateCurrentPosition();
+                }
+                final var error = new IllegalCharacterError(illegalCharacterBeginningPosition.lineNumber());
+                errorHandler.reportError(error);
+            } else if (currentCharacter() == '%' && followingCharacterOfCurrentOne() == 'd') {
+                literalFormatStringContentBuilder.append(currentCharacter()).append(followingCharacterOfCurrentOne());
                 consumeCurrentCharacterAndUpdateCurrentPosition(2);
-                final var illegalCharacterError = new IllegalCharacterError(
-                        getLineAt(beginningPosition()),
-                        illegalCharacterBeginningPosition,
-                        currentPosition()
-                );
-                errorHandler.reportError(illegalCharacterError);
             } else if (!LiteralFormatStringToken.isLegalCharacter(currentCharacter())) {
                 final var illegalCharacterBeginningPosition = currentPosition();
                 literalFormatStringContentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();
-                final var illegalCharacterError = new IllegalCharacterError(
-                        getLineAt(beginningPosition()),
-                        illegalCharacterBeginningPosition,
-                        currentPosition()
-                );
-                errorHandler.reportError(illegalCharacterError);
+                final var error = new IllegalCharacterError(illegalCharacterBeginningPosition.lineNumber());
+                errorHandler.reportError(error);
             } else {
                 literalFormatStringContentBuilder.append(currentCharacter());
                 consumeCurrentCharacterAndUpdateCurrentPosition();

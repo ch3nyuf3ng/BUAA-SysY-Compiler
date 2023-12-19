@@ -7,11 +7,11 @@ import terminators.RightBracketToken;
 
 import java.util.List;
 
-public class RepresentationBuilder {
+public class ReprBuilder {
     public static <Operand1 extends DetailedRepresentable,
             Operand2 extends DetailedRepresentable,
             Operator extends DetailedRepresentable>
-    String binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
+    String binaryOpExpWithCatCodeForEachPairDetailedRepr(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList, String categoryCode
     ) {
         final var stringBuilder = new StringBuilder()
@@ -28,7 +28,7 @@ public class RepresentationBuilder {
     public static <Operand1 extends DetailedRepresentable,
             Operand2 extends DetailedRepresentable,
             Operator extends DetailedRepresentable>
-    String binaryOperatorExpressionDetailedRepresentation(
+    String binaryOpExpDetailedRepr(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList
     ) {
         final var stringBuilder = new StringBuilder();
@@ -40,10 +40,8 @@ public class RepresentationBuilder {
         return stringBuilder.toString();
     }
 
-    public static <Operand1 extends Representable,
-            Operand2 extends Representable,
-            Operator extends Representable>
-    String binaryOperatorExpressionRepresentation(
+    public static <Operand1 extends Representable, Operand2 extends Representable, Operator extends Representable>
+    String binaryOpExRepr(
             Operand1 firstOperand1, List<Pair<Operator, Operand2>> operatorWithOperandList
     ) {
         final var stringBuilder = new StringBuilder().append(firstOperand1.representation());
@@ -56,7 +54,7 @@ public class RepresentationBuilder {
     }
 
     public static <NonTerminator extends DetailedRepresentable>
-    String bracketWithNonTerminatorDetailedRepresentation(List<BracketWith<NonTerminator>> bracketWithTList) {
+    String bracketWithNonTerminatorDetailedRepr(List<BracketWith<NonTerminator>> bracketWithTList) {
         final var stringBuilder = new StringBuilder();
         bracketWithTList.forEach(t -> stringBuilder
                 .append(t.leftBracketToken().detailedRepresentation())
@@ -67,7 +65,7 @@ public class RepresentationBuilder {
     }
 
     public static <NonTerminator extends Representable>
-    String bracketWithNonTerminatorRepresentation(List<BracketWith<NonTerminator>> bracketWithTList) {
+    String bracketWithNonTerminatorRepr(List<BracketWith<NonTerminator>> bracketWithTList) {
         final var stringBuilder = new StringBuilder();
         bracketWithTList.forEach(t -> stringBuilder
                 .append(t.leftBracketToken().representation())

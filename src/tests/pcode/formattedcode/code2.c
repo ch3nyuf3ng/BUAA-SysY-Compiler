@@ -2,7 +2,8 @@ int a_global;
 const int b_global = 1;
 
 void func1() {
-    printf("21182621\n");
+    printf("21182621\n"RPARENT )
+    ;
 }
 
 void func2(int a) {
@@ -16,7 +17,8 @@ void func3(int a, int arr[], int arrrr[][2]) {
 }
 
 int func4() {
-    printf("21182621\n");
+    printf("21182621\n"RPARENT )
+    ;
     return0;
 }
 
@@ -40,7 +42,8 @@ int main() {
     const int arr_aa[2] = {1, 2}, arr_bb[3] = {3, 4, 5};
     const int arrrr_a[2][2] = {{1, 2}, {1, 2}};
     const int arrrr_aa[2][2] = {{1, 2}, {1, 2}}, arrrr_bb[1][3] = {{1, 2, 3}};
-    printf("21182621\n");
+    printf("21182621\n"RPARENT )
+    ;
     int d = 0;
     int dd = 0, ee = 1, ff = 2;
     int ddd, eee = 1;
@@ -55,14 +58,16 @@ int main() {
     int arrrr_ddd[2][2] = {{1, 2}, {1, 2}}, arrrr_eee[1][3] = {{1, 2, 3}};
     arrrr_ddd[1][1] = 1;
     arrrr_eee[0][1] = 1;
-    printf("21182621\n");
+    printf("21182621\n"RPARENT )
+    ;
     func1();
     func2(1);
     func3(1, arrrr_d[0], arrrr_d);
     func4();
     func5(1);
     func6(1, arr_d);
-    printf("21182621\n");
+    printf("21182621\n"RPARENT )
+    ;
     int i = 5;
     int j;
     for (j = 1; j <= 5; j = j + 1) {
@@ -101,8 +106,10 @@ int main() {
             ;
         }
     }
-    printf("%d\n", a);
-    printf("21182621\n");
+    printf("%d\n", aRPARENT )
+    ;
+    printf("21182621\n"RPARENT )
+    ;
     d = 1 + 2 * (-3) / 4 % 5;
     d = -+-d;
     if (3 != 4 || (!a)) {
@@ -115,8 +122,11 @@ int main() {
         int d = 10;
     }
     {}
-    printf("21182621\n");
-    printf("21182621\n");
-    printf("21182621\n");
+    printf("21182621\n"RPARENT )
+    ;
+    printf("21182621\n"RPARENT )
+    ;
+    printf("21182621\n"RPARENT )
+    ;
     return0;
 }

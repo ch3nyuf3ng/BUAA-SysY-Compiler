@@ -1,13 +1,13 @@
 package symbol;
 
-import nonterminators.BasicType;
+import foundation.protocols.EvaluationType;
 
 import java.util.List;
 
 public record VariableMetadata(
         boolean isConstant,
         boolean isArray,
-        BasicType basicType,
+        EvaluationType evaluationType,
         List<Integer> dimensionSizes,
         int activeRecordOffset,
         int depth
@@ -25,7 +25,7 @@ public record VariableMetadata(
         return '\n' +
                 "    isConstant: " + isConstant + '\n' +
                 "    isArray: " + isArray + '\n' +
-                "    basicType: " + basicType.representation() + '\n' +
+                "    evaluationType: " + evaluationType + '\n' +
                 "    dimensionSizes: " + dimensionSizes + '\n' +
                 "    activeRecordOffset: " + activeRecordOffset + '\n' +
                 "    depth: " + depth;

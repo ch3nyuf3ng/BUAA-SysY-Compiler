@@ -1,6 +1,6 @@
 package symbol;
 
-import nonterminators.BasicType;
+import foundation.protocols.EvaluationType;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import static symbol.SymbolUtils.generateDimensionOffsets;
 
 public record FunctionParameterMetadata(
         boolean isArrayPointer,
-        BasicType basicType,
+        EvaluationType evaluationType,
         List<Integer> dimensionSizes,
         int activeRecordOffset
 ) {
@@ -20,7 +20,7 @@ public record FunctionParameterMetadata(
     public String toString() {
         return '\n' +
                 "        isArrayPointer: " + isArrayPointer + '\n' +
-                "        basicType: " + basicType.representation() + '\n' +
+                "        evaluationType: " + evaluationType + '\n' +
                 "        dimensionSizes: " + dimensionSizes + '\n' +
                 "        activeRecordOffset: " + activeRecordOffset;
     }

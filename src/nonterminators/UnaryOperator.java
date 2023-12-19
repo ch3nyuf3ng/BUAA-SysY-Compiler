@@ -29,8 +29,6 @@ public record UnaryOperator(
 
     @Override
     public String toString() {
-        return "UnaryOperator{" +
-                "operator=" + operator +
-                '}';
+        return representation();
     }
 }

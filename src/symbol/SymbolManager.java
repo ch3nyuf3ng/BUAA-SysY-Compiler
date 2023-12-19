@@ -58,12 +58,20 @@ public class SymbolManager {
         ifCount += 1;
     }
 
-    public int loopIndex() {
-        return loopIndexes.get(loopIndexes.size() - 1);
+    public Optional<Integer> loopIndex() {
+        if (loopIndexes.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(loopIndexes.get(loopIndexes.size() - 1));
+        }
     }
 
-    public int loopDepth() {
-        return loopDepths.get(loopDepths.size() - 1);
+    public Optional<Integer> loopDepth() {
+        if (loopIndexes.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(loopDepths.get(loopDepths.size() - 1));
+        }
     }
 
     public int createLoopIndex() {

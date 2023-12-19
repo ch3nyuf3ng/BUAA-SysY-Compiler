@@ -11,8 +11,10 @@ int add1(int a, int b) {
     const int AAA = 3, BBB_ = 3, CCC = 9;
     const int a1 = 12, a2 = 22;
     ans = a + b;
-    printf("a = %d\n", a);
-    printf("b = %d\n", b);
+    printf("a = %d\n", aRPARENT )
+    ;
+    printf("b = %d\n", bRPARENT )
+    ;
     returnans;
 }
 
@@ -25,12 +27,14 @@ int add() {
 }
 
 void printarrrr(int arr[][2]) {
-    printf("first: %d", arr[0][0]);
+    printf("first: %d", arr[0][0]RPARENT )
+    ;
     return;
 }
 
 void printarr(int arr[], int arr2[]) {
-    printf("first : %d", arr[0]);
+    printf("first : %d", arr[0]RPARENT )
+    ;
 }
 
 int main() {
@@ -63,12 +67,15 @@ int main() {
     if (i == 0) {}  
     for (; 1; ) {
         if (var_array[i] == 2 && var_array[0] > 0) {
-            printf("%d\n", var_array[i]);
+            printf("%d\n", var_array[i]RPARENT )
+            ;
         } else ;
         if (var_array[i] != 2) {
-            printf("%d is not 2\n", var_array[i]);
+            printf("%d is not 2\n", var_array[i]RPARENT )
+            ;
         }  
-        printf("xxxx\n");
+        printf("xxxx\n"RPARENT )
+        ;
         i = i + 1;
         if (-var_array[i] >= 0 || var_array[0] <= 0 && 1) {
             var_array[i] = var_array[i] * 3;

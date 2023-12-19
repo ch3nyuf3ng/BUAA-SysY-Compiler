@@ -38,10 +38,6 @@ public record LeftBracketToken(
 
     @Override
     public String toString() {
-        return "LeftBracketToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

@@ -109,14 +109,23 @@ int main() {
     bv[1] = getint();
     func4(a, bv, arr);
     func5();
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
-    printf("%d\n", 1);
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
+    printf("%d\n", 1RPARENT )
+    ;
     return0;
 }

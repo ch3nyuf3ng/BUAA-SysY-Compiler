@@ -1,10 +1,13 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
-import foundation.ArrayPointer;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.FuncArgNumUnmatchException;
+import error.exceptions.FuncArgTypeUnmatchException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
+import foundation.protocols.EvaluationType;
 import nonterminators.protocols.NonTerminatorType;
 import nonterminators.protocols.Precalculable;
 import pcode.code.Operate;
@@ -32,14 +35,14 @@ public record MultiplicativeExpression(
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
+        return ReprBuilder.binaryOpExpWithCatCodeForEachPairDetailedRepr(
                 firstExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatorExpressionRepresentation(firstExpression, operatorWithExpressionList);
+        return ReprBuilder.binaryOpExRepr(firstExpression, operatorWithExpressionList);
     }
 
     @Override
@@ -49,15 +52,13 @@ public record MultiplicativeExpression(
 
     @Override
     public String toString() {
-        return "MultiplicativeExpression{" +
-                "firstExpression=" + firstExpression +
-                ", operatorWithExpressionList=" + operatorWithExpressionList +
-                '}';
+        return representation();
     }
 
     @Override
-    public int calculateToInt(SymbolManager symbolManager) {
-        var product = firstExpression.calculateToInt(symbolManager);
+    public int calculateToInt(SymbolManager symbolManager) throws IdentifierUndefineException {
+        var product = 1;
+        product *= firstExpression.calculateToInt(symbolManager);
         for (var operatorWithExpression : operatorWithExpressionList) {
             final var operator = operatorWithExpression.first();
             final var expression = operatorWithExpression.second();
@@ -68,18 +69,30 @@ public record MultiplicativeExpression(
             } else if (operator instanceof ModulusToken) {
                 product %= expression.calculateToInt(symbolManager);
             } else {
-                throw new RuntimeException();
+                throw new UnsupportedOperationException();
             }
         }
         return product;
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
-        firstExpression.generatePcode(symbolManager, pcodeList, errorHandler);
+    public void generatePcode(
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
+        try {
+            firstExpression.generatePcode(symbolManager, pcodeList, errorHandler);
+        } catch (IdentifierUndefineException | AssignToConstantException |
+                 FuncArgTypeUnmatchException | FuncArgNumUnmatchException e) {
+            errorHandler.reportError(e);
+        }
         for (var operatorWithExpression : operatorWithExpressionList) {
             final var operator = operatorWithExpression.first();
             final var expression = operatorWithExpression.second();
-            expression.generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                expression.generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (IdentifierUndefineException | AssignToConstantException |
+                     FuncArgTypeUnmatchException | FuncArgNumUnmatchException e) {
+                errorHandler.reportError(e);
+            }
             if (operator instanceof MultiplyToken) {
                 pcodeList.add(new Operate(Operate.Opcode.MULTIPLY));
             } else if (operator instanceof DivideToken) {
@@ -87,20 +100,24 @@ public record MultiplicativeExpression(
             } else if (operator instanceof ModulusToken) {
                 pcodeList.add(new Operate(Operate.Opcode.MODULUS));
             } else {
-                throw new RuntimeException("Unsupport: " + operator.getClass());
+                throw new UnsupportedOperationException();
             }
         }
     }
 
-    public boolean isArrayPointer(SymbolManager symbolManager) {
-        if (operatorWithExpressionList.isEmpty()) {
-            return firstExpression.isArrayPointer(symbolManager);
-        } else {
-            return false;
-        }
-    }
+//    public boolean isArrayPointer(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        if (operatorWithExpressionList.isEmpty()) {
+//            return firstExpression.isArrayPointer(symbolManager);
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    public ArrayPointerType arrayPointerType(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        return firstExpression.arrayPointerType(symbolManager);
+//    }
 
-    public ArrayPointer arrayPointerType(SymbolManager symbolManager) {
-        return firstExpression.arrayPointerType(symbolManager);
+    public EvaluationType evaluationType(SymbolManager symbolManager) throws IdentifierUndefineException {
+        return firstExpression.evaluationType(symbolManager);
     }
 }

@@ -40,10 +40,6 @@ public record MinusToken(
 
     @Override
     public String toString() {
-        return "MinusToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

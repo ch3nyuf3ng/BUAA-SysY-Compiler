@@ -1,12 +1,10 @@
 package parse;
 
 import error.ErrorHandler;
+import error.errors.MissingRightBracketError;
 import error.errors.MissingRightParenthesisError;
 import error.errors.MissingSemicolonError;
-import foundation.BracketWith;
-import foundation.Logger;
-import foundation.Pair;
-import foundation.Position;
+import foundation.*;
 import lex.Lexer;
 import nonterminators.*;
 import terminators.*;
@@ -163,21 +161,27 @@ public class Parser {
             }
 
             final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
-            if (rightParenthesisToken.isEmpty()) break parse;
 
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
             final var result = new PrintfStatement(
-                    printfToken.get(), leftParenthesisToken.get(),
-                    literalFormatStringToken.get(), commaWithExpressionList,
-                    rightParenthesisToken.get(), semicolonToken
+                    printfToken.get(), leftParenthesisToken.get(), literalFormatStringToken.get(),
+                    commaWithExpressionList, rightParenthesisToken, semicolonToken
             );
+            if (rightParenthesisToken.isEmpty()) {
+                final TokenType lastTerminator;
+                if (commaWithExpressionList.isEmpty()) {
+                    lastTerminator = literalFormatStringToken.get();
+                } else {
+                    final var expression = commaWithExpressionList.get(commaWithExpressionList.size() - 1).second();
+                    lastTerminator = expression.lastTerminator();
+                }
+                final var error = new MissingRightParenthesisError(Helpers.lineNumberOf(lastTerminator));
+                errorHandler.reportError(error);
+            }
             if (semicolonToken.isEmpty()) {
                 final var lastTerminator = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastTerminator.endingPosition()),
-                        lastTerminator.endingPosition()
-                );
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastTerminator));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -247,10 +251,7 @@ public class Parser {
             final var result = new ReturnStatement(returnToken.get(), expression, semicolonToken);
             if (semicolonToken.isEmpty()) {
                 final var lastToken = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastToken.endingPosition()),
-                        lastToken.endingPosition()
-                );
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -371,10 +372,7 @@ public class Parser {
             );
             if (semicolonToken.isEmpty()) {
                 final var lastToken = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastToken.endingPosition()),
-                        lastToken.endingPosition()
-                );
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -509,16 +507,13 @@ public class Parser {
             if (breakToken.isEmpty()) break parse;
 
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
-
-            final var result = new BreakStatement(breakToken.get(), semicolonToken);
             if (semicolonToken.isEmpty()) {
-                final var lastToken = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastToken.endingPosition()),
-                        lastToken.endingPosition()
-                );
+                final var lastToken = breakToken.get();
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
                 errorHandler.reportError(error);
             }
+
+            final var result = new BreakStatement(breakToken.get(), semicolonToken);
             if (Logger.LogEnabled) {
                 Logger.debug("Matched <BreakStatement>: " + result.representation(), Logger.Category.PARSER);
             }
@@ -630,18 +625,12 @@ public class Parser {
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
             final var result = new ConstDeclaration(
-                    constToken.get(),
-                    basicType.get(),
-                    firstConstDefinition.get(),
-                    Collections.unmodifiableList(additionalConstDefinitionList),
-                    semicolonToken
+                    constToken.get(), basicType.get(), firstConstDefinition.get(),
+                    Collections.unmodifiableList(additionalConstDefinitionList), semicolonToken
             );
             if (semicolonToken.isEmpty()) {
                 final var lastToken = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastToken.endingPosition()),
-                        lastToken.endingPosition()
-                );
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -677,12 +666,15 @@ public class Parser {
                 if (constExpression.isEmpty()) break parse;
 
                 final var rightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
+                if (rightBracketToken.isEmpty()) {
+                    final var lastTerminator = constExpression.get().lastTerminator();
+                    final var error = new MissingRightBracketError(Helpers.lineNumberOf(lastTerminator));
+                    errorHandler.reportError(error);
+                }
 
-                bracketWithConstExpressionList.add(new BracketWith<>(
-                        leftBracketToken.get(),
-                        constExpression.get(),
-                        rightBracketToken
-                ));
+                bracketWithConstExpressionList.add(
+                        new BracketWith<>(leftBracketToken.get(), constExpression.get(), rightBracketToken)
+                );
             }
 
             final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
@@ -692,10 +684,7 @@ public class Parser {
             if (constInitValue.isEmpty()) break parse;
 
             final var result = new ConstDefinition(
-                    identifierToken.get(),
-                    bracketWithConstExpressionList,
-                    assignToken.get(),
-                    constInitValue.get()
+                    identifierToken.get(), bracketWithConstExpressionList, assignToken.get(), constInitValue.get()
             );
             if (Logger.LogEnabled) {
                 Logger.debug("Matched <ConstDefinition>." + result.representation(), Logger.Category.PARSER);
@@ -784,16 +773,13 @@ public class Parser {
             if (continueToken.isEmpty()) break parse;
 
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
-
-            final var result = new ContinueStatement(continueToken.get(), semicolonToken);
             if (semicolonToken.isEmpty()) {
-                final var lastToken = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastToken.endingPosition()),
-                        lastToken.endingPosition()
-                );
+                final var lastToken = continueToken.get();
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
                 errorHandler.reportError(error);
             }
+
+            final var result = new ContinueStatement(continueToken.get(), semicolonToken);
             if (Logger.LogEnabled) {
                 Logger.debug("Matched <ContinueStatement>: " + result.representation(), Logger.Category.PARSER);
             }
@@ -928,9 +914,14 @@ public class Parser {
             final var expression = parseExpression();
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            if (semicolonToken.isEmpty()) break parse;
+            if (semicolonToken.isEmpty() && expression.isEmpty()) break parse;
 
-            final var result = new ExpressionStatement(expression, semicolonToken.get());
+            final var result = new ExpressionStatement(expression, semicolonToken);
+            if (semicolonToken.isEmpty()) {
+                final var lastToken = expression.get().lastTerminator();
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
+                errorHandler.reportError(error);
+            }
             if (Logger.LogEnabled) {
                 Logger.debug("Matched <ExpressionStatement>: " + result.representation(), Logger.Category.PARSER);
             }
@@ -1106,7 +1097,8 @@ public class Parser {
                     funcParaList, rightParenthesisToken, block.get()
             );
             if (rightParenthesisToken.isEmpty()) {
-                final var error = new MissingRightParenthesisError(result.lastTerminator().endingPosition().lineNumber());
+                final var lastTerminator = leftParenthesisToken.get();
+                final var error = new MissingRightParenthesisError(Helpers.lineNumberOf(lastTerminator));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -1149,13 +1141,11 @@ public class Parser {
             final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
 
             final var result = new FuncInvocation(
-                    identifierToken.get(),
-                    leftParenthesisToken.get(),
-                    funcArgList,
-                    rightParenthesisToken
+                    identifierToken.get(), leftParenthesisToken.get(), funcArgList, rightParenthesisToken
             );
             if (rightParenthesisToken.isEmpty()) {
-                final var error = new MissingRightParenthesisError(result.lastTerminator().endingPosition().lineNumber());
+                final var lastTerminator = result.lastTerminator();
+                final var error = new MissingRightParenthesisError(Helpers.lineNumberOf(lastTerminator));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -1192,7 +1182,10 @@ public class Parser {
             ));
 
             final var rightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
-            if (rightBracketToken.isEmpty()) break parse;
+            if (rightBracketToken.isEmpty()) {
+                final var error = new MissingRightBracketError(Helpers.lineNumberOf(identifierToken.get()));
+                errorHandler.reportError(error);
+            }
 
             final var bracketWithConstExpressionList = new ArrayList<BracketWith<ConstExpression>>();
             while (lexer.isMatchedTokenOf(LeftBracketToken.class)) {
@@ -1207,6 +1200,10 @@ public class Parser {
                 bracketWithConstExpressionList.add(new BracketWith<>(
                         additionalLeftBracketToken.get(), constExpression.get(), additionalRightBracketToken
                 ));
+                if (additionalRightBracketToken.isEmpty()) {
+                    final var error = new MissingRightBracketError(Helpers.lineNumberOf(identifierToken.get()));
+                    errorHandler.reportError(error);
+                }
             }
 
             final var result = new FuncParam(
@@ -1309,6 +1306,12 @@ public class Parser {
             if (condition.isEmpty()) break parse;
 
             final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
+            if (rightParenthesisToken.isEmpty()) {
+                final var error = new MissingRightParenthesisError(
+                        Helpers.lineNumberOf(condition.get().lastTerminator())
+                );
+                errorHandler.reportError(error);
+            }
 
             final var ifStatement = parseStatement();
             if (ifStatement.isEmpty()) break parse;
@@ -1316,17 +1319,9 @@ public class Parser {
             final var elseToken = lexer.tryMatchAndConsumeTokenOf(ElseToken.class);
             if (elseToken.isEmpty()) {
                 final var result = new IfStatement(
-                        ifToken.get(), leftParenthesisToken.get(),
-                        condition.get(), rightParenthesisToken,
-                        ifStatement.get(),
-                        Optional.empty(), Optional.empty()
+                        ifToken.get(), leftParenthesisToken.get(), condition.get(), rightParenthesisToken,
+                        ifStatement.get(), Optional.empty(), Optional.empty()
                 );
-                if (rightParenthesisToken.isEmpty()) {
-                    final var error = new MissingRightParenthesisError(
-                            result.lastTerminator().endingPosition().lineNumber()
-                    );
-                    errorHandler.reportError(error);
-                }
                 if (Logger.LogEnabled) {
                     Logger.debug("Matched <IfStatement>:\n" + result.representation(), Logger.Category.PARSER);
                 }
@@ -1337,16 +1332,9 @@ public class Parser {
             if (elseStatement.isEmpty()) break parse;
 
             final var result = new IfStatement(
-                    ifToken.get(), leftParenthesisToken.get(),
-                    condition.get(), rightParenthesisToken,
+                    ifToken.get(), leftParenthesisToken.get(), condition.get(), rightParenthesisToken,
                     ifStatement.get(), elseToken, elseStatement
             );
-            if (rightParenthesisToken.isEmpty()) {
-                final var error = new MissingRightParenthesisError(
-                        result.lastTerminator().endingPosition().lineNumber()
-                );
-                errorHandler.reportError(error);
-            }
             if (Logger.LogEnabled) {
                 Logger.debug("Matched <IfStatement>:\n" + result.representation(), Logger.Category.PARSER);
             }
@@ -1379,12 +1367,15 @@ public class Parser {
                 final var expression = parseExpression();
                 if (expression.isEmpty()) break parse;
 
-                final var optionalRightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
+                final var rightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
+                if (rightBracketToken.isEmpty()) {
+                    final var lastTerminator = expression.get().lastTerminator();
+                    final var error = new MissingRightBracketError(Helpers.lineNumberOf(lastTerminator));
+                    errorHandler.reportError(error);
+                }
 
-                bracketWithExpressionList.add(new BracketWith<>(
-                        leftBracketToken.get(),
-                        expression.get(),
-                        optionalRightBracketToken
+                bracketWithExpressionList.add(
+                        new BracketWith<>(leftBracketToken.get(),expression.get(), rightBracketToken
                 ));
             }
 
@@ -1504,7 +1495,7 @@ public class Parser {
                     intToken.get(),
                     mainToken.get(),
                     leftParenthesisToken.get(),
-                    rightParenthesisToken.get(),
+                    rightParenthesisToken,
                     block.get()
             );
             if (Logger.LogEnabled) {
@@ -1664,15 +1655,6 @@ public class Parser {
         final var beginningPosition = lexer.beginningPosition();
 
         if (lexer.isMatchedTokenOf(IdentifierToken.class)) {
-            final var expressionStatement = parseExpressionStatement();
-            if (expressionStatement.isPresent()) {
-                final var result = new Statement(expressionStatement.get());
-                if (Logger.LogEnabled) {
-                    Logger.debug("Matched <Statement>: " + result.representation(), Logger.Category.PARSER);
-                }
-                return Optional.of(result);
-            }
-
             final var getIntStatement = parseGetIntStatement();
             if (getIntStatement.isPresent()) {
                 final var result = new Statement(getIntStatement.get());
@@ -1924,17 +1906,11 @@ public class Parser {
             } // Avoid Matching FuncDef.
 
             final var result = new VarDeclaration(
-                    basicType.get(),
-                    firstVarDefinition.get(),
-                    additionalVarDefinitionList,
-                    semicolonToken
+                    basicType.get(), firstVarDefinition.get(), additionalVarDefinitionList, semicolonToken
             );
             if (semicolonToken.isEmpty()) {
                 final var lastToken = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastToken.endingPosition()),
-                        lastToken.endingPosition()
-                );
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastToken));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {
@@ -1970,13 +1946,15 @@ public class Parser {
                 if (constExpression.isEmpty()) break parse;
 
                 final var optionalRightBracketToken = lexer.tryMatchAndConsumeTokenOf(RightBracketToken.class);
-                if (optionalRightBracketToken.isEmpty()) Logger.warn("Tolerated a right bracket missing.");
+                if (optionalRightBracketToken.isEmpty()) {
+                    final var lastTerminator = constExpression.get().lastTerminator();
+                    final var error = new MissingRightBracketError(Helpers.lineNumberOf(lastTerminator));
+                    errorHandler.reportError(error);
+                }
 
-                bracketWithConstExpressionList.add(new BracketWith<>(
-                        leftBracketToken.get(),
-                        constExpression.get(),
-                        optionalRightBracketToken
-                ));
+                bracketWithConstExpressionList.add(
+                        new BracketWith<>(leftBracketToken.get(), constExpression.get(), optionalRightBracketToken)
+                );
             }
 
             final var assignToken = lexer.tryMatchAndConsumeTokenOf(AssignToken.class);
@@ -2095,24 +2073,17 @@ public class Parser {
             if (leftParenthesisToken.isEmpty()) break parse;
 
             final var rightParenthesisToken = lexer.tryMatchAndConsumeTokenOf(RightParenthesisToken.class);
-            if (rightParenthesisToken.isEmpty()) break parse;
 
             final var semicolonToken = lexer.tryMatchAndConsumeTokenOf(SemicolonToken.class);
 
-            final var result = new GetIntStatement(
-                    leftValue.get(),
-                    assignToken.get(),
-                    getIntToken.get(),
-                    leftParenthesisToken.get(),
-                    rightParenthesisToken.get(),
-                    semicolonToken
-            );
+            final var result = new GetIntStatement(leftValue.get(), assignToken.get(), getIntToken.get(), leftParenthesisToken.get(), rightParenthesisToken, semicolonToken);
             if (semicolonToken.isEmpty()) {
                 final var lastTerminator = result.lastTerminator();
-                final var error = new MissingSemicolonError(
-                        lexer.getLineAt(lastTerminator.endingPosition()),
-                        lastTerminator.endingPosition()
-                );
+                final var error = new MissingSemicolonError(Helpers.lineNumberOf(lastTerminator));
+                errorHandler.reportError(error);
+            }
+            if (rightParenthesisToken.isEmpty()) {
+                final var error = new MissingRightParenthesisError(Helpers.lineNumberOf(leftParenthesisToken.get()));
                 errorHandler.reportError(error);
             }
             if (Logger.LogEnabled) {

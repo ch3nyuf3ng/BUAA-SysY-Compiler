@@ -38,10 +38,6 @@ public record ContinueToken(
 
     @Override
     public String toString() {
-        return "ContinueToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

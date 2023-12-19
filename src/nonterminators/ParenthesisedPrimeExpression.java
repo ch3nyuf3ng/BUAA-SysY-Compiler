@@ -1,8 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
-import foundation.ArrayPointer;
+import error.exceptions.IdentifierUndefineException;
+import foundation.protocols.EvaluationType;
 import nonterminators.protocols.Precalculable;
 import nonterminators.protocols.PrimaryExpressionType;
 import pcode.protocols.PcodeType;
@@ -44,27 +44,27 @@ public record ParenthesisedPrimeExpression(
 
     @Override
     public String toString() {
-        return "ParenthesisedPrimeExpression{" +
-                "leftParenthesisToken=" + leftParenthesisToken +
-                ", expression=" + expression +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                '}';
+        return representation();
     }
 
     @Override
-    public int calculateToInt(SymbolManager symbolManager) {
+    public int calculateToInt(SymbolManager symbolManager) throws IdentifierUndefineException {
         return expression.calculateToInt(symbolManager);
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         expression.generatePcode(symbolManager, pcodeList, errorHandler);
     }
 
-    public boolean isArrayPointer(SymbolManager symbolManager) {
-        return expression.isArrayPointer(symbolManager);
-    }
+//    public boolean isArrayPointer(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        return expression.isArrayPointer(symbolManager);
+//    }
+//
+//    public ArrayPointerType arrayPointerType(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        return expression.arrayPointerType(symbolManager);
+//    }
 
-    public ArrayPointer arrayPointerType(SymbolManager symbolManager) {
-        return expression.arrayPointerType(symbolManager);
+    public EvaluationType evaluationType(SymbolManager symbolManager) throws IdentifierUndefineException {
+        return expression.evaluationType(symbolManager);
     }
 }

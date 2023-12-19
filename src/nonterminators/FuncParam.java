@@ -1,10 +1,12 @@
 package nonterminators;
 
-import error.ErrorChecker;
-import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierRedefineException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.BracketWith;
-import foundation.RepresentationBuilder;
+import foundation.Helpers;
+import foundation.ReprBuilder;
+import foundation.protocols.EvaluationType;
+import foundation.typing.ArrayPointerType;
 import nonterminators.protocols.NonTerminatorType;
 import symbol.FunctionParameterMetadata;
 import symbol.FunctionParameterSymbol;
@@ -18,13 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record FuncParam(
-        BasicType basicType,
-        IdentifierToken identifierToken,
-        Optional<LeftBracketToken> leftBracketToken,
-        Optional<RightBracketToken> rightBracketToken,
-        List<BracketWith<ConstExpression>> bracketWithConstExpressionList
-) implements NonTerminatorType {
+public record FuncParam(BasicType basicType, IdentifierToken identifierToken,
+                        Optional<LeftBracketToken> leftBracketToken, Optional<RightBracketToken> rightBracketToken,
+                        List<BracketWith<ConstExpression>> bracketWithConstExpressionList) implements NonTerminatorType {
     @Override
     public TokenType lastTerminator() {
         if (!bracketWithConstExpressionList.isEmpty()) {
@@ -33,7 +31,9 @@ public record FuncParam(
             if (lastItem.rightBracketToken().isPresent()) return lastItem.rightBracketToken().get();
             return lastItem.entity().lastTerminator();
         }
-        if (rightBracketToken.isPresent()) return rightBracketToken.get();
+        if (rightBracketToken.isPresent()) {
+            return rightBracketToken.get();
+        }
         return identifierToken;
     }
 
@@ -43,7 +43,7 @@ public record FuncParam(
                 + identifierToken.detailedRepresentation()
                 + leftBracketToken.map(LeftBracketToken::detailedRepresentation).orElse("")
                 + rightBracketToken.map(RightBracketToken::detailedRepresentation).orElse("")
-                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithConstExpressionList)
+                + ReprBuilder.bracketWithNonTerminatorDetailedRepr(bracketWithConstExpressionList)
                 + categoryCode() + '\n';
     }
 
@@ -53,7 +53,7 @@ public record FuncParam(
                 + identifierToken.representation()
                 + leftBracketToken.map(LeftBracketToken::representation).orElse("")
                 + rightBracketToken.map(RightBracketToken::representation).orElse("")
-                + RepresentationBuilder.bracketWithNonTerminatorRepresentation(bracketWithConstExpressionList);
+                + ReprBuilder.bracketWithNonTerminatorRepr(bracketWithConstExpressionList);
     }
 
     @Override
@@ -63,27 +63,26 @@ public record FuncParam(
 
     @Override
     public String toString() {
-        return "FuncParam{" +
-                "basicType=" + basicType +
-                ", identifierToken=" + identifierToken +
-                ", leftBracketToken=" + leftBracketToken +
-                ", rightBracketToken=" + rightBracketToken +
-                ", bracketWithConstExpressionList=" + bracketWithConstExpressionList +
-                '}';
+        return representation();
     }
 
     public FunctionParameterSymbol generateParameterSymbol(
-            SymbolManager symbolManager,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        ErrorChecker.checkRedefinedIdentifier(symbolManager, errorHandler, identifierToken);
+            SymbolManager symbolManager
+    ) throws IdentifierRedefineException, IdentifierUndefineException {
         final var identifier = identifierToken.identifier();
+        final var possibleSameNameSameLevelSymbol = symbolManager.findSymbol(identifier, false);
+        if (possibleSameNameSameLevelSymbol.isPresent()) {
+            throw new IdentifierRedefineException(Helpers.lineNumberOf(identifierToken));
+        }
         final var dimensionSizes = new ArrayList<Integer>();
         final boolean isArrayPointer;
+        final EvaluationType evaluationType;
         if (leftBracketToken().isPresent()) {
             isArrayPointer = true;
+            evaluationType = new ArrayPointerType(basicType.evaluationType(), bracketWithConstExpressionList().size() + 1);
             dimensionSizes.add(0);
         } else {
+            evaluationType = basicType().evaluationType();
             isArrayPointer = false;
         }
         for (var bracketWithConstExpression : bracketWithConstExpressionList) {
@@ -91,10 +90,7 @@ public record FuncParam(
             dimensionSizes.add(dimensionSize);
         }
         final var metadata = new FunctionParameterMetadata(
-                isArrayPointer,
-                basicType,
-                dimensionSizes,
-                symbolManager.activeRecordOffset()
+                isArrayPointer, evaluationType, dimensionSizes, symbolManager.activeRecordOffset()
         );
         return new FunctionParameterSymbol(identifier, metadata);
     }

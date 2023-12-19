@@ -40,10 +40,6 @@ public record IntToken(
 
     @Override
     public String toString() {
-        return "IntToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

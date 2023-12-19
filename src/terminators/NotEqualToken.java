@@ -37,10 +37,6 @@ public record NotEqualToken(
 
     @Override
     public String toString() {
-        return "NotEqualToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

@@ -1,9 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.code.Operate;
 import pcode.protocols.PcodeType;
@@ -29,14 +28,14 @@ public record EqualityExpression(
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
+        return ReprBuilder.binaryOpExpWithCatCodeForEachPairDetailedRepr(
                 firstExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
+        return ReprBuilder.binaryOpExRepr(
                 firstExpression, operatorWithExpressionList
         );
     }
@@ -48,13 +47,10 @@ public record EqualityExpression(
 
     @Override
     public String toString() {
-        return "EqualityExpression{" +
-                "firstExpression=" + firstExpression +
-                ", operatorWithExpressionList=" + operatorWithExpressionList +
-                '}';
+        return representation();
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         firstExpression.generatePcode(symbolManager, pcodeList, errorHandler);
         for (final var operatorWithExpression : operatorWithExpressionList) {
             final var operator = operatorWithExpression.first();
@@ -65,7 +61,7 @@ public record EqualityExpression(
             } else if (operator instanceof NotEqualToken) {
                 pcodeList.add(new Operate(Operate.Opcode.NOT_EQUAL));
             } else {
-                throw new RuntimeException();
+                throw new UnsupportedOperationException();
             }
         }
     }

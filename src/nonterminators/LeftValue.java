@@ -1,12 +1,13 @@
 package nonterminators;
 
-import error.ErrorChecker;
 import error.ErrorHandler;
-import error.FatalErrorException;
-import error.errors.AssignToConstError;
-import foundation.ArrayPointer;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.BracketWith;
-import foundation.RepresentationBuilder;
+import foundation.Helpers;
+import foundation.ReprBuilder;
+import foundation.protocols.EvaluationType;
+import foundation.typing.ArrayPointerType;
 import nonterminators.protocols.Precalculable;
 import nonterminators.protocols.PrimaryExpressionType;
 import pcode.code.LoadAddress;
@@ -21,7 +22,6 @@ import symbol.protocols.SymbolType;
 import terminators.IdentifierToken;
 import terminators.protocols.TokenType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public record LeftValue(
@@ -30,24 +30,28 @@ public record LeftValue(
 ) implements PrimaryExpressionType, Precalculable {
     @Override
     public TokenType lastTerminator() {
-        if (bracketWithExpressionList.isEmpty()) return identifierToken;
+        if (bracketWithExpressionList.isEmpty()) {
+            return identifierToken;
+        }
         final var lastIndex = bracketWithExpressionList.size() - 1;
         final var lastItem = bracketWithExpressionList.get(lastIndex);
-        if (lastItem.rightBracketToken().isPresent()) return lastItem.rightBracketToken().get();
+        if (lastItem.rightBracketToken().isPresent()) {
+            return lastItem.rightBracketToken().get();
+        }
         return lastItem.entity().lastTerminator();
     }
 
     @Override
     public String detailedRepresentation() {
         return identifierToken.detailedRepresentation()
-                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithExpressionList)
+                + ReprBuilder.bracketWithNonTerminatorDetailedRepr(bracketWithExpressionList)
                 + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
         return identifierToken.representation()
-                + RepresentationBuilder.bracketWithNonTerminatorRepresentation(bracketWithExpressionList);
+                + ReprBuilder.bracketWithNonTerminatorRepr(bracketWithExpressionList);
     }
 
     @Override
@@ -61,44 +65,32 @@ public record LeftValue(
     }
 
     @Override
-    public int calculateToInt(SymbolManager symbolManager) {
+    public int calculateToInt(SymbolManager symbolManager) throws IdentifierUndefineException {
         final var possibleSymbol = symbolManager.findSymbol(identifierToken.identifier(), true);
-        if (possibleSymbol.isPresent() && possibleSymbol.get() instanceof VariableSymbol variableSymbol) {
-            final var possiblePrecalculatedValue = variableSymbol.precalculatedValue();
-            if (possiblePrecalculatedValue.isPresent()) {
-                final var precalculatedValue = possiblePrecalculatedValue.get();
-                if (bracketWithExpressionList.isEmpty()) {
-                    return precalculatedValue.get(0);
-                } else {
-                    final var dimensionSizes = new ArrayList<>(variableSymbol.metadata().dimensionSizes());
-                    for (var i = dimensionSizes.size() - 2; i >= 0; i -= 1) {
-                        dimensionSizes.set(i, dimensionSizes.get(i) * dimensionSizes.get(i + 1));
-                    }
-                    var expandedIndex = 0;
-                    for (var i = 0; i < dimensionSizes.size(); i += 1) {
-                        final var dimensionIndex = bracketWithExpressionList.get(i).entity().calculateToInt(symbolManager);
-                        expandedIndex += dimensionIndex * dimensionSizes.get(i);
-                    }
-                    return precalculatedValue.get(expandedIndex);
-                }
-            } else {
-                throw new RuntimeException();
-            }
-        } else {
-            throw new RuntimeException();
+        if (possibleSymbol.isEmpty()) {
+            throw new IdentifierUndefineException(identifierToken.lineNumber());
         }
+        if (possibleSymbol.get() instanceof VariableSymbol variableSymbol) {
+            final var precalculatedValue = variableSymbol.precalculatedValue();
+            final var dimensionOffsets = variableSymbol.metadata().dimensionOffsets();
+            var expandedIndex = 0;
+            for (var i = 0; i < dimensionOffsets.size(); i += 1) {
+                final var dimensionExpression = bracketWithExpressionList.get(i).entity();
+                final var dimensionIndex = dimensionExpression.calculateToInt(symbolManager);
+                expandedIndex += dimensionIndex * dimensionOffsets.get(i);
+            }
+            return precalculatedValue.get(expandedIndex);
+        }
+        throw new RuntimeException();
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            boolean isForStoringValue,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        ErrorChecker.checkUndefiniedIdentifier(symbolManager, errorHandler, identifierToken);
+            SymbolManager symbolManager, List<PcodeType> pcodeList,
+            boolean isForStoringValue, ErrorHandler errorHandler
+    ) throws IdentifierUndefineException, AssignToConstantException {
         final var symbol = getSymbol(symbolManager);
         final var indexesCount = bracketWithExpressionList.size();
-        final var isCalculatedResultArrayPointer = isCalculatedResultArrayPointer(symbolManager);
+        final var isCalculatedResultArrayPointer = isArrayPointerType(symbolManager);
         final List<Integer> dimensionSizes;
         final List<Integer> dimensionOffsets;
         final int depth;
@@ -106,8 +98,7 @@ public record LeftValue(
         final boolean isFunctionArrayPointerArg;
         if (symbol instanceof VariableSymbol variableSymbol) {
             if (variableSymbol.metadata().isConstant() && isForStoringValue) {
-                final var error = new AssignToConstError(identifierToken.endingPosition().lineNumber());
-                errorHandler.reportFatalError(error);
+                throw new AssignToConstantException(Helpers.lineNumberOf(identifierToken));
             }
             isFunctionArrayPointerArg = false;
             dimensionSizes = variableSymbol.metadata().dimensionSizes();
@@ -121,7 +112,7 @@ public record LeftValue(
             depth = 1;
             addr = functionParameterSymbol.metadata().activeRecordOffset();
         } else {
-            throw new RuntimeException();
+            throw new RuntimeException("Unknown implementation of SymbolType.");
         }
         if (indexesCount > dimensionSizes.size()) {
             throw new RuntimeException();
@@ -159,40 +150,58 @@ public record LeftValue(
         }
     }
 
-    public boolean isCalculatedResultArrayPointer(SymbolManager symbolManager) {
+    private boolean isArrayPointerType(SymbolManager symbolManager) throws IdentifierUndefineException {
         final var symbol = getSymbol(symbolManager);
         final var indexesCount = bracketWithExpressionList.size();
         if (symbol instanceof VariableSymbol variableSymbol) {
-            return variableSymbol.metadata().isArray()
-                    && indexesCount < variableSymbol.metadata().dimensionSizes().size();
+            return variableSymbol.metadata().isArray() && indexesCount < variableSymbol.metadata().dimensionSizes().size();
         } else if (symbol instanceof FunctionParameterSymbol functionParameterSymbol) {
-            return functionParameterSymbol.metadata().isArrayPointer()
-                    && indexesCount < functionParameterSymbol.metadata().dimensionSizes().size();
+            return functionParameterSymbol.metadata().isArrayPointer() && indexesCount < functionParameterSymbol.metadata().dimensionSizes().size();
         } else {
-            throw new RuntimeException();
+            throw new IdentifierUndefineException(identifierToken.lineNumber());
         }
     }
 
-    public ArrayPointer arrayPointerType(SymbolManager symbolManager) {
+    private ArrayPointerType arrayPointerType(SymbolManager symbolManager) throws IdentifierUndefineException {
         final var symbol = getSymbol(symbolManager);
         if (symbol instanceof VariableSymbol variableSymbol) {
-            final var basicType = variableSymbol.metadata().basicType();
+            final var basicType = variableSymbol.metadata().evaluationType();
             final var level = variableSymbol.metadata().dimensionSizes().size() - bracketWithExpressionList.size();
-            return new ArrayPointer(basicType, level);
+            return new ArrayPointerType(basicType, level);
         } else if (symbol instanceof FunctionParameterSymbol functionParameterSymbol) {
-            final var basicType = functionParameterSymbol.metadata().basicType();
+            final EvaluationType basicType;
+            final var parameterEvaluationType = functionParameterSymbol.metadata().evaluationType();
+            if (parameterEvaluationType instanceof ArrayPointerType arrayPointerType) {
+                basicType = arrayPointerType.evaluationType();
+            } else {
+                basicType = parameterEvaluationType;
+            }
             final var level = functionParameterSymbol.metadata().dimensionSizes().size() - bracketWithExpressionList.size();
-            return new ArrayPointer(basicType, level);
+            return new ArrayPointerType(basicType, level);
         } else {
-            throw new RuntimeException();
+            throw new IdentifierUndefineException(identifierToken.lineNumber());
         }
     }
 
-    private SymbolType getSymbol(SymbolManager symbolManager) {
+    private SymbolType getSymbol(SymbolManager symbolManager) throws IdentifierUndefineException {
         final var possibleSymbol = symbolManager.findSymbol(identifierToken.identifier(), true);
         if (possibleSymbol.isEmpty()) {
-            throw new RuntimeException();
+            throw new IdentifierUndefineException(identifierToken.lineNumber());
         }
         return possibleSymbol.get();
+    }
+
+    public EvaluationType evaluationType(SymbolManager symbolManager) throws IdentifierUndefineException {
+        if (isArrayPointerType(symbolManager)) {
+            return arrayPointerType(symbolManager);
+        }
+        final var symbol = getSymbol(symbolManager);
+        if (symbol instanceof VariableSymbol variableSymbol) {
+            return variableSymbol.metadata().evaluationType();
+        } else if (symbol instanceof FunctionParameterSymbol functionParameterSymbol) {
+            return functionParameterSymbol.metadata().evaluationType();
+        } else {
+            throw new UnsupportedOperationException();
+        }
     }
 }

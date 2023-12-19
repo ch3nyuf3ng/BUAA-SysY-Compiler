@@ -38,10 +38,6 @@ public record ConstToken(
 
     @Override
     public String toString() {
-        return "ConstToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

@@ -1,7 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.code.StoreValue;
 import pcode.protocols.PcodeType;
@@ -39,18 +40,12 @@ public record ForStatement(
 
     @Override
     public String toString() {
-        return "ForStatement{" +
-                "leftValue=" + leftValue +
-                ", assignToken=" + assignToken +
-                ", expression=" + expression +
-                '}';
+        return representation();
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws AssignToConstantException, IdentifierUndefineException {
         expression.generatePcode(symbolManager, pcodeList, errorHandler);
         leftValue.generatePcode(symbolManager, pcodeList, true, errorHandler);
         pcodeList.add(new StoreValue(-1, 0));

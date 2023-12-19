@@ -1,7 +1,6 @@
 package tests.pcode;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import foundation.IO;
 import foundation.Logger;
 import lex.Lexer;
@@ -19,6 +18,7 @@ public class PcodeTest {
     private final static String FormattedSourceCodeFilePath = "formattedcode";
     private final static String MyOutputFolderPath = "myoutput";
     private final static String PcodeFolderPath = "pcode";
+    private final static String ErrorFolderPath = "error";
 
     public static void main(String[] args) {
         int i;
@@ -26,7 +26,7 @@ public class PcodeTest {
             Logger.debug("Test " + i, Logger.Category.INTERPRETER);
             final var sourceCode = IO.simpleInput(SourceCodeFilePath + File.separator + "testfile" + i + ".txt");
             final var input = IO.simpleInput(InputFilePath + File.separator + "input" + i + ".txt");
-            final var errorHandler = new ErrorHandler(false);
+            final var errorHandler = new ErrorHandler(true);
             final var lexer = new Lexer(errorHandler, sourceCode);
             final var parser = new Parser(errorHandler, lexer);
             final var possibleCompileUnit = parser.parse();
@@ -39,20 +39,25 @@ public class PcodeTest {
             final var pcodeList = new ArrayList<PcodeType>();
             try {
                 compileUnit.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
-            } catch (FatalErrorException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                Logger.writeLogFile();
+                throw e;
             }
-            final var pcodeBuilder = new StringBuilder();
-            for (final var pcode : pcodeList) {
-                final var pcodeToPrint = pcode.representation().replace("\n", "\\n");
-                pcodeBuilder.append(pcodeToPrint).append('\n');
+            if (errorHandler.hasError()) {
+                IO.simpleOutputToFolder(ErrorFolderPath, "error" + i + ".txt", errorHandler.generateSimpleLog());
+            } else {
+                final var pcodeBuilder = new StringBuilder();
+                for (final var pcode : pcodeList) {
+                    final var pcodeToPrint = pcode.representation().replace("\n", "\\n");
+                    pcodeBuilder.append(pcodeToPrint).append('\n');
+                }
+                final var pcode = pcodeBuilder.toString();
+                IO.simpleOutputToFolder(PcodeFolderPath, "pcode" + i + ".txt", pcode);
+                final var interpreter = new Interpreter(pcodeList, input);
+                interpreter.run();
+                final var result = interpreter.output();
+                IO.simpleOutputToFolder(MyOutputFolderPath, "output" + i + ".txt", result);
             }
-            final var pcode = pcodeBuilder.toString();
-            IO.simpleOutputToFolder(PcodeFolderPath, "pcode" + i + ".txt", pcode);
-            final var interpreter = new Interpreter(pcodeList, input);
-            interpreter.run();
-            final var result = interpreter.output();
-            IO.simpleOutputToFolder(MyOutputFolderPath, "output" + i + ".txt", result);
             Logger.writeLogFile();
         }
     }

@@ -37,10 +37,6 @@ public record LogicalOrToken(
 
     @Override
     public String toString() {
-        return "LogicalOrToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

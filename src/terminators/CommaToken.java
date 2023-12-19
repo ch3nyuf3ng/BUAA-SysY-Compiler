@@ -37,10 +37,6 @@ public record CommaToken(
 
     @Override
     public String toString() {
-        return "CommaToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

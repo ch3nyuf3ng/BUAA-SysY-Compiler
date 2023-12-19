@@ -37,10 +37,6 @@ public record RightBraceToken(
 
     @Override
     public String toString() {
-        return "RightBraceToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

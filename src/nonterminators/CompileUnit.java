@@ -1,7 +1,7 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierRedefineException;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.code.BlockEnd;
 import pcode.code.BlockStart;
@@ -47,11 +47,16 @@ public record CompileUnit(
         return mainFuncDefinition.lastTerminator();
     }
 
+    @Override
+    public String toString() {
+        return representation();
+    }
+
     public void buildSymbolTableAndGeneratePcode(
             SymbolManager symbolManager,
             List<PcodeType> pcodeList,
             ErrorHandler errorHandler
-    ) throws FatalErrorException {
+    ) {
         pcodeList.add(new BlockStart());
         for (var declaration : declarationList) {
             declaration.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
@@ -59,7 +64,11 @@ public record CompileUnit(
         pcodeList.add(new CallFunction("#main_start", 0));
         pcodeList.add(new Jump("#main_end"));
         for (var funcDefinition : funcDefinitionList) {
-            funcDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                funcDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
+            } catch (IdentifierRedefineException e) {
+                errorHandler.reportError(e);
+            }
         }
         mainFuncDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         pcodeList.add(new BlockEnd(false));

@@ -1,9 +1,9 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.ConstInitValueType;
 import pcode.code.MemAddZeros;
 import pcode.protocols.PcodeType;
@@ -32,25 +32,17 @@ public record ArrayConstInitValue(
     @Override
     public String detailedRepresentation() {
         return firstInitValue.map(initValue -> leftBraceToken.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
-                        initValue, commaWithInitValueList
-                  )
+                + ReprBuilder.binaryOpExpDetailedRepr(initValue, commaWithInitValueList)
                 + rightBraceToken.detailedRepresentation()
-                ).orElseGet(() ->
-                leftBraceToken.detailedRepresentation()
-                + rightBraceToken.detailedRepresentation()
-        );
+        ).orElseGet(() -> leftBraceToken.detailedRepresentation() + rightBraceToken.detailedRepresentation());
     }
 
     @Override
     public String representation() {
         return firstInitValue.map(initValue -> leftBraceToken.representation()
-                + RepresentationBuilder.binaryOperatorExpressionRepresentation( initValue, commaWithInitValueList)
+                + ReprBuilder.binaryOpExRepr(initValue, commaWithInitValueList)
                 + rightBraceToken.representation()
-                ).orElseGet(() ->
-                leftBraceToken.representation()
-                + rightBraceToken.representation()
-        );
+        ).orElseGet(() -> leftBraceToken.representation() + rightBraceToken.representation());
     }
 
     @Override
@@ -60,15 +52,10 @@ public record ArrayConstInitValue(
 
     @Override
     public String toString() {
-        return "ArrayConstInitValue{" +
-                "leftBraceToken=" + leftBraceToken +
-                ", firstInitValue=" + firstInitValue +
-                ", commaWithInitValueList=" + commaWithInitValueList +
-                ", rightBraceToken=" + rightBraceToken +
-                '}';
+        return representation();
     }
 
-    public List<Integer> precalculateValue(SymbolManager symbolManager, int totalSize) {
+    public List<Integer> precalculateValue(SymbolManager symbolManager, int totalSize) throws IdentifierUndefineException {
         final var values = new ArrayList<Integer>();
         if (firstInitValue.isEmpty()) {
             for (var i = 0; i < totalSize; i += 1) {
@@ -85,11 +72,9 @@ public record ArrayConstInitValue(
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            VariableSymbol variableSymbol,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList,
+            VariableSymbol variableSymbol, ErrorHandler errorHandler
+    ) {
         if (firstInitValue.isPresent()) {
             firstInitValue.get().generatePcode(symbolManager, pcodeList, variableSymbol, errorHandler);
             for (final var commaWithInitValue : commaWithInitValueList) {

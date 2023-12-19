@@ -38,10 +38,6 @@ public record ElseToken(
 
     @Override
     public String toString() {
-        return "ElseToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

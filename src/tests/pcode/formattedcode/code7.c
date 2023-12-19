@@ -5,50 +5,67 @@ int main() {
     int s1[6] = {0, 1, 2, 3, 6, 12};
     int s2[2][3] = {{10, 11, 12}, {13, 14, 15}};
     if (!s1[0] == 1 && !(s1[0] * 2) && !0) {
-        printf("! is ok\n");
+        printf("! is ok\n"RPARENT )
+        ;
     } else {
-        printf("! has problem\n");
+        printf("! has problem\n"RPARENT )
+        ;
     }
     if (a + b < s1[5] && s1[3] - s1[0] < s2[1][2] / a == 0 && b < a + b < s1[0] == 0 && 0 == b < a + b < s1[2] > s1[1]) {
-        printf("< is ok\n");
+        printf("< is ok\n"RPARENT )
+        ;
     } else {
-        printf("< has problem\n");
+        printf("< has problem\n"RPARENT )
+        ;
     }
     if (a * b > s1[2] * s2[1][2] == 0 && (s2[0][1] - s1[2]) % a > s2[1][2] / a && s1[5] > a + b + 2 > 0 == 0 && s1[5] > a + b < s1[1] == 0) {
-        printf("> is ok\n");
+        printf("> is ok\n"RPARENT )
+        ;
     } else {
-        printf("> has problem\n");
+        printf("> has problem\n"RPARENT )
+        ;
     }
     if (a <= b && a <= b + s1[1] && a <= b <= s1[0] == 0 && a <= b >= s1[2] < 1) {
-        printf("<= is ok\n");
+        printf("<= is ok\n"RPARENT )
+        ;
     } else {
-        printf("<= has problem\n");
+        printf("<= has problem\n"RPARENT )
+        ;
     }
     if (b >= a + 1 && b >= s1[4] + s1[1] != 1 && a <= b >= s1[1] + 1 == 0 && a >= b >= s1[0] <= s1[0] != 1) {
-        printf(">= is ok\n");
+        printf(">= is ok\n"RPARENT )
+        ;
     } else {
-        printf(">= has problem\n");
+        printf(">= has problem\n"RPARENT )
+        ;
     }
     if (a != b && a == b == 0 && a > b == a < b != 1 && a >= b == s1[2] != s1[0] != s1[4]) {
-        printf("== != is ok\n");
+        printf("== != is ok\n"RPARENT )
+        ;
     } else {
-        printf("== != has problem\n");
+        printf("== != has problem\n"RPARENT )
+        ;
     }
     if (s1[3] == s2[0][1] || a >= b || a + 7 % 4 < b * 3) {
-        printf("or is ok\n");
+        printf("or is ok\n"RPARENT )
+        ;
     } else {
-        printf("or has problem\n");
+        printf("or has problem\n"RPARENT )
+        ;
     }
     if (a / 2 < b - 3 || s1[0] + 1 > s1[5] && b > s1[5]) {
-        printf("the priority of and/or is ok\n");
+        printf("the priority of and/or is ok\n"RPARENT )
+        ;
     } else {
-        printf("the priority of and/or has problem\n");
+        printf("the priority of and/or has problem\n"RPARENT )
+        ;
     }
     if (a < b || +a) {
         a = a + 1;
         if (s1[0] < s1[1] && +b) {
             b = b + 1;
-            printf("%d %d\n", a, b);
+            printf("%d %d\n", a, bRPARENT )
+            ;
         }  
     }  
     return0;

@@ -1,7 +1,6 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.VarInitValueType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -34,16 +33,10 @@ public record ScalarVarInitValue(
 
     @Override
     public String toString() {
-        return "ScalarVarInitValue{" +
-                "expression=" + expression +
-                '}';
+        return representation();
     }
 
-    public List<Integer> precalculateValue(SymbolManager symbolManager) {
-        return List.of(expression.calculateToInt(symbolManager));
-    }
-
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         expression.generatePcode(symbolManager, pcodeList, errorHandler);
     }
 }

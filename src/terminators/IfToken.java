@@ -38,10 +38,6 @@ public record IfToken(
 
     @Override
     public String toString() {
-        return "IfToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

@@ -6,7 +6,8 @@ int v_arrayInit[3] = {1, 2, 3};
 int v_matrixInit[3][3] = {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
 
 void print(int output) {
-    printf("\nf2() flag : %d", output);
+    printf("\nf2() flag : %d", outputRPARENT )
+    ;
     return;
 }
 
@@ -63,7 +64,8 @@ int main() {
             } else {
                 flag = 1;
             }
-            printf("\nflag = %d : c1 = %d, c2 = %d", flag, c1, c2);
+            printf("\nflag = %d : c1 = %d, c2 = %d", flag, c1, c2RPARENT )
+            ;
             i = i + 1;
             a = a + 5;
             b = b + 5;

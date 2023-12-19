@@ -38,10 +38,6 @@ public record PrintfToken(
 
     @Override
     public String toString() {
-        return "PrintfToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

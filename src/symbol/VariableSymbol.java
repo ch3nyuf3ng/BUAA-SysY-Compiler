@@ -4,12 +4,11 @@ import symbol.protocols.SymbolType;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public record VariableSymbol(
         String identifier,
         VariableMetadata metadata,
-        Optional<List<Integer>> precalculatedValue
+        List<Integer> precalculatedValue
 ) implements SymbolType {
     public VariableSymbol {
         Objects.requireNonNull(identifier);

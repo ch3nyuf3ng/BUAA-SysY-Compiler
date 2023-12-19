@@ -127,8 +127,8 @@ public class Interpreter {
                 if (Logger.LogEnabled) {
                     Logger.debug(toString(), Logger.Category.INTERPRETER);
                 }
-            } else if (codeLine instanceof Debug debug) {
-                runDebug(debug);
+            } else if (codeLine instanceof DebugPcode debugPcode) {
+                runDebug(debugPcode);
             } else {
                 throw new RuntimeException();
             }
@@ -175,11 +175,11 @@ public class Interpreter {
         return (int) stack.get(markPointer + 3);
     }
 
-    private void runDebug(Debug debug) {
+    private void runDebug(DebugPcode debugPcode) {
         programCounter += 1;
 
         if (Logger.LogEnabled) {
-            Logger.debug("Debug hint: " + debug.hint(), Logger.Category.INTERPRETER);
+            Logger.debug("Debug hint: " + debugPcode.hint(), Logger.Category.INTERPRETER);
         }
     }
 
@@ -279,11 +279,13 @@ public class Interpreter {
             stack.remove(stack.size() - 1);
         }
 
-        Logger.debug(
-                "Returned a function "
-                        + (returnFunction.hasReturnValue() ? "which has a return value." : "."),
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Returned a function "
+                            + (returnFunction.hasReturnValue() ? "which has a return value." : "."),
+                    Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runLoadAddress(LoadAddress loadAddress) {
@@ -302,20 +304,24 @@ public class Interpreter {
 
         programCounter += 1;
 
-        Logger.debug(
-                "Load address from [" + loadAddress.level() + ", " + loadAddress.addr() + "]",
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Load address from [" + loadAddress.level() + ", " + loadAddress.addr() + "]",
+                    Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runLoadImmediate(LoadImmediate loadImmediate) {
         stack.add(loadImmediate.immediate());
         stackPointer += 1;
         programCounter += 1;
-        Logger.debug(
-                "Load immediate: " + loadImmediate.immediate(),
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Load immediate: " + loadImmediate.immediate(),
+                    Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runLoadValue(LoadValue loadValue) {
@@ -332,11 +338,13 @@ public class Interpreter {
             }
         }
 
-        Logger.debug(
-                "Load value from [" + loadValue.level() + ", " + loadValue.addr() + "]"
-                        + "with offset: " + dynamicOffset + ".",
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Load value from [" + loadValue.level() + ", " + loadValue.addr() + "]"
+                            + "with offset: " + dynamicOffset + ".",
+                    Logger.Category.INTERPRETER
+            );
+        }
 
         final var value = stack.get(currentMarkPointer + loadValue.addr() + dynamicOffset);
         stackPointer += 1;
@@ -367,18 +375,22 @@ public class Interpreter {
 
         programCounter += 1;
 
-        Logger.debug(
-                "Store value " + value + " to [" + storeValue.level() + ", " + storeValue.addr() + "]"
-                        + "with offset: " + dynamicOffset + ".",
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Store value " + value + " to [" + storeValue.level() + ", " + storeValue.addr() + "]"
+                            + "with offset: " + dynamicOffset + ".",
+                    Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runJump(Jump jump) {
         programCounter = labelToCodeIndex.get(jump.label());
-        Logger.debug(
-                "Jump to: " + jump.label(), Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Jump to: " + jump.label(), Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runJumpIfNonZero(JumpIfNonzero jumpIfNonzero) {
@@ -391,9 +403,11 @@ public class Interpreter {
         stack.remove(stackPointer);
         stackPointer -= 1;
 
-        Logger.debug(
-                "Jump if non zero to: " + jumpIfNonzero.label(), Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Jump if non zero to: " + jumpIfNonzero.label(), Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runJumpIfZero(JumpIfZero jumpIfZero) {
@@ -406,9 +420,11 @@ public class Interpreter {
         stack.remove(stackPointer);
         stackPointer -= 1;
 
-        Logger.debug(
-                "Jump if zero to: " + jumpIfZero.label(), Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Jump if zero to: " + jumpIfZero.label(), Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runReadNumber() {
@@ -417,10 +433,12 @@ public class Interpreter {
         stack.add(inputNumber);
         programCounter += 1;
 
-        Logger.debug(
-                "Read an input number: " + inputNumber,
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Read an input number: " + inputNumber,
+                    Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runStackPointerMove(StackPointerMove stackPointerMove) {
@@ -438,11 +456,13 @@ public class Interpreter {
 
         programCounter += 1;
 
-        Logger.debug(
-                "Move stack pointer from " + originalStackPointer
-                        + " to " + stackPointer + " by " + stackPointerMove.immediate() + ".",
-                Logger.Category.INTERPRETER
-        );
+        if (Logger.LogEnabled) {
+            Logger.debug(
+                    "Move stack pointer from " + originalStackPointer
+                            + " to " + stackPointer + " by " + stackPointerMove.immediate() + ".",
+                    Logger.Category.INTERPRETER
+            );
+        }
     }
 
     private void runWriteNumber() {

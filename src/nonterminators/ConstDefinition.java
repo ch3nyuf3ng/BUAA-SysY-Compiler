@@ -1,11 +1,11 @@
 package nonterminators;
 
-import error.ErrorChecker;
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierRedefineException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.BracketWith;
 import foundation.Logger;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -17,7 +17,6 @@ import terminators.protocols.TokenType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public record ConstDefinition(
         IdentifierToken identifierToken,
@@ -28,7 +27,7 @@ public record ConstDefinition(
     @Override
     public String detailedRepresentation() {
         return identifierToken.detailedRepresentation()
-                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithConstExpressionList)
+                + ReprBuilder.bracketWithNonTerminatorDetailedRepr(bracketWithConstExpressionList)
                 + assignToken.detailedRepresentation()
                 + initValue.detailedRepresentation()
                 + categoryCode() + '\n';
@@ -37,7 +36,7 @@ public record ConstDefinition(
     @Override
     public String representation() {
         return identifierToken.representation()
-                + RepresentationBuilder.bracketWithNonTerminatorRepresentation(bracketWithConstExpressionList) + ' '
+                + ReprBuilder.bracketWithNonTerminatorRepr(bracketWithConstExpressionList) + ' '
                 + assignToken.representation() + ' '
                 + initValue.representation();
     }
@@ -54,22 +53,17 @@ public record ConstDefinition(
 
     @Override
     public String toString() {
-        return "ConstDefinition{" +
-                "identifierToken=" + identifierToken +
-                ", bracketWithConstExpressionList=" + bracketWithConstExpressionList +
-                ", assignToken=" + assignToken +
-                ", initValue=" + initValue +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            BasicType basicType,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        ErrorChecker.checkRedefinedIdentifier(symbolManager, errorHandler, identifierToken);
+            SymbolManager symbolManager, List<PcodeType> pcodeList, BasicType basicType, ErrorHandler errorHandler
+    ) throws IdentifierRedefineException, IdentifierUndefineException {
         final var identifier = identifierToken.identifier();
+        final var possibleSameNameSameLevelSymbol = symbolManager.findSymbol(identifier, false);
+        if (possibleSameNameSameLevelSymbol.isPresent()) {
+            throw new IdentifierRedefineException(identifierToken.lineNumber());
+        }
         final var isArray = !bracketWithConstExpressionList.isEmpty();
         final var surfacialDimensionSizes = new ArrayList<Integer>();
         for (var bracketWithConstExpression : bracketWithConstExpressionList) {
@@ -78,16 +72,16 @@ public record ConstDefinition(
         }
         final var activeRecordOffset = symbolManager.activeRecordOffset();
         final var depth = symbolManager.currentDepth();
-        final var metadata = new VariableMetadata(true, isArray, basicType, surfacialDimensionSizes, activeRecordOffset, depth);
-        final var precalculatedValues = Optional.of(initValue.precalculateValue(symbolManager, metadata.totalSize()));
+        final var metadata = new VariableMetadata(
+                true, isArray, basicType.evaluationType(), surfacialDimensionSizes, activeRecordOffset, depth
+        );
+        final var precalculatedValues = initValue.precalculateValue(symbolManager, metadata.totalSize());
         final var symbol = new VariableSymbol(identifier, metadata, precalculatedValues);
         symbolManager.addSymbol(symbol);
         if (Logger.LogEnabled) {
-            Logger.debug(
-                    "Added Constant Symbol into Table"
-                            + symbolManager.innerSymbolTableIndex()
-                            + ": " + symbol,
-                    Logger.Category.SYMBOL
+            Logger.debug("Added Constant Symbol into Table"
+                    + symbolManager.innerSymbolTableIndex() + ": " + symbol
+                    , Logger.Category.SYMBOL
             );
         }
         initValue.generatePcode(symbolManager, pcodeList, symbol, errorHandler);

@@ -39,10 +39,6 @@ public record MultiplyToken(
 
     @Override
     public String toString() {
-        return "MultiplyToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

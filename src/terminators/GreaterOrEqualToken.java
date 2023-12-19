@@ -38,10 +38,6 @@ public record GreaterOrEqualToken(
 
     @Override
     public String toString() {
-        return "GreaterOrEqualToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

@@ -38,10 +38,6 @@ public record MainToken(
 
     @Override
     public String toString() {
-        return "MainToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

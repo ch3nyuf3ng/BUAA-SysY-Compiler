@@ -1,7 +1,7 @@
 package nonterminators;
 
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.NonTerminatorType;
 import terminators.CommaToken;
 import terminators.protocols.TokenType;
@@ -24,14 +24,14 @@ public record FuncParamList(
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
+        return ReprBuilder.binaryOpExpDetailedRepr(
                 firstFuncParam, commaWithFuncParamList
         ) + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
+        return ReprBuilder.binaryOpExRepr(
                 firstFuncParam, commaWithFuncParamList
         );
     }
@@ -43,9 +43,6 @@ public record FuncParamList(
 
     @Override
     public String toString() {
-        return "FuncParamList{" +
-                "firstFuncParam=" + firstFuncParam +
-                ", commaWithFuncParamList=" + commaWithFuncParamList +
-                '}';
+        return representation();
     }
 }

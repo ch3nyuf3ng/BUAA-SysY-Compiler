@@ -1,7 +1,7 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.NonTerminatorType;
 import nonterminators.protocols.Precalculable;
 import pcode.protocols.PcodeType;
@@ -41,11 +41,11 @@ public record ConstExpression(
     }
 
     @Override
-    public int calculateToInt(SymbolManager symbolManager) {
+    public int calculateToInt(SymbolManager symbolManager) throws IdentifierUndefineException {
         return additiveExpression.calculateToInt(symbolManager);
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         additiveExpression.generatePcode(symbolManager, pcodeList, errorHandler);
     }
 }

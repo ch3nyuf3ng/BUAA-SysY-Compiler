@@ -1,7 +1,6 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.BlockItemType;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.protocols.PcodeType;
@@ -39,16 +38,14 @@ public record BlockItem(
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
         if (blockItem instanceof Declaration declaration) {
             declaration.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         } else if (blockItem instanceof Statement statement) {
             statement.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         } else {
-            throw new RuntimeException();
+            throw new UnsupportedOperationException();
         }
     }
 }

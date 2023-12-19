@@ -1,7 +1,6 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.StatementType;
 import pcode.code.StackPointerMove;
 import pcode.protocols.PcodeType;
@@ -14,18 +13,24 @@ import java.util.Optional;
 
 public record ExpressionStatement(
         Optional<Expression> expression,
-        SemicolonToken semicolonToken
+        Optional<SemicolonToken> semicolonToken
 ) implements StatementType {
+    public ExpressionStatement {
+        if (expression.isEmpty() && semicolonToken.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     @Override
     public String detailedRepresentation() {
-        return expression.map(value -> value.detailedRepresentation() + semicolonToken.detailedRepresentation())
-                .orElseGet(semicolonToken::detailedRepresentation);
+        return expression.map(Expression::detailedRepresentation).orElse("") +
+                semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
     @Override
     public String representation() {
-        return expression.map(value -> value.representation() + semicolonToken.representation()).orElseGet(
-                semicolonToken::representation);
+        return expression.map(Expression::representation).orElse("") +
+                semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
     @Override
@@ -35,24 +40,22 @@ public record ExpressionStatement(
 
     @Override
     public TokenType lastTerminator() {
-        return semicolonToken;
+        if (semicolonToken.isPresent()) {
+            return semicolonToken.get();
+        } else {
+            assert expression.isPresent();
+            return expression.get().lastTerminator();
+        }
     }
 
     @Override
     public String toString() {
-        return "ExpressionStatement{" +
-                "expression=" + expression +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
     public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         expression.ifPresent(value -> {
-            try {
-                value.generatePcode(symbolManager, pcodeList, errorHandler);
-            } catch (FatalErrorException e) {
-                throw new RuntimeException(e);
-            }
+            value.generatePcode(symbolManager, pcodeList, errorHandler);
             pcodeList.add(new StackPointerMove(-1));
         });
     }

@@ -1,5 +1,7 @@
 package nonterminators;
 
+import error.exceptions.BreakOrContinueMisusedException;
+import foundation.Helpers;
 import nonterminators.protocols.StatementType;
 import pcode.code.BlockEnd;
 import pcode.code.Jump;
@@ -41,15 +43,18 @@ public record ContinueStatement(
 
     @Override
     public String toString() {
-        return "ContinueStatement{" +
-                "continueToken=" + continueToken +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList) {
-        final var label = "#loop" + "[" + symbolManager.loopIndex() + "]_iter";
-        final var recycleActiveRecordCount = symbolManager.currentDepth() - symbolManager.loopDepth();
+    public void generatePcode(
+            SymbolManager symbolManager, List<PcodeType> pcodeList
+    ) throws BreakOrContinueMisusedException {
+        if (symbolManager.loopIndex().isEmpty()) {
+            throw new BreakOrContinueMisusedException(Helpers.lineNumberOf(continueToken));
+        }
+        final var label = "#loop" + "[" + symbolManager.loopIndex().get() + "]_iter";
+        assert symbolManager.loopDepth().isPresent();
+        final var recycleActiveRecordCount = symbolManager.currentDepth() - symbolManager.loopDepth().get();
         for (var i = 0; i < recycleActiveRecordCount; i += 1) {
             pcodeList.add(new BlockEnd(false));
         }

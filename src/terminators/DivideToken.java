@@ -38,10 +38,6 @@ public record DivideToken(
 
     @Override
     public String toString() {
-        return "DivideToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

@@ -38,10 +38,6 @@ public record SemicolonToken(
 
     @Override
     public String toString() {
-        return "SemicolonToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

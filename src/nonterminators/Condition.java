@@ -1,7 +1,6 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -9,9 +8,7 @@ import terminators.protocols.TokenType;
 
 import java.util.List;
 
-public record Condition(
-        LogicalOrExpression logicalOrExpression
-) implements NonTerminatorType {
+public record Condition(LogicalOrExpression logicalOrExpression) implements NonTerminatorType {
     @Override
     public String detailedRepresentation() {
         return logicalOrExpression.detailedRepresentation() + categoryCode() + "\n";
@@ -34,12 +31,10 @@ public record Condition(
 
     @Override
     public String toString() {
-        return "Condition{" +
-                "logicalOrExpression=" + logicalOrExpression +
-                '}';
+        return representation();
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         logicalOrExpression.generatePcode(symbolManager, pcodeList, errorHandler);
     }
 }

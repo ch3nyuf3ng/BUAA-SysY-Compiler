@@ -54,7 +54,8 @@ int main() {
         {
             {}
             {}
-            if (a[i]) printf("%d %d\n", i, (i % 2) * reflect1[i % 16] + ((i + 1) % 2) * reflect2[i % 5][i % 5]);  
+            if (a[i]) printf("%d %d\n", i, (i % 2) * reflect1[i % 16] + ((i + 1) % 2) * reflect2[i % 5][i % 5]RPARENT )
+            ;  
             i = i + 1;
             ;
             ;

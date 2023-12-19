@@ -1,9 +1,10 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierRedefineException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.DeclarationType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -23,7 +24,7 @@ public record VarDeclaration(
     @Override
     public String detailedRepresentation() {
         return basicType.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
+                + ReprBuilder.binaryOpExpDetailedRepr(
                         firstVarDefinition, commaWithVarDefinitionList
                   )
                 + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("")
@@ -33,7 +34,7 @@ public record VarDeclaration(
     @Override
     public String representation() {
         return basicType.representation() + ' '
-                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
+                + ReprBuilder.binaryOpExRepr(
                         firstVarDefinition, commaWithVarDefinitionList
                   )
                 + semicolonToken.map(SemicolonToken::representation).orElse("");
@@ -46,7 +47,9 @@ public record VarDeclaration(
 
     @Override
     public TokenType lastTerminator() {
-        if (semicolonToken.isPresent()) return semicolonToken.get();
+        if (semicolonToken.isPresent()) {
+            return semicolonToken.get();
+        }
         if (!commaWithVarDefinitionList.isEmpty()) {
             final var lastIndex = commaWithVarDefinitionList.size() - 1;
             final var lastNonTerminator = commaWithVarDefinitionList.get(lastIndex).second();
@@ -57,23 +60,24 @@ public record VarDeclaration(
 
     @Override
     public String toString() {
-        return "VarDeclaration{" +
-                "basicType=" + basicType +
-                ", firstVarDefinition=" + firstVarDefinition +
-                ", commaWithVarDefinitionList=" + commaWithVarDefinitionList +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        firstVarDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
+        try {
+            firstVarDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+        } catch (IdentifierRedefineException | IdentifierUndefineException e) {
+            errorHandler.reportError(e);
+        }
         for (var commaWithVarDefinition : commaWithVarDefinitionList) {
             final var varDefinition = commaWithVarDefinition.second();
-            varDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+            try {
+                varDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+            } catch (IdentifierRedefineException | IdentifierUndefineException e) {
+                errorHandler.reportError(e);
+            }
         }
     }
 }

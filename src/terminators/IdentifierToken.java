@@ -41,4 +41,8 @@ public record IdentifierToken(
     public String toString() {
         return identifier;
     }
+
+    public int lineNumber() {
+        return beginningPosition.lineNumber();
+    }
 }

@@ -39,10 +39,6 @@ public record PlusToken(
 
     @Override
     public String toString() {
-        return "PlusToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

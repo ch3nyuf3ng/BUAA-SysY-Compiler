@@ -1,7 +1,7 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.ConstInitValueType;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.protocols.PcodeType;
@@ -36,33 +36,29 @@ public record ConstInitValue(
 
     @Override
     public String toString() {
-        return "ConstInitValue{" +
-                "constInitValue=" + constInitValue +
-                '}';
+        return representation();
     }
 
-    public List<Integer> precalculateValue(SymbolManager symbolManager, int totalSize) {
+    public List<Integer> precalculateValue(SymbolManager symbolManager, int totalSize) throws IdentifierUndefineException {
         if (constInitValue instanceof ArrayConstInitValue arrayConstInitValue) {
             return arrayConstInitValue.precalculateValue(symbolManager, totalSize);
         } else if (constInitValue instanceof ScalarConstInitValue scalarConstInitValue) {
             return scalarConstInitValue.precalculateValue(symbolManager);
         } else {
-            throw new RuntimeException();
+            throw new UnsupportedOperationException();
         }
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            VariableSymbol variableSymbol,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList,
+            VariableSymbol variableSymbol, ErrorHandler errorHandler
+    ) {
         if (constInitValue instanceof ScalarConstInitValue scalarConstInitValue) {
             scalarConstInitValue.generatePcode(symbolManager, pcodeList, errorHandler);
         } else if (constInitValue instanceof ArrayConstInitValue arrayConstInitValue) {
             arrayConstInitValue.generatePcode(symbolManager, pcodeList, variableSymbol, errorHandler);
         } else {
-            throw new RuntimeException();
+            throw new UnsupportedOperationException();
         }
     }
 }

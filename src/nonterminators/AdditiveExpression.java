@@ -1,10 +1,10 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
-import foundation.ArrayPointer;
+import error.exceptions.IdentifierUndefineException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
+import foundation.protocols.EvaluationType;
 import nonterminators.protocols.NonTerminatorType;
 import nonterminators.protocols.Precalculable;
 import pcode.code.Operate;
@@ -23,14 +23,14 @@ public record AdditiveExpression(
 ) implements NonTerminatorType, Precalculable {
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
+        return ReprBuilder.binaryOpExpWithCatCodeForEachPairDetailedRepr(
                 firstExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
+        return ReprBuilder.binaryOpExRepr(
                 firstExpression, operatorWithExpressionList
         );
     }
@@ -50,14 +50,11 @@ public record AdditiveExpression(
 
     @Override
     public String toString() {
-        return "AdditiveExpression{" +
-                "firstExpression=" + firstExpression +
-                ", operatorWithExpressionList=" + operatorWithExpressionList +
-                '}';
+        return representation();
     }
 
     @Override
-    public int calculateToInt(SymbolManager symbolManager) {
+    public int calculateToInt(SymbolManager symbolManager) throws IdentifierUndefineException {
         var sum = firstExpression.calculateToInt(symbolManager);
         for (var operatorWithExpression : operatorWithExpressionList) {
             final var operator = operatorWithExpression.first();
@@ -71,7 +68,9 @@ public record AdditiveExpression(
         return sum;
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
         firstExpression.generatePcode(symbolManager, pcodeList, errorHandler);
         for (var operatorWithExpression : operatorWithExpressionList) {
             final var operator = operatorWithExpression.first();
@@ -82,20 +81,24 @@ public record AdditiveExpression(
             } else if (operator instanceof MinusToken) {
                 pcodeList.add(new Operate(Operate.Opcode.MINUS));
             } else {
-                throw new RuntimeException();
+                throw new UnsupportedOperationException();
             }
         }
     }
 
-    public boolean isArrayPointer(SymbolManager symbolManager) {
-        if (operatorWithExpressionList.isEmpty()) {
-            return firstExpression.isArrayPointer(symbolManager);
-        } else {
-            return false;
-        }
-    }
+//    public boolean isArrayPointer(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        if (operatorWithExpressionList.isEmpty()) {
+//            return firstExpression.isArrayPointer(symbolManager);
+//        } else {
+//            return false;
+//        }
+//    }
+//
+//    public ArrayPointerType arrayPointerType(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        return firstExpression.arrayPointerType(symbolManager);
+//    }
 
-    public ArrayPointer arrayPointerType(SymbolManager symbolManager) {
-        return firstExpression.arrayPointerType(symbolManager);
+    public EvaluationType evaluationType(SymbolManager symbolManager) throws IdentifierUndefineException {
+        return firstExpression().evaluationType(symbolManager);
     }
 }

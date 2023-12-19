@@ -44,10 +44,12 @@ int judgeB(int a, int b) {
 void printArr(int a[]) {
     int i = 0;
     for (; i < 2; ) {
-        printf("%d", a[i]);
+        printf("%d", a[i]RPARENT )
+        ;
         i = i + 1;
     }
-    printf("\n");
+    printf("\n"RPARENT )
+    ;
 }
 
 void printArr2(int a[][2]) {
@@ -62,7 +64,8 @@ void printArr2(int a[][2]) {
 void printHello() {
     int name;
     name = getint();
-    printf("Hello %d\n", name);
+    printf("Hello %d\n", nameRPARENT )
+    ;
 }
 
 int add(int n) {
@@ -102,11 +105,14 @@ int main() {
         i = i + 1;
     }
     ans = getint();
-    printf("%d\n", add(ans));
+    printf("%d\n", add(ans)RPARENT )
+    ;
     ans = getDif3N(1, 999);
-    printf("%d\n", ans);
+    printf("%d\n", ansRPARENT )
+    ;
     ans = judgeB(2, 3);
-    printf("judgeB 2,3 = %d\n", ans);
+    printf("judgeB 2,3 = %d\n", ansRPARENT )
+    ;
     printHello();
     printArr2(next);
     printArr(next[0]);

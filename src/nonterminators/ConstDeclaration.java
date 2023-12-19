@@ -1,9 +1,10 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierRedefineException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.DeclarationType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -26,9 +27,8 @@ public record ConstDeclaration(
     public String detailedRepresentation() {
         return constToken.detailedRepresentation()
                 + basicType.detailedRepresentation()
-                + RepresentationBuilder.binaryOperatorExpressionDetailedRepresentation(
-                        firstConstDefinition,
-                commaWithConstDefinitionList
+                + ReprBuilder.binaryOpExpDetailedRepr(
+                        firstConstDefinition, commaWithConstDefinitionList
                   )
                 + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("")
                 + categoryCode() + '\n';
@@ -38,9 +38,8 @@ public record ConstDeclaration(
     public String representation() {
         return constToken.representation() + ' '
                 + basicType.representation() + ' '
-                + RepresentationBuilder.binaryOperatorExpressionRepresentation(
-                        firstConstDefinition,
-                commaWithConstDefinitionList
+                + ReprBuilder.binaryOpExRepr(
+                        firstConstDefinition, commaWithConstDefinitionList
                   )
                 + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
@@ -52,33 +51,35 @@ public record ConstDeclaration(
 
     @Override
     public TokenType lastTerminator() {
-        if (semicolonToken.isPresent()) return semicolonToken.get();
-        if (!commaWithConstDefinitionList.isEmpty())
-            return commaWithConstDefinitionList.get(commaWithConstDefinitionList.size() - 1).second()
-                    .lastTerminator();
+        if (semicolonToken.isPresent()) {
+            return semicolonToken.get();
+        }
+        if (!commaWithConstDefinitionList.isEmpty()) {
+            return commaWithConstDefinitionList.get(commaWithConstDefinitionList.size() - 1).second().lastTerminator();
+        }
         return firstConstDefinition.lastTerminator();
     }
 
     @Override
     public String toString() {
-        return "ConstDeclaration{" +
-                "constToken=" + constToken +
-                ", basicType=" + basicType +
-                ", firstConstDefinition=" + firstConstDefinition +
-                ", commaWithConstDefinitionList=" + commaWithConstDefinitionList +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        firstConstDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
-        for (var commaWithVarDefinition : commaWithConstDefinitionList) {
-            final var varDefinition = commaWithVarDefinition.second();
-            varDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
+        try {
+            firstConstDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+        } catch (IdentifierRedefineException | IdentifierUndefineException e) {
+            errorHandler.reportError(e);
+        }
+        for (var commaWithConstDefinition : commaWithConstDefinitionList) {
+            final var constDefinition = commaWithConstDefinition.second();
+            try {
+                constDefinition.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, basicType, errorHandler);
+            } catch (IdentifierRedefineException | IdentifierUndefineException e) {
+                errorHandler.reportError(e);
+            }
         }
     }
 }

@@ -1,7 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.StatementType;
 import pcode.code.*;
 import pcode.protocols.PcodeType;
@@ -64,26 +65,18 @@ public record ForLoopStatement(
 
     @Override
     public String toString() {
-        return "ForLoopStatement{" +
-                "forToken=" + forToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", initStatement=" + initStatement +
-                ", semicolonToken1=" + semicolonToken1 +
-                ", condition=" + condition +
-                ", semicolonToken2=" + semicolonToken2 +
-                ", iterateStatement=" + iterateStatement +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                ", statement=" + statement +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
         if (initStatement.isPresent()) {
-            initStatement.get().generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                initStatement.get().generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (AssignToConstantException | IdentifierUndefineException e) {
+                errorHandler.reportError(e);
+            }
         }
         final var label = "#loop" + "[" + symbolManager.createLoopIndex() + "]";
         pcodeList.add(new Label(label + "_start"));
@@ -94,7 +87,11 @@ public record ForLoopStatement(
         statement.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         pcodeList.add(new Label(label + "_iter"));
         if (iterateStatement.isPresent()) {
-            iterateStatement.get().generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                iterateStatement.get().generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (AssignToConstantException | IdentifierUndefineException e) {
+                errorHandler.reportError(e);
+            }
         }
         pcodeList.add(new Jump(label + "_start"));
         pcodeList.add(new Label(label + "_end"));

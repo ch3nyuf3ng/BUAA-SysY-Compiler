@@ -1,7 +1,9 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.ReturnValueInVoidFuncException;
+import foundation.Helpers;
+import foundation.typing.VoidType;
 import nonterminators.protocols.StatementType;
 import pcode.code.BlockEnd;
 import pcode.code.ReturnFunction;
@@ -55,23 +57,13 @@ public record ReturnStatement(
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-//        final var functionSymbol = symbolManager.getCurrentDefiningFunction();
-//        final var noReturnValue = functionSymbol.metadata().returnType().funcType() instanceof VoidToken;
-//        if (noReturnValue && expression.isPresent()) {
-//            final var error = new ExcessReturnError(returnToken.endingPosition().lineNumber());
-//            errorHandler.reportFatalError(error);
-//        }
-        expression.ifPresent(value -> {
-            try {
-                value.generatePcode(symbolManager, pcodeList, errorHandler);
-            } catch (FatalErrorException e) {
-                throw new RuntimeException(e);
-            }
-        });
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws ReturnValueInVoidFuncException {
+        final var currentDefiningFunction = symbolManager.getCurrentDefiningFunction();
+        if (currentDefiningFunction.metadata().returnType().equals(new VoidType()) && expression.isPresent()) {
+            throw new ReturnValueInVoidFuncException(Helpers.lineNumberOf(returnToken));
+        }
+        expression.ifPresent(value -> value.generatePcode(symbolManager, pcodeList, errorHandler));
         final var recycleActiveRecordCount = symbolManager.currentDepth() - 1;
         for (var i = 0; i < recycleActiveRecordCount; i += 1) {
             pcodeList.add(new BlockEnd(expression.isPresent()));

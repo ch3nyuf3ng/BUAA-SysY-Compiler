@@ -26,7 +26,6 @@ public class IO {
             if (!folder.exists() && !folder.mkdirs()) {
                 System.out.println("Failed to create the output folder.");
             }
-
             final var file = new File(folder, filename);
             final var fileWriter = new FileWriter(file);
             final var bufferedWriter = new BufferedWriter(fileWriter);

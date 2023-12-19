@@ -1,16 +1,20 @@
 package nonterminators;
 
-import error.ErrorChecker;
 import error.ErrorHandler;
-import error.FatalErrorException;
 import error.errors.MissingReturnError;
+import error.exceptions.IdentifierRedefineException;
+import error.exceptions.IdentifierUndefineException;
 import foundation.Logger;
+import foundation.Helpers;
 import nonterminators.protocols.NonTerminatorType;
-import pcode.code.Debug;
+import pcode.code.DebugPcode;
 import pcode.code.Label;
 import pcode.code.ReturnFunction;
 import pcode.protocols.PcodeType;
-import symbol.*;
+import symbol.FunctionMetadata;
+import symbol.FunctionParameterSymbol;
+import symbol.FunctionSymbol;
+import symbol.SymbolManager;
 import terminators.IdentifierToken;
 import terminators.LeftParenthesisToken;
 import terminators.RightParenthesisToken;
@@ -62,69 +66,73 @@ public record FuncDefinition(
 
     @Override
     public String toString() {
-        return "FuncDefinition{" +
-                "funcType=" + funcType +
-                ", identifierToken=" + identifierToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", funcParaList=" + funcParaList +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                ", block=" + block +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
             SymbolManager symbolManager,
             List<PcodeType> pcodeList,
             ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        if (Debug.Enable) {
-            pcodeList.add(new Debug("Function definition: " + representation()));
+    ) throws IdentifierRedefineException {
+        if (DebugPcode.Enable) {
+            pcodeList.add(new DebugPcode("Function definition: " + representation()));
         }
-        ErrorChecker.checkRedefinedIdentifier(symbolManager, errorHandler, identifierToken);
         final var identifier = identifierToken.identifier();
+        final var possibleSameNameSameLevelSymbol = symbolManager.findSymbol(identifier, false);
+        if (possibleSameNameSameLevelSymbol.isPresent()) {
+            throw new IdentifierRedefineException(Helpers.lineNumberOf(identifierToken));
+        }
         final var parameters = new ArrayList<FunctionParameterSymbol>();
         final var funcLabel = "#" + identifierToken.identifier();
         pcodeList.add(new Label(funcLabel + "_start"));
-        final var metadata = new FunctionMetadata(funcType, parameters);
+        final var metadata = new FunctionMetadata(funcType.evaluationType(), parameters);
         final var functionSymbol = new FunctionSymbol(identifier, metadata);
         symbolManager.addSymbol(functionSymbol);
         symbolManager.setCurrentDefiningFunction(functionSymbol);
         if (Logger.LogEnabled) {
             Logger.debug(
-                    "Added Function Symbol into Table"
-                            + symbolManager.innerSymbolTableIndex()
-                            + ": " + functionSymbol,
+                    "Added Function Symbol into Table" + symbolManager.innerSymbolTableIndex() + ": " + functionSymbol,
                     Logger.Category.SYMBOL
             );
         }
         symbolManager.createSymbolTable();
         if (funcParaList.isPresent()) {
-            final var firstParameter = funcParaList.get().firstFuncParam().generateParameterSymbol(symbolManager, errorHandler);
-            symbolManager.addSymbol(firstParameter);
-            parameters.add(firstParameter);
-            for (var commaWithFuncParam : funcParaList.get().commaWithFuncParamList()) {
-                final var funcParam = commaWithFuncParam.second();
-                final var parameter = funcParam.generateParameterSymbol(symbolManager, errorHandler);
-                symbolManager.addSymbol(parameter);
-                parameters.add(parameter);
+            final FunctionParameterSymbol firstParameter;
+            try {
+                firstParameter = funcParaList.get().firstFuncParam().generateParameterSymbol(symbolManager);
+                symbolManager.addSymbol(firstParameter);
+                parameters.add(firstParameter);
+            } catch (IdentifierUndefineException e) {
+                errorHandler.reportError(e);
             }
-            for (var functionParameterSymbol : parameters) {
-                if (Logger.LogEnabled) {
+            for (var commaWithFuncParam : funcParaList.get().commaWithFuncParamList()) {
+                try {
+                    final var funcParam = commaWithFuncParam.second();
+                    final var parameter = funcParam.generateParameterSymbol(symbolManager);
+                    symbolManager.addSymbol(parameter);
+                    parameters.add(parameter);
+                } catch (IdentifierRedefineException | IdentifierUndefineException e) {
+                    errorHandler.reportError(e);
+                }
+            }
+            if (Logger.LogEnabled) {
+                for (var functionParameterSymbol : parameters) {
                     Logger.debug(
                             "Added Function Parameter Symbol into Table"
-                                    + symbolManager.innerSymbolTableIndex()
-                                    + ": " + functionParameterSymbol,
+                                    + symbolManager.innerSymbolTableIndex() + ": "
+                                    + functionParameterSymbol,
                             Logger.Category.SYMBOL
                     );
                 }
             }
         }
         block.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
-        if (!block.lastItemIsReturn() && funcType.funcType() instanceof VoidToken) {
+        if (block.lastItemIsNotReturn() && funcType.funcTypeToken() instanceof VoidToken) {
             pcodeList.add(new ReturnFunction(false));
-        } else if (!block.lastItemIsReturn() && !(funcType.funcType() instanceof VoidToken)) {
-            final var error = new MissingReturnError(block.rightBraceToken().endingPosition().lineNumber());
-            errorHandler.reportFatalError(error);
+        } else if (block.lastItemIsNotReturn() && !(funcType.funcTypeToken() instanceof VoidToken)) {
+            final var rightBrace = block.rightBraceToken();
+            final var error = new MissingReturnError(Helpers.lineNumberOf(rightBrace));
+            errorHandler.reportError(error);
         }
         pcodeList.add(new Label(funcLabel + "_end"));
         symbolManager.tracebackSymbolTable();

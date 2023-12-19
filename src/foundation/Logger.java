@@ -9,16 +9,15 @@ public class Logger {
 
     public static final boolean LogEnabled = false;
     public static final boolean ErrorOutputEnabled = false;
-    public static final boolean WarningOutputEnabled = false;
     public static final boolean DebugOutputEnabled = false;
-    private static final StringBuilder logBuilder = new StringBuilder();
+    private static StringBuilder logBuilder = new StringBuilder();
     public static final Set<Category> DebugOutputAllowedCategories = Set.of(
-            Category.LEXER,
-            Category.PARSER,
-            Category.SYMBOL,
-            Category.IR,
-            Category.INTERPRETER
+            Category.SYMBOL, Category.IR
     );
+
+    public static void clearLog() {
+        logBuilder = new StringBuilder();
+    }
 
     public static void error(String errorMessage) {
         if (LogEnabled) {
@@ -26,15 +25,6 @@ public class Logger {
                 System.out.println("[ERROR] " + errorMessage);
             }
             logBuilder.append("[ERROR] ").append(errorMessage).append('\n');
-        }
-    }
-
-    public static void warn(String warningMessage) {
-        if (LogEnabled) {
-            if (WarningOutputEnabled) {
-                System.out.println("[WARN] " + warningMessage);
-            }
-            logBuilder.append("[WARN] ").append(warningMessage).append('\n');
         }
     }
 

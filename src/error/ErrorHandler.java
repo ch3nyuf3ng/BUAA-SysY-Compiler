@@ -1,37 +1,31 @@
 package error;
 
-import error.errors.protocols.ErrorType;
+import error.protocols.ErrorType;
 import foundation.Logger;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ErrorHandler{
-    private final List<ErrorType> errors;
+    private final Set<ErrorType> errors;
     private final boolean enabled;
 
     public ErrorHandler(boolean enabled) {
-        errors = new ArrayList<>();
+        errors = new HashSet<>();
         this.enabled = enabled;
-    }
-
-    public boolean enabled() {
-        return enabled;
     }
 
     public void reportError(ErrorType error) {
         if (enabled) {
             errors.add(error);
-            Logger.warn("\n" + error.detailedErrorMessage());
+            Logger.error("\n" + error.detailedErrorMessage());
         }
     }
 
-    public void reportFatalError(ErrorType error) throws FatalErrorException {
-        if (enabled) {
-            errors.add(error);
-            Logger.error("\n" + error.detailedErrorMessage());
-        }
-        throw new FatalErrorException();
+    public boolean hasError() {
+        return !errors.isEmpty();
     }
 
     public String generateSimpleLog() {
@@ -40,20 +34,10 @@ public class ErrorHandler{
         }
 
         final var logBuilder = new StringBuilder();
-        for (final var error : errors) {
+        final var sortedErrors = new ArrayList<>(errors);
+        sortedErrors.sort(Comparator.comparingInt(ErrorType::lineNumber));
+        for (final var error : sortedErrors) {
             logBuilder.append(error.simpleErrorMessage()).append('\n');
-        }
-        return logBuilder.toString();
-    }
-
-    public String generateDetailedLog() {
-        if (!enabled) {
-            return "Error handler is not enabled.";
-        }
-
-        final var logBuilder = new StringBuilder();
-        for (final var error : errors) {
-            logBuilder.append(error.detailedErrorMessage()).append('\n');
         }
         return logBuilder.toString();
     }

@@ -41,12 +41,14 @@ int power(int n, int res[][2]) {
 }
 
 int error() {
-    printf("Error!\n");
+    printf("Error!\n"RPARENT )
+    ;
     return1;
 }
 
 int out(int r[][2]) {
-    printf("%d %d\n%d %d\n", r[0][0], r[0][1], r[1][0], r[1][1]);
+    printf("%d %d\n%d %d\n", r[0][0], r[0][1], r[1][0], r[1][1]RPARENT )
+    ;
     return1;
 }
 
@@ -57,12 +59,14 @@ int main() {
     int tmp[2] = {0, 0};
     int res[2][2];
     int vec_list[6][2] = {{1, 0}, {1, 1}, {2, 1}, {3, 1}, {4, 3}, {-1, 1}};
-    printf("a[n] = a[n - 1] + a[n - 2] (for different init values)\n");
+    printf("a[n] = a[n - 1] + a[n - 2] (for different init values)\n"RPARENT )
+    ;
     for (; n > down; ) {
         int p;
         p = getint();
         int ret = power(p, res);
-        printf("/* input = %d */\n", p);
+        printf("/* input = %d */\n", pRPARENT )
+        ;
         if (ret && error()) {
             n = n - 1;
             continue;
@@ -71,16 +75,21 @@ int main() {
             int i = 0;
             for (; i < 6 || 1; ) {
                 __vec_mul(tmp, res, vec_list[i]);
-                printf("when a[0] = %d, a[1] = %d ==> a[%d] = %d\n", vec_list[i][1], vec_list[i][0], p, tmp[1]);
+                printf("when a[0] = %d, a[1] = %d ==> a[%d] = %d\n", vec_list[i][1], vec_list[i][0], p, tmp[1]RPARENT )
+                ;
                 i = i + 1;
                 if (i >= 6) break; else continue;
             }
         }  
-        printf("//////////////////////////////////////\n");
+        printf("//////////////////////////////////////\n"RPARENT )
+        ;
         n = -+-+-(1 - n);
     }
-    printf("/****************** END ******************/\n");
-    printf("");
-    printf("");
+    printf("/****************** END ******************/\n"RPARENT )
+    ;
+    printf(""RPARENT )
+    ;
+    printf(""RPARENT )
+    ;
     return0;
 }

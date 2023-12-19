@@ -38,10 +38,6 @@ public record BreakToken(
 
     @Override
     public String toString() {
-        return "BreakToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

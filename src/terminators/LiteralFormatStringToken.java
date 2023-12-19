@@ -44,10 +44,6 @@ public record LiteralFormatStringToken(
 
     @Override
     public String toString() {
-        return "LiteralFormatStringToken{" +
-                "content='" + content + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

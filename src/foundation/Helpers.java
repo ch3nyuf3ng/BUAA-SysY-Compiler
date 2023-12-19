@@ -1,9 +1,11 @@
 package foundation;
 
+import terminators.protocols.TokenType;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringUtils {
+public class Helpers {
     public static List<String> findDifferingLines(String str1, String str2) {
         final var lines1 = str1.split("[\\r\\n]+");
         final var lines2 = str2.split("[\\r\\n]+");
@@ -42,5 +44,25 @@ public class StringUtils {
 
     public static int digitsCountOf(int integer) {
         return String.valueOf(integer).length();
+    }
+
+    public static int formatDescriptorCount(String string) {
+        final var length = string.length();
+        var count = 0;
+        for (var i = 0; i < length - 1; ) {
+            final var firstChar = string.charAt(i);
+            final var secondChar = string.charAt(i + 1);
+            if (firstChar == '%' && secondChar == 'd') {
+                count += 1;
+                i += 2;
+            } else {
+                i += 1;
+            }
+        }
+        return count;
+    }
+
+    public static int lineNumberOf(TokenType token) {
+        return token.beginningPosition().lineNumber();
     }
 }

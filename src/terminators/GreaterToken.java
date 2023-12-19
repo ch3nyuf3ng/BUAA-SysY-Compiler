@@ -38,10 +38,6 @@ public record GreaterToken(
 
     @Override
     public String toString() {
-        return "GreaterToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

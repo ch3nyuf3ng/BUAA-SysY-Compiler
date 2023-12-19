@@ -18,16 +18,26 @@ int fk(int a, int b[], int c[][2]) {
 }
 
 int main() {
-    printf("21371064");
-    printf("\n");
-    printf("heihei%d\n", a0);
-    printf("%d\n", 8);
-    printf("AC\n");
-    printf("WA\n");
-    printf("TLE\n");
-    printf("RE\n");
-    printf("PE\n");
-    printf("AK!!\n");
+    printf("21371064"RPARENT )
+    ;
+    printf("\n"RPARENT )
+    ;
+    printf("heihei%d\n", a0RPARENT )
+    ;
+    printf("%d\n", 8RPARENT )
+    ;
+    printf("AC\n"RPARENT )
+    ;
+    printf("WA\n"RPARENT )
+    ;
+    printf("TLE\n"RPARENT )
+    ;
+    printf("RE\n"RPARENT )
+    ;
+    printf("PE\n"RPARENT )
+    ;
+    printf("AK!!\n"RPARENT )
+    ;
     int a1 = 1;
     if (a0 < a1) a1 = 1;  
     if (a0 > a1) a1 = 1; else a1 = 1;

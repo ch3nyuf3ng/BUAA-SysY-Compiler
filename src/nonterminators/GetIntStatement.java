@@ -1,7 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.StatementType;
 import pcode.code.ReadNumber;
 import pcode.code.StoreValue;
@@ -18,7 +19,7 @@ public record GetIntStatement(
         AssignToken assignToken,
         GetIntToken getIntToken,
         LeftParenthesisToken leftParenthesisToken,
-        RightParenthesisToken rightParenthesisToken,
+        Optional<RightParenthesisToken> rightParenthesisToken,
         Optional<SemicolonToken> semicolonToken
 ) implements StatementType {
 
@@ -28,7 +29,7 @@ public record GetIntStatement(
                 + assignToken.detailedRepresentation()
                 + getIntToken.detailedRepresentation()
                 + leftParenthesisToken.detailedRepresentation()
-                + rightParenthesisToken.detailedRepresentation()
+                + rightParenthesisToken.map(RightParenthesisToken::detailedRepresentation).orElse("")
                 + semicolonToken.map(SemicolonToken::detailedRepresentation).orElse("");
     }
 
@@ -38,7 +39,7 @@ public record GetIntStatement(
                 + assignToken.representation() + " "
                 + getIntToken.representation()
                 + leftParenthesisToken.representation()
-                + rightParenthesisToken.representation()
+                + rightParenthesisToken.map(RightParenthesisToken::representation).orElse("")
                 + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
@@ -51,28 +52,21 @@ public record GetIntStatement(
     public TokenType lastTerminator() {
         if (semicolonToken.isPresent()) {
             return semicolonToken.get();
+        } else if (rightParenthesisToken.isPresent()) {
+            return rightParenthesisToken.get();
         } else {
-            return rightParenthesisToken;
+            return leftParenthesisToken;
         }
     }
 
     @Override
     public String toString() {
-        return "GetIntStatement{" +
-                "leftValue=" + leftValue +
-                ", assignToken=" + assignToken +
-                ", getIntToken=" + getIntToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws AssignToConstantException, IdentifierUndefineException {
         pcodeList.add(new ReadNumber());
         leftValue.generatePcode(symbolManager, pcodeList, true, errorHandler);
         pcodeList.add(new StoreValue(-1, 0));

@@ -1,10 +1,11 @@
 package nonterminators;
 
-import error.ErrorChecker;
 import error.ErrorHandler;
-import error.FatalErrorException;
-import error.errors.FuncArgNumUnmatchError;
-import error.errors.FuncArgTypeUnmatchError;
+import error.exceptions.FuncArgNumUnmatchException;
+import error.exceptions.FuncArgTypeUnmatchException;
+import error.exceptions.IdentifierUndefineException;
+import foundation.Helpers;
+import foundation.protocols.EvaluationType;
 import nonterminators.protocols.UnaryExpressionType;
 import pcode.code.CallFunction;
 import pcode.protocols.PcodeType;
@@ -59,31 +60,19 @@ public record FuncInvocation(
 
     @Override
     public String toString() {
-        return "FuncInvocation{" +
-                "identifierToken=" + identifierToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", funcArgList=" + funcArgList +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                '}';
+        return representation();
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        ErrorChecker.checkUndefiniedIdentifier(symbolManager, errorHandler, identifierToken);
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws IdentifierUndefineException, FuncArgTypeUnmatchException, FuncArgNumUnmatchException {
         final var possibleSymbol = symbolManager.findSymbol(identifierToken.identifier(), true);
-        if (possibleSymbol.isEmpty()) {
-            throw new RuntimeException();
-        }
-        if (!(possibleSymbol.get() instanceof FunctionSymbol functionSymbol)) {
-            throw new RuntimeException();
+        if (possibleSymbol.isEmpty() || !(possibleSymbol.get() instanceof FunctionSymbol functionSymbol)) {
+            throw new IdentifierUndefineException(Helpers.lineNumberOf(identifierToken));
         }
         final int argumentsCount = funcArgList.map(FuncArgList::argCount).orElse(0);
         if (argumentsCount != functionSymbol.metadata().parameters().size()) {
-            final var error = new FuncArgNumUnmatchError(identifierToken.endingPosition().lineNumber());
-            errorHandler.reportFatalError(error);
+            throw new FuncArgNumUnmatchException(Helpers.lineNumberOf(identifierToken));
         }
         final var arguments = new ArrayList<Expression>();
         if (funcArgList.isPresent()) {
@@ -96,23 +85,20 @@ public record FuncInvocation(
         for (var i = 0; i < arguments.size(); i += 1) {
             final var argument = arguments.get(i);
             final var parameter = parameters.get(i);
-            final var error = new FuncArgTypeUnmatchError(identifierToken.endingPosition().lineNumber());
-            if (parameter.metadata().isArrayPointer()) {
-                if (!argument.isArrayPointer(symbolManager)) {
-                    errorHandler.reportFatalError(error);
-                }
-                final var argumentArrayPointer = argument.arrayPointerType(symbolManager);
-                if (!argumentArrayPointer.basicType().hasSameTypeWith(parameter.metadata().basicType())) {
-                    errorHandler.reportFatalError(error);
-                }
-                if (argumentArrayPointer.level() != parameter.metadata().dimensionSizes().size()) {
-                    errorHandler.reportFatalError(error);
-                }
+            if (parameter.metadata().evaluationType().equals(argument.evaluationType(symbolManager))) {
                 argument.generatePcode(symbolManager, pcodeList, errorHandler);
             } else {
-                argument.generatePcode(symbolManager, pcodeList, errorHandler);
+                throw new FuncArgTypeUnmatchException(Helpers.lineNumberOf(identifierToken));
             }
         }
         pcodeList.add(new CallFunction("#" + identifierToken.identifier() + "_start", argumentsCount));
+    }
+
+    public EvaluationType evaluationType(SymbolManager symbolManager) throws IdentifierUndefineException {
+        final var possibleSymbol = symbolManager.findSymbol(identifierToken.identifier(), true);
+        if (possibleSymbol.isEmpty() || !(possibleSymbol.get() instanceof FunctionSymbol functionSymbol)) {
+            throw new IdentifierUndefineException(Helpers.lineNumberOf(identifierToken));
+        }
+        return functionSymbol.metadata().returnType();
     }
 }

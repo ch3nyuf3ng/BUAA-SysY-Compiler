@@ -37,10 +37,6 @@ public record EqualToken(
 
     @Override
     public String toString() {
-        return "EqualToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

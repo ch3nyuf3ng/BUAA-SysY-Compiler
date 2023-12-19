@@ -1,7 +1,6 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.StatementType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -48,22 +47,20 @@ public record Block(
         return representation();
     }
 
-    public boolean lastItemIsReturn() {
+    public boolean lastItemIsNotReturn() {
         if (blockItemList.isEmpty()) {
-            return false;
+            return true;
         }
         final var lastBlockItem = blockItemList.get(blockItemList.size() - 1);
         if (lastBlockItem.blockItem() instanceof Statement statement) {
-            return statement.statement() instanceof ReturnStatement;
+            return !(statement.statement() instanceof ReturnStatement);
         }
-        return false;
+        return true;
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
         for (final var blockItem : blockItemList) {
             blockItem.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         }

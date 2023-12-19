@@ -38,10 +38,6 @@ public record LessToken(
 
     @Override
     public String toString() {
-        return "LessToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

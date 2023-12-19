@@ -27,7 +27,7 @@ public class Tester {
             final var sourceCode = IO.simpleInputFromFolder(inputFolderPath, inputFileName);
             final var testOutput = stringProcessor.process(sourceCode);
             final var standardOutput = IO.simpleInputFromFolder(standardOutputFolderPath, outputFileName);
-            final var differentLines = StringUtils.findDifferingLines(testOutput, standardOutput);
+            final var differentLines = Helpers.findDifferingLines(testOutput, standardOutput);
             final var differencesLog = String.join("\n", differentLines);
 
             IO.simpleOutputToFolder(testOutputFolderPath, outputFileName, testOutput);

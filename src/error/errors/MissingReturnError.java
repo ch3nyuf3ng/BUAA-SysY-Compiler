@@ -1,6 +1,6 @@
 package error.errors;
 
-import error.errors.protocols.ErrorType;
+import error.protocols.ErrorType;
 
 public record MissingReturnError(int lineNumber) implements ErrorType {
     @Override
@@ -10,7 +10,7 @@ public record MissingReturnError(int lineNumber) implements ErrorType {
 
     @Override
     public String simpleErrorMessage() {
-        return lineNumber + categoryCode();
+        return lineNumber + " " + categoryCode();
     }
 
     @Override

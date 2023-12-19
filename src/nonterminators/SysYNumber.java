@@ -1,10 +1,13 @@
 package nonterminators;
 
+import foundation.protocols.EvaluationType;
+import foundation.typing.IntType;
 import nonterminators.protocols.Precalculable;
 import nonterminators.protocols.PrimaryExpressionType;
 import pcode.code.LoadImmediate;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
+import terminators.LiteralIntegerToken;
 import terminators.protocols.NumberTokenType;
 import terminators.protocols.TokenType;
 
@@ -35,9 +38,7 @@ public record SysYNumber(
 
     @Override
     public String toString() {
-        return "SysYNumber{" +
-                "literalNumberToken=" + literalNumberToken +
-                '}';
+        return representation();
     }
 
     @Override
@@ -47,5 +48,13 @@ public record SysYNumber(
 
     public void generatePcode(List<PcodeType> pcodeList) {
         pcodeList.add(new LoadImmediate(literalNumberToken.toInt()));
+    }
+
+    public EvaluationType evaluationType() {
+        if (literalNumberToken instanceof LiteralIntegerToken) {
+            return new IntType();
+        } else {
+            throw new RuntimeException();
+        }
     }
 }

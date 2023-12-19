@@ -1,9 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import foundation.Pair;
-import foundation.RepresentationBuilder;
+import foundation.ReprBuilder;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.code.*;
 import pcode.protocols.PcodeType;
@@ -27,14 +26,14 @@ public record LogicalAndExpression(
 
     @Override
     public String detailedRepresentation() {
-        return RepresentationBuilder.binaryOperatorExpressionWithCategoryCodeForEachPairDetailedRepresentation(
+        return ReprBuilder.binaryOpExpWithCatCodeForEachPairDetailedRepr(
                 firstEqualityExpression, operatorWithExpressionList, categoryCode()
         );
     }
 
     @Override
     public String representation() {
-        return RepresentationBuilder.binaryOperatorExpressionRepresentation(
+        return ReprBuilder.binaryOpExRepr(
                 firstEqualityExpression,
                 operatorWithExpressionList
         );
@@ -47,13 +46,10 @@ public record LogicalAndExpression(
 
     @Override
     public String toString() {
-        return "LogicalAndExpression{" +
-                "firstEqualityExpression=" + firstEqualityExpression +
-                ", operatorWithExpressionList=" + operatorWithExpressionList +
-                '}';
+        return representation();
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         if (!operatorWithExpressionList.isEmpty()) {
             final var baseLabel = "#and" + "[" + symbolManager.andCount() + "]";
             final var shortcutLabel = baseLabel + "_shortcut";

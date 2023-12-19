@@ -1,11 +1,12 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import error.errors.MissingReturnError;
 import foundation.Logger;
+import foundation.Helpers;
+import foundation.typing.IntType;
 import nonterminators.protocols.NonTerminatorType;
-import pcode.code.Debug;
+import pcode.code.DebugPcode;
 import pcode.code.Label;
 import pcode.protocols.PcodeType;
 import symbol.FunctionMetadata;
@@ -19,12 +20,13 @@ import terminators.protocols.TokenType;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public record MainFuncDefinition(
         IntToken intToken,
         MainToken mainToken,
         LeftParenthesisToken leftParenthesisToken,
-        RightParenthesisToken rightParenthesisToken,
+        Optional<RightParenthesisToken> rightParenthesisToken,
         Block block
 ) implements NonTerminatorType {
     @Override
@@ -35,14 +37,18 @@ public record MainFuncDefinition(
     @Override
     public String detailedRepresentation() {
         return intToken.detailedRepresentation() + mainToken.detailedRepresentation()
-                + leftParenthesisToken.detailedRepresentation() + rightParenthesisToken.detailedRepresentation()
+                + leftParenthesisToken.detailedRepresentation()
+                + rightParenthesisToken.map(RightParenthesisToken::detailedRepresentation).orElse("")
                 + block.detailedRepresentation() + categoryCode() + "\n";
     }
 
     @Override
     public String representation() {
-        return intToken.representation() + " " + mainToken.representation() + leftParenthesisToken.representation()
-                + rightParenthesisToken.representation() + " " + block.representation();
+        return intToken.representation() + " "
+                + mainToken.representation()
+                + leftParenthesisToken.representation()
+                + rightParenthesisToken.map(RightParenthesisToken::representation).orElse("") + " "
+                + block.representation();
     }
 
     @Override
@@ -52,42 +58,33 @@ public record MainFuncDefinition(
 
     @Override
     public String toString() {
-        return "MainFuncDefinition{" +
-                "intToken=" + intToken +
-                ", mainToken=" + mainToken +
-                ", leftParenthesisToken=" + leftParenthesisToken +
-                ", rightParenthesisToken=" + rightParenthesisToken +
-                ", block=" + block +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
         final var mainFuncSymbol = new FunctionSymbol(
-                "main",
-                new FunctionMetadata(
-                        new FuncType(intToken),
-                        Collections.emptyList()
-                )
+                "main", new FunctionMetadata(new IntType(), Collections.emptyList())
         );
         symbolManager.addSymbol(mainFuncSymbol);
+        symbolManager.setCurrentDefiningFunction(mainFuncSymbol);
         if (Logger.LogEnabled) {
             Logger.debug("Added Main Func Symbol: " + mainFuncSymbol, Logger.Category.SYMBOL);
         }
-        if (Debug.Enable) {
-            pcodeList.add(new Debug("Main: " + representation()));
+        if (DebugPcode.Enable) {
+            pcodeList.add(new DebugPcode("Main: " + representation()));
         }
         pcodeList.add(new Label("#main_start"));
         symbolManager.createSymbolTable();
         block.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         symbolManager.tracebackSymbolTable();
-        if (!block.lastItemIsReturn()) {
-            final var error = new MissingReturnError(block.rightBraceToken().endingPosition().lineNumber());
-            errorHandler.reportFatalError(error);
+        if (block.lastItemIsNotReturn()) {
+            final var rightBrace = block.rightBraceToken();
+            final var error = new MissingReturnError(Helpers.lineNumberOf(rightBrace));
+            errorHandler.reportError(error);
         }
         pcodeList.add(new Label("#main_end"));
+        symbolManager.delCurrentDefiningFunction();
     }
 }

@@ -1,10 +1,9 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
 import nonterminators.protocols.BlockItemType;
 import nonterminators.protocols.DeclarationType;
-import pcode.code.Debug;
+import pcode.code.DebugPcode;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
 import terminators.protocols.TokenType;
@@ -36,25 +35,21 @@ public record Declaration(
 
     @Override
     public String toString() {
-        return "Declaration{" +
-                "declaration=" + declaration +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        if (Debug.Enable) {
-            pcodeList.add(new Debug("Declaration: " + declaration.representation()));
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
+        if (DebugPcode.Enable) {
+            pcodeList.add(new DebugPcode("Declaration: " + declaration.representation()));
         }
         if (declaration instanceof VarDeclaration varDeclaration) {
             varDeclaration.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         } else if (declaration instanceof ConstDeclaration constDeclaration) {
             constDeclaration.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         } else {
-            throw new RuntimeException();
+            throw new UnsupportedOperationException();
         }
     }
 }

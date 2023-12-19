@@ -38,10 +38,6 @@ public record LogicalNotToken(
 
     @Override
     public String toString() {
-        return "LogicalNotToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

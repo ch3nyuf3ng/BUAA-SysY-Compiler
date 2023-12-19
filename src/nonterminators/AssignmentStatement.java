@@ -1,7 +1,8 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.StatementType;
 import pcode.code.StoreValue;
 import pcode.protocols.PcodeType;
@@ -29,9 +30,9 @@ public record AssignmentStatement(
 
     @Override
     public String representation() {
-        return leftValue.representation()
-                + " " + assignToken.representation()
-                + " " + expression.representation()
+        return leftValue.representation() + " "
+                + assignToken.representation() + " "
+                + expression.representation()
                 + semicolonToken.map(SemicolonToken::representation).orElse("");
     }
 
@@ -42,25 +43,21 @@ public record AssignmentStatement(
 
     @Override
     public TokenType lastTerminator() {
-        if (semicolonToken.isPresent()) return semicolonToken.get();
-        return expression.lastTerminator();
+        if (semicolonToken.isPresent()) {
+            return semicolonToken.get();
+        } else {
+            return expression.lastTerminator();
+        }
     }
 
     @Override
     public String toString() {
-        return "AssignmentStatement{" +
-                "leftValue=" + leftValue +
-                ", assignToken=" + assignToken +
-                ", expression=" + expression +
-                ", semicolonToken=" + semicolonToken +
-                '}';
+        return representation();
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws AssignToConstantException, IdentifierUndefineException {
         expression.generatePcode(symbolManager, pcodeList, errorHandler);
         leftValue.generatePcode(symbolManager, pcodeList, true, errorHandler);
         pcodeList.add(new StoreValue(-1, 0));

@@ -1,7 +1,7 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.IdentifierUndefineException;
 import nonterminators.protocols.ConstInitValueType;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
@@ -34,16 +34,14 @@ public record ScalarConstInitValue(
 
     @Override
     public String toString() {
-        return "ScalarConstInitValue{" +
-                "constExpression=" + constExpression +
-                '}';
+        return representation();
     }
 
-    public List<Integer> precalculateValue(SymbolManager symbolManager) {
+    public List<Integer> precalculateValue(SymbolManager symbolManager) throws IdentifierUndefineException {
         return List.of(constExpression.calculateToInt(symbolManager));
     }
 
-    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) throws FatalErrorException {
+    public void generatePcode(SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler) {
         constExpression.generatePcode(symbolManager, pcodeList, errorHandler);
     }
 }

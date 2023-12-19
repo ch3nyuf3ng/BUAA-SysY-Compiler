@@ -24,12 +24,14 @@ int main() {
         m = n % i;
         if (m == 0) {
             flag = 1;
-            printf("0\n");
+            printf("0\n"RPARENT )
+            ;
         }  
         i = i + 1;
     }
     c = jian();
-    printf("%d\n", c);
+    printf("%d\n", cRPARENT )
+    ;
     d = c + 1;
     e = c * 2;
     if (e < 5) {
@@ -57,9 +59,13 @@ int main() {
         }  
     }  
     keke(a, b);
-    printf("%d\n%d\n%d\n%d\n", d, e, f, g);
-    printf("19182620\n");
-    printf("19182620\n");
-    printf("19182620\n");
+    printf("%d\n%d\n%d\n%d\n", d, e, f, gRPARENT )
+    ;
+    printf("19182620\n"RPARENT )
+    ;
+    printf("19182620\n"RPARENT )
+    ;
+    printf("19182620\n"RPARENT )
+    ;
     return0;
 }

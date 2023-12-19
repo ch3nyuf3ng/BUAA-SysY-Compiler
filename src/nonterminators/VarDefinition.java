@@ -1,11 +1,9 @@
 package nonterminators;
 
-import error.ErrorChecker;
 import error.ErrorHandler;
-import error.FatalErrorException;
-import foundation.BracketWith;
-import foundation.Logger;
-import foundation.RepresentationBuilder;
+import error.exceptions.IdentifierRedefineException;
+import error.exceptions.IdentifierUndefineException;
+import foundation.*;
 import nonterminators.protocols.NonTerminatorType;
 import pcode.code.MemAddZeros;
 import pcode.protocols.PcodeType;
@@ -17,6 +15,7 @@ import terminators.IdentifierToken;
 import terminators.protocols.TokenType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,10 +28,9 @@ public record VarDefinition(
     @Override
     public String detailedRepresentation() {
         return identifierToken.detailedRepresentation()
-                + RepresentationBuilder.bracketWithNonTerminatorDetailedRepresentation(bracketWithConstExpressionList)
+                + ReprBuilder.bracketWithNonTerminatorDetailedRepr(bracketWithConstExpressionList)
                 + assignToken.map(AssignToken::detailedRepresentation).orElse("")
-                + varInitValue.map(VarInitValue::detailedRepresentation).orElse("")
-                + categoryCode() + '\n';
+                + varInitValue.map(VarInitValue::detailedRepresentation).orElse("") + categoryCode() + '\n';
     }
 
     @Override
@@ -61,7 +59,9 @@ public record VarDefinition(
         if (!bracketWithConstExpressionList.isEmpty()) {
             final var lastIndex = bracketWithConstExpressionList.size() - 1;
             final var lastItem = bracketWithConstExpressionList.get(lastIndex);
-            if (lastItem.rightBracketToken().isPresent()) return lastItem.rightBracketToken().get();
+            if (lastItem.rightBracketToken().isPresent()) {
+                return lastItem.rightBracketToken().get();
+            }
             return lastItem.entity().lastTerminator();
         }
         return identifierToken;
@@ -69,22 +69,17 @@ public record VarDefinition(
 
     @Override
     public String toString() {
-        return "VarDefinition{" +
-                "identifierToken=" + identifierToken +
-                ", bracketWithConstExpressionList=" + bracketWithConstExpressionList +
-                ", assignToken=" + assignToken +
-                ", varInitValue=" + varInitValue +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            BasicType basicType,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        ErrorChecker.checkRedefinedIdentifier(symbolManager, errorHandler, identifierToken);
+            SymbolManager symbolManager, List<PcodeType> pcodeList, BasicType basicType, ErrorHandler errorHandler
+    ) throws IdentifierRedefineException, IdentifierUndefineException {
         final var identifier = identifierToken.identifier();
+        final var possibleSameNameSameLevelSymbol = symbolManager.findSymbol(identifier, false);
+        if (possibleSameNameSameLevelSymbol.isPresent()) {
+            throw new IdentifierRedefineException(Helpers.lineNumberOf(identifierToken));
+        }
         final var isArray = !bracketWithConstExpressionList.isEmpty();
         final var dimensionSizes = new ArrayList<Integer>();
         for (var bracketWithConstExpression : bracketWithConstExpressionList) {
@@ -94,20 +89,13 @@ public record VarDefinition(
         final var activeRecordOffset = symbolManager.activeRecordOffset();
         final var depth = symbolManager.currentDepth();
         final var metadata = new VariableMetadata(
-                false,
-                isArray,
-                basicType,
-                dimensionSizes,
-                activeRecordOffset,
-                depth
+                false, isArray, basicType.evaluationType(), dimensionSizes, activeRecordOffset, depth
         );
-        final var symbol = new VariableSymbol(identifier, metadata, Optional.empty());
+        final var symbol = new VariableSymbol(identifier, metadata, Collections.emptyList());
         symbolManager.addSymbol(symbol);
         if (Logger.LogEnabled) {
             Logger.debug(
-                    "Added Variable Symbol into Table"
-                            + symbolManager.innerSymbolTableIndex()
-                            + ": " + symbol,
+                    "Added Variable Symbol into Table" + symbolManager.innerSymbolTableIndex() + ": " + symbol,
                     Logger.Category.SYMBOL
             );
         }

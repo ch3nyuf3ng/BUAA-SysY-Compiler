@@ -39,10 +39,6 @@ public record VoidToken(
 
     @Override
     public String toString() {
-        return "VoidToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }

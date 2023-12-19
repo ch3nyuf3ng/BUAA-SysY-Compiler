@@ -29,7 +29,8 @@ void test6(int x) {
 }
 
 int main() {
-    printf("21373119");
+    printf("21373119"RPARENT )
+    ;
     int a = 1;
     int xm = 0, xmm = 0;
     int yxm[2] = {1, 0}, yxmm[4][5], yxmmm;
@@ -37,7 +38,8 @@ int main() {
     int c1[2][3] = {{1, 2, 3}, {4, 5, 6}};
     {
         int a = 1;
-        printf("%d\n", a);
+        printf("%d\n", aRPARENT )
+        ;
     }
     {
         int x = 12;
@@ -130,7 +132,8 @@ int main() {
         }
         {}
         {
-            printf("%d%d", a, a);
+            printf("%d%d", a, aRPARENT )
+            ;
         }
     }
     return0;

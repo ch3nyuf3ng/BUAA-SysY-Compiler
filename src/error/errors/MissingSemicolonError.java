@@ -1,12 +1,8 @@
 package error.errors;
 
-import error.errors.protocols.ErrorType;
-import foundation.Position;
+import error.protocols.ErrorType;
 
-public record MissingSemicolonError(
-        String line,
-        Position position
-) implements ErrorType {
+public record MissingSemicolonError(int lineNumber) implements ErrorType {
     @Override
     public String categoryCode() {
         return "i";
@@ -14,17 +10,10 @@ public record MissingSemicolonError(
 
     @Override
     public String simpleErrorMessage() {
-        return categoryCode() + " " + position().lineNumber();
+        return lineNumber + " " + categoryCode();
     }
 
     public String detailedErrorMessage() {
-        final var whitespaces = " ".repeat(
-                String.valueOf(position().lineNumber()).length()
-                        + 1
-                        + position().columnNumber()
-        );
-        return position().lineNumber() + ' ' + line + '\n'
-                + whitespaces + '^' + '\n'
-                + "Missing a semicolon." + '\n';
+        return simpleErrorMessage();
     }
 }

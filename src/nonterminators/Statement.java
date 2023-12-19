@@ -1,12 +1,12 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
+import error.exceptions.*;
 import nonterminators.protocols.BlockItemType;
 import nonterminators.protocols.StatementType;
 import pcode.code.BlockEnd;
 import pcode.code.BlockStart;
-import pcode.code.Debug;
+import pcode.code.DebugPcode;
 import pcode.protocols.PcodeType;
 import symbol.SymbolManager;
 import terminators.protocols.TokenType;
@@ -38,21 +38,21 @@ public record Statement(
 
     @Override
     public String toString() {
-        return "Statement{" +
-                "statement=" + statement +
-                '}';
+        return representation();
     }
 
     public void buildSymbolTableAndGeneratePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
-        if (Debug.Enable) {
-            pcodeList.add(new Debug("Statement: " + statement.representation()));
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) {
+        if (DebugPcode.Enable) {
+            pcodeList.add(new DebugPcode("Statement: " + statement.representation()));
         }
         if (statement instanceof AssignmentStatement assignmentStatement) {
-            assignmentStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                assignmentStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (AssignToConstantException | IdentifierUndefineException e) {
+                errorHandler.reportError(e);
+            }
         } else if (statement instanceof Block block) {
             symbolManager.createSymbolTable();
             pcodeList.add(new BlockStart());
@@ -60,21 +60,41 @@ public record Statement(
             symbolManager.tracebackSymbolTable();
             pcodeList.add(new BlockEnd(false));
         } else if (statement instanceof BreakStatement breakStatement) {
-            breakStatement.generatePcode(symbolManager, pcodeList);
+            try {
+                breakStatement.generatePcode(symbolManager, pcodeList);
+            } catch (BreakOrContinueMisusedException e) {
+                errorHandler.reportError(e);
+            }
         } else if (statement instanceof ContinueStatement continueStatement) {
-            continueStatement.generatePcode(symbolManager, pcodeList);
+            try {
+                continueStatement.generatePcode(symbolManager, pcodeList);
+            } catch (BreakOrContinueMisusedException e) {
+                errorHandler.reportError(e);
+            }
         } else if (statement instanceof ExpressionStatement expressionStatement) {
             expressionStatement.generatePcode(symbolManager, pcodeList, errorHandler);
         } else if (statement instanceof ForLoopStatement forLoopStatement) {
             forLoopStatement.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         } else if (statement instanceof GetIntStatement getIntStatement) {
-            getIntStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                getIntStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (AssignToConstantException | IdentifierUndefineException e) {
+                errorHandler.reportError(e);
+            }
         } else if (statement instanceof IfStatement ifStatement) {
             ifStatement.buildSymbolTableAndGeneratePcode(symbolManager, pcodeList, errorHandler);
         } else if (statement instanceof PrintfStatement printfStatement) {
-            printfStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                printfStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (FormatStringArgCountUnmatchException e) {
+                errorHandler.reportError(e);
+            }
         } else if (statement instanceof ReturnStatement returnStatement) {
-            returnStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            try {
+                returnStatement.generatePcode(symbolManager, pcodeList, errorHandler);
+            } catch (ReturnValueInVoidFuncException e) {
+                errorHandler.reportError(e);
+            }
         } else {
             throw new RuntimeException();
         }

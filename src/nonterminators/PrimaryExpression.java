@@ -1,8 +1,9 @@
 package nonterminators;
 
 import error.ErrorHandler;
-import error.FatalErrorException;
-import foundation.ArrayPointer;
+import error.exceptions.AssignToConstantException;
+import error.exceptions.IdentifierUndefineException;
+import foundation.protocols.EvaluationType;
 import nonterminators.protocols.Precalculable;
 import nonterminators.protocols.PrimaryExpressionType;
 import nonterminators.protocols.UnaryExpressionType;
@@ -12,9 +13,7 @@ import terminators.protocols.TokenType;
 
 import java.util.List;
 
-public record PrimaryExpression(
-        PrimaryExpressionType primaryExpression
-) implements UnaryExpressionType, Precalculable {
+public record PrimaryExpression(PrimaryExpressionType primaryExpression) implements UnaryExpressionType, Precalculable {
     @Override
     public String detailedRepresentation() {
         return primaryExpression.detailedRepresentation() + categoryCode() + "\n";
@@ -37,13 +36,11 @@ public record PrimaryExpression(
 
     @Override
     public String toString() {
-        return "PrimaryExpression{" +
-                "primaryExpression=" + primaryExpression +
-                '}';
+        return representation();
     }
 
     @Override
-    public int calculateToInt(SymbolManager symbolManager) {
+    public int calculateToInt(SymbolManager symbolManager) throws IdentifierUndefineException {
         if (primaryExpression instanceof LeftValue leftValue) {
             return leftValue.calculateToInt(symbolManager);
         } else if (primaryExpression instanceof ParenthesisedPrimeExpression parenthesisedPrimeExpression) {
@@ -51,15 +48,13 @@ public record PrimaryExpression(
         } else if (primaryExpression instanceof SysYNumber number) {
             return number.calculateToInt(symbolManager);
         } else {
-            throw new RuntimeException();
+            throw new UnsupportedOperationException();
         }
     }
 
     public void generatePcode(
-            SymbolManager symbolManager,
-            List<PcodeType> pcodeList,
-            ErrorHandler errorHandler
-    ) throws FatalErrorException {
+            SymbolManager symbolManager, List<PcodeType> pcodeList, ErrorHandler errorHandler
+    ) throws AssignToConstantException, IdentifierUndefineException {
         if (primaryExpression instanceof ParenthesisedPrimeExpression parenthesisedPrimeExpression) {
             parenthesisedPrimeExpression.generatePcode(symbolManager, pcodeList, errorHandler);
         } else if (primaryExpression instanceof SysYNumber sysYNumber) {
@@ -71,25 +66,37 @@ public record PrimaryExpression(
         }
     }
 
-    public boolean isArrayPointer(SymbolManager symbolManager) {
-        if (primaryExpression instanceof ParenthesisedPrimeExpression parenthesisedPrimeExpression) {
-            return parenthesisedPrimeExpression.isArrayPointer(symbolManager);
-        } else if (primaryExpression instanceof SysYNumber) {
-            return false;
-        } else if (primaryExpression instanceof LeftValue leftValue) {
-            return leftValue.isCalculatedResultArrayPointer(symbolManager);
-        } else {
-            throw new RuntimeException();
-        }
-    }
+//    public boolean isArrayPointer(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        if (primaryExpression instanceof ParenthesisedPrimeExpression parenthesisedPrimeExpression) {
+//            return parenthesisedPrimeExpression.isArrayPointer(symbolManager);
+//        } else if (primaryExpression instanceof SysYNumber) {
+//            return false;
+//        } else if (primaryExpression instanceof LeftValue leftValue) {
+//            return leftValue.isArrayPointerType(symbolManager);
+//        } else {
+//            throw new RuntimeException();
+//        }
+//    }
+//
+//    public ArrayPointerType arrayPointerType(SymbolManager symbolManager) throws IdentifierUndefineException {
+//        if (primaryExpression instanceof ParenthesisedPrimeExpression parenthesisedPrimeExpression) {
+//            return parenthesisedPrimeExpression.arrayPointerType(symbolManager);
+//        } else if (primaryExpression instanceof LeftValue leftValue) {
+//            return leftValue.arrayPointerType(symbolManager);
+//        } else {
+//            throw new UnsupportedOperationException();
+//        }
+//    }
 
-    public ArrayPointer arrayPointerType(SymbolManager symbolManager) {
+    public EvaluationType evaluationType(SymbolManager symbolManager) throws IdentifierUndefineException {
         if (primaryExpression instanceof ParenthesisedPrimeExpression parenthesisedPrimeExpression) {
-            return parenthesisedPrimeExpression.arrayPointerType(symbolManager);
+            return parenthesisedPrimeExpression.evaluationType(symbolManager);
+        } else if (primaryExpression instanceof SysYNumber sysYNumber) {
+            return sysYNumber.evaluationType();
         } else if (primaryExpression instanceof LeftValue leftValue) {
-            return leftValue.arrayPointerType(symbolManager);
+            return leftValue.evaluationType(symbolManager);
         } else {
-            throw new RuntimeException();
+            throw new UnsupportedOperationException();
         }
     }
 }

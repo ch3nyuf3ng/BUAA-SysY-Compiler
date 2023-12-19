@@ -38,10 +38,6 @@ public record RightParenthesisToken(
 
     @Override
     public String toString() {
-        return "RightParenthesisToken{" +
-                "rawRepresentation='" + rawRepresentation + '\'' +
-                ", beginningPosition=" + beginningPosition +
-                ", endingPosition=" + endingPosition +
-                '}';
+        return representation();
     }
 }
