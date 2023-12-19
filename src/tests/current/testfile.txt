@@ -1,57 +1,22 @@
+void f() {}
 
-
-const int ZERO = 0, ONE = 1;
-int var2 = 2, var3 = 3;
-
-void fun()
-{
-    int i = 1;
-    {
-        int yuming = 1;
-        for (;yuming < 1000;)
-        {
-            /* code */
-            yuming = yuming * 2;
-        }
-        printf("\n%d",yuming);
-    }
-    return;
+int g(int a) {
+    return a;
 }
 
-int main()
-{
-    printf("21373457\n");
-    if (ZERO + var2 == var3 - ONE && ONE)
-    {
-        if (ZERO || !ZERO && ONE + 1 + var2 < 0)
-        {
-            printf("ERROR!\n");
-        }
-        else
-        {
-            printf("And success!\n");
-        }
-    }
+int i(int a[]) {
+    return a[1];
+}
 
-    if (var3 != 3 || var2 - 22 == -20)
-    {
+int h(int a[][2]) {
+    return i(a[0]);
+}
 
-        if (ONE % 2 + 3 - 4 * 2 + var3 + var2 <= 100 || ONE)
-        {
-            printf("Or pass!\n");
-        }
-    }
-
-    
-    printf("Test1 Success!");
-    {
-    }
-    fun();
-    fun();
-    fun();
-    fun();
-    fun();
-    fun();
-    
+int main() {
+    int a[2][2] = {{1, 2}, {3, 4}};
+    printf("%d\n", h(a));
+    printf("%d\n", i(a[1]));
+    printf("%d\n", g(a[0][0]));
+    printf("%d\n", g(h(a) + 3));
     return 0;
 }

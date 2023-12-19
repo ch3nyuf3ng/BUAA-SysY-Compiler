@@ -6,6 +6,8 @@ import error.exceptions.FuncArgTypeUnmatchException;
 import error.exceptions.IdentifierUndefineException;
 import foundation.Helpers;
 import foundation.protocols.EvaluationType;
+import foundation.typing.ArrayPointerType;
+import foundation.typing.VoidType;
 import nonterminators.protocols.UnaryExpressionType;
 import pcode.code.CallFunction;
 import pcode.protocols.PcodeType;
@@ -85,10 +87,20 @@ public record FuncInvocation(
         for (var i = 0; i < arguments.size(); i += 1) {
             final var argument = arguments.get(i);
             final var parameter = parameters.get(i);
-            if (parameter.metadata().evaluationType().equals(argument.evaluationType(symbolManager))) {
+            final var error = new FuncArgTypeUnmatchException(Helpers.lineNumberOf(identifierToken));
+            if (parameter.metadata().isArrayPointer()) {
+                final var argType = argument.evaluationType(symbolManager);
+                if (!argType.equals(parameter.metadata().evaluationType())) {
+                    throw error;
+                }
+                if (((ArrayPointerType) argType).level() != parameter.metadata().dimensionSizes().size()) {
+                    throw error;
+                }
                 argument.generatePcode(symbolManager, pcodeList, errorHandler);
+            } else if (argument.evaluationType(symbolManager) instanceof VoidType) {
+                throw error;
             } else {
-                throw new FuncArgTypeUnmatchException(Helpers.lineNumberOf(identifierToken));
+                argument.generatePcode(symbolManager, pcodeList, errorHandler);
             }
         }
         pcodeList.add(new CallFunction("#" + identifierToken.identifier() + "_start", argumentsCount));

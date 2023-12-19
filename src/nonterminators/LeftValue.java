@@ -22,6 +22,7 @@ import symbol.protocols.SymbolType;
 import terminators.IdentifierToken;
 import terminators.protocols.TokenType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public record LeftValue(
@@ -167,7 +168,9 @@ public record LeftValue(
         if (symbol instanceof VariableSymbol variableSymbol) {
             final var basicType = variableSymbol.metadata().evaluationType();
             final var level = variableSymbol.metadata().dimensionSizes().size() - bracketWithExpressionList.size();
-            return new ArrayPointerType(basicType, level);
+            final var pointerDimensions = new ArrayList<>(variableSymbol.metadata().dimensionSizes());
+            pointerDimensions.set(0, 0);
+            return new ArrayPointerType(basicType, level, pointerDimensions);
         } else if (symbol instanceof FunctionParameterSymbol functionParameterSymbol) {
             final EvaluationType basicType;
             final var parameterEvaluationType = functionParameterSymbol.metadata().evaluationType();
@@ -177,7 +180,7 @@ public record LeftValue(
                 basicType = parameterEvaluationType;
             }
             final var level = functionParameterSymbol.metadata().dimensionSizes().size() - bracketWithExpressionList.size();
-            return new ArrayPointerType(basicType, level);
+            return new ArrayPointerType(basicType, level, new ArrayList<>(functionParameterSymbol.metadata().dimensionSizes()));
         } else {
             throw new IdentifierUndefineException(identifierToken.lineNumber());
         }

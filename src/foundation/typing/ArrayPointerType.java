@@ -2,11 +2,12 @@ package foundation.typing;
 
 import foundation.protocols.EvaluationType;
 
-import java.util.Objects;
+import java.util.List;
 
 public record ArrayPointerType(
         EvaluationType evaluationType,
-        int level
+        int level,
+        List<Integer> dimensionSizes
 ) implements EvaluationType {
     @Override
     public boolean equals(Object o) {
@@ -17,6 +18,6 @@ public record ArrayPointerType(
             return false;
         }
         ArrayPointerType that = (ArrayPointerType) o;
-        return level == that.level && Objects.equals(evaluationType, that.evaluationType);
+        return level == that.level && evaluationType.equals(that.evaluationType);
     }
 }

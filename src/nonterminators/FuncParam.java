@@ -79,15 +79,20 @@ public record FuncParam(BasicType basicType, IdentifierToken identifierToken,
         final EvaluationType evaluationType;
         if (leftBracketToken().isPresent()) {
             isArrayPointer = true;
-            evaluationType = new ArrayPointerType(basicType.evaluationType(), bracketWithConstExpressionList().size() + 1);
             dimensionSizes.add(0);
         } else {
-            evaluationType = basicType().evaluationType();
             isArrayPointer = false;
         }
         for (var bracketWithConstExpression : bracketWithConstExpressionList) {
             final var dimensionSize = bracketWithConstExpression.entity().calculateToInt(symbolManager);
             dimensionSizes.add(dimensionSize);
+        }
+        if (leftBracketToken().isPresent()) {
+            evaluationType = new ArrayPointerType(
+                    basicType().evaluationType(), dimensionSizes.size(), new ArrayList<>(dimensionSizes)
+            );
+        } else {
+            evaluationType = basicType().evaluationType();
         }
         final var metadata = new FunctionParameterMetadata(
                 isArrayPointer, evaluationType, dimensionSizes, symbolManager.activeRecordOffset()
