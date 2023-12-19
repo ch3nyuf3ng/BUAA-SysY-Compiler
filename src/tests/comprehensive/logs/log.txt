@@ -1,0 +1,183 @@
+[DEBUG] Added Variable Symbol into Table[0]: 
+  identifier: ga
+  metadata: 
+    isConstant: false
+    isArray: false
+    evaluationType: int
+    dimensionSizes: []
+    activeRecordOffset: 4
+    depth: 0
+  precalculatedValue: []
+[DEBUG] Added Variable Symbol into Table[0]: 
+  identifier: gb
+  metadata: 
+    isConstant: false
+    isArray: false
+    evaluationType: int
+    dimensionSizes: []
+    activeRecordOffset: 5
+    depth: 0
+  precalculatedValue: []
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: func1
+  metadata: 
+    returnType: void
+    parameters: 
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: func2
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 1]: 
+    - identifier: a
+      metadata: 
+        isArrayPointer: false
+        evaluationType: int
+        dimensionSizes: []
+        activeRecordOffset: 4
+[DEBUG] Added Function Parameter Symbol into Table[0, 1]: 
+    - identifier: b
+      metadata: 
+        isArrayPointer: false
+        evaluationType: int
+        dimensionSizes: []
+        activeRecordOffset: 5
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: func3
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 2]: 
+    - identifier: arr1
+      metadata: 
+        isArrayPointer: true
+        evaluationType: ArrayPointerType[evaluationType=int, level=0]
+        dimensionSizes: [0]
+        activeRecordOffset: 4
+[DEBUG] Added Function Parameter Symbol into Table[0, 2]: 
+    - identifier: arr2
+      metadata: 
+        isArrayPointer: true
+        evaluationType: ArrayPointerType[evaluationType=int, level=1]
+        dimensionSizes: [0, 2]
+        activeRecordOffset: 5
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: func4
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 3]: 
+    - identifier: a
+      metadata: 
+        isArrayPointer: false
+        evaluationType: int
+        dimensionSizes: []
+        activeRecordOffset: 4
+[DEBUG] Added Function Parameter Symbol into Table[0, 3]: 
+    - identifier: b
+      metadata: 
+        isArrayPointer: false
+        evaluationType: int
+        dimensionSizes: []
+        activeRecordOffset: 5
+[DEBUG] Added Variable Symbol into Table[0, 3]: 
+  identifier: c
+  metadata: 
+    isConstant: false
+    isArray: false
+    evaluationType: int
+    dimensionSizes: []
+    activeRecordOffset: 6
+    depth: 1
+  precalculatedValue: []
+[ERROR] 
+18 d
+[ERROR] 
+19 d
+[DEBUG] Added Variable Symbol into Table[0, 3]: 
+  identifier: arr1
+  metadata: 
+    isConstant: false
+    isArray: true
+    evaluationType: int
+    dimensionSizes: [2]
+    activeRecordOffset: 7
+    depth: 1
+  precalculatedValue: []
+[DEBUG] Added Variable Symbol into Table[0, 3]: 
+  identifier: arr2
+  metadata: 
+    isConstant: false
+    isArray: true
+    evaluationType: int
+    dimensionSizes: [2, 2]
+    activeRecordOffset: 9
+    depth: 1
+  precalculatedValue: []
+[ERROR] 
+22 d
+[DEBUG] Added Function Symbol into Table[0]: 
+  identifier: func5
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Function Parameter Symbol into Table[0, 4]: 
+    - identifier: a
+      metadata: 
+        isArrayPointer: false
+        evaluationType: int
+        dimensionSizes: []
+        activeRecordOffset: 4
+[DEBUG] Added Variable Symbol into Table[0, 4]: 
+  identifier: r
+  metadata: 
+    isConstant: false
+    isArray: false
+    evaluationType: int
+    dimensionSizes: []
+    activeRecordOffset: 5
+    depth: 1
+  precalculatedValue: []
+[DEBUG] Added Main Func Symbol: 
+  identifier: main
+  metadata: 
+    returnType: int
+    parameters: 
+[DEBUG] Added Variable Symbol into Table[0, 5]: 
+  identifier: arr1
+  metadata: 
+    isConstant: false
+    isArray: true
+    evaluationType: int
+    dimensionSizes: [2]
+    activeRecordOffset: 4
+    depth: 1
+  precalculatedValue: []
+[DEBUG] Added Variable Symbol into Table[0, 5]: 
+  identifier: arr2
+  metadata: 
+    isConstant: false
+    isArray: true
+    evaluationType: int
+    dimensionSizes: [2, 2]
+    activeRecordOffset: 6
+    depth: 1
+  precalculatedValue: []
+[ERROR] 
+36 d
+[DEBUG] Added Variable Symbol into Table[0, 5]: 
+  identifier: a
+  metadata: 
+    isConstant: false
+    isArray: false
+    evaluationType: int
+    dimensionSizes: []
+    activeRecordOffset: 10
+    depth: 1
+  precalculatedValue: []
+[ERROR] 
+37 d
+[ERROR] 
+38 d
+[ERROR] 
+39 d

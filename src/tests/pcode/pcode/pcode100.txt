@@ -1,0 +1,254 @@
+BLKS
+LIT 1
+LIT 2
+LIT 3
+MAZ 1
+LIT 1
+LIT 2
+OPR 1
+MAZ 1
+CAL #main_start
+JMP #main_end
+#double2_start:
+LIT 0
+LOD 0,4
+OPR 8
+JPC #if[0]_else
+#if[0]_start:
+BLKS
+LIT 2
+LIT 0
+LOD 1,4
+OPR 3
+BLKE 1
+RET 1
+BLKE 0
+JMP #if[0]_end
+#if[0]_else:
+BLKS
+LIT 2
+LIT 0
+LOD 1,4
+OPR 7
+OPR 3
+BLKE 1
+RET 1
+BLKE 0
+#if[0]_end:
+LIT 0
+RET 1
+#double2_end:
+#add_start:
+LIT 0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 0
+LEA 0,6
+STO -1,0
+LIT 0
+LOD 0,6
+RET 1
+#add_end:
+#sub_start:
+LIT 0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 2
+LIT 0
+LEA 0,6
+STO -1,0
+LIT 0
+LOD 0,6
+LIT 0
+OPR 16
+JPC #if[1]_else
+#if[1]_start:
+BLKS
+LIT 0
+LOD 1,6
+BLKE 1
+RET 1
+BLKE 0
+JMP #if[1]_end
+#if[1]_else:
+#if[1]_end:
+LIT 0
+LOD 0,6
+LIT 0
+OPR 14
+JPC #if[2]_else
+#if[2]_start:
+BLKS
+LIT 0
+BLKE 1
+RET 1
+BLKE 0
+JMP #if[2]_end
+#if[2]_else:
+#if[2]_end:
+LIT 0
+RET 1
+#sub_end:
+#print_none_start:
+RET 0
+#print_none_end:
+#main_start:
+BLKS
+LIT 0
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+#loop[0]_start:
+LIT 0
+LOD 0,4
+LIT 4
+OPR 13
+JPC #loop[0]_end
+BLKS
+LIT 0
+LOD 1,4
+LIT 4
+OPR 12
+JPC #if[3]_else
+#if[3]_start:
+BLKS
+LIT 0
+LOD 2,4
+LIT 1
+OPR 1
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[3]_end
+#if[3]_else:
+BLKS
+BLKE 0
+BLKE 0
+JMP #loop[0]_end
+BLKE 0
+#if[3]_end:
+RED
+LIT 0
+LEA 1,5
+STO -1,0
+LIT 0
+LOD 1,5
+LIT 0
+OPR 11
+JPC #if[4]_else
+#if[4]_start:
+BLKS
+RED
+LIT 0
+LEA 2,7
+STO -1,0
+LIT 0
+LOD 2,7
+CAL #double2_start
+LIT 1
+OPR 5
+LIT 0
+LEA 2,6
+STO -1,0
+WRTS ""
+LIT 0
+LOD 2,6
+WRT
+WRTS " "
+LIT 0
+LOD 2,7
+CAL #double2_start
+LIT 1
+OPR 6
+OPR 4
+LIT 0
+LEA 2,6
+STO -1,0
+WRTS ""
+LIT 0
+LOD 2,6
+WRT
+WRTS "\n"
+BLKE 0
+BLKE 0
+JMP #loop[0]_iter
+BLKE 0
+JMP #if[4]_end
+#if[4]_else:
+#if[4]_end:
+LIT 0
+LOD 1,5
+LIT 0
+OPR 15
+JPC #if[5]_else
+#if[5]_start:
+BLKS
+RED
+LIT 0
+LEA 2,7
+STO -1,0
+RED
+LIT 0
+LEA 2,8
+STO -1,0
+WRTS ""
+LIT 0
+LOD 2,7
+LIT 0
+LOD 2,8
+CAL #add_start
+WRT
+WRTS "\n"
+BLKE 0
+BLKE 0
+JMP #loop[0]_iter
+BLKE 0
+JMP #if[5]_end
+#if[5]_else:
+#if[5]_end:
+LIT 0
+LOD 1,5
+LIT 0
+OPR 13
+JPC #if[6]_else
+#if[6]_start:
+BLKS
+RED
+LIT 0
+LEA 2,7
+STO -1,0
+RED
+LIT 0
+LEA 2,8
+STO -1,0
+WRTS ""
+LIT 0
+LOD 2,7
+LIT 0
+LOD 2,8
+CAL #sub_start
+WRT
+WRTS "\n"
+BLKE 0
+BLKE 0
+JMP #loop[0]_iter
+BLKE 0
+JMP #if[6]_end
+#if[6]_else:
+#if[6]_end:
+BLKE 0
+#loop[0]_iter:
+JMP #loop[0]_start
+#loop[0]_end:
+BLKE 0
+LIT 0
+RET 1
+#main_end:
+BLKE 0

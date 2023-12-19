@@ -1,0 +1,374 @@
+BLKS
+LIT 0
+CAL #main_start
+JMP #main_end
+#f_start:
+RET 0
+#f_end:
+#ff_start:
+LIT 0
+LOD 0,6
+LIT 1
+OPR 1
+LIT 0
+LEA 0,6
+STO -1,0
+RET 0
+#ff_end:
+#fd_start:
+LIT 0
+LOD 0,4
+RET 1
+#fd_end:
+#fk_start:
+LIT 1
+RET 1
+#fk_end:
+#main_start:
+WRTS "21371064"
+WRTS "\n"
+WRTS "heihei"
+LIT 0
+LOD 1,4
+WRT
+WRTS "\n"
+WRTS ""
+LIT 8
+WRT
+WRTS "\n"
+WRTS "AC\n"
+WRTS "WA\n"
+WRTS "TLE\n"
+WRTS "RE\n"
+WRTS "PE\n"
+WRTS "AK!!\n"
+LIT 1
+LIT 0
+LOD 1,4
+LIT 0
+LOD 0,4
+OPR 13
+JPC #if[0]_else
+#if[0]_start:
+LIT 1
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[0]_end
+#if[0]_else:
+#if[0]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 0,4
+OPR 15
+JPC #if[1]_else
+#if[1]_start:
+LIT 1
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[1]_end
+#if[1]_else:
+LIT 1
+LIT 0
+LEA 0,4
+STO -1,0
+#if[1]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 0,4
+OPR 11
+JPC #if[2]_else
+#if[2]_start:
+LIT 3
+LIT 4
+OPR 3
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[2]_end
+#if[2]_else:
+#if[2]_end:
+LIT 0
+LOD 0,4
+OPR 8
+JPC #if[3]_else
+#if[3]_start:
+LIT 3
+LIT 4
+OPR 2
+LIT 5
+OPR 1
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[3]_end
+#if[3]_else:
+#if[3]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 0,4
+OPR 16
+JPC #if[4]_else
+#if[4]_start:
+LIT 9
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[4]_end
+#if[4]_else:
+#if[4]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 0,4
+OPR 14
+JPC #if[5]_else
+#if[5]_start:
+LIT 10
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[5]_end
+#if[5]_else:
+#if[5]_end:
+#loop[0]_start:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 0,4
+OPR 16
+JPC #loop[0]_end
+BLKS
+LIT 0
+LOD 1,4
+LIT 4
+OPR 11
+JPC #if[6]_else
+#if[6]_start:
+LIT 5
+LIT 0
+LEA 1,4
+STO -1,0
+JMP #if[6]_end
+#if[6]_else:
+#if[6]_end:
+BLKE 0
+JMP #loop[0]_end
+BLKE 0
+JMP #loop[0]_iter
+BLKE 0
+#loop[0]_iter:
+JMP #loop[0]_start
+#loop[0]_end:
+LIT 3
+LIT 5
+OPR 4
+LIT 0
+LEA 0,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 6
+OPR 5
+LIT 0
+LEA 0,4
+STO -1,0
+LIT 2
+LIT 0
+LEA 0,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 2
+OPR 11
+JPC #if[7]_else
+#if[7]_start:
+BLKS
+LIT 3
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 4
+LIT 0
+LEA 1,4
+STO -1,0
+BLKE 0
+JMP #if[7]_end
+#if[7]_else:
+#if[7]_end:
+#loop[1]_start:
+LIT 0
+LOD 0,4
+LIT 4
+OPR 11
+JPC #loop[1]_end
+BLKS
+LIT 0
+LOD 1,4
+LIT 1
+OPR 1
+LIT 0
+LEA 1,4
+STO -1,0
+BLKE 0
+JMP #loop[1]_iter
+BLKE 0
+#loop[1]_iter:
+JMP #loop[1]_start
+#loop[1]_end:
+#and[0]_start:
+LIT 0
+LOD 0,4
+LIT 5
+OPR 11
+JPC #and[0]_shortcut
+LIT 1
+LIT 0
+LOD 0,4
+LIT 4
+OPR 11
+OPR 9
+JMP #and[0]_end
+#and[0]_shortcut:
+LIT 0
+#and[0]_end:
+JPC #if[8]_else
+#if[8]_start:
+LIT 6
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[8]_end
+#if[8]_else:
+#if[8]_end:
+#or[0]_start:
+LIT 0
+LOD 0,4
+LIT 6
+OPR 12
+JPT #or[0]_true
+LIT 0
+LIT 0
+LOD 0,4
+LIT 3
+OPR 11
+OPR 10
+JMP #or[0]_end
+#or[0]_true:
+LIT 1
+#or[0]_end:
+JPC #if[9]_else
+#if[9]_start:
+LIT 0
+LOD 1,4
+LIT 0
+LEA 0,4
+STO -1,0
+JMP #if[9]_end
+#if[9]_else:
+#if[9]_end:
+MAZ 2
+LIT 1
+LIT 2
+LIT 1
+LIT 2
+LIT 3
+LIT 4
+LIT 1
+LIT 2
+LIT 3
+LIT 1
+LIT 2
+LIT 1
+LIT 2
+LIT 4
+LIT 2
+LIT 4
+OPR 4
+LIT 2
+OPR 3
+LIT 6
+OPR 5
+OPR 1
+LIT 5
+OPR 2
+LIT 9
+LIT 0
+LOD 0,4
+CAL #fd_start
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LEA 0,20
+STO -1,0
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 0,20
+LIT 0
+LEA 0,5
+LIT 0
+LEA 0,9
+CAL #fk_start
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LEA 0,20
+STO -1,0
+LIT 4
+RED
+LIT 0
+LEA 0,22
+STO -1,0
+CAL #f_start
+INT -1
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 0,20
+LIT 0
+LIT 1
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 0,9
+LIT 0
+LIT 1
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 0,16
+CAL #ff_start
+INT -1
+LIT 3
+LIT 0
+LOD 1,4
+OPR 1
+CAL #fd_start
+LIT 0
+LEA 0,22
+STO -1,0
+LIT 0
+RET 1
+#main_end:
+BLKE 0

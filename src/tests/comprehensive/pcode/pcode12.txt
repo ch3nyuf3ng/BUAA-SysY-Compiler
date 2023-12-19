@@ -1,0 +1,1337 @@
+BLKS
+LIT 4
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,4
+OPR 3
+LIT 0
+LOD 0,4
+OPR 3
+LIT 376789
+LIT 326
+OPR 5
+LIT 23167
+OPR 1
+LIT 3427
+OPR 6
+LIT 276
+OPR 3
+LIT 13
+OPR 4
+OPR 2
+LIT 0
+LOD 0,4
+LIT 10
+LIT 0
+LOD 0,4
+LIT 2
+OPR 4
+OPR 3
+OPR 1
+LIT 10
+OPR 7
+LIT 123
+LIT 3
+LIT 2
+OPR 4
+LIT 666
+LIT 0
+LOD 0,4
+OPR 1
+LIT 233
+OPR 5
+OPR 1
+OPR 3
+LIT 21
+LIT 3
+OPR 1
+OPR 4
+OPR 1
+LIT 0
+OPR 6
+OPR 7
+OPR 6
+OPR 7
+OPR 6
+OPR 1
+LIT 10086
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,4
+OPR 3
+LIT 0
+LIT 233
+LIT 3
+OPR 1
+OPR 3
+LIT 212132
+OPR 1
+LIT 0
+LOD 0,4
+LIT 2
+LIT 0
+LOD 0,4
+OPR 3
+OPR 1
+LIT 0
+LOD 0,5
+OPR 1
+LIT 1234
+LIT 0
+LOD 0,4
+OPR 4
+LIT 3
+OPR 7
+LIT 2
+OPR 1
+LIT 657
+LIT 24
+OPR 4
+OPR 1
+LIT 0
+LOD 0,7
+LIT 57024
+OPR 1
+LIT 0
+LOD 0,8
+LIT 0
+LOD 0,7
+OPR 3
+LIT 2
+OPR 4
+LIT 4
+OPR 3
+LIT 0
+LOD 0,5
+OPR 3
+LIT 8792
+LIT 289
+OPR 7
+LIT 2378
+OPR 3
+LIT 89
+OPR 2
+LIT 908
+LIT 0
+LOD 0,8
+LIT 2
+LIT 2768
+LIT 13
+OPR 5
+LIT 56
+OPR 1
+OPR 3
+LIT 0
+LIT 10086
+OPR 1
+LIT 2
+OPR 7
+OPR 1
+LIT 20
+OPR 6
+OPR 1
+LIT 0
+LOD 0,8
+LIT 2364
+OPR 3
+LIT 324567
+LIT 34
+OPR 7
+OPR 4
+LIT 213
+OPR 7
+OPR 3
+LIT 10009921
+OPR 5
+OPR 1
+LIT 278
+OPR 7
+LIT 2318
+OPR 3
+LIT 10009921
+OPR 4
+LIT 234
+OPR 6
+OPR 1
+LIT 831
+OPR 2
+MAZ 1
+LIT 1983
+LIT 2323
+LIT 9382
+OPR 6
+LIT 23
+OPR 3
+LIT 23
+OPR 4
+LIT 128
+OPR 2
+LIT 0
+OPR 7
+LIT 390042
+LIT 204
+LIT 8137
+OPR 3
+OPR 2
+MAZ 6
+MAZ 2
+MAZ 1
+LIT 287
+LIT 0
+LOD 0,6
+LIT 2
+OPR 3
+LIT 287
+LIT 2786
+LIT 8719
+OPR 7
+OPR 2
+MAZ 1
+CAL #main_start
+JMP #main_end
+#__my_Ha_s__h_start:
+MAZ 1
+MAZ 1
+LIT 0
+LOD 0,5
+LIT 0
+LEA 0,6
+STO -1,0
+LIT 0
+LIT 0
+LEA 0,7
+STO -1,0
+#loop[0]_start:
+LIT 0
+LOD 0,7
+LIT 0
+LOD 0,5
+OPR 13
+JPC #loop[0]_end
+BLKS
+LIT 0
+LOD 1,6
+LIT 98326464
+OPR 1
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,6
+LIT 20373381
+OPR 3
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,6
+LIT 23667832
+OPR 1
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,6
+LIT 133
+OPR 4
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,6
+LIT 1347887899
+OPR 1
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,6
+LIT 99998099
+OPR 5
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,6
+LIT 123671861
+OPR 3
+LIT 236234
+OPR 2
+LIT 0
+LOD 1,6
+LIT 135632
+OPR 1
+OPR 3
+LIT 7
+OPR 4
+LIT 0
+LEA 1,6
+STO -1,0
+LIT 0
+LOD 1,7
+LIT 0
+OPR 7
+LIT 2
+OPR 1
+LIT 1234
+LIT 888
+OPR 4
+OPR 2
+OPR 1
+LIT 0
+LEA 1,7
+STO -1,0
+BLKE 0
+#loop[0]_iter:
+JMP #loop[0]_start
+#loop[0]_end:
+LIT 0
+LOD 0,6
+RET 1
+#__my_Ha_s__h_end:
+#____start:
+WRTS "   !!! ()*+,-./:;<>=@?^_`{}|~[]  called func: ___\n"
+RET 0
+#____end:
+#_____start:
+WRTS "//called func: ____, _arg = "
+LIT 0
+LOD 0,4
+LIT 2
+OPR 3
+LIT 3
+OPR 3
+LIT 6
+OPR 4
+WRT
+WRTS "\n"
+RET 0
+#_____end:
+#___start:
+WRTS "called func: __, array[0] = "
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LIT 0
+LOD 0,4
+OPR 1
+LOD -1,0
+WRT
+WRTS "\n\n\n"
+RET 0
+#___end:
+#_Main_start:
+WRTS "called func: Main, array[0][0] = "
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LIT 0
+LOD 0,4
+OPR 1
+LOD -1,0
+WRT
+WRTS ", array[0][1] = "
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LIT 0
+LOD 0,4
+OPR 1
+LOD -1,0
+WRT
+WRTS "\n\n"
+RET 0
+#_Main_end:
+#_add_fake_start:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 100
+LIT 10086
+OPR 1
+OPR 16
+JPC #if[0]_else
+#if[0]_start:
+BLKS
+LIT 0
+LOD 1,4
+LIT 203
+LIT 0
+LOD 1,5
+OPR 3
+LIT 201
+OPR 4
+OPR 1
+BLKE 1
+RET 1
+BLKE 0
+JMP #if[0]_end
+#if[0]_else:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 10086
+OPR 2
+LIT 12345678
+OPR 13
+JPC #if[1]_else
+#if[1]_start:
+BLKS
+LIT 1003
+LIT 0
+LOD 1,4
+OPR 3
+LIT 1009
+OPR 4
+LIT 2022
+LIT 0
+LOD 1,5
+OPR 3
+LIT 2019
+OPR 4
+OPR 1
+BLKE 1
+RET 1
+BLKE 0
+JMP #if[1]_end
+#if[1]_else:
+BLKS
+LIT 0
+LOD 1,4
+LIT 0
+LOD 1,5
+OPR 1
+LIT 233
+OPR 2
+BLKE 1
+RET 1
+BLKE 0
+#if[1]_end:
+#if[0]_end:
+LIT 10086
+OPR 7
+RET 1
+#_add_fake_end:
+#_add_start:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 0
+LOD 0,6
+OPR 1
+RET 1
+#_add_end:
+#_get_id_start:
+MAZ 1
+LIT 76
+LIT 0
+LEA 0,4
+STO -1,0
+BLKS
+LIT 123
+INT -1
+WRTS ""
+LIT 0
+LOD 1,4
+WRT
+WRTS "\n"
+LIT 10086
+LIT 0
+LEA 1,4
+STO -1,0
+WRTS ""
+LIT 0
+LOD 1,4
+WRT
+WRTS "\n"
+LIT 10
+OPR 6
+OPR 7
+OPR 6
+WRTS ""
+LIT 0
+LOD 0,4
+WRT
+WRTS "\n"
+BLKE 0
+LIT 20373381
+RET 1
+#_get_id_end:
+#_M__a_G_I___c_start:
+LIT 0
+LOD 0,4
+LIT 763835168
+OPR 7
+OPR 1
+LIT 1996325548
+OPR 5
+LIT 1881457024
+OPR 3
+LIT 11
+OPR 4
+LIT 540488577
+OPR 3
+RET 1
+#_M__a_G_I___c_end:
+#main_start:
+BLKS
+BLKS
+BLKS
+BLKS
+BLKE 0
+BLKE 0
+BLKE 0
+BLKE 0
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+MAZ 1
+LIT 1
+LIT 2
+LIT 3
+LIT 4
+LIT 5
+LIT 6
+LIT 7
+LIT 8
+LIT 10
+LIT 20
+LIT 10
+LIT 0
+LIT 1
+RED
+LIT 0
+LEA 0,4
+STO -1,0
+RED
+LIT 0
+LEA 0,5
+STO -1,0
+RED
+LIT 0
+LEA 0,6
+STO -1,0
+RED
+LIT 0
+LEA 0,7
+STO -1,0
+RED
+LIT 0
+LEA 0,8
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 20373381
+OPR 11
+JPC #if[2]_else
+#if[2]_start:
+BLKS
+LIT 0
+LOD 1,21
+LIT 1
+OPR 1
+LIT 0
+LEA 1,21
+STO -1,0
+LIT 0
+LOD 1,20
+LIT 1332
+OPR 1
+LIT 0
+LEA 1,20
+STO -1,0
+BLKE 0
+JMP #if[2]_end
+#if[2]_else:
+#if[2]_end:
+LIT 0
+LOD 0,5
+LIT 200
+OPR 15
+JPC #if[3]_else
+#if[3]_start:
+LIT 0
+LOD 0,21
+LIT 1
+OPR 1
+LIT 0
+LEA 0,21
+STO -1,0
+JMP #if[3]_end
+#if[3]_else:
+#if[3]_end:
+LIT 0
+LOD 0,6
+LIT 111
+OPR 16
+JPC #if[4]_else
+#if[4]_start:
+LIT 0
+LOD 0,7
+LIT 2234
+OPR 12
+JPC #if[5]_else
+#if[5]_start:
+LIT 0
+LOD 0,21
+LIT 1
+OPR 1
+LIT 0
+LEA 0,21
+STO -1,0
+JMP #if[5]_end
+#if[5]_else:
+LIT 0
+LOD 0,21
+LIT 2729
+OPR 1
+LIT 0
+LEA 0,21
+STO -1,0
+#if[5]_end:
+JMP #if[4]_end
+#if[4]_else:
+#if[4]_end:
+LIT 0
+LIT 0
+#loop[1]_start:
+LIT 0
+OPR 8
+JPC #loop[1]_end
+BLKS
+LIT 0
+LOD 1,23
+LIT 0
+LIT 0
+LOD 1,22
+LIT 1
+OPR 3
+OPR 1
+LOD 2,9
+OPR 1
+LIT 0
+LEA 1,23
+STO -1,0
+LIT 0
+LOD 1,22
+LIT 1
+OPR 1
+LIT 0
+LEA 1,22
+STO -1,0
+LIT 0
+LOD 1,22
+LIT 0
+LOD 2,4
+LIT 2
+OPR 4
+OPR 16
+JPC #if[6]_else
+#if[6]_start:
+BLKS
+BLKE 0
+BLKE 0
+JMP #loop[1]_end
+BLKE 0
+JMP #if[6]_end
+#if[6]_else:
+#if[6]_end:
+BLKE 0
+#loop[1]_iter:
+JMP #loop[1]_start
+#loop[1]_end:
+LIT 0
+MAZ 12
+#loop[2]_start:
+LIT 1
+LIT 2
+OPR 14
+JPC #loop[2]_end
+BLKS
+LIT 0
+LIT 0
+LIT 0
+LOD 1,24
+LIT 1
+OPR 3
+OPR 1
+LEA 1,25
+STO -1,0
+LIT 0
+LOD 1,24
+LIT 5
+OPR 11
+JPC #if[7]_else
+#if[7]_start:
+BLKS
+LIT 0
+LOD 2,24
+LIT 1
+OPR 1
+LIT 0
+LEA 2,24
+STO -1,0
+BLKE 0
+BLKE 0
+JMP #loop[2]_iter
+BLKE 0
+JMP #if[7]_end
+#if[7]_else:
+#if[7]_end:
+LIT 0
+LOD 1,24
+LIT 10
+OPR 15
+JPC #if[8]_else
+#if[8]_start:
+BLKS
+BLKE 0
+BLKE 0
+JMP #loop[2]_end
+BLKE 0
+JMP #if[8]_end
+#if[8]_else:
+#if[8]_end:
+LIT 0
+LOD 1,24
+LIT 0
+LIT 0
+LOD 1,24
+LIT 1
+OPR 3
+OPR 1
+LEA 1,25
+STO -1,0
+LIT 0
+LOD 1,24
+LIT 1
+OPR 1
+LIT 0
+LEA 1,24
+STO -1,0
+LIT 0
+LOD 1,23
+LIT 0
+LOD 1,24
+LIT 0
+LOD 1,24
+OPR 3
+OPR 1
+LIT 0
+LEA 1,23
+STO -1,0
+LIT 0
+LOD 1,21
+LIT 1
+OPR 1
+LIT 0
+LEA 1,21
+STO -1,0
+BLKE 0
+#loop[2]_iter:
+JMP #loop[2]_start
+#loop[2]_end:
+LIT 0
+#or[0]_start:
+LIT 0
+LOD 1,4
+LIT 5
+OPR 13
+JPT #or[0]_true
+LIT 0
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,9
+LIT 10
+OPR 13
+OPR 10
+JMP #or[0]_end
+#or[0]_true:
+LIT 1
+#or[0]_end:
+JPC #if[9]_else
+#if[9]_start:
+BLKS
+LIT 0
+LOD 1,37
+LIT 1
+OPR 1
+LIT 0
+LEA 1,37
+STO -1,0
+BLKE 0
+JMP #if[9]_end
+#if[9]_else:
+#if[9]_end:
+#and[0]_start:
+LIT 0
+LOD 1,7
+LIT 0
+OPR 13
+JPC #and[0]_shortcut
+LIT 1
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,9
+LIT 10
+OPR 15
+OPR 9
+JMP #and[0]_end
+#and[0]_shortcut:
+LIT 0
+#and[0]_end:
+JPC #if[10]_else
+#if[10]_start:
+BLKS
+LIT 0
+LOD 1,37
+LIT 2
+OPR 1
+LIT 0
+LEA 1,37
+STO -1,0
+BLKE 0
+JMP #if[10]_end
+#if[10]_else:
+#if[10]_end:
+RED
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LEA 1,31
+STO -1,0
+RED
+LIT 0
+LIT 1
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LEA 1,31
+STO -1,0
+RED
+LIT 0
+LIT 2
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LEA 1,31
+STO -1,0
+RED
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LEA 1,37
+STO -1,0
+RED
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LEA 1,37
+STO -1,0
+RED
+LIT 0
+LEA 1,39
+STO -1,0
+LIT 0
+LOD 1,39
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,37
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,37
+OPR 3
+OPR 1
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+LIT 2
+LIT 1
+OPR 3
+OPR 4
+OPR 1
+LIT 0
+LEA 1,39
+STO -1,0
+LIT 0
+LIT 2
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+LIT 0
+LIT 1
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+OPR 3
+LIT 0
+LIT 2
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LEA 1,31
+STO -1,0
+LIT 0
+LOD 0,23
+LIT 0
+LOD 0,23
+OPR 3
+LIT 0
+LOD 0,17
+LIT 0
+LOD 0,18
+LIT 3
+CAL #_add_start
+OPR 1
+LIT 0
+LEA 1,44
+STO -1,0
+LIT 0
+LOD 0,23
+CAL #_get_id_start
+OPR 1
+LIT 123243
+LIT 0
+LOD 0,4
+CAL #_add_fake_start
+OPR 1
+LIT 0
+LEA 0,23
+STO -1,0
+CAL #____start
+INT -1
+LIT 0
+LEA 1,40
+CAL #_Main_start
+INT -1
+LIT 0
+LEA 1,27
+LIT 3432
+CAL #___start
+INT -1
+WRTS "temp: "
+LIT 0
+LOD 0,37
+WRT
+WRTS "\n"
+WRTS ""
+LIT 0
+LEA 0,25
+LIT 12
+CAL #__my_Ha_s__h_start
+WRT
+WRTS " "
+LIT 0
+LOD 0,23
+WRT
+WRTS " "
+LIT 1
+WRT
+WRTS " "
+LIT 0
+LOD 1,5
+WRT
+WRTS " "
+LIT 0
+LOD 1,7
+WRT
+WRTS " "
+LIT 0
+LOD 1,8
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,9
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,9
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS "\n"
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LIT 2
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 3
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 3
+OPR 3
+OPR 1
+LIT 2
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 2
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 2
+LIT 3
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 2
+LIT 3
+OPR 3
+OPR 1
+LIT 2
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 3
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 3
+LIT 3
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS " "
+LIT 0
+LIT 3
+LIT 3
+OPR 3
+OPR 1
+LIT 2
+LIT 1
+OPR 3
+OPR 1
+LOD 1,11
+WRT
+WRTS "\n"
+LIT 0
+LOD 1,23
+WRT
+WRTS " "
+LIT 0
+LOD 1,24
+WRT
+WRTS " "
+LIT 0
+LOD 1,25
+WRT
+WRTS " "
+LIT 0
+LOD 1,26
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+WRT
+WRTS " "
+LIT 0
+LIT 2
+LIT 2
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+WRT
+WRTS " "
+LIT 0
+LIT 2
+LIT 2
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,31
+WRT
+WRTS "\n"
+LIT 0
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,37
+WRT
+WRTS " "
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,37
+WRT
+WRTS " "
+LIT 0
+LOD 1,39
+WRT
+WRTS " "
+LIT 0
+LOD 1,44
+WRT
+WRTS " "
+LIT 0
+LEA 1,37
+LIT 2
+CAL #__my_Ha_s__h_start
+CAL #_M__a_G_I___c_start
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 2
+OPR 3
+OPR 1
+LEA 1,40
+LIT 2
+CAL #__my_Ha_s__h_start
+WRT
+WRTS " "
+LIT 0
+LOD 0,20
+WRT
+WRTS " "
+LIT 0
+LOD 0,19
+WRT
+WRTS " "
+LIT 0
+LOD 0,8
+WRT
+WRTS " "
+LIT 0
+LIT 0
+LIT 4
+OPR 3
+OPR 1
+LIT 2
+LIT 1
+OPR 3
+OPR 1
+LOD 0,9
+WRT
+WRTS "\n"
+LIT 0
+LOD 0,21
+CAL #_____start
+INT -1
+LIT 0
+RET 1
+#main_end:
+BLKE 0

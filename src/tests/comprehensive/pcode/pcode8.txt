@@ -1,0 +1,143 @@
+BLKS
+LIT 1
+LIT 3
+OPR 6
+LIT 8
+LIT 0
+LIT 2
+OPR 1
+LIT 5
+OPR 7
+LIT 6
+OPR 6
+CAL #main_start
+JMP #main_end
+#main_start:
+WRTS "\n"
+LIT 10
+#loop[0]_start:
+LIT 0
+LOD 0,4
+JPC #loop[0]_end
+BLKS
+LIT 0
+LOD 1,4
+LIT 1
+OPR 2
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 1,4
+LIT 0
+LOD 2,9
+OPR 13
+JPC #if[0]_else
+#if[0]_start:
+BLKS
+BLKE 0
+BLKE 0
+JMP #loop[0]_iter
+WRTS "Continue is error!\n"
+BLKE 0
+JMP #if[0]_end
+#if[0]_else:
+#if[0]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 2,4
+OPR 13
+JPC #if[1]_else
+#if[1]_start:
+BLKS
+BLKE 0
+BLKE 0
+JMP #loop[0]_end
+WRTS "Break is error!And < is error!\n"
+BLKE 0
+JMP #if[1]_end
+#if[1]_else:
+#if[1]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 2,5
+OPR 11
+JPC #if[2]_else
+#if[2]_start:
+BLKS
+WRTS "+ is correct!\n"
+BLKE 0
+JMP #if[2]_end
+#if[2]_else:
+BLKS
+WRTS "+ is error!\n"
+BLKE 0
+#if[2]_end:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 2,7
+OPR 11
+JPC #if[3]_else
+#if[3]_start:
+BLKS
+BLKE 0
+BLKE 0
+JMP #loop[0]_end
+BLKE 0
+JMP #if[3]_end
+#if[3]_else:
+#if[3]_end:
+BLKE 0
+#loop[0]_iter:
+JMP #loop[0]_start
+#loop[0]_end:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 1,7
+OPR 12
+JPC #if[4]_else
+#if[4]_start:
+BLKS
+LIT 0
+LOD 1,4
+LIT 0
+OPR 11
+JPC #if[5]_else
+#if[5]_start:
+BLKS
+WRTS "Break is error!\n"
+BLKE 0
+JMP #if[5]_end
+#if[5]_else:
+BLKS
+WRTS "Continue is error!\n"
+BLKE 0
+#if[5]_end:
+BLKE 0
+JMP #if[4]_end
+#if[4]_else:
+#if[4]_end:
+WRTS "a1+b1 is "
+LIT 0
+LOD 1,4
+LIT 0
+LOD 1,7
+OPR 1
+WRT
+WRTS "\n"
+WRTS "a2+b2 is "
+LIT 0
+LOD 1,5
+LIT 0
+LOD 1,8
+OPR 1
+WRT
+WRTS "\n"
+LIT 0
+RET 1
+#main_end:
+BLKE 0

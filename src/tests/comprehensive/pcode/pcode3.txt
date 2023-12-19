@@ -1,0 +1,707 @@
+BLKS
+LIT 1
+LIT 2
+LIT 3
+LIT 2
+LIT 3
+LIT 4
+LIT 0
+LIT 1
+LIT 0
+LIT 0
+LIT 1
+LIT 0
+LIT 0
+LIT 2
+CAL #main_start
+JMP #main_end
+#test1_start:
+RET 0
+#test1_end:
+#test2_start:
+RET 0
+#test2_end:
+#test3_start:
+LIT 1
+RET 1
+#test3_end:
+#test4_start:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 0
+LOD 0,6
+OPR 3
+RET 1
+#test4_end:
+#test5_start:
+RET 0
+#test5_end:
+#test6_start:
+RET 0
+#test6_end:
+#main_start:
+WRTS "21373119"
+LIT 1
+LIT 0
+LIT 0
+LIT 1
+LIT 0
+MAZ 20
+MAZ 1
+LIT 1
+LIT 2
+LIT 1
+LIT 2
+LIT 3
+LIT 4
+LIT 5
+LIT 6
+BLKS
+LIT 1
+WRTS ""
+LIT 0
+LOD 0,4
+WRT
+WRTS "\n"
+BLKE 0
+BLKS
+LIT 12
+LIT 10
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 3
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 4
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 5
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 1
+LIT 1
+OPR 1
+OPR 1
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 2
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 3
+LIT 0
+LOD 0,4
+OPR 3
+LIT 2
+OPR 4
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 1
+LIT 0
+LOD 0,4
+OPR 4
+LIT 2
+OPR 3
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 2
+LIT 0
+LOD 0,4
+OPR 3
+LIT 0
+LOD 0,4
+LIT 7
+OPR 5
+OPR 1
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 1
+OPR 7
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 1
+OPR 6
+OPR 7
+OPR 6
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 1
+OPR 7
+OPR 6
+OPR 7
+LIT 0
+LEA 1,4
+STO -1,0
+BLKS
+BLKE 0
+LIT 0
+LOD 1,4
+LIT 0
+LOD 1,4
+CAL #test1_start
+INT -1
+CAL #test2_start
+INT -1
+LIT 1
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LEA 1,30
+STO -1,0
+LIT 0
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LEA 1,32
+STO -1,0
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,32
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,30
+LIT 0
+LEA 1,4
+STO -1,0
+RED
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 1,4
+LIT 0
+LEA 1,30
+LIT 0
+LEA 1,32
+CAL #test5_start
+INT -1
+LIT 0
+LEA 1,30
+LIT 0
+LEA 1,32
+CAL #test3_start
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LEA 1,32
+LIT 0
+LEA 1,32
+CAL #test3_start
+LIT 0
+LEA 1,4
+STO -1,0
+LIT 0
+LOD 1,4
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,30
+LIT 0
+LIT 0
+LIT 3
+OPR 3
+OPR 1
+LIT 0
+LIT 1
+OPR 3
+OPR 1
+LOD 1,32
+CAL #test4_start
+INT -1
+LIT 0
+LOD 1,4
+CAL #test6_start
+INT -1
+LIT 1
+LIT 0
+LIT 1
+LIT 3
+OPR 3
+OPR 1
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LEA 1,32
+STO -1,0
+#or[0]_start:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 15
+JPT #or[0]_true
+LIT 0
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 13
+OPR 10
+JMP #or[0]_end
+#or[0]_true:
+LIT 1
+#or[0]_end:
+JPC #if[0]_else
+#if[0]_start:
+BLKS
+LIT 1
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[0]_end
+#if[0]_else:
+#if[0]_end:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 16
+JPC #if[1]_else
+#if[1]_start:
+BLKS
+LIT 2
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[1]_end
+#if[1]_else:
+#if[1]_end:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+OPR 14
+JPC #if[2]_else
+#if[2]_start:
+BLKS
+LIT 3
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[2]_end
+#if[2]_else:
+#if[2]_end:
+#or[1]_start:
+LIT 0
+LOD 0,4
+LIT 0
+LOD 0,5
+LIT 1
+OPR 1
+OPR 15
+JPT #or[1]_true
+LIT 0
+LIT 0
+LOD 0,4
+OPR 8
+OPR 10
+JMP #or[1]_end
+#or[1]_true:
+LIT 1
+#or[1]_end:
+JPC #if[3]_else
+#if[3]_start:
+BLKS
+LIT 4
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[3]_end
+#if[3]_else:
+#if[3]_end:
+#and[0]_start:
+LIT 0
+LOD 1,4
+LIT 0
+OPR 11
+JPC #and[0]_shortcut
+LIT 1
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LOD 1,30
+LIT 1
+OPR 11
+OPR 9
+JMP #and[0]_end
+#and[0]_shortcut:
+LIT 0
+#and[0]_end:
+JPC #if[4]_else
+#if[4]_start:
+BLKS
+LIT 5
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[4]_end
+#if[4]_else:
+BLKS
+LIT 6
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+#if[4]_end:
+#or[2]_start:
+LIT 0
+LOD 1,4
+LIT 1
+OPR 11
+JPT #or[2]_true
+LIT 0
+LIT 0
+LOD 1,4
+LIT 0
+OPR 12
+OPR 10
+JMP #or[2]_end
+#or[2]_true:
+LIT 1
+#or[2]_end:
+JPC #if[5]_else
+#if[5]_start:
+BLKS
+LIT 7
+LIT 0
+LEA 2,4
+STO -1,0
+BLKE 0
+JMP #if[5]_end
+#if[5]_else:
+#if[5]_end:
+LIT 0
+OPR 8
+JPC #if[6]_else
+#if[6]_start:
+BLKS
+BLKE 0
+JMP #if[6]_end
+#if[6]_else:
+#if[6]_end:
+LIT 0
+LIT 0
+LEA 1,5
+STO -1,0
+#loop[0]_start:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 13
+JPC #loop[0]_end
+BLKS
+LIT 0
+OPR 8
+JPC #if[7]_else
+#if[7]_start:
+BLKS
+BLKE 0
+JMP #if[7]_end
+#if[7]_else:
+#if[7]_end:
+BLKE 0
+JMP #loop[0]_iter
+BLKE 0
+#loop[0]_iter:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 1
+LIT 0
+LEA 1,5
+STO -1,0
+JMP #loop[0]_start
+#loop[0]_end:
+LIT 0
+LIT 0
+LEA 1,5
+STO -1,0
+#loop[1]_start:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 13
+JPC #loop[1]_end
+BLKS
+BLKS
+LIT 0
+OPR 8
+JPC #if[8]_else
+#if[8]_start:
+BLKS
+BLKE 0
+JMP #if[8]_end
+#if[8]_else:
+#if[8]_end:
+BLKE 0
+BLKE 0
+JMP #loop[1]_iter
+BLKE 0
+BLKE 0
+#loop[1]_iter:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 1
+LIT 0
+LEA 1,5
+STO -1,0
+JMP #loop[1]_start
+#loop[1]_end:
+#loop[2]_start:
+LIT 0
+LOD 1,5
+LIT 2
+OPR 13
+JPC #loop[2]_end
+BLKS
+#or[3]_start:
+LIT 0
+LOD 1,4
+LIT 0
+LOD 1,5
+OPR 15
+JPT #or[3]_true
+LIT 0
+LIT 0
+LOD 1,4
+LIT 0
+LOD 1,5
+OPR 13
+OPR 10
+JMP #or[3]_end
+#or[3]_true:
+LIT 1
+#or[3]_end:
+JPC #if[9]_else
+#if[9]_start:
+BLKS
+LIT 1
+LIT 0
+LEA 3,5
+STO -1,0
+BLKE 0
+JMP #if[9]_end
+#if[9]_else:
+#if[9]_end:
+BLKE 0
+JMP #loop[2]_end
+BLKE 0
+#loop[2]_iter:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 1
+LIT 0
+LEA 1,5
+STO -1,0
+JMP #loop[2]_start
+#loop[2]_end:
+LIT 1
+LIT 0
+LEA 1,5
+STO -1,0
+#loop[3]_start:
+BLKS
+LIT 2
+LIT 0
+LEA 2,6
+STO -1,0
+BLKE 0
+JMP #loop[3]_end
+BLKE 0
+#loop[3]_iter:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 1
+LIT 0
+LEA 1,5
+STO -1,0
+JMP #loop[3]_start
+#loop[3]_end:
+LIT 1
+LIT 0
+LEA 1,5
+STO -1,0
+#loop[4]_start:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 13
+JPC #loop[4]_end
+BLKS
+LIT 2
+LIT 0
+LEA 2,6
+STO -1,0
+LIT 1
+LIT 0
+LIT 1
+LIT 1
+OPR 3
+OPR 1
+LEA 2,30
+STO -1,0
+BLKE 0
+JMP #loop[4]_end
+BLKE 0
+#loop[4]_iter:
+JMP #loop[4]_start
+#loop[4]_end:
+#loop[5]_start:
+BLKS
+BLKE 0
+JMP #loop[5]_end
+BLKE 0
+#loop[5]_iter:
+LIT 0
+LOD 1,5
+LIT 1
+OPR 1
+LIT 0
+LEA 1,5
+STO -1,0
+JMP #loop[5]_start
+#loop[5]_end:
+#loop[6]_start:
+LIT 0
+LOD 1,5
+LIT 2
+OPR 13
+JPC #loop[6]_end
+BLKS
+BLKE 0
+JMP #loop[6]_end
+BLKE 0
+#loop[6]_iter:
+JMP #loop[6]_start
+#loop[6]_end:
+LIT 1
+LIT 0
+LEA 1,5
+STO -1,0
+#loop[7]_start:
+BLKS
+BLKE 0
+JMP #loop[7]_end
+BLKE 0
+#loop[7]_iter:
+JMP #loop[7]_start
+#loop[7]_end:
+#loop[8]_start:
+BLKS
+BLKE 0
+JMP #loop[8]_end
+BLKE 0
+#loop[8]_iter:
+JMP #loop[8]_start
+#loop[8]_end:
+BLKS
+BLKE 0
+BLKS
+WRTS ""
+LIT 0
+LOD 2,4
+WRT
+WRTS ""
+LIT 0
+LOD 2,4
+WRT
+BLKE 0
+BLKE 0
+LIT 0
+RET 1
+#main_end:
+BLKE 0
